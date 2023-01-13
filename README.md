@@ -10,8 +10,9 @@ This Project Pythia Cookbook covers using the [kerchunk](https://fsspec.github.i
 ## Motivation
 
 
-The Kerchunk library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF & FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, kerchunk reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file. 
+The Kerchunk library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF & FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, kerchunk reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)). 
 These summary files can then be combined to generated a `kerchunk` reference for that dataset, which can be read via Xarray. 
+
 
 
 ## Authors
