@@ -1,4 +1,4 @@
-name: cookbook-dev
+name: kerchunk-cookbook-dev
 channels:
   - conda-forge
 dependencies:
@@ -6,5 +6,10 @@ dependencies:
   - jupyterlab
   - jupyter_server<2
   - pip
+  - fsspec
+  - numcodecs
+  - numpy
+  - ujson
+  - zarr
   - pip:
       - sphinx-pythia-theme
