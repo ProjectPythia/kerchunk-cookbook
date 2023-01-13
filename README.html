@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>(Replace_with_your_title) Cookbook &#8212; Project Pythia Cookbook Template</title>
+    <title>Kerchunk Cookbook &#8212; Project Pythia Kerchunk Cookbook</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Project Pythia Notebook Template" href="notebooks/notebook-template.html" />
+    <link rel="next" title="The High-Resolution Rapid Refresh (HRRR)" href="notebooks/HRRR.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -180,19 +180,24 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
   <a class="reference internal" href="#">
-   (Replace_with_your_title) Cookbook
+   Kerchunk Cookbook
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  Example Notebooks
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/notebook-template.html">
-   Project Pythia Notebook Template
+  <a class="reference internal" href="notebooks/HRRR.html">
+   The High-Resolution Rapid Refresh (HRRR)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/NWM.html">
+   National Water Model - Short Range Forecast
   </a>
  </li>
 </ul>
@@ -249,14 +254,14 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/ProjectPythia/cookbook-template/"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/ProjectPythia/kerchunk-cookbook/"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ProjectPythia/cookbook-template//issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/cookbook-template/edit/main/README.md"><button
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/README.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -304,13 +309,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#section-1-replace-with-the-title-of-this-section-e-g-foundations">
-     Section 1 ( Replace with the title of this section, e.g. “Foundations” )
+    <a class="reference internal nav-link" href="#section-1-foundations">
+     Section 1 Foundations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#section-2-replace-with-the-title-of-this-section-e-g-example-workflows">
-     Section 2 ( Replace with the title of this section, e.g. “Example workflows” )
+    <a class="reference internal nav-link" href="#section-2-example-notebooks">
+     Section 2 Example Notebooks
     </a>
    </li>
   </ul>
@@ -343,19 +348,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <a class="reference internal image-reference" href="_images/thumbnail.png"><img alt="thumbnail" src="_images/thumbnail.png" style="width: 300px;" /></a>
-<div class="tex2jax_ignore mathjax_ignore section" id="replace-with-your-title-cookbook">
-<h1>(Replace_with_your_title) Cookbook<a class="headerlink" href="#replace-with-your-title-cookbook" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+  <a class="reference internal image-reference" href="thumbnail.png"><img alt="thumbnail" src="thumbnail.png" style="width: 300px;" /></a>
+<div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-cookbook">
+<h1>Kerchunk Cookbook<a class="headerlink" href="#kerchunk-cookbook" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <p><a class="reference external" href="https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml"><img alt="nightly-build" src="https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg" /></a>
 <a class="reference external" href="http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks"><img alt="Binder" src="http://binder.mypythia.org/badge_logo.svg" /></a></p>
-<p>This Project Pythia Cookbook covers … (replace <code class="docutils literal notranslate"><span class="pre">...</span></code> with the main subject of your cookbook … e.g., <em>working with radar data in Python</em>)</p>
+<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">kerchunk</a> library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.</p>
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>(Add a few sentences stating why this cookbook will be useful. What skills will you, “the chef”, gain once you have reached the end of the cookbook?)</p>
+<p>The Kerchunk library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF &amp; FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, kerchunk reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">kerchunk docs</a>).
+These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">kerchunk</span></code> reference for that dataset, which can be read via Xarray.</p>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p><span class="xref myst">First Author</span>, <span class="xref myst">Second Author</span>, etc. <em>Acknowledge primary content authors here</em></p>
+<p><span class="xref myst">Norland Raphael Hagen</span>.</p>
+<p>Much of the content of this cookbook was inspired by Martin Durant, the creator of kerchunk and the <a class="reference external" href="https://fsspec.github.io/kerchunk/">kerchunk documentation</a>.</p>
 <div class="section" id="contributors">
 <h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <a href="https://github.com/ProjectPythia/cookbook-template/graphs/contributors">
@@ -365,14 +372,16 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 <div class="section" id="structure">
 <h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>(State one or more sections that will comprise the notebook. E.g., <em>This cookbook is broken up into two main sections - “Foundations” and “Example Workflows.”</em> Then, describe each section below.)</p>
-<div class="section" id="section-1-replace-with-the-title-of-this-section-e-g-foundations">
-<h3>Section 1 ( Replace with the title of this section, e.g. “Foundations” )<a class="headerlink" href="#section-1-replace-with-the-title-of-this-section-e-g-foundations" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>(Add content for this section, e.g., “The foundational content includes … “)</p>
+<p>This cookbook is broken up into two sections, Foundations and Example Notebooks.</p>
+<div class="section" id="section-1-foundations">
+<h3>Section 1 Foundations<a class="headerlink" href="#section-1-foundations" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<!-- TODO:
+Add basic kerchunk -->
 </div>
-<div class="section" id="section-2-replace-with-the-title-of-this-section-e-g-example-workflows">
-<h3>Section 2 ( Replace with the title of this section, e.g. “Example workflows” )<a class="headerlink" href="#section-2-replace-with-the-title-of-this-section-e-g-example-workflows" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>(Add content for this section, e.g., “Example workflows include … “)</p>
+<div class="section" id="section-2-example-notebooks">
+<h3>Section 2 Example Notebooks<a class="headerlink" href="#section-2-example-notebooks" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.</p>
+<p>We aim to create example notebooks of creating kerchunk’d datasets for all the supported file formats.</p>
 </div>
 </div>
 <div class="section" id="running-the-notebooks">
@@ -398,21 +407,20 @@ Jupyter</a>.</p>
 <div class="section" id="running-on-your-own-machine">
 <h3>Running on Your Own Machine<a class="headerlink" href="#running-on-your-own-machine" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <p>If you are interested in running this material locally on your computer, you will need to follow this workflow:</p>
-<p>(Replace “cookbook-example” with the title of your cookbooks)</p>
 <ol>
-<li><p>Clone the <code class="docutils literal notranslate"><span class="pre">https://github.com/ProjectPythia/cookbook-example</span></code> repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ProjectPythia/cookbook-example.git
+<li><p>Clone the <code class="docutils literal notranslate"><span class="pre">https://github.com/ProjectPythia/kerchunk-cookbook</span></code> repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ProjectPythia/kerchunk-cookbook.git
 </pre></div>
 </div>
 </li>
-<li><p>Move into the <code class="docutils literal notranslate"><span class="pre">cookbook-example</span></code> directory</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>cookbook-example
+<li><p>Move into the <code class="docutils literal notranslate"><span class="pre">kerchunk-cookbook</span></code> directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>kerchunk-cookbook
 </pre></div>
 </div>
 </li>
 <li><p>Create and activate your conda environment from the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
-conda<span class="w"> </span>activate<span class="w"> </span>cookbook-example
+conda<span class="w"> </span>activate<span class="w"> </span>kerchunk-cookbook
 </pre></div>
 </div>
 </li>
@@ -452,10 +460,10 @@ jupyter<span class="w"> </span>lab
               </div>
               <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="notebooks/notebook-template.html" title="next page">
+    <a class='right-next' id="next-link" href="notebooks/HRRR.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Project Pythia Notebook Template</p>
+        <p class="prev-next-title">The High-Resolution Rapid Refresh (HRRR)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -504,7 +512,7 @@ jupyter<span class="w"> </span>lab
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 3 January 2023.
+          Last updated on 13 January 2023.
         </p>
       </div>
     </div>
