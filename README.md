@@ -1,19 +1,25 @@
 <img src="thumbnail.png" alt="thumbnail" width="300"/>
 
-# (Replace_with_your_title) Cookbook
+# Kerchunk Cookbook
 
 [![nightly-build](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml)
 [![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks)
 
-This Project Pythia Cookbook covers ... (replace `...` with the main subject of your cookbook ... e.g., *working with radar data in Python*)
+This Project Pythia Cookbook covers using the [kerchunk](https://fsspec.github.io/kerchunk/) library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data. 
 
 ## Motivation
 
-(Add a few sentences stating why this cookbook will be useful. What skills will you, "the chef", gain once you have reached the end of the cookbook?)
+
+The Kerchunk library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF & FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, kerchunk reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)). 
+These summary files can then be combined to generated a `kerchunk` reference for that dataset, which can be read via Xarray. 
+
+
 
 ## Authors
 
-[First Author](@first-author), [Second Author](@second-author), etc. *Acknowledge primary content authors here*
+[Norland Raphael Hagen](@first-author).
+
+Much of the content of this cookbook was inspired by Martin Durant, the creator of kerchunk and the [kerchunk documentation](https://fsspec.github.io/kerchunk/). 
 
 ### Contributors
 
@@ -22,13 +28,20 @@ This Project Pythia Cookbook covers ... (replace `...` with the main subject of 
 </a>
 
 ## Structure
-(State one or more sections that will comprise the notebook. E.g., *This cookbook is broken up into two main sections - "Foundations" and "Example Workflows."* Then, describe each section below.)
 
-### Section 1 ( Replace with the title of this section, e.g. "Foundations" )
-(Add content for this section, e.g., "The foundational content includes ... ")
+This cookbook is broken up into two sections, Foundations and Example Notebooks. 
 
-### Section 2 ( Replace with the title of this section, e.g. "Example workflows" )
-(Add content for this section, e.g., "Example workflows include ... ")
+### Section 1 Foundations
+
+<!-- TODO:
+Add basic kerchunk -->
+
+
+### Section 2 Example Notebooks
+
+Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
+
+We aim to create example notebooks of creating kerchunk'd datasets for all the supported file formats. 
 
 ## Running the Notebooks
 You can either run the notebook using [Binder](https://mybinder.org/) or on your local machine.
@@ -53,21 +66,20 @@ Jupyter](https://foundations.projectpythia.org/foundations/getting-started-jupyt
 ### Running on Your Own Machine
 If you are interested in running this material locally on your computer, you will need to follow this workflow:
 
-(Replace "cookbook-example" with the title of your cookbooks)   
 
-1. Clone the `https://github.com/ProjectPythia/cookbook-example` repository:
+1. Clone the `https://github.com/ProjectPythia/kerchunk-cookbook` repository:
 
    ```bash
-    git clone https://github.com/ProjectPythia/cookbook-example.git
+    git clone https://github.com/ProjectPythia/kerchunk-cookbook.git
     ```  
-1. Move into the `cookbook-example` directory
+1. Move into the `kerchunk-cookbook` directory
     ```bash
-    cd cookbook-example
+    cd kerchunk-cookbook
     ```  
 1. Create and activate your conda environment from the `environment.yml` file
     ```bash
     conda env create -f environment.yml
-    conda activate cookbook-example
+    conda activate kerchunk-cookbook
     ```  
 1.  Move into the `notebooks` directory and start up Jupyterlab
     ```bash

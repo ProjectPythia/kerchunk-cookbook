@@ -1,6 +1,7 @@
 format: jb-book
 root: README
 parts:
-  - caption: Introduction
+  - caption: Example Notebooks
     chapters:
-      - file: notebooks/notebook-template
+      - file: notebooks/HRRR
+      - file: notebooks/NWM
