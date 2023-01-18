@@ -36,6 +36,17 @@ In the `Foundations` section we will demonstrate how to use kerchunk to create d
 
 The notebooks in the `Case Studies` section demonstrate how to use kerchunk to create datasets for all the supported file formats. Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
 
+### Future Additions / Wishlist
+
+This Pithia cookbook is a start, but there are many more details of `Kerchunk` that could be covered. If you have an idea of what to add or would like to contribute, please open up a PR or issue.
+
+Some possible additions:
+
+- Diving into the details: The nitty-gritty on how `kerchunk` works.
+- `Kerchunk` and `Dask`: How to use Dask to speed-up your kerchunk dataset generation.
+- `Kerchunk` and `parquet`, what are the benefits of using parquet for reference file storage.
+- Appending to a kerchunk dataset: How to schedule processing of newly added data files and how to add them to a `kerchunk` dataset.
+
 ## Running the Notebooks
 
 You can either run the notebook using [Binder](https://mybinder.org/) or on your local machine.
