@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The High-Resolution Rapid Refresh (HRRR) &#8212; Project Pythia Kerchunk Cookbook</title>
+    <title>Kerchunk and GRIB2: A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset &#8212; Project Pythia Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="National Water Model - Short Range Forecast" href="NWM.html" />
+    <link rel="next" title="Kerchunk and NetCDF/HDF5: A Case Study using the National Water Model - Short Range Forecast Dataset" href="NWM.html" />
     <link rel="prev" title="&lt;no title&gt;" href="../foundations/kerchunk_multi_file.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -205,12 +205,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   The High-Resolution Rapid Refresh (HRRR)
+   Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="NWM.html">
-   National Water Model - Short Range Forecast
+   Kerchunk and NetCDF/HDF5:  A Case Study using the National Water Model - Short Range Forecast Dataset
   </a>
  </li>
 </ul>
@@ -317,8 +317,33 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-dataset">
+   About the Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-input-file-list">
-   Create input file list
+   Create Input File List
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -347,10 +372,61 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="the-high-resolution-rapid-refresh-hrrr">
-<h1>The High-Resolution Rapid Refresh (HRRR)<a class="headerlink" href="#the-high-resolution-rapid-refresh-hrrr" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
-<p>The HRRR is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
-NOAA releases a copy of this dataset via the AWS Registry of Open Data. While these data are stored in the cloud, they are stored in the GRIB2 file format, which does not allow asynronous reads. By generating a kerchunk index of this dataset, we can read it as if it were an Analysis-ready, cloud-optimized (ARCO) dataset.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-grib2-a-case-study-using-noaas-high-resolution-rapid-refresh-hrrr-dataset">
+<h1>Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset<a class="headerlink" href="#kerchunk-and-grib2-a-case-study-using-noaas-high-resolution-rapid-refresh-hrrr-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Kerchunk supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using kerchunk, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
+</div>
+<div class="section" id="about-the-dataset">
+<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">HRRR</span></code> is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
+NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Within this notebook, we will cover:</p>
+<ol class="simple">
+<li><p>How to access remote GRIB2 data using kerchunk</p></li>
+<li><p>Combining multiple kerchunk reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
+<li><p>Reading the output with xarray and intake</p></li>
+</ol>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepts</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../foundations/kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<td><p>Required</p></td>
+<td><p>IO/Visualization</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://projectpythia.org/intake-cookbook/notebooks/intake_introduction.html">Intake Introduction</a></p></td>
+<td><p>Recommended</p></td>
+<td><p>IO</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Time to learn</strong>: 45 minutes</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
@@ -364,21 +440,10 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data. While th
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">glob</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;xarray&#39;
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="create-input-file-list">
-<h2>Create input file list<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
@@ -505,7 +570,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data. While th
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x171eb9d60&gt;
 </pre></div>
 </div>
-<img alt="../../_images/HRRR_13_1.png" src="../../_images/HRRR_13_1.png" />
+<img alt="../../_images/HRRR_16_1.png" src="../../_images/HRRR_16_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -518,7 +583,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data. While th
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1720725e0&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/HRRR_14_1.png" src="../../_images/HRRR_14_1.png" />
+<img alt="../../_images/HRRR_17_1.png" src="../../_images/HRRR_17_1.png" />
 </div>
 </div>
 </div>
@@ -557,7 +622,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data. While th
     <a class='right-next' id="next-link" href="NWM.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">National Water Model - Short Range Forecast</p>
+        <p class="prev-next-title">Kerchunk and NetCDF/HDF5:  A Case Study using the National Water Model - Short Range Forecast Dataset</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
