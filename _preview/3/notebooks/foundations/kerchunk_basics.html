@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="kerchunk_multi_file.html" />
+    <link rel="next" title="Multi File Datasets with Kerchunk" href="kerchunk_multi_file.html" />
     <link rel="prev" title="Kerchunk Cookbook" href="../../README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -194,6 +194,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Kerchunk Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kerchunk_multi_file.html">
+   Multi File Datasets with Kerchunk
   </a>
  </li>
 </ul>
@@ -415,6 +420,7 @@ In this tutorial we will:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Options passed to fsspec</span>
 <span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
 
+
 <span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc&quot;</span>
 
@@ -472,7 +478,7 @@ In this tutorial we will:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x173043f40&gt;
 </pre></div>
 </div>
-<img alt="../../_images/kerchunk_basics_12_1.png" src="../../_images/kerchunk_basics_12_1.png" />
+<img alt="../../_images/kerchunk_basics_11_1.png" src="../../_images/kerchunk_basics_11_1.png" />
 </div>
 </div>
 </div>
@@ -512,7 +518,7 @@ In this tutorial we will:</p>
     <a class='right-next' id="next-link" href="kerchunk_multi_file.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Multi File Datasets with Kerchunk</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
