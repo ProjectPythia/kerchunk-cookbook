@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "refs": {
+    ".zgroup": "{\"zarr_format\":2}",
+    "time/.zarray": "{\n    \"chunks\": [\n        10\n    ],\n    \"compressor\": null,\n    \"dtype\": \"<i4\",\n    \"fill_value\": null,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\": [\n        10\n    ],\n    \"zarr_format\": 2\n}",
+    "time/0": "base64:QBWpAXwVqQG4FakB9BWpATAWqQFsFqkBqBapAeQWqQEgF6kBXBepAQ==",
+    "time/.zattrs": "{\n    \"_ARRAY_DIMENSIONS\": [\n        \"time\"\n    ],\n    \"long_name\": \"valid output time\",\n    \"standard_name\": \"time\",\n    \"units\": \"minutes since 1970-01-01 00:00:00 UTC\",\n    \"valid_max\": 27859260,\n    \"valid_min\": 27858240\n}",
+    ".zattrs": "{\"Conventions\":\"CF-1.6\",\"NWM_version_number\":\"v2.2\",\"TITLE\":\"OUTPUT FROM NWM v2.2\",\"cdm_datatype\":\"Station\",\"code_version\":\"v5.2.0-beta2\",\"dev\":\"dev_ prefix indicates development\\/internal meta data\",\"dev_NOAH_TIMESTEP\":3600,\"dev_OVRTSWCRT\":1,\"dev_channelBucket_only\":0,\"dev_channel_only\":0,\"featureType\":\"timeSeries\",\"model_configuration\":\"short_range\",\"model_initialization_time\":\"2022-12-19_23:00:00\",\"model_output_type\":\"channel_rt\",\"model_output_valid_time\":\"2022-12-20_00:00:00\",\"model_total_valid_times\":18,\"proj4\":\"+proj=lcc +units=m +a=6370000.0 +b=6370000.0 +lat_1=30.0 +lat_2=60.0 +lat_0=40.0 +lon_0=-97.0 +x_0=0 +y_0=0 +k_0=1.0 +nadgrids=@\",\"station_dimension\":\"feature_id\",\"stream_order_output\":1}",
+    "crs/.zarray": "{\"chunks\":[1],\"compressor\":null,\"dtype\":\"|S1\",\"fill_value\":\"IA==\",\"filters\":null,\"order\":\"C\",\"shape\":[10],\"zarr_format\":2}",
+    "crs/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\"],\"_CoordinateAxes\":\"latitude longitude\",\"esri_pe_string\":\"GEOGCS[\\\"GCS_WGS_1984\\\",DATUM[\\\"D_WGS_1984\\\",SPHEROID[\\\"WGS_1984\\\",6378137.0,298.257223563]],PRIMEM[\\\"Greenwich\\\",0.0],UNIT[\\\"Degree\\\",0.0174532925199433]];-400 -400 1000000000;-100000 10000;-100000 10000;8.98315284119521E-09;0.001;0.001;IsHighPrecision\",\"grid_mapping_name\":\"latitude longitude\",\"inverse_flattening\":298.2572326660156,\"long_name\":\"CRS definition\",\"longitude_of_prime_meridian\":0.0,\"semi_major_axis\":6378137.0,\"semi_minor_axis\":6356752.5,\"spatial_ref\":\"GEOGCS[\\\"GCS_WGS_1984\\\",DATUM[\\\"D_WGS_1984\\\",SPHEROID[\\\"WGS_1984\\\",6378137.0,298.257223563]],PRIMEM[\\\"Greenwich\\\",0.0],UNIT[\\\"Degree\\\",0.0174532925199433]];-400 -400 1000000000;-100000 10000;-100000 10000;8.98315284119521E-09;0.001;0.001;IsHighPrecision\",\"transform_name\":\"latitude longitude\"}",
+    "crs/0": "\u0000",
+    "feature_id/.zarray": "{\"chunks\":[2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":0,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[2776738],\"zarr_format\":2}",
+    "feature_id/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"feature_id\"],\"cf_role\":\"timeseries_id\",\"comment\":\"NHDPlusv2 ComIDs within CONUS, arbitrary Reach IDs outside of CONUS\",\"long_name\":\"Reach ID\"}",
+    "feature_id/0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      55895,
+      558203
+    ],
+    "nudge/.zarray": "{\"chunks\":[1,2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":-999900,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[10,2776738],\"zarr_format\":2}",
+    "nudge/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"feature_id\"],\"add_offset\":0.0,\"coordinates\":\"latitude longitude\",\"grid_mapping\":\"crs\",\"long_name\":\"Amount of stream flow alteration\",\"missing_value\":-999900,\"scale_factor\":0.009999999776482582,\"units\":\"m3 s-1\",\"valid_range\":[-5000000,5000000]}",
+    "nudge/0.0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      2513577,
+      103565
+    ],
+    "qBtmVertRunoff/.zarray": "{\"chunks\":[1,2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":-9999000,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[10,2776738],\"zarr_format\":2}",
+    "qBtmVertRunoff/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"feature_id\"],\"add_offset\":0.0,\"coordinates\":\"latitude longitude\",\"grid_mapping\":\"crs\",\"long_name\":\"Runoff from bottom of soil to bucket\",\"missing_value\":-9999000,\"scale_factor\":0.0010000000474974513,\"units\":\"m3\",\"valid_range\":[0,20000000]}",
+    "qBtmVertRunoff/0.0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      8997409,
+      5016785
+    ],
+    "qBucket/.zarray": "{\"chunks\":[1,2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":-999900000,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[10,2776738],\"zarr_format\":2}",
+    "qBucket/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"feature_id\"],\"add_offset\":0.0,\"coordinates\":\"latitude longitude\",\"grid_mapping\":\"crs\",\"long_name\":\"Flux from gw bucket\",\"missing_value\":-999900000,\"scale_factor\":9.999999747378752e-6,\"units\":\"m3 s-1\",\"valid_range\":[0,2000000000]}",
+    "qBucket/0.0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      5703447,
+      3293962
+    ],
+    "qSfcLatRunoff/.zarray": "{\"chunks\":[1,2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":-999900000,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[10,2776738],\"zarr_format\":2}",
+    "qSfcLatRunoff/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"feature_id\"],\"add_offset\":0.0,\"coordinates\":\"latitude longitude\",\"grid_mapping\":\"crs\",\"long_name\":\"Runoff from terrain routing\",\"missing_value\":-999900000,\"scale_factor\":9.999999747378752e-6,\"units\":\"m3 s-1\",\"valid_range\":[0,2000000000]}",
+    "qSfcLatRunoff/0.0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      4671916,
+      1031531
+    ],
+    "reference_time/.zarray": "{\"chunks\":[1],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":null,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[1],\"zarr_format\":2}",
+    "reference_time/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"reference_time\"],\"long_name\":\"model initialization time\",\"standard_name\":\"forecast_reference_time\",\"units\":\"minutes since 1970-01-01 00:00:00 UTC\"}",
+    "reference_time/0": "base64:eF5jEV3JCAABpgDE",
+    "streamflow/.zarray": "{\"chunks\":[1,2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":-999900,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[10,2776738],\"zarr_format\":2}",
+    "streamflow/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"feature_id\"],\"add_offset\":0.0,\"coordinates\":\"latitude longitude\",\"grid_mapping\":\"crs\",\"long_name\":\"River Flow\",\"missing_value\":-999900,\"scale_factor\":0.009999999776482582,\"units\":\"m3 s-1\",\"valid_range\":[0,5000000]}",
+    "streamflow/0.0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1899479
+    ],
+    "velocity/.zarray": "{\"chunks\":[1,2776738],\"compressor\":{\"id\":\"zlib\",\"level\":2},\"dtype\":\"<i4\",\"fill_value\":-999900,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[10,2776738],\"zarr_format\":2}",
+    "velocity/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"feature_id\"],\"add_offset\":0.0,\"coordinates\":\"latitude longitude\",\"grid_mapping\":\"crs\",\"long_name\":\"River Velocity\",\"missing_value\":-999900,\"scale_factor\":0.009999999776482582,\"units\":\"m s-1\",\"valid_range\":[0,5000000]}",
+    "velocity/0.0": [
+      "s3://noaa-nwm-pds/nwm.20221219/short_range/nwm.t23z.short_range.channel_rt.f001.conus.nc",
+      2617142,
+      2054774
+    ],
+    "crs/1": "\u0000",
+    "nudge/1.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t00z.short_range.channel_rt.f001.conus.nc",
+      2513329,
+      103872
+    ],
+    "qBtmVertRunoff/1.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t00z.short_range.channel_rt.f001.conus.nc",
+      8999096,
+      5016559
+    ],
+    "qBucket/1.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t00z.short_range.channel_rt.f001.conus.nc",
+      5705006,
+      3294090
+    ],
+    "qSfcLatRunoff/1.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t00z.short_range.channel_rt.f001.conus.nc",
+      4672148,
+      1032858
+    ],
+    "streamflow/1.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t00z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1899231
+    ],
+    "velocity/1.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t00z.short_range.channel_rt.f001.conus.nc",
+      2617201,
+      2054947
+    ],
+    "crs/2": "\u0000",
+    "nudge/2.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t01z.short_range.channel_rt.f001.conus.nc",
+      2514721,
+      103714
+    ],
+    "qBtmVertRunoff/2.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t01z.short_range.channel_rt.f001.conus.nc",
+      9001239,
+      5016344
+    ],
+    "qBucket/2.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t01z.short_range.channel_rt.f001.conus.nc",
+      5707353,
+      3293886
+    ],
+    "qSfcLatRunoff/2.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t01z.short_range.channel_rt.f001.conus.nc",
+      4673208,
+      1034145
+    ],
+    "streamflow/2.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t01z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1900623
+    ],
+    "velocity/2.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t01z.short_range.channel_rt.f001.conus.nc",
+      2618435,
+      2054773
+    ],
+    "crs/3": "\u0000",
+    "nudge/3.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t02z.short_range.channel_rt.f001.conus.nc",
+      2514989,
+      103572
+    ],
+    "qBtmVertRunoff/3.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t02z.short_range.channel_rt.f001.conus.nc",
+      9000973,
+      5016730
+    ],
+    "qBucket/3.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t02z.short_range.channel_rt.f001.conus.nc",
+      5706795,
+      3294178
+    ],
+    "qSfcLatRunoff/3.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t02z.short_range.channel_rt.f001.conus.nc",
+      4673079,
+      1033716
+    ],
+    "streamflow/3.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t02z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1900891
+    ],
+    "velocity/3.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t02z.short_range.channel_rt.f001.conus.nc",
+      2618561,
+      2054518
+    ],
+    "crs/4": "\u0000",
+    "nudge/4.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t03z.short_range.channel_rt.f001.conus.nc",
+      2516224,
+      103374
+    ],
+    "qBtmVertRunoff/4.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t03z.short_range.channel_rt.f001.conus.nc",
+      9002114,
+      5017088
+    ],
+    "qBucket/4.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t03z.short_range.channel_rt.f001.conus.nc",
+      5707717,
+      3294397
+    ],
+    "qSfcLatRunoff/4.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t03z.short_range.channel_rt.f001.conus.nc",
+      4674403,
+      1033314
+    ],
+    "streamflow/4.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t03z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1902126
+    ],
+    "velocity/4.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t03z.short_range.channel_rt.f001.conus.nc",
+      2619598,
+      2054805
+    ],
+    "crs/5": "\u0000",
+    "nudge/5.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t04z.short_range.channel_rt.f001.conus.nc",
+      2515869,
+      103413
+    ],
+    "qBtmVertRunoff/5.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t04z.short_range.channel_rt.f001.conus.nc",
+      9000112,
+      5017324
+    ],
+    "qBucket/5.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t04z.short_range.channel_rt.f001.conus.nc",
+      5705594,
+      3294518
+    ],
+    "qSfcLatRunoff/5.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t04z.short_range.channel_rt.f001.conus.nc",
+      4673631,
+      1031963
+    ],
+    "streamflow/5.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t04z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1901771
+    ],
+    "velocity/5.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t04z.short_range.channel_rt.f001.conus.nc",
+      2619282,
+      2054349
+    ],
+    "crs/6": "\u0000",
+    "nudge/6.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t05z.short_range.channel_rt.f001.conus.nc",
+      2515726,
+      103522
+    ],
+    "qBtmVertRunoff/6.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t05z.short_range.channel_rt.f001.conus.nc",
+      9000496,
+      5016929
+    ],
+    "qBucket/6.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t05z.short_range.channel_rt.f001.conus.nc",
+      5705373,
+      3295123
+    ],
+    "qSfcLatRunoff/6.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t05z.short_range.channel_rt.f001.conus.nc",
+      4673232,
+      1032141
+    ],
+    "streamflow/6.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t05z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1901628
+    ],
+    "velocity/6.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t05z.short_range.channel_rt.f001.conus.nc",
+      2619248,
+      2053984
+    ],
+    "crs/7": "\u0000",
+    "nudge/7.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t06z.short_range.channel_rt.f001.conus.nc",
+      2513944,
+      103641
+    ],
+    "qBtmVertRunoff/7.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t06z.short_range.channel_rt.f001.conus.nc",
+      8995224,
+      5017090
+    ],
+    "qBucket/7.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t06z.short_range.channel_rt.f001.conus.nc",
+      5700104,
+      3295120
+    ],
+    "qSfcLatRunoff/7.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t06z.short_range.channel_rt.f001.conus.nc",
+      4671836,
+      1028268
+    ],
+    "streamflow/7.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t06z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1899846
+    ],
+    "velocity/7.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t06z.short_range.channel_rt.f001.conus.nc",
+      2617585,
+      2054251
+    ],
+    "crs/8": "\u0000",
+    "nudge/8.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t07z.short_range.channel_rt.f001.conus.nc",
+      2513373,
+      103395
+    ],
+    "qBtmVertRunoff/8.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t07z.short_range.channel_rt.f001.conus.nc",
+      8994484,
+      5016974
+    ],
+    "qBucket/8.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t07z.short_range.channel_rt.f001.conus.nc",
+      5699197,
+      3295287
+    ],
+    "qSfcLatRunoff/8.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t07z.short_range.channel_rt.f001.conus.nc",
+      4670884,
+      1028313
+    ],
+    "streamflow/8.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t07z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1899275
+    ],
+    "velocity/8.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t07z.short_range.channel_rt.f001.conus.nc",
+      2616768,
+      2054116
+    ],
+    "crs/9": "\u0000",
+    "nudge/9.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t08z.short_range.channel_rt.f001.conus.nc",
+      2512897,
+      103331
+    ],
+    "qBtmVertRunoff/9.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t08z.short_range.channel_rt.f001.conus.nc",
+      8995753,
+      5017025
+    ],
+    "qBucket/9.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t08z.short_range.channel_rt.f001.conus.nc",
+      5699786,
+      3295967
+    ],
+    "qSfcLatRunoff/9.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t08z.short_range.channel_rt.f001.conus.nc",
+      4670409,
+      1029377
+    ],
+    "streamflow/9.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t08z.short_range.channel_rt.f001.conus.nc",
+      614098,
+      1898799
+    ],
+    "velocity/9.0": [
+      "s3://noaa-nwm-pds/nwm.20221220/short_range/nwm.t08z.short_range.channel_rt.f001.conus.nc",
+      2616228,
+      2054181
+    ]
+  }
+}

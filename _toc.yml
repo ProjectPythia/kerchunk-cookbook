@@ -5,7 +5,7 @@ parts:
     chapters:
       - file: notebooks/foundations/kerchunk_basics
       - file: notebooks/foundations/kerchunk_multi_file
-  
+
   - caption: Case Studies
     chapters:
       - file: notebooks/case_studies/HRRR
