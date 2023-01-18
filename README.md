@@ -33,15 +33,12 @@ This cookbook is broken up into two sections, Foundations and Example Notebooks.
 
 ### Section 1 Foundations
 
-<!-- TODO:
-Add basic kerchunk -->
+In the `Foundations` section we will demonstrate how to use kerchunk to create datasets from single file sources, as well as to create multi-file datasets from collections of files.
 
+### Section 2 Case Studies
 
-### Section 2 Example Notebooks
+The notebooks in the `Case Studies` section demonstrate how to use kerchunk to create datasets for all the supported file formats. Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
 
-Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
-
-We aim to create example notebooks of creating kerchunk'd datasets for all the supported file formats. 
 
 ## Running the Notebooks
 You can either run the notebook using [Binder](https://mybinder.org/) or on your local machine.
