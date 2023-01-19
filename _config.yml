@@ -8,7 +8,7 @@ email: projectpythia@ucar.edu
 copyright: "2022"
 
 description: A Project Pythia Cookbook for Kerchunk
-thumbnail: kerchunk.png
+thumbnail: thumbnail.png
 tags:
   domains:
     - AWS cloud, Data access, HRRR model, zarr
