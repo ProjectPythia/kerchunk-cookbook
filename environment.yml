@@ -9,6 +9,7 @@ dependencies:
   - fsspec
   - numcodecs
   - numpy
+  - tqdm
   - ujson
   - zarr
   - pip:
