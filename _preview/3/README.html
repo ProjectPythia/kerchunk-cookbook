@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/foundations/kerchunk_multi_file.html">
-   Multi File Datasets with Kerchunk
+   Multi-File Datasets with Kerchunk
   </a>
  </li>
 </ul>
@@ -370,21 +370,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <a class="reference internal image-reference" href="thumbnail.png"><img alt="thumbnail" src="thumbnail.png" style="width: 300px;" /></a>
+  <a class="reference internal image-reference" href="_images/thumbnail.png"><img alt="thumbnail" src="_images/thumbnail.png" style="width: 300px;" /></a>
 <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-cookbook">
 <h1>Kerchunk Cookbook<a class="headerlink" href="#kerchunk-cookbook" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <p><a class="reference external" href="https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml"><img alt="nightly-build" src="https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg" /></a>
 <a class="reference external" href="http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks"><img alt="Binder" src="http://binder.mypythia.org/badge_logo.svg" /></a></p>
-<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">kerchunk</a> library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.</p>
+<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk</a> library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.</p>
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The Kerchunk library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF &amp; FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, kerchunk reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">kerchunk docs</a>).
-These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">kerchunk</span></code> reference for that dataset, which can be read via Xarray.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF &amp; FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).
+These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference for that dataset, which can be read via Xarray.</p>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p><span class="xref myst">Norland Raphael Hagen</span>.</p>
-<p>Much of the content of this cookbook was inspired by Martin Durant, the creator of kerchunk and the <a class="reference external" href="https://fsspec.github.io/kerchunk/">kerchunk documentation</a>.</p>
+<p>Much of the content of this cookbook was inspired by Martin Durant, the creator of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk documentation</a>.</p>
 <div class="section" id="contributors">
 <h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <a href="https://github.com/ProjectPythia/kerchunk-cookbook/graphs/contributors">
@@ -397,21 +397,21 @@ These summary files can then be combined to generated a <code class="docutils li
 <p>This cookbook is broken up into two sections, Foundations and Example Notebooks.</p>
 <div class="section" id="section-1-foundations">
 <h3>Section 1 Foundations<a class="headerlink" href="#section-1-foundations" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Foundations</span></code> section we will demonstrate how to use kerchunk to create datasets from single file sources, as well as to create multi-file datasets from collections of files.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">Foundations</span></code> section we will demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create datasets from single file sources, as well as to create multi-file datasets from collections of files.</p>
 </div>
 <div class="section" id="section-2-case-studies">
 <h3>Section 2 Case Studies<a class="headerlink" href="#section-2-case-studies" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section demonstrate how to use kerchunk to create datasets for all the supported file formats. Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.</p>
+<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create datasets for all the supported file formats. <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.</p>
 </div>
 <div class="section" id="future-additions-wishlist">
 <h3>Future Additions / Wishlist<a class="headerlink" href="#future-additions-wishlist" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>This Pithia cookbook is a start, but there are many more details of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> that could be covered. If you have an idea of what to add or would like to contribute, please open up a PR or issue.</p>
+<p>This Pythia cookbook is a start, but there are many more details of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> that could be covered. If you have an idea of what to add or would like to contribute, please open up a PR or issue.</p>
 <p>Some possible additions:</p>
 <ul class="simple">
-<li><p>Diving into the details: The nitty-gritty on how <code class="docutils literal notranslate"><span class="pre">kerchunk</span></code> works.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">Dask</span></code>: How to use Dask to speed-up your kerchunk dataset generation.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">parquet</span></code>, what are the benefits of using parquet for reference file storage.</p></li>
-<li><p>Appending to a kerchunk dataset: How to schedule processing of newly added data files and how to add them to a <code class="docutils literal notranslate"><span class="pre">kerchunk</span></code> dataset.</p></li>
+<li><p>Diving into the details: The nitty-gritty on how <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> works.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">Dask</span></code>: How to use Dask to speed-up your <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> dataset generation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">Parquet</span></code>, what are the benefits of using parquet for reference file storage.</p></li>
+<li><p>Appending to a Kerchunk dataset: How to schedule processing of newly added data files and how to add them to a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> dataset.</p></li>
 </ul>
 </div>
 </div>
@@ -545,7 +545,7 @@ jupyter<span class="w"> </span>lab
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 18 January 2023.
+          Last updated on 19 January 2023.
         </p>
       </div>
     </div>

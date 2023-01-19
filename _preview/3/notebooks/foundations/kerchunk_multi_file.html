@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi File Datasets with Kerchunk &#8212; Project Pythia Kerchunk Cookbook</title>
+    <title>Multi-File Datasets with Kerchunk &#8212; Project Pythia Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -198,7 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Multi File Datasets with Kerchunk
+   Multi-File Datasets with Kerchunk
   </a>
  </li>
 </ul>
@@ -342,15 +342,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optional-if-you-want-to-look-at-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below">
-     Optional: If you want to look at one NetCDF files before creating the kerchunk index, try uncommenting this code snippet below.
+    <a class="reference internal nav-link" href="#optional-if-you-want-to-examine-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below">
+     Optional: If you want to examine one NetCDF files before creating the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Kerchunk
+      </span>
+     </code>
+     index, try uncommenting this code snippet below.
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-kerchunk-references-for-every-file-in-file-pattern-list">
-   Create Kerchunk References for every file in
+  <a class="reference internal nav-link" href="#create-kerchunk-references-for-every-file-in-the-file-pattern-list">
+   Create Kerchunk References for every file in the
    <code class="docutils literal notranslate">
     <span class="pre">
      File_Pattern
@@ -360,15 +366,32 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#note-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-from-365-to-7">
-     Note: To speed next section up, uncomment the next cell.  This will reduce the # of input files from 365 to 7.
+    <a class="reference internal nav-link" href="#note-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-from-365-to-7-going-from-a-years-worth-of-data-to-a-weeks-worth-of-data">
+     Note: To speed next section up, uncomment the next cell.  This will reduce the # of input files from 365 to 7, going from a year’s worth of data, to a weeks worth of data.
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-   Combine .json kerchunk reference files and write a combined kerchunk index
+   Combine
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .json
+    </span>
+   </code>
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   reference files and write a combined
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   index
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -378,7 +401,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#open-combined-kerchunk-dataset-with-fsspec-and-xarray">
-   Open combined kerchunk dataset with
+   Open combined
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   dataset with
    <code class="docutils literal notranslate">
     <span class="pre">
      fsspec
@@ -408,18 +437,18 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <p><a class="reference internal" href="../../_images/kerchunk.png"><img alt="Kerchunk Logo" src="../../_images/kerchunk.png" style="width: 500px;" /></a></img></p>
+  <p><a class="reference internal" href="../../_images/thumbnail.png"><img alt="Kerchunk Logo" src="../../_images/thumbnail.png" style="width: 500px;" /></a></img></p>
 <div class="tex2jax_ignore mathjax_ignore section" id="multi-file-datasets-with-kerchunk">
-<h1>Multi File Datasets with Kerchunk<a class="headerlink" href="#multi-file-datasets-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h1>Multi-File Datasets with Kerchunk<a class="headerlink" href="#multi-file-datasets-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>This notebook is intends to build off of the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">kerchunks basics notebook</span></a>.</p>
+<p>This notebook is intends to build off of the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics notebook</span></a>.</p>
 <p>In this tutorial we will:</p>
 <ul class="simple">
 <li><p>Create a list of input paths for a collection of NetCDF files stored on the cloud.</p></li>
-<li><p>Iterate through our file input list and create kerchunk reference <code class="docutils literal notranslate"><span class="pre">.jsons</span></code> for each file.</p></li>
+<li><p>Iterate through our file input list and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference <code class="docutils literal notranslate"><span class="pre">.jsons</span></code> for each file.</p></li>
 <li><p>Combine the reference <code class="docutils literal notranslate"><span class="pre">.jsons</span></code> into a single combined dataset reference with the rechunker class, <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
-<li><p>Learn how to read the combined dataset  using <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
+<li><p>Learn how to read the combined dataset  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
 </ul>
 </div>
 <div class="section" id="prerequisites">
@@ -436,7 +465,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <td><p>Required</p></td>
 <td><p>Basic features</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/cartopy/cartopy.html">Introduction to Xarray</a></p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
 <td><p>Recommended</p></td>
 <td><p>IO</p></td>
 </tr>
@@ -463,7 +492,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 <div class="section" id="create-a-file-pattern-from-a-list-of-input-netcdf-files">
 <h3>Create a File Pattern from a list of  input NetCDF files<a class="headerlink" href="#create-a-file-pattern-from-a-list-of-input-netcdf-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>Below we will create a list of input files we want kerchunk to read over. In the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics Tutorial</span></a>, we looked at a single file of climate downscaled data over Southern Alaska. In this example, we will build off of that work and use kerchunk to combine multiple NetCDF files of this dataset into a single virtual dataset.</p>
+<p>Below we will create a list of input files we want <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to index. In the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics Tutorial</span></a>, we looked at a single file of climate downscaled data over Southern Alaska. In this example, we will build off of that work and use kerchunk to combine multiple NetCDF files of this dataset into a single virtual dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
@@ -493,28 +522,30 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 <p>As a quick check, it looks like we have a list 365 file paths, which should be a year of downscaled climte data.</p>
 </div>
-<div class="section" id="optional-if-you-want-to-look-at-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below">
-<h3>Optional: If you want to look at one NetCDF files before creating the kerchunk index, try uncommenting this code snippet below.<a class="headerlink" href="#optional-if-you-want-to-look-at-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="section" id="optional-if-you-want-to-examine-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below">
+<h3>Optional: If you want to examine one NetCDF files before creating the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index, try uncommenting this code snippet below.<a class="headerlink" href="#optional-if-you-want-to-examine-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: Optional piece of code to view one of the NetCDF files using Xarray as fsspec.</span>
 
 <span class="c1"># import s3fs</span>
+
 <span class="c1"># fs = s3fs.S3FileSystem(anon=True, default_fill_cache=False)</span>
 <span class="c1"># with fs.open(file_pattern[0]) as fileObj:</span>
 <span class="c1">#     ds = xr.open_dataset(fileObj)</span>
 <span class="c1">#     print(ds)</span>
+<span class="c1">#     print(ds.nbytes / 1e9)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="create-kerchunk-references-for-every-file-in-file-pattern-list">
-<h2>Create Kerchunk References for every file in <code class="docutils literal notranslate"><span class="pre">File_Pattern</span></code> list<a class="headerlink" href="#create-kerchunk-references-for-every-file-in-file-pattern-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Now that we have a list of NetCDF files, we can use kerchunk to create reference files for each one of these. To do this, we will iterate through each file and create a reference <code class="docutils literal notranslate"><span class="pre">.json</span></code>. To speed this process up, you could use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
-<div class="section" id="note-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-from-365-to-7">
-<h3>Note: To speed next section up, uncomment the next cell.  This will reduce the # of input files from 365 to 7.<a class="headerlink" href="#note-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-from-365-to-7" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="section" id="create-kerchunk-references-for-every-file-in-the-file-pattern-list">
+<h2>Create Kerchunk References for every file in the <code class="docutils literal notranslate"><span class="pre">File_Pattern</span></code> list<a class="headerlink" href="#create-kerchunk-references-for-every-file-in-the-file-pattern-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Now that we have a list of NetCDF files, we can use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create reference files for each one of these. To do this, we will iterate through each file and create a reference <code class="docutils literal notranslate"><span class="pre">.json</span></code>. To speed this process up, you could use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallelize this.</p>
+<div class="section" id="note-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-from-365-to-7-going-from-a-years-worth-of-data-to-a-weeks-worth-of-data">
+<h3>Note: To speed next section up, uncomment the next cell.  This will reduce the # of input files from 365 to 7, going from a year’s worth of data, to a weeks worth of data.<a class="headerlink" href="#note-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-from-365-to-7-going-from-a-years-worth-of-data-to-a-weeks-worth-of-data" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### OPTIONAL SPEEDUP: DEFAULT IS OFF ###</span>
@@ -526,11 +557,12 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fsspec.open args</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fsspec.open kwargs. Details on this can be found in `kerchunk_basics` in the (### Define kwargs for `fsspec`) section.</span>
+
 <span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
 <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
 
-<span class="c1"># Use kerchunk&#39;s SingleHdf5ToZarr to transform netcdf to kerchunk index.</span>
+<span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
 <span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
         <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
@@ -541,7 +573,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <span class="k">return</span> <span class="n">outf</span>
 
 
-<span class="c1"># Iterate through filelist to generate kerchunked files. Good use for dask</span>
+<span class="c1"># Iterate through filelist to generate Kerchunked files. Good use for `Dask`</span>
 <span class="n">output_files</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">):</span>
     <span class="n">outf</span> <span class="o">=</span> <span class="n">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
@@ -550,7 +582,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▍        | 1/7 [00:33&lt;03:21, 33.51s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 43%|████▎     | 3/7 [14:48&lt;19:47, 296.82s/it]
 </pre></div>
 </div>
 </div>
@@ -565,7 +597,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-<h2>Combine .json kerchunk reference files and write a combined kerchunk index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Combine <code class="docutils literal notranslate"><span class="pre">.json</span></code> <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># combine individual references into single consolidated reference</span>
@@ -577,11 +609,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 
 
 <span class="n">multi_kerchunk</span> <span class="o">=</span> <span class="n">mzz</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
-
-<span class="c1"># Write kerchunk .json record</span>
-<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;combined_kerchunk.json&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">multi_kerchunk</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -601,10 +628,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="section" id="open-combined-kerchunk-dataset-with-fsspec-and-xarray">
-<h2>Open combined kerchunk dataset with <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> and <code class="docutils literal notranslate"><span class="pre">Xarray</span></code><a class="headerlink" href="#open-combined-kerchunk-dataset-with-fsspec-and-xarray" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Open combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> dataset with <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> and <code class="docutils literal notranslate"><span class="pre">Xarray</span></code><a class="headerlink" href="#open-combined-kerchunk-dataset-with-fsspec-and-xarray" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and xarray</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and Xarray</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
     <span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="n">multi_kerchunk</span><span class="p">,</span> <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">remote_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="p">)</span>
@@ -710,7 +737,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 18 January 2023.
+          Last updated on 19 January 2023.
         </p>
       </div>
     </div>

@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multi File Datasets with Kerchunk" href="kerchunk_multi_file.html" />
+    <link rel="next" title="Multi-File Datasets with Kerchunk" href="kerchunk_multi_file.html" />
     <link rel="prev" title="Kerchunk Cookbook" href="../../README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -198,7 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="kerchunk_multi_file.html">
-   Multi File Datasets with Kerchunk
+   Multi-File Datasets with Kerchunk
   </a>
  </li>
 </ul>
@@ -337,16 +337,24 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#define-kwargs-for-fsspec">
+     Define kwargs for
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fsspec
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parse-a-single-netcdf-file-with-kerchunk">
      Parse a single NetCDF file with kerchunk
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#load-kerchunk-reference-file">
-       Load Kerchunk Reference File
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-kerchunk-reference-file">
+     Load Kerchunk Reference File
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-dataset">
@@ -366,7 +374,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <p><a class="reference internal" href="../../_images/kerchunk.png"><img alt="Kerchunk Logo" src="../../_images/kerchunk.png" style="width: 500px;" /></a></img></p>
+  <p><a class="reference internal" href="../../_images/thumbnail.png"><img alt="Kerchunk Logo" src="../../_images/thumbnail.png" style="width: 500px;" /></a></img></p>
 <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-basics">
 <h1>Kerchunk Basics<a class="headerlink" href="#kerchunk-basics" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <div class="section" id="overview">
@@ -375,9 +383,9 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 In this tutorial we will:</p>
 <ul class="simple">
 <li><p>Scan a single NetCDF file to create a kerchunk virtual dataset</p></li>
-<li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
+<li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
 </ul>
-<p>While this notebook only examines using kerchunk on a single NetCDF file, kerchunk can be used to create virutal zarr datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
+<p>While this notebook only examines using kerchunk on a single NetCDF file, kerchunk can be used to create virutal <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -389,7 +397,7 @@ In this tutorial we will:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/cartopy/cartopy.html">Introduction to Xarray</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
 <td><p>Helpful</p></td>
 <td><p>Basic features</p></td>
 </tr>
@@ -412,16 +420,29 @@ In this tutorial we will:</p>
 </div>
 </div>
 </div>
+<div class="section" id="define-kwargs-for-fsspec">
+<h3>Define kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code><a class="headerlink" href="#define-kwargs-for-fsspec" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>In the dictionary definition in the next cell, we are passing options to <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/api.html?highlight=.open#fsspec.open"><code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code></a>. Any additional kwargs passed in this dictionary through <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> will pass as kwargs to the file system, in our case <code class="docutils literal notranslate"><span class="pre">s3</span></code>. The API docs for the <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> filesystem spec can be found <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/api.html">here</a>.</p>
+<p>In this example we are passing a few kwargs. In short they are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">anon=True</span></code>: This is a <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that specifies you are not passing any connection credentials and are connecting to a public bucket.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default_fill_cache=False</span></code>: <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that avoids caching in between chunks of files. This may lower memory usage when reading large files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default_cache_type=&quot;first&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> kwarg that specifies the caching strategy used buy <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>. In this case, <code class="docutils literal notranslate"><span class="pre">first</span></code> caches the first block of a file only.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="parse-a-single-netcdf-file-with-kerchunk">
 <h3>Parse a single NetCDF file with kerchunk<a class="headerlink" href="#parse-a-single-netcdf-file-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <p>Below we will access a NetCDF file stored on the AWS cloud. This dataset is a single time slice of a climate downscaled product for Alaska.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Options passed to fsspec</span>
-<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
-
-
-<span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc&quot;</span>
 
 <span class="c1"># Uses kerchunk to scan through the netcdf file to create kerchunk mapping and then save output as .json</span>
@@ -436,8 +457,9 @@ In this tutorial we will:</p>
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="load-kerchunk-reference-file">
-<h4>Load Kerchunk Reference File<a class="headerlink" href="#load-kerchunk-reference-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h4>
+<h3>Load Kerchunk Reference File<a class="headerlink" href="#load-kerchunk-reference-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use fsspec to create filesystem from .json reference file</span>
@@ -454,16 +476,6 @@ In this tutorial we will:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/ipykernel_7074/2342211006.py:11: RuntimeWarning: Failed to open Zarr store with consolidated metadata, but successfully read with non-consolidated metadata. This is typically much slower for opening a dataset. To silence this warning, consider:
-1. Consolidating metadata in this existing store with zarr.consolidate_metadata().
-2. Explicitly setting consolidated=False, to avoid trying to read consolidate metadata, or
-3. Explicitly setting consolidated=True, to raise an error in this case instead of falling back to try reading non-consolidated metadata.
-  ds = xr.open_dataset(fs.get_mapper(&quot;&quot;), engine=&#39;zarr&#39;)
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="plot-dataset">
@@ -473,12 +485,6 @@ In this tutorial we will:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x173043f40&gt;
-</pre></div>
-</div>
-<img alt="../../_images/kerchunk_basics_11_1.png" src="../../_images/kerchunk_basics_11_1.png" />
 </div>
 </div>
 </div>
@@ -518,7 +524,7 @@ In this tutorial we will:</p>
     <a class='right-next' id="next-link" href="kerchunk_multi_file.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multi File Datasets with Kerchunk</p>
+        <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -567,7 +573,7 @@ In this tutorial we will:</p>
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 18 January 2023.
+          Last updated on 19 January 2023.
         </p>
       </div>
     </div>

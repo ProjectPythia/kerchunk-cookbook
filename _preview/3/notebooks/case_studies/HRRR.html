@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Kerchunk and NetCDF/HDF5: A Case Study using the National Water Model - Short Range Forecast Dataset" href="NWM.html" />
-    <link rel="prev" title="Multi File Datasets with Kerchunk" href="../foundations/kerchunk_multi_file.html" />
+    <link rel="prev" title="Multi-File Datasets with Kerchunk" href="../foundations/kerchunk_multi_file.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -198,7 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../foundations/kerchunk_multi_file.html">
-   Multi File Datasets with Kerchunk
+   Multi-File Datasets with Kerchunk
   </a>
  </li>
 </ul>
@@ -353,17 +353,17 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files">
-   Iterate through filelist and create kerchunk indicies as .json files
+   Iterate through filelist and create Kerchunk indicies as .json files
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-   Combine .json kerchunk reference files and write a combined kerchunk index
+   Combine .json Kerchunk reference files and write a combined Kerchunk index
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-kerchunked-dataset">
-   Load kerchunked dataset
+   Load Kerchunked dataset
   </a>
  </li>
 </ul>
@@ -382,7 +382,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p><a class="reference internal" href="../../_images/GRIB2.png"><img alt="HRRR GRIB2" src="../../_images/GRIB2.png" style="width: 400px;" /></a></img></p>
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Kerchunk supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using kerchunk, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using Kerchunk, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
 </div>
 <div class="section" id="about-the-dataset">
 <h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -393,9 +393,9 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Within this notebook, we will cover:</p>
 <ol class="simple">
-<li><p>How to access remote GRIB2 data using kerchunk</p></li>
-<li><p>Combining multiple kerchunk reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
-<li><p>Reading the output with xarray and intake</p></li>
+<li><p>How to access remote GRIB2 data using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
+<li><p>Combining multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
+<li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
 </ol>
 </div>
 <div class="section" id="prerequisites">
@@ -474,32 +474,33 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t04z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t05z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t06z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t07z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t08z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t09z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t10z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t11z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t12z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t13z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t14z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t15z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t16z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t17z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20221110/conus/hrrr.t18z.wrfsfcf01.grib2&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t04z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t05z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t06z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t07z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t08z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t09z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t10z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t11z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t12z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t13z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t14z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t15z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t16z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t17z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t18z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t19z.wrfsfcf01.grib2&#39;]
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="iterate-through-filelist-and-create-kerchunk-indicies-as-json-files">
-<h2>Iterate through filelist and create kerchunk indicies as .json files<a class="headerlink" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Iterate through filelist and create Kerchunk indicies as .json files<a class="headerlink" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
@@ -542,14 +543,14 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 19/19 [51:04&lt;00:00, 161.28s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 1/20 [09:11&lt;2:54:37, 551.44s/it]
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-<h2>Combine .json kerchunk reference files and write a combined kerchunk index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Combine .json Kerchunk reference files and write a combined Kerchunk index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># combine individual references into single consolidated reference</span>
@@ -565,7 +566,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 <div class="section" id="load-kerchunked-dataset">
-<h2>Load kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Load Kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and xarray</span>
@@ -586,24 +587,12 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x171eb9d60&gt;
-</pre></div>
-</div>
-<img alt="../../_images/HRRR_17_1.png" src="../../_images/HRRR_17_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1720725e0&gt;]
-</pre></div>
-</div>
-<img alt="../../_images/HRRR_18_1.png" src="../../_images/HRRR_18_1.png" />
 </div>
 </div>
 </div>
@@ -636,7 +625,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Multi File Datasets with Kerchunk</p>
+            <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="NWM.html" title="next page">
@@ -691,7 +680,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 18 January 2023.
+          Last updated on 19 January 2023.
         </p>
       </div>
     </div>
