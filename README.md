@@ -5,18 +5,18 @@
 [![nightly-build](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml)
 [![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks)
 
-This Project Pythia Cookbook covers using the [kerchunk](https://fsspec.github.io/kerchunk/) library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.
+This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/) library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.
 
 ## Motivation
 
-The Kerchunk library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF & FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, kerchunk reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
-These summary files can then be combined to generated a `kerchunk` reference for that dataset, which can be read via Xarray.
+The `Kerchunk` library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF & FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
+These summary files can then be combined to generated a `Kerchunk` reference for that dataset, which can be read via Xarray.
 
 ## Authors
 
 [Norland Raphael Hagen](@first-author).
 
-Much of the content of this cookbook was inspired by Martin Durant, the creator of kerchunk and the [kerchunk documentation](https://fsspec.github.io/kerchunk/).
+Much of the content of this cookbook was inspired by Martin Durant, the creator of `Kerchunk and the [Kerchunk documentation](https://fsspec.github.io/kerchunk/).
 
 ### Contributors
 
@@ -30,22 +30,22 @@ This cookbook is broken up into two sections, Foundations and Example Notebooks.
 
 ### Section 1 Foundations
 
-In the `Foundations` section we will demonstrate how to use kerchunk to create datasets from single file sources, as well as to create multi-file datasets from collections of files.
+In the `Foundations` section we will demonstrate how to use `Kerchunk` to create datasets from single file sources, as well as to create multi-file datasets from collections of files.
 
 ### Section 2 Case Studies
 
-The notebooks in the `Case Studies` section demonstrate how to use kerchunk to create datasets for all the supported file formats. Kerchunk currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
+The notebooks in the `Case Studies` section demonstrate how to use `Kerchunk` to create datasets for all the supported file formats. `Kerchunk` currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
 
 ### Future Additions / Wishlist
 
-This Pithia cookbook is a start, but there are many more details of `Kerchunk` that could be covered. If you have an idea of what to add or would like to contribute, please open up a PR or issue.
+This Pythia cookbook is a start, but there are many more details of `Kerchunk` that could be covered. If you have an idea of what to add or would like to contribute, please open up a PR or issue.
 
 Some possible additions:
 
-- Diving into the details: The nitty-gritty on how `kerchunk` works.
-- `Kerchunk` and `Dask`: How to use Dask to speed-up your kerchunk dataset generation.
-- `Kerchunk` and `parquet`, what are the benefits of using parquet for reference file storage.
-- Appending to a kerchunk dataset: How to schedule processing of newly added data files and how to add them to a `kerchunk` dataset.
+- Diving into the details: The nitty-gritty on how `Kerchunk` works.
+- `Kerchunk` and `Dask`: How to use Dask to speed-up your `Kerchunk` dataset generation.
+- `Kerchunk` and `Parquet`, what are the benefits of using parquet for reference file storage.
+- Appending to a Kerchunk dataset: How to schedule processing of newly added data files and how to add them to a `Kerchunk` dataset.
 
 ## Running the Notebooks
 
