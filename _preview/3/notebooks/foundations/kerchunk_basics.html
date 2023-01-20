@@ -379,13 +379,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <h1>Kerchunk Basics<a class="headerlink" href="#kerchunk-basics" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>This notebook is intended as an introduction to using kerchunk.
+<p>This notebook is intended as an introduction to using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.
 In this tutorial we will:</p>
 <ul class="simple">
-<li><p>Scan a single NetCDF file to create a kerchunk virtual dataset</p></li>
+<li><p>Scan a single NetCDF file to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> virtual dataset</p></li>
 <li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
 </ul>
-<p>While this notebook only examines using kerchunk on a single NetCDF file, kerchunk can be used to create virutal <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
+<p>While this notebook only examines using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on a single NetCDF file, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used to create virutal <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -476,6 +476,15 @@ In this tutorial we will:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/ipykernel_8128/1112314070.py:11: RuntimeWarning: Failed to open Zarr store with consolidated metadata, but successfully read with non-consolidated metadata. This is typically much slower for opening a dataset. To silence this warning, consider:
+1. Consolidating metadata in this existing store with zarr.consolidate_metadata().
+2. Explicitly setting consolidated=False, to avoid trying to read consolidate metadata, or
+3. Explicitly setting consolidated=True, to raise an error in this case instead of falling back to try reading non-consolidated metadata.
+  ds = xr.open_dataset(fs.get_mapper(&quot;&quot;), engine=&quot;zarr&quot;)
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="plot-dataset">
@@ -485,6 +494,12 @@ In this tutorial we will:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x16eb12020&gt;
+</pre></div>
+</div>
+<img alt="../../_images/kerchunk_basics_13_1.png" src="../../_images/kerchunk_basics_13_1.png" />
 </div>
 </div>
 </div>
@@ -573,7 +588,7 @@ In this tutorial we will:</p>
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 19 January 2023.
+          Last updated on 20 January 2023.
         </p>
       </div>
     </div>

@@ -375,11 +375,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <h1>Kerchunk Cookbook<a class="headerlink" href="#kerchunk-cookbook" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <p><a class="reference external" href="https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml"><img alt="nightly-build" src="https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg" /></a>
 <a class="reference external" href="http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks"><img alt="Binder" src="http://binder.mypythia.org/badge_logo.svg" /></a></p>
-<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk</a> library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.</p>
+<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk</a> library to access archival data formats as if they were ARCO (Analysis-Ready-Cloud-Optimized) data.</p>
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF &amp; FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).
-These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference for that dataset, which can be read via Xarray.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library allows you to access chunked and compressed data formats (such as NetCDF, GRIB2, TIFF &amp; FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).
+These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference for that dataset, which can be read via <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a>.</p>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -545,7 +545,7 @@ jupyter<span class="w"> </span>lab
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 19 January 2023.
+          Last updated on 20 January 2023.
         </p>
       </div>
     </div>

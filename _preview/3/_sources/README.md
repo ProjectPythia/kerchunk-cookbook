@@ -5,12 +5,12 @@
 [![nightly-build](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml)
 [![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks)
 
-This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/) library to access archival data formats as if they were ARCO (Alanysis-Ready-Cloud-Optimized) data.
+This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/) library to access archival data formats as if they were ARCO (Analysis-Ready-Cloud-Optimized) data.
 
 ## Motivation
 
-The `Kerchunk` library allow you to access chunked and compressed data formats such as (NetCDF, GRIB2, TIFF & FITS), many which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows you parallel, chunk specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
-These summary files can then be combined to generated a `Kerchunk` reference for that dataset, which can be read via Xarray.
+The `Kerchunk` library allows you to access chunked and compressed data formats (such as NetCDF, GRIB2, TIFF & FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
+These summary files can then be combined to generated a `Kerchunk` reference for that dataset, which can be read via [Xarray](https://docs.xarray.dev/en/stable/).
 
 ## Authors
 

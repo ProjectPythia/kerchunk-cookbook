@@ -353,7 +353,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files">
-   Iterate through filelist and create Kerchunk indicies as .json files
+   Iterate through filelist and create
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   indicies as .json files
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -382,7 +388,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p><a class="reference internal" href="../../_images/GRIB2.png"><img alt="HRRR GRIB2" src="../../_images/GRIB2.png" style="width: 400px;" /></a></img></p>
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using Kerchunk, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
 </div>
 <div class="section" id="about-the-dataset">
 <h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -500,7 +506,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 <div class="section" id="iterate-through-filelist-and-create-kerchunk-indicies-as-json-files">
-<h2>Iterate through filelist and create Kerchunk indicies as .json files<a class="headerlink" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Iterate through filelist and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as .json files<a class="headerlink" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
@@ -543,7 +549,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 1/20 [09:11&lt;2:54:37, 551.44s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 20/20 [2:55:08&lt;00:00, 525.44s/it]  
 </pre></div>
 </div>
 </div>
@@ -587,12 +593,24 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1835733a0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_17_1.png" src="../../_images/HRRR_17_1.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1836dfa30&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_18_1.png" src="../../_images/HRRR_18_1.png" />
 </div>
 </div>
 </div>
@@ -680,7 +698,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 19 January 2023.
+          Last updated on 20 January 2023.
         </p>
       </div>
     </div>
