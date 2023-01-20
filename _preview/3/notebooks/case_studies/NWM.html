@@ -321,16 +321,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   Motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#about-the-dataset">
-   About the Dataset
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
    Overview
   </a>
@@ -338,6 +328,16 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-dataset">
+   About the Dataset
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -349,16 +349,23 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   <a class="reference internal nav-link" href="#create-input-file-list">
    Create Input File List
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optional-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-and-speed-up-the-example-considerably">
+     OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example considerably.
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iterate-through-flist-and-create-kerchunk-indicies-as-json-files">
+  <a class="reference internal nav-link" href="#iterate-through-file-pattern-list-and-create-kerchunk-indicies-as-json-files">
    Iterate through
    <code class="docutils literal notranslate">
     <span class="pre">
-     flist
+     file_pattern
     </span>
    </code>
-   and create
+   list and create
    <code class="docutils literal notranslate">
     <span class="pre">
      Kerchunk
@@ -408,15 +415,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-netcdf-hdf5-a-case-study-using-the-national-water-model-short-range-forecast-dataset">
 <h1>Kerchunk and NetCDF/HDF5:  A Case Study using the National Water Model - Short Range Forecast Dataset<a class="headerlink" href="#kerchunk-and-netcdf-hdf5-a-case-study-using-the-national-water-model-short-range-forecast-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
-<div class="section" id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>NetCDF/HDF5 is one of the most universally adopted file formats in earth sciences, with support of much of the community as well as scientific agencies, data centers and university labs. A huge amount of legacy data has been generated in this format. Fortunately, using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read these datasets as if they were Zarr.</p>
-</div>
-<div class="section" id="about-the-dataset">
-<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The National Water Model dataset is a produced by the National Oceanic and Atmospheric Administations (NOAA’s) Office of Water Prediction. It is a forecast model of water resources, providing multiple variables across the continental United States (CONUS).
-This dataset is available via the Registry of Open Data on AWS as a collection of netCDF files that do not require any login authentication. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we will demonstrate how to build a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index so that this dataset can be read as if it were an ARCO (Analysis-Ready, Cloud-Optimized) dataset.</p>
-</div>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Within this notebook, we will cover:</p>
@@ -425,6 +423,7 @@ This dataset is available via the Registry of Open Data on AWS as a collection o
 <li><p>Combining multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
 <li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
 </ol>
+<p>This notebook shares many similarities with the <span class="xref myst">Multi-File Datasets with Kerchunk</span>. If you are confused on the function of a block of code, please refer there for a more detailed breakdown of what each line is doing.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -459,15 +458,22 @@ This dataset is available via the Registry of Open Data on AWS as a collection o
 </ul>
 </div>
 <hr class="docutils" />
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>NetCDF/HDF5 is one of the most universally adopted file formats in earth sciences, with support of much of the community as well as scientific agencies, data centers and university labs. A huge amount of legacy data has been generated in this format. Fortunately, using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read these datasets as if they were <code class="docutils literal notranslate"><span class="pre">Zarr</span></code>.</p>
+</div>
+<div class="section" id="about-the-dataset">
+<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>The National Water Model dataset is a produced by the National Oceanic and Atmospheric Administations (NOAA’s) Office of Water Prediction. It is a forecast model of water resources, providing multiple variables across the continental United States (CONUS).
+This dataset is available via the Registry of Open Data on AWS as a collection of netCDF files that do not require any login authentication. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we will demonstrate how to build a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index so that this dataset can be read as if it were an ARCO (Analysis-Ready, Cloud-Optimized) dataset.</p>
+</div>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Module Imports</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">fsspec</span>
-<span class="kn">import</span> <span class="nn">fsspec_reference_maker</span>
 <span class="kn">import</span> <span class="nn">ujson</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
@@ -480,36 +486,49 @@ This dataset is available via the Registry of Open Data on AWS as a collection o
 </div>
 <div class="section" id="create-input-file-list">
 <h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">fsspec's</span></code> glob functionality along with the <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em> wildcard operator and some string slicing to grab a list of NetCDF files from a <code class="docutils literal notranslate"><span class="pre">s3</span></code> <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an `fsspec` filesystem for AWS s3.</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Use fsspec and glob to retrieve a list of all netCDF files to be used in the `Kerchunk` index generation.</span>
-<span class="n">flist</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+<span class="n">file_pattern</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;noaa-nwm-pds/nwm.*/short_range/nwm.*.short_range.channel_rt.f001.conus.nc&quot;</span>
 <span class="p">)</span>
 
 
-<span class="n">last_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">flist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">last_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">flist</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">last_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">last_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 <span class="n">last_files</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">last_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">last_file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">last_file</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">last_file</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">.channel_rt.*.conus.nc&quot;</span>
 <span class="p">)</span>
 
 <span class="c1"># Skip the first of the last_files since it&#39;s a duplicate</span>
-<span class="n">flist</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">last_files</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="n">file_pattern</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">last_files</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
 <span class="c1"># We need to include the &quot;s3://&quot; prefix to the list of files</span>
-<span class="c1"># so that fsspec will recognize that these JSON files are on S3. There is no &quot;storage_</span>
-<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">flist</span><span class="p">]</span>
+<span class="c1"># so that fsspec will recognize that these JSON files are on S3.</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optional-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-and-speed-up-the-example-considerably">
+<h3>OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example considerably.<a class="headerlink" href="#optional-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-and-speed-up-the-example-considerably" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># file_pattern = file_pattern[0:10]</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="iterate-through-flist-and-create-kerchunk-indicies-as-json-files">
-<h2>Iterate through <code class="docutils literal notranslate"><span class="pre">flist</span></code> and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#iterate-through-flist-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</div>
+<div class="section" id="iterate-through-file-pattern-list-and-create-kerchunk-indicies-as-json-files">
+<h2>Iterate through <code class="docutils literal notranslate"><span class="pre">file_pattern</span></code> list and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#iterate-through-file-pattern-list-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the cell below, we are defining a dictionary of kwargs to pass to <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> and <code class="docutils literal notranslate"><span class="pre">s3fs</span></code>.
+After that, we create a function named <code class="docutils literal notranslate"><span class="pre">gen_json</span></code>, which creates a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index on a given <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and writes that a <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fsspec.open args</span>
@@ -546,6 +565,7 @@ This dataset is available via the Registry of Open Data on AWS as a collection o
 </div>
 <div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
 <h2>Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the following cell, we are combining all the <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files that were generated above into a single reference file and writing that file to disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine single Kerchunk output reference files into a multi-file Kerchunk dataset</span>

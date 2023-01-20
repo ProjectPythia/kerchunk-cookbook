@@ -322,16 +322,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   Motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#about-the-dataset">
-   About the Dataset
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
    Overview
   </a>
@@ -339,6 +329,16 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-dataset">
+   About the Dataset
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -352,24 +352,65 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files">
-   Iterate through filelist and create
+  <a class="reference internal nav-link" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
+   Iterate through list of files and create
    <code class="docutils literal notranslate">
     <span class="pre">
      Kerchunk
     </span>
    </code>
-   indicies as .json files
+   indicies as
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .json
+    </span>
+   </code>
+   reference files
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-   Combine .json Kerchunk reference files and write a combined Kerchunk index
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combine-kerchunk-reference-json-files">
+     Combine
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Kerchunk
+      </span>
+     </code>
+     reference
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .json
+      </span>
+     </code>
+     files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#write-combined-kerchunk-reference-file-to-json">
+     Write combined
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Kerchunk
+      </span>
+     </code>
+     reference file to
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .json
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-kerchunked-dataset">
    Load Kerchunked dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-a-slice-of-the-dataset">
+   Plot a slice of the dataset
   </a>
  </li>
 </ul>
@@ -386,23 +427,16 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-grib2-a-case-study-using-noaas-high-resolution-rapid-refresh-hrrr-dataset">
 <h1>Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset<a class="headerlink" href="#kerchunk-and-grib2-a-case-study-using-noaas-high-resolution-rapid-refresh-hrrr-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <p><a class="reference internal" href="../../_images/GRIB2.png"><img alt="HRRR GRIB2" src="../../_images/GRIB2.png" style="width: 400px;" /></a></img></p>
-<div class="section" id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
-</div>
-<div class="section" id="about-the-dataset">
-<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">HRRR</span></code> is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
-NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
-</div>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Within this notebook, we will cover:</p>
 <ol class="simple">
-<li><p>How to access remote GRIB2 data using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
+<li><p>Generating a list of GRIB2 files on a remote filesystem using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code></p></li>
+<li><p>How to create reference files of GRIB2 files using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
 <li><p>Combining multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
 <li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
 </ol>
+<p>This notebook shares many similarities with the <span class="xref myst">Multi-File Datasets with Kerchunk</span> and the <a class="reference internal" href="NWM.html"><span class="doc std std-doc">NetCDF/HDF5 National Water Model Case Study</span></a>, however this case studies examines another data format and uses <code class="docutils literal notranslate"><span class="pre">kerchunk.scan_grib</span></code> to create reference files.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -437,6 +471,15 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </ul>
 </div>
 <hr class="docutils" />
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
+</div>
+<div class="section" id="about-the-dataset">
+<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">HRRR</span></code> is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
+NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
+</div>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
@@ -457,6 +500,8 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 <div class="section" id="create-input-file-list">
 <h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we create <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> files-systems for reading remote files and writing local reference files.
+Next we are using <code class="docutils literal notranslate"><span class="pre">fsspec.glob</span></code> to retrieve a list of file paths and appending the <code class="docutils literal notranslate"><span class="pre">s3://</span></code> prefix to them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
@@ -469,6 +514,20 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 <span class="n">files</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://</span><span class="si">{</span><span class="n">days_available</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">/conus/*wrfsfcf01.grib2&quot;</span><span class="p">)</span>
 <span class="c1"># Append s3 prefix for filelist</span>
 <span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -505,8 +564,8 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 </div>
-<div class="section" id="iterate-through-filelist-and-create-kerchunk-indicies-as-json-files">
-<h2>Iterate through filelist and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as .json files<a class="headerlink" href="#iterate-through-filelist-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
+<h2>Iterate through list of files and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files<a class="headerlink" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
@@ -554,9 +613,8 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-<h2>Combine .json Kerchunk reference files and write a combined Kerchunk index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="section" id="combine-kerchunk-reference-json-files">
+<h3>Combine <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#combine-kerchunk-reference-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># combine individual references into single consolidated reference</span>
@@ -571,11 +629,25 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 </div>
+<div class="section" id="write-combined-kerchunk-reference-file-to-json">
+<h3>Write combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference file to <code class="docutils literal notranslate"><span class="pre">.json</span></code><a class="headerlink" href="#write-combined-kerchunk-reference-file-to-json" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write Kerchunk .json record</span>
+<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;HRRR_combined.json&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">multi_kerchunk</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="load-kerchunked-dataset">
 <h2>Load Kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and xarray</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and Xarray</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
     <span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="n">multi_kerchunk</span><span class="p">,</span> <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">remote_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="p">)</span>
@@ -587,6 +659,10 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="plot-a-slice-of-the-dataset">
+<h2>Plot a slice of the dataset<a class="headerlink" href="#plot-a-slice-of-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> to select a single time slice of the dataset and plot a temperature map of CONUS.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -597,7 +673,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1835733a0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/HRRR_17_1.png" src="../../_images/HRRR_17_1.png" />
+<img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -610,7 +686,7 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1836dfa30&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/HRRR_18_1.png" src="../../_images/HRRR_18_1.png" />
+<img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
 </div>
 </div>
 </div>

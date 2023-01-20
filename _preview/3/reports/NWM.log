@@ -17,11 +17,9 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Module Imports
 import os
 
 import fsspec
-import fsspec_reference_maker
 import ujson
 import xarray as xr
 from kerchunk.combine import MultiZarrToZarr
@@ -32,12 +30,12 @@ from tqdm import tqdm
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
 Cell [0;32mIn[1], line 5[0m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mos[39;00m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mfsspec[39;00m
-[0;32m----> 5[0m [38;5;28;01mimport[39;00m [38;5;21;01mfsspec_reference_maker[39;00m
-[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mujson[39;00m
-[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mxarray[39;00m [38;5;28;01mas[39;00m [38;5;21;01mxr[39;00m
+[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mfsspec[39;00m
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mujson[39;00m
+[0;32m----> 5[0m [38;5;28;01mimport[39;00m [38;5;21;01mxarray[39;00m [38;5;28;01mas[39;00m [38;5;21;01mxr[39;00m
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkerchunk[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcombine[39;00m [38;5;28;01mimport[39;00m MultiZarrToZarr
+[1;32m      7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkerchunk[39;00m[38;5;21;01m.[39;00m[38;5;21;01mhdf[39;00m [38;5;28;01mimport[39;00m SingleHdf5ToZarr
 
-[0;31mModuleNotFoundError[0m: No module named 'fsspec_reference_maker'
-ModuleNotFoundError: No module named 'fsspec_reference_maker'
+[0;31mModuleNotFoundError[0m: No module named 'xarray'
+ModuleNotFoundError: No module named 'xarray'
 
