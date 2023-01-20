@@ -353,7 +353,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#load-kerchunk-reference-file">
-     Load Kerchunk Reference File
+     Load
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Kerchunk
+      </span>
+     </code>
+     Reference File
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -410,6 +416,13 @@ In this tutorial we will:</p>
 <hr class="docutils" />
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we will import a few <code class="docutils literal notranslate"><span class="pre">Python</span></code> libraries to help with our data processing.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fsspec</span></code> will be used to read remote and local filesystems.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kerchunk.hdf</span></code> will be used to read a NetCDF file and create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ujson</span></code> for writing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> output to the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file format.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Xarray</span></code> for examining out output dataset</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
@@ -429,6 +442,7 @@ In this tutorial we will:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">default_fill_cache=False</span></code>: <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that avoids caching in between chunks of files. This may lower memory usage when reading large files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">default_cache_type=&quot;first&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> kwarg that specifies the caching strategy used buy <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>. In this case, <code class="docutils literal notranslate"><span class="pre">first</span></code> caches the first block of a file only.</p></li>
 </ul>
+<p>Don’t worry too much about the details here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
@@ -440,6 +454,14 @@ In this tutorial we will:</p>
 <div class="section" id="parse-a-single-netcdf-file-with-kerchunk">
 <h3>Parse a single NetCDF file with kerchunk<a class="headerlink" href="#parse-a-single-netcdf-file-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <p>Below we will access a NetCDF file stored on the AWS cloud. This dataset is a single time slice of a climate downscaled product for Alaska.</p>
+<p>The steps in the cell below are as follows:</p>
+<ol class="simple">
+<li><p>Define the url that points to the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file we want to process</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> along with the dictionary of arguments we created about (<code class="docutils literal notranslate"><span class="pre">so</span></code>) to open the URL pointing to the NetCDF file.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> method to read through the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and extract the byte ranges, compression information and metadata.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">.translate</span></code> method on the output from the <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> to translate content the NetCDF file into the <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> format.</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file named <code class="docutils literal notranslate"><span class="pre">single_file_kerchunk.json</span></code> and write the dataset information to disk.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
@@ -459,7 +481,8 @@ In this tutorial we will:</p>
 </div>
 </div>
 <div class="section" id="load-kerchunk-reference-file">
-<h3>Load Kerchunk Reference File<a class="headerlink" href="#load-kerchunk-reference-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<h3>Load <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> Reference File<a class="headerlink" href="#load-kerchunk-reference-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>In the section below we will use <code class="docutils literal notranslate"><span class="pre">fsspec.filesystem</span></code> along with the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file to open the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file as if it were a <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use fsspec to create filesystem from .json reference file</span>
