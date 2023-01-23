@@ -11,6 +11,7 @@ dependencies:
   - numpy
   - tqdm
   - ujson
+  - xarray
   - zarr
   - pip:
       - sphinx-pythia-theme
