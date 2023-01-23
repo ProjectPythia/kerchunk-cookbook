@@ -527,7 +527,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -539,26 +539,11 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t04z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t05z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t06z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t07z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t08z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t09z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t10z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t11z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t12z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t13z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t14z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t15z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t16z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t17z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t18z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230119/conus/hrrr.t19z.wrfsfcf01.grib2&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t04z.wrfsfcf01.grib2&#39;]
 </pre></div>
 </div>
 </div>
@@ -608,7 +593,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 20/20 [2:55:08&lt;00:00, 525.44s/it]  
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 10/10 [43:32&lt;00:00, 261.26s/it]
 </pre></div>
 </div>
 </div>
@@ -617,7 +602,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <h3>Combine <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#combine-kerchunk-reference-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># combine individual references into single consolidated reference</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine individual references into single consolidated reference</span>
 <span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
     <span class="n">reference_jsons</span><span class="p">,</span>
     <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;valid_time&quot;</span><span class="p">],</span>
@@ -670,7 +655,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x1835733a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x169a18d30&gt;
 </pre></div>
 </div>
 <img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
@@ -683,7 +668,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1836dfa30&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x16990d8d0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
@@ -774,7 +759,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 20 January 2023.
+          Last updated on 23 January 2023.
         </p>
       </div>
     </div>
