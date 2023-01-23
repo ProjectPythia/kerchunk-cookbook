@@ -9,7 +9,9 @@ dependencies:
   - fsspec
   - numcodecs
   - numpy
+  - tqdm
   - ujson
+  - xarray
   - zarr
   - pip:
       - sphinx-pythia-theme
