@@ -1,0 +1,1630 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kerchunk and NetCDF/HDF5: A Case Study using the National Water Model - Short Range Forecast Dataset &#8212; Project Pythia Kerchunk Cookbook</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Kerchunk and GRIB2: A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset" href="HRRR.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-T52X8HNYE8');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="132">
+    <div class="container-fluid" id="shim"></div>
+    <div class="container-fluid" id="banner"></div>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="https://projectpythia.org">
+  <img src="../../_static/pythia_logo-white-rtext.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class=" collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ProjectPythia" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/project_pythia" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" rel="noopener" target="_blank" title="YouTube">
+            <span><i class="fab fa-youtube-square"></i></span>
+            <label class="sr-only">YouTube</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    <div class="container-xl">
+      <div class="row">
+        
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   Kerchunk Cookbook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foundations/kerchunk_basics.html">
+   Kerchunk Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foundations/kerchunk_multi_file.html">
+   Multi-File Datasets with Kerchunk
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Case Studies
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="HRRR.html">
+   Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Kerchunk and NetCDF/HDF5:  A Case Study using the National Water Model - Short Range Forecast Dataset
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by <a href="https://projectpythia.org">Project Pythia</a>.<br><br>
+All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code content is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 (CC BY 4.0)</a>.<br><br>
+
+</div>
+
+</div>
+
+        
+
+        <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main"><div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/case_studies/NWM.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ProjectPythia/kerchunk-cookbook/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/case_studies/NWM.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/case_studies/NWM.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/case_studies/NWM.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> On this page
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-dataset">
+   About the Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-input-file-list">
+   Create Input File List
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optional-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-and-speed-up-the-example-considerably">
+     OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example considerably.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterate-through-file-pattern-list-and-create-kerchunk-indicies-as-json-files">
+   Iterate through
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     file_pattern
+    </span>
+   </code>
+   list and create
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   indicies as
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .json
+    </span>
+   </code>
+   files
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
+   Combine .json
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   reference files and write a combined
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   index
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-kerchunked-dataset">
+   Load kerchunked dataset
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+          <div id="main-content" class="row">
+            <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+              
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-netcdf-hdf5-a-case-study-using-the-national-water-model-short-range-forecast-dataset">
+<h1>Kerchunk and NetCDF/HDF5:  A Case Study using the National Water Model - Short Range Forecast Dataset<a class="headerlink" href="#kerchunk-and-netcdf-hdf5-a-case-study-using-the-national-water-model-short-range-forecast-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Within this notebook, we will cover:</p>
+<ol class="simple">
+<li><p>How to access remote NetCDF data using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
+<li><p>Combining multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
+<li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
+</ol>
+<p>This notebook shares many similarities with the <a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a>. If you are confused on the function of a block of code, please refer there for a more detailed breakdown of what each line is doing.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepts</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../foundations/kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<td><p>Required</p></td>
+<td><p>IO/Visualization</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://projectpythia.org/intake-cookbook/notebooks/intake_introduction.html">Intake Introduction</a></p></td>
+<td><p>Recommended</p></td>
+<td><p>IO</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Time to learn</strong>: 45 minutes</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>NetCDF/HDF5 is one of the most universally adopted file formats in earth sciences, with support of much of the community as well as scientific agencies, data centers and university labs. A huge amount of legacy data has been generated in this format. Fortunately, using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read these datasets as if they were <code class="docutils literal notranslate"><span class="pre">Zarr</span></code>.</p>
+</div>
+<div class="section" id="about-the-dataset">
+<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>The National Water Model dataset is a produced by the National Oceanic and Atmospheric Administations (NOAA’s) Office of Water Prediction. It is a forecast model of water resources, providing multiple variables across the continental United States (CONUS).
+This dataset is available via the Registry of Open Data on AWS as a collection of netCDF files that do not require any login authentication. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we will demonstrate how to build a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index so that this dataset can be read as if it were an ARCO (Analysis-Ready, Cloud-Optimized) dataset.</p>
+</div>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">import</span> <span class="nn">ujson</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
+<span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-input-file-list">
+<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">fsspec's</span></code> glob functionality along with the <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em> wildcard operator and some string slicing to grab a list of NetCDF files from a <code class="docutils literal notranslate"><span class="pre">s3</span></code> <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an `fsspec` filesystem for AWS s3.</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Use fsspec and glob to retrieve a list of all netCDF files to be used in the `Kerchunk` index generation.</span>
+<span class="n">file_pattern</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;noaa-nwm-pds/nwm.*/short_range/nwm.*.short_range.channel_rt.f001.conus.nc&quot;</span>
+<span class="p">)</span>
+
+
+<span class="n">last_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">last_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+<span class="n">last_files</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">last_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">last_file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">last_file</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">last_file</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">.channel_rt.*.conus.nc&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Skip the first of the last_files since it&#39;s a duplicate</span>
+<span class="n">file_pattern</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">last_files</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="c1"># We need to include the &quot;s3://&quot; prefix to the list of files</span>
+<span class="c1"># so that fsspec will recognize that these JSON files are on S3.</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optional-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-and-speed-up-the-example-considerably">
+<h3>OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example considerably.<a class="headerlink" href="#optional-to-speed-next-section-up-uncomment-the-next-cell-this-will-reduce-the-of-input-files-and-speed-up-the-example-considerably" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="iterate-through-file-pattern-list-and-create-kerchunk-indicies-as-json-files">
+<h2>Iterate through <code class="docutils literal notranslate"><span class="pre">file_pattern</span></code> list and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#iterate-through-file-pattern-list-and-create-kerchunk-indicies-as-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the cell below, we are defining a dictionary of kwargs to pass to <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> and <code class="docutils literal notranslate"><span class="pre">s3fs</span></code>.
+After that, we create a function named <code class="docutils literal notranslate"><span class="pre">gen_json</span></code>, which creates a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index on a given <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and writes that a <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fsspec.open args</span>
+<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+
+<span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
+<span class="k">def</span> <span class="nf">gen_json</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outf</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">outf</span>
+
+
+<span class="c1"># Iterate through filelist to generate Kerchunked files. Good use for `Dask`</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">urls</span><span class="p">):</span>
+    <span class="n">outf</span> <span class="o">=</span> <span class="n">gen_json</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    <span class="n">output_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 708/708 [47:20&lt;00:00,  4.01s/it]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
+<h2>Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the following cell, we are combining all the <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files that were generated above into a single reference file and writing that file to disk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine single Kerchunk output reference files into a multi-file Kerchunk dataset</span>
+<span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span><span class="n">output_files</span><span class="p">,</span> <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">mzz</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
+
+<span class="c1"># Write Kerchunk .json record</span>
+<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;NWM.json&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-kerchunked-dataset">
+<h2>Load kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an fsspec reference filesystem from the Kerchunk output</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="n">output_fname</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/ipykernel_28729/2274580392.py:4: RuntimeWarning: Failed to open Zarr store with consolidated metadata, but successfully read with non-consolidated metadata. This is typically much slower for opening a dataset. To silence this warning, consider:
+1. Consolidating metadata in this existing store with zarr.consolidate_metadata().
+2. Explicitly setting consolidated=False, to avoid trying to read consolidate metadata, or
+3. Explicitly setting consolidated=True, to raise an error in this case instead of falling back to try reading non-consolidated metadata.
+  ds = xr.open_zarr(m)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:         (time: 708, feature_id: 2776738, reference_time: 1)
+Coordinates:
+  * feature_id      (feature_id) float64 101.0 179.0 181.0 ... 1.18e+09 1.18e+09
+  * reference_time  (reference_time) datetime64[ns] 2022-12-25T23:00:00
+  * time            (time) datetime64[ns] 2022-12-26 ... 2023-01-24T11:00:00
+Data variables:
+    crs             (time) object dask.array&lt;chunksize=(1,), meta=np.ndarray&gt;
+    nudge           (time, feature_id) float64 dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;
+    qBtmVertRunoff  (time, feature_id) float64 dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;
+    qBucket         (time, feature_id) float64 dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;
+    qSfcLatRunoff   (time, feature_id) float64 dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;
+    streamflow      (time, feature_id) float64 dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;
+    velocity        (time, feature_id) float64 dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;
+Attributes: (12/19)
+    Conventions:                CF-1.6
+    NWM_version_number:         v2.2
+    TITLE:                      OUTPUT FROM NWM v2.2
+    cdm_datatype:               Station
+    code_version:               v5.2.0-beta2
+    dev:                        dev_ prefix indicates development/internal me...
+    ...                         ...
+    model_output_type:          channel_rt
+    model_output_valid_time:    2022-12-26_00:00:00
+    model_total_valid_times:    18
+    proj4:                      +proj=lcc +units=m +a=6370000.0 +b=6370000.0 ...
+    station_dimension:          feature_id
+    stream_order_output:        1</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-25445962-e843-4382-86e0-0879abff68f9' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-25445962-e843-4382-86e0-0879abff68f9' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 708</li><li><span class='xr-has-index'>feature_id</span>: 2776738</li><li><span class='xr-has-index'>reference_time</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-e7afb990-82e4-44ea-8ddf-8fc2e86fc37c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e7afb990-82e4-44ea-8ddf-8fc2e86fc37c' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>feature_id</span></div><div class='xr-var-dims'>(feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>101.0 179.0 ... 1.18e+09 1.18e+09</div><input id='attrs-b102d0df-4c9f-4094-b39c-5ba0d596476b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b102d0df-4c9f-4094-b39c-5ba0d596476b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1bba28c2-392e-4cb9-b57e-d63c7e6b205e' class='xr-var-data-in' type='checkbox'><label for='data-1bba28c2-392e-4cb9-b57e-d63c7e6b205e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cf_role :</span></dt><dd>timeseries_id</dd><dt><span>comment :</span></dt><dd>NHDPlusv2 ComIDs within CONUS, arbitrary Reach IDs outside of CONUS</dd><dt><span>long_name :</span></dt><dd>Reach ID</dd></dl></div><div class='xr-var-data'><pre>array([1.010000e+02, 1.790000e+02, 1.810000e+02, ..., 1.180002e+09,
+       1.180002e+09, 1.180002e+09])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>reference_time</span></div><div class='xr-var-dims'>(reference_time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-25T23:00:00</div><input id='attrs-6195520b-8334-4c47-9bc4-8ed947f67e54' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6195520b-8334-4c47-9bc4-8ed947f67e54' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8baa0074-f36d-4b6f-98e6-9dc2f1687329' class='xr-var-data-in' type='checkbox'><label for='data-8baa0074-f36d-4b6f-98e6-9dc2f1687329' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>model initialization time</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-25T23:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-26 ... 2023-01-24T11:00:00</div><input id='attrs-27bad64d-7e68-4072-842c-f406e7683a04' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-27bad64d-7e68-4072-842c-f406e7683a04' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ca1ff014-4eb8-4444-8b3c-18646efe1dba' class='xr-var-data-in' type='checkbox'><label for='data-ca1ff014-4eb8-4444-8b3c-18646efe1dba' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>valid output time</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>valid_max :</span></dt><dd>27867900</dd><dt><span>valid_min :</span></dt><dd>27866880</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-26T00:00:00.000000000&#x27;, &#x27;2022-12-26T01:00:00.000000000&#x27;,
+       &#x27;2022-12-26T02:00:00.000000000&#x27;, ..., &#x27;2023-01-24T09:00:00.000000000&#x27;,
+       &#x27;2023-01-24T10:00:00.000000000&#x27;, &#x27;2023-01-24T11:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0189aaa5-0c56-4583-8334-7242f3e77952' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0189aaa5-0c56-4583-8334-7242f3e77952' class='xr-section-summary' >Data variables: <span>(7)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>crs</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1,), meta=np.ndarray&gt;</div><input id='attrs-69fb87e9-2ed8-4836-8146-83cf3faa548e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-69fb87e9-2ed8-4836-8146-83cf3faa548e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-42995f90-947f-4a4f-bc61-a9627e682de7' class='xr-var-data-in' type='checkbox'><label for='data-42995f90-947f-4a4f-bc61-a9627e682de7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>_CoordinateAxes :</span></dt><dd>latitude longitude</dd><dt><span>esri_pe_string :</span></dt><dd>GEOGCS[&quot;GCS_WGS_1984&quot;,DATUM[&quot;D_WGS_1984&quot;,SPHEROID[&quot;WGS_1984&quot;,6378137.0,298.257223563]],PRIMEM[&quot;Greenwich&quot;,0.0],UNIT[&quot;Degree&quot;,0.0174532925199433]];-400 -400 1000000000;-100000 10000;-100000 10000;8.98315284119521E-09;0.001;0.001;IsHighPrecision</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude longitude</dd><dt><span>inverse_flattening :</span></dt><dd>298.2572326660156</dd><dt><span>long_name :</span></dt><dd>CRS definition</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.5</dd><dt><span>spatial_ref :</span></dt><dd>GEOGCS[&quot;GCS_WGS_1984&quot;,DATUM[&quot;D_WGS_1984&quot;,SPHEROID[&quot;WGS_1984&quot;,6378137.0,298.257223563]],PRIMEM[&quot;Greenwich&quot;,0.0],UNIT[&quot;Degree&quot;,0.0174532925199433]];-400 -400 1000000000;-100000 10000;-100000 10000;8.98315284119521E-09;0.001;0.001;IsHighPrecision</dd><dt><span>transform_name :</span></dt><dd>latitude longitude</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 5.53 kiB </td>
+                        <td> 8 B </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708,) </td>
+                        <td> (1,) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> object numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="6" y1="0" x2="6" y2="25" />
+  <line x1="12" y1="0" x2="12" y2="25" />
+  <line x1="18" y1="0" x2="18" y2="25" />
+  <line x1="25" y1="0" x2="25" y2="25" />
+  <line x1="31" y1="0" x2="31" y2="25" />
+  <line x1="37" y1="0" x2="37" y2="25" />
+  <line x1="44" y1="0" x2="44" y2="25" />
+  <line x1="50" y1="0" x2="50" y2="25" />
+  <line x1="56" y1="0" x2="56" y2="25" />
+  <line x1="63" y1="0" x2="63" y2="25" />
+  <line x1="69" y1="0" x2="69" y2="25" />
+  <line x1="75" y1="0" x2="75" y2="25" />
+  <line x1="82" y1="0" x2="82" y2="25" />
+  <line x1="88" y1="0" x2="88" y2="25" />
+  <line x1="94" y1="0" x2="94" y2="25" />
+  <line x1="101" y1="0" x2="101" y2="25" />
+  <line x1="107" y1="0" x2="107" y2="25" />
+  <line x1="113" y1="0" x2="113" y2="25" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >708</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(0,140.000000,12.706308)">1</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>nudge</span></div><div class='xr-var-dims'>(time, feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;</div><input id='attrs-13237523-94ee-492d-85f3-58b4f715f34f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-13237523-94ee-492d-85f3-58b4f715f34f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c4486a93-e7f6-4fd5-9f02-ff8f1c412474' class='xr-var-data-in' type='checkbox'><label for='data-c4486a93-e7f6-4fd5-9f02-ff8f1c412474' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>coordinates :</span></dt><dd>latitude longitude</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>long_name :</span></dt><dd>Amount of stream flow alteration</dd><dt><span>units :</span></dt><dd>m3 s-1</dd><dt><span>valid_range :</span></dt><dd>[-5000000, 5000000]</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 14.65 GiB </td>
+                        <td> 21.18 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708, 2776738) </td>
+                        <td> (1, 2776738) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="1" x2="120" y2="1" />
+  <line x1="0" y1="2" x2="120" y2="2" />
+  <line x1="0" y1="3" x2="120" y2="3" />
+  <line x1="0" y1="5" x2="120" y2="5" />
+  <line x1="0" y1="6" x2="120" y2="6" />
+  <line x1="0" y1="8" x2="120" y2="8" />
+  <line x1="0" y1="9" x2="120" y2="9" />
+  <line x1="0" y1="10" x2="120" y2="10" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="13" x2="120" y2="13" />
+  <line x1="0" y1="14" x2="120" y2="14" />
+  <line x1="0" y1="16" x2="120" y2="16" />
+  <line x1="0" y1="17" x2="120" y2="17" />
+  <line x1="0" y1="18" x2="120" y2="18" />
+  <line x1="0" y1="20" x2="120" y2="20" />
+  <line x1="0" y1="21" x2="120" y2="21" />
+  <line x1="0" y1="22" x2="120" y2="22" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >2776738</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,12.706308)">708</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>qBtmVertRunoff</span></div><div class='xr-var-dims'>(time, feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;</div><input id='attrs-a8b9a09c-ad7f-4196-8f02-c28bbd3f2351' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a8b9a09c-ad7f-4196-8f02-c28bbd3f2351' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-65ea39cd-1233-43a6-b16e-81bb00470b5c' class='xr-var-data-in' type='checkbox'><label for='data-65ea39cd-1233-43a6-b16e-81bb00470b5c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>coordinates :</span></dt><dd>latitude longitude</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>long_name :</span></dt><dd>Runoff from bottom of soil to bucket</dd><dt><span>units :</span></dt><dd>m3</dd><dt><span>valid_range :</span></dt><dd>[0, 20000000]</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 14.65 GiB </td>
+                        <td> 21.18 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708, 2776738) </td>
+                        <td> (1, 2776738) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="1" x2="120" y2="1" />
+  <line x1="0" y1="2" x2="120" y2="2" />
+  <line x1="0" y1="3" x2="120" y2="3" />
+  <line x1="0" y1="5" x2="120" y2="5" />
+  <line x1="0" y1="6" x2="120" y2="6" />
+  <line x1="0" y1="8" x2="120" y2="8" />
+  <line x1="0" y1="9" x2="120" y2="9" />
+  <line x1="0" y1="10" x2="120" y2="10" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="13" x2="120" y2="13" />
+  <line x1="0" y1="14" x2="120" y2="14" />
+  <line x1="0" y1="16" x2="120" y2="16" />
+  <line x1="0" y1="17" x2="120" y2="17" />
+  <line x1="0" y1="18" x2="120" y2="18" />
+  <line x1="0" y1="20" x2="120" y2="20" />
+  <line x1="0" y1="21" x2="120" y2="21" />
+  <line x1="0" y1="22" x2="120" y2="22" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >2776738</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,12.706308)">708</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>qBucket</span></div><div class='xr-var-dims'>(time, feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;</div><input id='attrs-a8d8cf7c-bb76-464f-a772-8673aa124870' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a8d8cf7c-bb76-464f-a772-8673aa124870' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b2f42fc7-bfd5-4f88-baf4-a39f43aab13f' class='xr-var-data-in' type='checkbox'><label for='data-b2f42fc7-bfd5-4f88-baf4-a39f43aab13f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>coordinates :</span></dt><dd>latitude longitude</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>long_name :</span></dt><dd>Flux from gw bucket</dd><dt><span>units :</span></dt><dd>m3 s-1</dd><dt><span>valid_range :</span></dt><dd>[0, 2000000000]</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 14.65 GiB </td>
+                        <td> 21.18 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708, 2776738) </td>
+                        <td> (1, 2776738) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="1" x2="120" y2="1" />
+  <line x1="0" y1="2" x2="120" y2="2" />
+  <line x1="0" y1="3" x2="120" y2="3" />
+  <line x1="0" y1="5" x2="120" y2="5" />
+  <line x1="0" y1="6" x2="120" y2="6" />
+  <line x1="0" y1="8" x2="120" y2="8" />
+  <line x1="0" y1="9" x2="120" y2="9" />
+  <line x1="0" y1="10" x2="120" y2="10" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="13" x2="120" y2="13" />
+  <line x1="0" y1="14" x2="120" y2="14" />
+  <line x1="0" y1="16" x2="120" y2="16" />
+  <line x1="0" y1="17" x2="120" y2="17" />
+  <line x1="0" y1="18" x2="120" y2="18" />
+  <line x1="0" y1="20" x2="120" y2="20" />
+  <line x1="0" y1="21" x2="120" y2="21" />
+  <line x1="0" y1="22" x2="120" y2="22" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >2776738</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,12.706308)">708</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>qSfcLatRunoff</span></div><div class='xr-var-dims'>(time, feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;</div><input id='attrs-4d3d39e8-0e54-4880-b5ab-c6ba4d42ddd4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4d3d39e8-0e54-4880-b5ab-c6ba4d42ddd4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-433941e2-bfa8-46ea-ad24-e62f0e846e73' class='xr-var-data-in' type='checkbox'><label for='data-433941e2-bfa8-46ea-ad24-e62f0e846e73' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>coordinates :</span></dt><dd>latitude longitude</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>long_name :</span></dt><dd>Runoff from terrain routing</dd><dt><span>units :</span></dt><dd>m3 s-1</dd><dt><span>valid_range :</span></dt><dd>[0, 2000000000]</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 14.65 GiB </td>
+                        <td> 21.18 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708, 2776738) </td>
+                        <td> (1, 2776738) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="1" x2="120" y2="1" />
+  <line x1="0" y1="2" x2="120" y2="2" />
+  <line x1="0" y1="3" x2="120" y2="3" />
+  <line x1="0" y1="5" x2="120" y2="5" />
+  <line x1="0" y1="6" x2="120" y2="6" />
+  <line x1="0" y1="8" x2="120" y2="8" />
+  <line x1="0" y1="9" x2="120" y2="9" />
+  <line x1="0" y1="10" x2="120" y2="10" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="13" x2="120" y2="13" />
+  <line x1="0" y1="14" x2="120" y2="14" />
+  <line x1="0" y1="16" x2="120" y2="16" />
+  <line x1="0" y1="17" x2="120" y2="17" />
+  <line x1="0" y1="18" x2="120" y2="18" />
+  <line x1="0" y1="20" x2="120" y2="20" />
+  <line x1="0" y1="21" x2="120" y2="21" />
+  <line x1="0" y1="22" x2="120" y2="22" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >2776738</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,12.706308)">708</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>streamflow</span></div><div class='xr-var-dims'>(time, feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;</div><input id='attrs-9bb8bfc1-9e9e-47b4-9c54-90926da396e5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9bb8bfc1-9e9e-47b4-9c54-90926da396e5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b513954d-837f-4d6d-91eb-15c662290c0a' class='xr-var-data-in' type='checkbox'><label for='data-b513954d-837f-4d6d-91eb-15c662290c0a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>coordinates :</span></dt><dd>latitude longitude</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>long_name :</span></dt><dd>River Flow</dd><dt><span>units :</span></dt><dd>m3 s-1</dd><dt><span>valid_range :</span></dt><dd>[0, 5000000]</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 14.65 GiB </td>
+                        <td> 21.18 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708, 2776738) </td>
+                        <td> (1, 2776738) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="1" x2="120" y2="1" />
+  <line x1="0" y1="2" x2="120" y2="2" />
+  <line x1="0" y1="3" x2="120" y2="3" />
+  <line x1="0" y1="5" x2="120" y2="5" />
+  <line x1="0" y1="6" x2="120" y2="6" />
+  <line x1="0" y1="8" x2="120" y2="8" />
+  <line x1="0" y1="9" x2="120" y2="9" />
+  <line x1="0" y1="10" x2="120" y2="10" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="13" x2="120" y2="13" />
+  <line x1="0" y1="14" x2="120" y2="14" />
+  <line x1="0" y1="16" x2="120" y2="16" />
+  <line x1="0" y1="17" x2="120" y2="17" />
+  <line x1="0" y1="18" x2="120" y2="18" />
+  <line x1="0" y1="20" x2="120" y2="20" />
+  <line x1="0" y1="21" x2="120" y2="21" />
+  <line x1="0" y1="22" x2="120" y2="22" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >2776738</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,12.706308)">708</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>velocity</span></div><div class='xr-var-dims'>(time, feature_id)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(1, 2776738), meta=np.ndarray&gt;</div><input id='attrs-f29cd7a7-ed89-4f88-a3b1-0bba9df4e1ca' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f29cd7a7-ed89-4f88-a3b1-0bba9df4e1ca' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c4d96bd3-eebf-4667-9fad-1ac508c3f514' class='xr-var-data-in' type='checkbox'><label for='data-c4d96bd3-eebf-4667-9fad-1ac508c3f514' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>coordinates :</span></dt><dd>latitude longitude</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>long_name :</span></dt><dd>River Velocity</dd><dt><span>units :</span></dt><dd>m s-1</dd><dt><span>valid_range :</span></dt><dd>[0, 5000000]</dd></dl></div><div class='xr-var-data'><table>
+    <tr>
+        <td>
+            <table style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td> </td>
+                        <th> Array </th>
+                        <th> Chunk </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th> Bytes </th>
+                        <td> 14.65 GiB </td>
+                        <td> 21.18 MiB </td>
+                    </tr>
+
+                    <tr>
+                        <th> Shape </th>
+                        <td> (708, 2776738) </td>
+                        <td> (1, 2776738) </td>
+                    </tr>
+                    <tr>
+                        <th> Dask graph </th>
+                        <td colspan="2"> 708 chunks in 2 graph layers </td>
+                    </tr>
+                    <tr>
+                        <th> Data type </th>
+                        <td colspan="2"> float64 numpy.ndarray </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+        <svg width="170" height="75" style="stroke:rgb(0,0,0);stroke-width:1" >
+
+  <!-- Horizontal lines -->
+  <line x1="0" y1="0" x2="120" y2="0" style="stroke-width:2" />
+  <line x1="0" y1="1" x2="120" y2="1" />
+  <line x1="0" y1="2" x2="120" y2="2" />
+  <line x1="0" y1="3" x2="120" y2="3" />
+  <line x1="0" y1="5" x2="120" y2="5" />
+  <line x1="0" y1="6" x2="120" y2="6" />
+  <line x1="0" y1="8" x2="120" y2="8" />
+  <line x1="0" y1="9" x2="120" y2="9" />
+  <line x1="0" y1="10" x2="120" y2="10" />
+  <line x1="0" y1="12" x2="120" y2="12" />
+  <line x1="0" y1="13" x2="120" y2="13" />
+  <line x1="0" y1="14" x2="120" y2="14" />
+  <line x1="0" y1="16" x2="120" y2="16" />
+  <line x1="0" y1="17" x2="120" y2="17" />
+  <line x1="0" y1="18" x2="120" y2="18" />
+  <line x1="0" y1="20" x2="120" y2="20" />
+  <line x1="0" y1="21" x2="120" y2="21" />
+  <line x1="0" y1="22" x2="120" y2="22" />
+  <line x1="0" y1="24" x2="120" y2="24" />
+  <line x1="0" y1="25" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Vertical lines -->
+  <line x1="0" y1="0" x2="0" y2="25" style="stroke-width:2" />
+  <line x1="120" y1="0" x2="120" y2="25" style="stroke-width:2" />
+
+  <!-- Colored Rectangle -->
+  <polygon points="0.0,0.0 120.0,0.0 120.0,25.412616514582485 0.0,25.412616514582485" style="fill:#8B4903A0;stroke-width:0"/>
+
+  <!-- Text -->
+  <text x="60.000000" y="45.412617" font-size="1.0rem" font-weight="100" text-anchor="middle" >2776738</text>
+  <text x="140.000000" y="12.706308" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,140.000000,12.706308)">708</text>
+</svg>
+        </td>
+    </tr>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-7c06295e-d7cf-40ad-98bd-60fee1cb2410' class='xr-section-summary-in' type='checkbox'  ><label for='section-7c06295e-d7cf-40ad-98bd-60fee1cb2410' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>feature_id</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-683cfe31-587a-4c58-bc13-65bc67aeccd6' class='xr-index-data-in' type='checkbox'/><label for='index-683cfe31-587a-4c58-bc13-65bc67aeccd6' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([       101.0,        179.0,        181.0,        183.0,
+                     185.0,        843.0,        845.0,        847.0,
+                     849.0,        851.0,
+              ...
+              1180001795.0, 1180001796.0, 1180001797.0, 1180001798.0,
+              1180001799.0, 1180001800.0, 1180001801.0, 1180001802.0,
+              1180001803.0, 1180001804.0],
+             dtype=&#x27;float64&#x27;, name=&#x27;feature_id&#x27;, length=2776738))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>reference_time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-86796652-8cf2-4f15-9194-f3c2f79879e3' class='xr-index-data-in' type='checkbox'/><label for='index-86796652-8cf2-4f15-9194-f3c2f79879e3' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-25 23:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;reference_time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-dd7d43ed-93a6-4e72-8eca-5c7fccfd4523' class='xr-index-data-in' type='checkbox'/><label for='index-dd7d43ed-93a6-4e72-8eca-5c7fccfd4523' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-26 00:00:00&#x27;, &#x27;2022-12-26 01:00:00&#x27;,
+               &#x27;2022-12-26 02:00:00&#x27;, &#x27;2022-12-26 03:00:00&#x27;,
+               &#x27;2022-12-26 04:00:00&#x27;, &#x27;2022-12-26 05:00:00&#x27;,
+               &#x27;2022-12-26 06:00:00&#x27;, &#x27;2022-12-26 07:00:00&#x27;,
+               &#x27;2022-12-26 08:00:00&#x27;, &#x27;2022-12-26 09:00:00&#x27;,
+               ...
+               &#x27;2023-01-24 02:00:00&#x27;, &#x27;2023-01-24 03:00:00&#x27;,
+               &#x27;2023-01-24 04:00:00&#x27;, &#x27;2023-01-24 05:00:00&#x27;,
+               &#x27;2023-01-24 06:00:00&#x27;, &#x27;2023-01-24 07:00:00&#x27;,
+               &#x27;2023-01-24 08:00:00&#x27;, &#x27;2023-01-24 09:00:00&#x27;,
+               &#x27;2023-01-24 10:00:00&#x27;, &#x27;2023-01-24 11:00:00&#x27;],
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, length=708, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e1b71b89-4525-4c58-b8d9-d7ab965548a3' class='xr-section-summary-in' type='checkbox'  ><label for='section-e1b71b89-4525-4c58-b8d9-d7ab965548a3' class='xr-section-summary' >Attributes: <span>(19)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>CF-1.6</dd><dt><span>NWM_version_number :</span></dt><dd>v2.2</dd><dt><span>TITLE :</span></dt><dd>OUTPUT FROM NWM v2.2</dd><dt><span>cdm_datatype :</span></dt><dd>Station</dd><dt><span>code_version :</span></dt><dd>v5.2.0-beta2</dd><dt><span>dev :</span></dt><dd>dev_ prefix indicates development/internal meta data</dd><dt><span>dev_NOAH_TIMESTEP :</span></dt><dd>3600</dd><dt><span>dev_OVRTSWCRT :</span></dt><dd>1</dd><dt><span>dev_channelBucket_only :</span></dt><dd>0</dd><dt><span>dev_channel_only :</span></dt><dd>0</dd><dt><span>featureType :</span></dt><dd>timeSeries</dd><dt><span>model_configuration :</span></dt><dd>short_range</dd><dt><span>model_initialization_time :</span></dt><dd>2022-12-25_23:00:00</dd><dt><span>model_output_type :</span></dt><dd>channel_rt</dd><dt><span>model_output_valid_time :</span></dt><dd>2022-12-26_00:00:00</dd><dt><span>model_total_valid_times :</span></dt><dd>18</dd><dt><span>proj4 :</span></dt><dd>+proj=lcc +units=m +a=6370000.0 +b=6370000.0 +lat_1=30.0 +lat_2=60.0 +lat_0=40.0 +lon_0=-97.0 +x_0=0 +y_0=0 +k_0=1.0 +nadgrids=@</dd><dt><span>station_dimension :</span></dt><dd>feature_id</dd><dt><span>stream_order_output :</span></dt><dd>1</dd></dl></div></li></ul></div></div></div></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/case_studies"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="HRRR.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset</p>
+        </div>
+    </a>
+</div>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+<footer class="footer">
+  <div class="container-fluid m-0 p-0">
+  
+    <div class="footer-item">
+    
+  <div class="container-fluid footer-logos">
+    <div class="container-xl">
+      <div class="row d-flex flex-wrap align-items-center">
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="NCAR" src="../../_images/NCAR-contemp-logo-blue.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="Unidata" src="../../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="UAlbany" src="../../_images/UAlbany-A2-logo-purple-gold.svg" style="width: 100%">
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+    <div class="footer-item">
+    
+    </div>
+  
+    <div class="footer-item">
+      <div class="container-fluid footer-info">
+    <div class="container-xl">
+      <div class="d-flex justify-content-center">
+        <p class="py-1 m-0">
+            &copy;&nbsp;2022.
+        
+          By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
+        
+          Last updated on 23 January 2023.
+        </p>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+    <div class="footer-item">
+    
+    </div>
+  
+  </div>
+</footer>
+  </body>
+</html>
