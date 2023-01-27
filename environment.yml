@@ -2,6 +2,7 @@ name: kerchunk-cookbook-dev
 channels:
   - conda-forge
 dependencies:
+  - cfgrib
   - jupyter-book
   - jupyterlab
   - jupyter_server<2
@@ -15,3 +16,4 @@ dependencies:
   - zarr
   - pip:
       - sphinx-pythia-theme
+      - git+https://github.com/fsspec/kerchunk.git
