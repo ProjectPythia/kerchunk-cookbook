@@ -17,68 +17,75 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Initiate fsspec filesystems for reading and writing
-fs_read = fsspec.filesystem("s3", anon=True, skip_instance_cache=True)
-fs_write = fsspec.filesystem("")
-
-# retrieve list of available days in archive
-days_available = fs_read.glob("s3://noaa-hrrr-bdp-pds/hrrr.*")
-# Read HRRR GRIB2 files from latest day
-files = fs_read.glob(f"s3://{days_available[-1]}/conus/*wrfsfcf01.grib2")
-# Append s3 prefix for filelist
-files = sorted(["s3://" + f for f in files])
+# open dataset as zarr object using fsspec reference file system and Xarray
+fs = fsspec.filesystem(
+    "reference", fo=multi_kerchunk, remote_protocol="s3", remote_options={"anon": True}
+)
+m = fs.get_mapper("")
+ds = xr.open_dataset(
+    m, engine="zarr", backend_kwargs=dict(consolidated=False), chunks={"valid_time": 1}
+)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:211[0m, in [0;36mget_filesystem_class[0;34m(protocol)[0m
-[1;32m    210[0m [38;5;28;01mtry[39;00m:
-[0;32m--> 211[0m     register_implementation(protocol, [43m_import_class[49m[43m([49m[43mbit[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mclass[39;49m[38;5;124;43m"[39;49m[43m][49m[43m)[49m)
-[1;32m    212[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
+Cell [0;32mIn[10], line 6[0m
+[1;32m      2[0m fs [38;5;241m=[39m fsspec[38;5;241m.[39mfilesystem(
+[1;32m      3[0m     [38;5;124m"[39m[38;5;124mreference[39m[38;5;124m"[39m, fo[38;5;241m=[39mmulti_kerchunk, remote_protocol[38;5;241m=[39m[38;5;124m"[39m[38;5;124ms3[39m[38;5;124m"[39m, remote_options[38;5;241m=[39m{[38;5;124m"[39m[38;5;124manon[39m[38;5;124m"[39m: [38;5;28;01mTrue[39;00m}
+[1;32m      4[0m )
+[1;32m      5[0m m [38;5;241m=[39m fs[38;5;241m.[39mget_mapper([38;5;124m"[39m[38;5;124m"[39m)
+[0;32m----> 6[0m ds [38;5;241m=[39m [43mxr[49m[38;5;241;43m.[39;49m[43mopen_dataset[49m[43m([49m
+[1;32m      7[0m [43m    [49m[43mm[49m[43m,[49m[43m [49m[43mengine[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mzarr[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mbackend_kwargs[49m[38;5;241;43m=[39;49m[38;5;28;43mdict[39;49m[43m([49m[43mconsolidated[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m[43m,[49m[43m [49m[43mchunks[49m[38;5;241;43m=[39;49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43mvalid_time[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;241;43m1[39;49m[43m}[49m
+[1;32m      8[0m [43m)[49m
 
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:234[0m, in [0;36m_import_class[0;34m(cls, minv)[0m
-[1;32m    233[0m mod, name [38;5;241m=[39m [38;5;28mcls[39m[38;5;241m.[39mrsplit([38;5;124m"[39m[38;5;124m.[39m[38;5;124m"[39m, [38;5;241m1[39m)
-[0;32m--> 234[0m mod [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mmod[49m[43m)[49m
-[1;32m    235[0m [38;5;28;01mreturn[39;00m [38;5;28mgetattr[39m(mod, name)
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:547[0m, in [0;36mopen_dataset[0;34m(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, backend_kwargs, **kwargs)[0m
+[1;32m    540[0m overwrite_encoded_chunks [38;5;241m=[39m kwargs[38;5;241m.[39mpop([38;5;124m"[39m[38;5;124moverwrite_encoded_chunks[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m)
+[1;32m    541[0m backend_ds [38;5;241m=[39m backend[38;5;241m.[39mopen_dataset(
+[1;32m    542[0m     filename_or_obj,
+[1;32m    543[0m     drop_variables[38;5;241m=[39mdrop_variables,
+[1;32m    544[0m     [38;5;241m*[39m[38;5;241m*[39mdecoders,
+[1;32m    545[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
+[1;32m    546[0m )
+[0;32m--> 547[0m ds [38;5;241m=[39m [43m_dataset_from_backend_dataset[49m[43m([49m
+[1;32m    548[0m [43m    [49m[43mbackend_ds[49m[43m,[49m
+[1;32m    549[0m [43m    [49m[43mfilename_or_obj[49m[43m,[49m
+[1;32m    550[0m [43m    [49m[43mengine[49m[43m,[49m
+[1;32m    551[0m [43m    [49m[43mchunks[49m[43m,[49m
+[1;32m    552[0m [43m    [49m[43mcache[49m[43m,[49m
+[1;32m    553[0m [43m    [49m[43moverwrite_encoded_chunks[49m[43m,[49m
+[1;32m    554[0m [43m    [49m[43minline_array[49m[43m,[49m
+[1;32m    555[0m [43m    [49m[43mdrop_variables[49m[38;5;241;43m=[39;49m[43mdrop_variables[49m[43m,[49m
+[1;32m    556[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mdecoders[49m[43m,[49m
+[1;32m    557[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m,[49m
+[1;32m    558[0m [43m[49m[43m)[49m
+[1;32m    559[0m [38;5;28;01mreturn[39;00m ds
 
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
-[1;32m    125[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
-[0;32m--> 126[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:358[0m, in [0;36m_dataset_from_backend_dataset[0;34m(backend_ds, filename_or_obj, engine, chunks, cache, overwrite_encoded_chunks, inline_array, **extra_tokens)[0m
+[1;32m    356[0m     ds [38;5;241m=[39m backend_ds
+[1;32m    357[0m [38;5;28;01melse[39;00m:
+[0;32m--> 358[0m     ds [38;5;241m=[39m [43m_chunk_ds[49m[43m([49m
+[1;32m    359[0m [43m        [49m[43mbackend_ds[49m[43m,[49m
+[1;32m    360[0m [43m        [49m[43mfilename_or_obj[49m[43m,[49m
+[1;32m    361[0m [43m        [49m[43mengine[49m[43m,[49m
+[1;32m    362[0m [43m        [49m[43mchunks[49m[43m,[49m
+[1;32m    363[0m [43m        [49m[43moverwrite_encoded_chunks[49m[43m,[49m
+[1;32m    364[0m [43m        [49m[43minline_array[49m[43m,[49m
+[1;32m    365[0m [43m        [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mextra_tokens[49m[43m,[49m
+[1;32m    366[0m [43m    [49m[43m)[49m
+[1;32m    368[0m ds[38;5;241m.[39mset_close(backend_ds[38;5;241m.[39m_close)
+[1;32m    370[0m [38;5;66;03m# Ensure source filename always stored in dataset object[39;00m
 
-File [0;32m<frozen importlib._bootstrap>:1050[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:318[0m, in [0;36m_chunk_ds[0;34m(backend_ds, filename_or_obj, engine, chunks, overwrite_encoded_chunks, inline_array, **extra_tokens)[0m
+[1;32m    309[0m [38;5;28;01mdef[39;00m [38;5;21m_chunk_ds[39m(
+[1;32m    310[0m     backend_ds,
+[1;32m    311[0m     filename_or_obj,
+[0;32m   (...)[0m
+[1;32m    316[0m     [38;5;241m*[39m[38;5;241m*[39mextra_tokens,
+[1;32m    317[0m ):
+[0;32m--> 318[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mdask[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m [38;5;28;01mimport[39;00m tokenize
+[1;32m    320[0m     mtime [38;5;241m=[39m _get_mtime(filename_or_obj)
+[1;32m    321[0m     token [38;5;241m=[39m tokenize(filename_or_obj, mtime, engine, chunks, [38;5;241m*[39m[38;5;241m*[39mextra_tokens)
 
-File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
-
-File [0;32m<frozen importlib._bootstrap>:1004[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
-
-[0;31mModuleNotFoundError[0m: No module named 's3fs'
-
-The above exception was the direct cause of the following exception:
-
-[0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[2], line 2[0m
-[1;32m      1[0m [38;5;66;03m# Initiate fsspec filesystems for reading and writing[39;00m
-[0;32m----> 2[0m fs_read [38;5;241m=[39m [43mfsspec[49m[38;5;241;43m.[39;49m[43mfilesystem[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43ms3[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43manon[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m[43m [49m[43mskip_instance_cache[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
-[1;32m      3[0m fs_write [38;5;241m=[39m fsspec[38;5;241m.[39mfilesystem([38;5;124m"[39m[38;5;124m"[39m)
-[1;32m      5[0m [38;5;66;03m# retrieve list of available days in archive[39;00m
-
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:251[0m, in [0;36mfilesystem[0;34m(protocol, **storage_options)[0m
-[1;32m    244[0m [38;5;28;01mif[39;00m protocol [38;5;241m==[39m [38;5;124m"[39m[38;5;124marrow_hdfs[39m[38;5;124m"[39m:
-[1;32m    245[0m     warnings[38;5;241m.[39mwarn(
-[1;32m    246[0m         [38;5;124m"[39m[38;5;124mThe [39m[38;5;124m'[39m[38;5;124marrow_hdfs[39m[38;5;124m'[39m[38;5;124m protocol has been deprecated and will be [39m[38;5;124m"[39m
-[1;32m    247[0m         [38;5;124m"[39m[38;5;124mremoved in the future. Specify it as [39m[38;5;124m'[39m[38;5;124mhdfs[39m[38;5;124m'[39m[38;5;124m.[39m[38;5;124m"[39m,
-[1;32m    248[0m         [38;5;167;01mDeprecationWarning[39;00m,
-[1;32m    249[0m     )
-[0;32m--> 251[0m [38;5;28mcls[39m [38;5;241m=[39m [43mget_filesystem_class[49m[43m([49m[43mprotocol[49m[43m)[49m
-[1;32m    252[0m [38;5;28;01mreturn[39;00m [38;5;28mcls[39m([38;5;241m*[39m[38;5;241m*[39mstorage_options)
-
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:213[0m, in [0;36mget_filesystem_class[0;34m(protocol)[0m
-[1;32m    211[0m         register_implementation(protocol, _import_class(bit[[38;5;124m"[39m[38;5;124mclass[39m[38;5;124m"[39m]))
-[1;32m    212[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
-[0;32m--> 213[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(bit[[38;5;124m"[39m[38;5;124merr[39m[38;5;124m"[39m]) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
-[1;32m    214[0m [38;5;28mcls[39m [38;5;241m=[39m registry[protocol]
-[1;32m    215[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m([38;5;28mcls[39m, [38;5;124m"[39m[38;5;124mprotocol[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m) [38;5;129;01min[39;00m ([38;5;124m"[39m[38;5;124mabstract[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m):
-
-[0;31mImportError[0m: Install s3fs to access S3
-ImportError: Install s3fs to access S3
+[0;31mModuleNotFoundError[0m: No module named 'dask'
+ModuleNotFoundError: No module named 'dask'
 
