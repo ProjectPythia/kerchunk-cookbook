@@ -17,46 +17,126 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import fsspec
-import kerchunk.hdf
-import ujson
-import xarray as xr
+# Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).
+url = "s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc"
+
+# Uses kerchunk to scan through the netcdf file to create kerchunk mapping and then save output as .json
+# Note: In this example, we write the kerchunk output to a .json file.
+# You could also keep this information in memory and pass it to fsspec
+with fsspec.open(url, **so) as inf:
+    h5chunks = kerchunk.hdf.SingleHdf5ToZarr(inf, url, inline_threshold=100)
+    h5chunks.translate()
+    with open("single_file_kerchunk.json", "wb") as f:
+        f.write(ujson.dumps(h5chunks.translate()).encode())
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:14[0m
-[1;32m     13[0m [38;5;28;01mtry[39;00m:
-[0;32m---> 14[0m     [38;5;28;01mimport[39;00m [38;5;21;01mh5py[39;00m
-[1;32m     15[0m [38;5;28;01mexcept[39;00m [38;5;167;01mModuleNotFoundError[39;00m:  [38;5;66;03m# pragma: no cover[39;00m
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:211[0m, in [0;36mget_filesystem_class[0;34m(protocol)[0m
+[1;32m    210[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 211[0m     register_implementation(protocol, [43m_import_class[49m[43m([49m[43mbit[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mclass[39;49m[38;5;124;43m"[39;49m[43m][49m[43m)[49m)
+[1;32m    212[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
 
-[0;31mModuleNotFoundError[0m: No module named 'h5py'
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:234[0m, in [0;36m_import_class[0;34m(cls, minv)[0m
+[1;32m    233[0m mod, name [38;5;241m=[39m [38;5;28mcls[39m[38;5;241m.[39mrsplit([38;5;124m"[39m[38;5;124m.[39m[38;5;124m"[39m, [38;5;241m1[39m)
+[0;32m--> 234[0m mod [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mmod[49m[43m)[49m
+[1;32m    235[0m [38;5;28;01mreturn[39;00m [38;5;28mgetattr[39m(mod, name)
 
-During handling of the above exception, another exception occurred:
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m    125[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m--> 126[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1050[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1004[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+[0;31mModuleNotFoundError[0m: No module named 's3fs'
+
+The above exception was the direct cause of the following exception:
 
 [0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[1], line 2[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mfsspec[39;00m
-[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mkerchunk[39;00m[38;5;21;01m.[39;00m[38;5;21;01mhdf[39;00m
-[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mujson[39;00m
-[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mxarray[39;00m [38;5;28;01mas[39;00m [38;5;21;01mxr[39;00m
+Cell [0;32mIn[3], line 7[0m
+[1;32m      2[0m url [38;5;241m=[39m [38;5;124m"[39m[38;5;124ms3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc[39m[38;5;124m"[39m
+[1;32m      4[0m [38;5;66;03m# Uses kerchunk to scan through the netcdf file to create kerchunk mapping and then save output as .json[39;00m
+[1;32m      5[0m [38;5;66;03m# Note: In this example, we write the kerchunk output to a .json file.[39;00m
+[1;32m      6[0m [38;5;66;03m# You could also keep this information in memory and pass it to fsspec[39;00m
+[0;32m----> 7[0m [38;5;28;01mwith[39;00m [43mfsspec[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mso[49m[43m)[49m [38;5;28;01mas[39;00m inf:
+[1;32m      8[0m     h5chunks [38;5;241m=[39m kerchunk[38;5;241m.[39mhdf[38;5;241m.[39mSingleHdf5ToZarr(inf, url, inline_threshold[38;5;241m=[39m[38;5;241m100[39m)
+[1;32m      9[0m     h5chunks[38;5;241m.[39mtranslate()
 
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:16[0m
-[1;32m     14[0m     [38;5;28;01mimport[39;00m [38;5;21;01mh5py[39;00m
-[1;32m     15[0m [38;5;28;01mexcept[39;00m [38;5;167;01mModuleNotFoundError[39;00m:  [38;5;66;03m# pragma: no cover[39;00m
-[0;32m---> 16[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
-[1;32m     17[0m         [38;5;124m"[39m[38;5;124mh5py is required for kerchunking HDF5/NetCDF4 files. Please install with [39m[38;5;124m"[39m
-[1;32m     18[0m         [38;5;124m"[39m[38;5;124m`pip/conda install h5py`. See https://docs.h5py.org/en/latest/build.html [39m[38;5;124m"[39m
-[1;32m     19[0m         [38;5;124m"[39m[38;5;124mfor more details.[39m[38;5;124m"[39m
-[1;32m     20[0m     )
-[1;32m     22[0m lggr [38;5;241m=[39m logging[38;5;241m.[39mgetLogger([38;5;124m"[39m[38;5;124mh5-to-zarr[39m[38;5;124m"[39m)
-[1;32m     23[0m _HIDDEN_ATTRS [38;5;241m=[39m {  [38;5;66;03m# from h5netcdf.attrs[39;00m
-[1;32m     24[0m     [38;5;124m"[39m[38;5;124mREFERENCE_LIST[39m[38;5;124m"[39m,
-[1;32m     25[0m     [38;5;124m"[39m[38;5;124mCLASS[39m[38;5;124m"[39m,
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/core.py:419[0m, in [0;36mopen[0;34m(urlpath, mode, compression, encoding, errors, protocol, newline, **kwargs)[0m
+[1;32m    369[0m [38;5;28;01mdef[39;00m [38;5;21mopen[39m(
+[1;32m    370[0m     urlpath,
+[1;32m    371[0m     mode[38;5;241m=[39m[38;5;124m"[39m[38;5;124mrb[39m[38;5;124m"[39m,
 [0;32m   (...)[0m
-[1;32m     31[0m     [38;5;124m"[39m[38;5;124m_NCProperties[39m[38;5;124m"[39m,
-[1;32m     32[0m }
+[1;32m    377[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
+[1;32m    378[0m ):
+[1;32m    379[0m [38;5;250m    [39m[38;5;124;03m"""Given a path or paths, return one ``OpenFile`` object.[39;00m
+[1;32m    380[0m 
+[1;32m    381[0m [38;5;124;03m    Parameters[39;00m
+[0;32m   (...)[0m
+[1;32m    417[0m [38;5;124;03m    ``OpenFile`` object.[39;00m
+[1;32m    418[0m [38;5;124;03m    """[39;00m
+[0;32m--> 419[0m     [38;5;28;01mreturn[39;00m [43mopen_files[49m[43m([49m
+[1;32m    420[0m [43m        [49m[43murlpath[49m[38;5;241;43m=[39;49m[43m[[49m[43murlpath[49m[43m][49m[43m,[49m
+[1;32m    421[0m [43m        [49m[43mmode[49m[38;5;241;43m=[39;49m[43mmode[49m[43m,[49m
+[1;32m    422[0m [43m        [49m[43mcompression[49m[38;5;241;43m=[39;49m[43mcompression[49m[43m,[49m
+[1;32m    423[0m [43m        [49m[43mencoding[49m[38;5;241;43m=[39;49m[43mencoding[49m[43m,[49m
+[1;32m    424[0m [43m        [49m[43merrors[49m[38;5;241;43m=[39;49m[43merrors[49m[43m,[49m
+[1;32m    425[0m [43m        [49m[43mprotocol[49m[38;5;241;43m=[39;49m[43mprotocol[49m[43m,[49m
+[1;32m    426[0m [43m        [49m[43mnewline[49m[38;5;241;43m=[39;49m[43mnewline[49m[43m,[49m
+[1;32m    427[0m [43m        [49m[43mexpand[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m    428[0m [43m        [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m,[49m
+[1;32m    429[0m [43m    [49m[43m)[49m[[38;5;241m0[39m]
 
-[0;31mImportError[0m: h5py is required for kerchunking HDF5/NetCDF4 files. Please install with `pip/conda install h5py`. See https://docs.h5py.org/en/latest/build.html for more details.
-ImportError: h5py is required for kerchunking HDF5/NetCDF4 files. Please install with `pip/conda install h5py`. See https://docs.h5py.org/en/latest/build.html for more details.
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/core.py:272[0m, in [0;36mopen_files[0;34m(urlpath, mode, compression, encoding, errors, name_function, num, protocol, newline, auto_mkdir, expand, **kwargs)[0m
+[1;32m    203[0m [38;5;28;01mdef[39;00m [38;5;21mopen_files[39m(
+[1;32m    204[0m     urlpath,
+[1;32m    205[0m     mode[38;5;241m=[39m[38;5;124m"[39m[38;5;124mrb[39m[38;5;124m"[39m,
+[0;32m   (...)[0m
+[1;32m    215[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
+[1;32m    216[0m ):
+[1;32m    217[0m [38;5;250m    [39m[38;5;124;03m"""Given a path or paths, return a list of ``OpenFile`` objects.[39;00m
+[1;32m    218[0m 
+[1;32m    219[0m [38;5;124;03m    For writing, a str path must contain the "*" character, which will be filled[39;00m
+[0;32m   (...)[0m
+[1;32m    270[0m [38;5;124;03m    be used as a single context[39;00m
+[1;32m    271[0m [38;5;124;03m    """[39;00m
+[0;32m--> 272[0m     fs, fs_token, paths [38;5;241m=[39m [43mget_fs_token_paths[49m[43m([49m
+[1;32m    273[0m [43m        [49m[43murlpath[49m[43m,[49m
+[1;32m    274[0m [43m        [49m[43mmode[49m[43m,[49m
+[1;32m    275[0m [43m        [49m[43mnum[49m[38;5;241;43m=[39;49m[43mnum[49m[43m,[49m
+[1;32m    276[0m [43m        [49m[43mname_function[49m[38;5;241;43m=[39;49m[43mname_function[49m[43m,[49m
+[1;32m    277[0m [43m        [49m[43mstorage_options[49m[38;5;241;43m=[39;49m[43mkwargs[49m[43m,[49m
+[1;32m    278[0m [43m        [49m[43mprotocol[49m[38;5;241;43m=[39;49m[43mprotocol[49m[43m,[49m
+[1;32m    279[0m [43m        [49m[43mexpand[49m[38;5;241;43m=[39;49m[43mexpand[49m[43m,[49m
+[1;32m    280[0m [43m    [49m[43m)[49m
+[1;32m    281[0m     [38;5;28;01mif[39;00m [38;5;124m"[39m[38;5;124mr[39m[38;5;124m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m mode [38;5;129;01mand[39;00m auto_mkdir:
+[1;32m    282[0m         parents [38;5;241m=[39m {fs[38;5;241m.[39m_parent(path) [38;5;28;01mfor[39;00m path [38;5;129;01min[39;00m paths}
+
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/core.py:574[0m, in [0;36mget_fs_token_paths[0;34m(urlpath, mode, num, name_function, storage_options, protocol, expand)[0m
+[1;32m    572[0m [38;5;28;01mif[39;00m protocol:
+[1;32m    573[0m     storage_options[[38;5;124m"[39m[38;5;124mprotocol[39m[38;5;124m"[39m] [38;5;241m=[39m protocol
+[0;32m--> 574[0m chain [38;5;241m=[39m [43m_un_chain[49m[43m([49m[43murlpath0[49m[43m,[49m[43m [49m[43mstorage_options[49m[43m [49m[38;5;129;43;01mor[39;49;00m[43m [49m[43m{[49m[43m}[49m[43m)[49m
+[1;32m    575[0m inkwargs [38;5;241m=[39m {}
+[1;32m    576[0m [38;5;66;03m# Reverse iterate the chain, creating a nested target_* structure[39;00m
+
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/core.py:315[0m, in [0;36m_un_chain[0;34m(path, kwargs)[0m
+[1;32m    313[0m [38;5;28;01mfor[39;00m bit [38;5;129;01min[39;00m [38;5;28mreversed[39m(bits):
+[1;32m    314[0m     protocol [38;5;241m=[39m kwargs[38;5;241m.[39mpop([38;5;124m"[39m[38;5;124mprotocol[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m) [38;5;129;01mor[39;00m split_protocol(bit)[[38;5;241m0[39m] [38;5;129;01mor[39;00m [38;5;124m"[39m[38;5;124mfile[39m[38;5;124m"[39m
+[0;32m--> 315[0m     [38;5;28mcls[39m [38;5;241m=[39m [43mget_filesystem_class[49m[43m([49m[43mprotocol[49m[43m)[49m
+[1;32m    316[0m     extra_kwargs [38;5;241m=[39m [38;5;28mcls[39m[38;5;241m.[39m_get_kwargs_from_urls(bit)
+[1;32m    317[0m     kws [38;5;241m=[39m kwargs[38;5;241m.[39mpop(protocol, {})
+
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:213[0m, in [0;36mget_filesystem_class[0;34m(protocol)[0m
+[1;32m    211[0m         register_implementation(protocol, _import_class(bit[[38;5;124m"[39m[38;5;124mclass[39m[38;5;124m"[39m]))
+[1;32m    212[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
+[0;32m--> 213[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(bit[[38;5;124m"[39m[38;5;124merr[39m[38;5;124m"[39m]) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
+[1;32m    214[0m [38;5;28mcls[39m [38;5;241m=[39m registry[protocol]
+[1;32m    215[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m([38;5;28mcls[39m, [38;5;124m"[39m[38;5;124mprotocol[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m) [38;5;129;01min[39;00m ([38;5;124m"[39m[38;5;124mabstract[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m):
+
+[0;31mImportError[0m: Install s3fs to access S3
+ImportError: Install s3fs to access S3
 

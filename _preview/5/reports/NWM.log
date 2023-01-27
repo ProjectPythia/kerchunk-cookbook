@@ -17,50 +17,81 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import os
+# Create an `fsspec` filesystem for AWS s3.
+fs = fsspec.filesystem("s3", anon=True, skip_instance_cache=True)
 
-import fsspec
-import ujson
-import xarray as xr
-from kerchunk.combine import MultiZarrToZarr
-from kerchunk.hdf import SingleHdf5ToZarr
-from tqdm import tqdm
+# Use fsspec and glob to retrieve a list of all netCDF files to be used in the `Kerchunk` index generation.
+file_pattern = fs.glob(
+    f"noaa-nwm-pds/nwm.*/short_range/nwm.*.short_range.channel_rt.f001.conus.nc"
+)
+
+
+last_dir = f"{os.path.dirname(file_pattern[-1])}"
+last_file = os.path.basename(file_pattern[-1]).split(".")
+last_files = fs.glob(
+    f"{last_dir}/{last_file[0]}.{last_file[1]}.{last_file[2]}.channel_rt.*.conus.nc"
+)
+
+# Skip the first of the last_files since it's a duplicate
+file_pattern.extend(last_files[1:])
+
+# We need to include the "s3://" prefix to the list of files
+# so that fsspec will recognize that these JSON files are on S3.
+urls = ["s3://" + f for f in file_pattern]
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:14[0m
-[1;32m     13[0m [38;5;28;01mtry[39;00m:
-[0;32m---> 14[0m     [38;5;28;01mimport[39;00m [38;5;21;01mh5py[39;00m
-[1;32m     15[0m [38;5;28;01mexcept[39;00m [38;5;167;01mModuleNotFoundError[39;00m:  [38;5;66;03m# pragma: no cover[39;00m
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:211[0m, in [0;36mget_filesystem_class[0;34m(protocol)[0m
+[1;32m    210[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 211[0m     register_implementation(protocol, [43m_import_class[49m[43m([49m[43mbit[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mclass[39;49m[38;5;124;43m"[39;49m[43m][49m[43m)[49m)
+[1;32m    212[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
 
-[0;31mModuleNotFoundError[0m: No module named 'h5py'
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:234[0m, in [0;36m_import_class[0;34m(cls, minv)[0m
+[1;32m    233[0m mod, name [38;5;241m=[39m [38;5;28mcls[39m[38;5;241m.[39mrsplit([38;5;124m"[39m[38;5;124m.[39m[38;5;124m"[39m, [38;5;241m1[39m)
+[0;32m--> 234[0m mod [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mmod[49m[43m)[49m
+[1;32m    235[0m [38;5;28;01mreturn[39;00m [38;5;28mgetattr[39m(mod, name)
 
-During handling of the above exception, another exception occurred:
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/importlib/__init__.py:126[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m    125[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m--> 126[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1050[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1027[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1004[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+[0;31mModuleNotFoundError[0m: No module named 's3fs'
+
+The above exception was the direct cause of the following exception:
 
 [0;31mImportError[0m                               Traceback (most recent call last)
-Cell [0;32mIn[1], line 7[0m
-[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mxarray[39;00m [38;5;28;01mas[39;00m [38;5;21;01mxr[39;00m
-[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkerchunk[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcombine[39;00m [38;5;28;01mimport[39;00m MultiZarrToZarr
-[0;32m----> 7[0m [38;5;28;01mfrom[39;00m [38;5;21;01mkerchunk[39;00m[38;5;21;01m.[39;00m[38;5;21;01mhdf[39;00m [38;5;28;01mimport[39;00m SingleHdf5ToZarr
-[1;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtqdm[39;00m [38;5;28;01mimport[39;00m tqdm
+Cell [0;32mIn[2], line 2[0m
+[1;32m      1[0m [38;5;66;03m# Create an `fsspec` filesystem for AWS s3.[39;00m
+[0;32m----> 2[0m fs [38;5;241m=[39m [43mfsspec[49m[38;5;241;43m.[39;49m[43mfilesystem[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43ms3[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43manon[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m[43m [49m[43mskip_instance_cache[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
+[1;32m      4[0m [38;5;66;03m# Use fsspec and glob to retrieve a list of all netCDF files to be used in the `Kerchunk` index generation.[39;00m
+[1;32m      5[0m file_pattern [38;5;241m=[39m fs[38;5;241m.[39mglob(
+[1;32m      6[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124mnoaa-nwm-pds/nwm.*/short_range/nwm.*.short_range.channel_rt.f001.conus.nc[39m[38;5;124m"[39m
+[1;32m      7[0m )
 
-File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:16[0m
-[1;32m     14[0m     [38;5;28;01mimport[39;00m [38;5;21;01mh5py[39;00m
-[1;32m     15[0m [38;5;28;01mexcept[39;00m [38;5;167;01mModuleNotFoundError[39;00m:  [38;5;66;03m# pragma: no cover[39;00m
-[0;32m---> 16[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
-[1;32m     17[0m         [38;5;124m"[39m[38;5;124mh5py is required for kerchunking HDF5/NetCDF4 files. Please install with [39m[38;5;124m"[39m
-[1;32m     18[0m         [38;5;124m"[39m[38;5;124m`pip/conda install h5py`. See https://docs.h5py.org/en/latest/build.html [39m[38;5;124m"[39m
-[1;32m     19[0m         [38;5;124m"[39m[38;5;124mfor more details.[39m[38;5;124m"[39m
-[1;32m     20[0m     )
-[1;32m     22[0m lggr [38;5;241m=[39m logging[38;5;241m.[39mgetLogger([38;5;124m"[39m[38;5;124mh5-to-zarr[39m[38;5;124m"[39m)
-[1;32m     23[0m _HIDDEN_ATTRS [38;5;241m=[39m {  [38;5;66;03m# from h5netcdf.attrs[39;00m
-[1;32m     24[0m     [38;5;124m"[39m[38;5;124mREFERENCE_LIST[39m[38;5;124m"[39m,
-[1;32m     25[0m     [38;5;124m"[39m[38;5;124mCLASS[39m[38;5;124m"[39m,
-[0;32m   (...)[0m
-[1;32m     31[0m     [38;5;124m"[39m[38;5;124m_NCProperties[39m[38;5;124m"[39m,
-[1;32m     32[0m }
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:251[0m, in [0;36mfilesystem[0;34m(protocol, **storage_options)[0m
+[1;32m    244[0m [38;5;28;01mif[39;00m protocol [38;5;241m==[39m [38;5;124m"[39m[38;5;124marrow_hdfs[39m[38;5;124m"[39m:
+[1;32m    245[0m     warnings[38;5;241m.[39mwarn(
+[1;32m    246[0m         [38;5;124m"[39m[38;5;124mThe [39m[38;5;124m'[39m[38;5;124marrow_hdfs[39m[38;5;124m'[39m[38;5;124m protocol has been deprecated and will be [39m[38;5;124m"[39m
+[1;32m    247[0m         [38;5;124m"[39m[38;5;124mremoved in the future. Specify it as [39m[38;5;124m'[39m[38;5;124mhdfs[39m[38;5;124m'[39m[38;5;124m.[39m[38;5;124m"[39m,
+[1;32m    248[0m         [38;5;167;01mDeprecationWarning[39;00m,
+[1;32m    249[0m     )
+[0;32m--> 251[0m [38;5;28mcls[39m [38;5;241m=[39m [43mget_filesystem_class[49m[43m([49m[43mprotocol[49m[43m)[49m
+[1;32m    252[0m [38;5;28;01mreturn[39;00m [38;5;28mcls[39m([38;5;241m*[39m[38;5;241m*[39mstorage_options)
 
-[0;31mImportError[0m: h5py is required for kerchunking HDF5/NetCDF4 files. Please install with `pip/conda install h5py`. See https://docs.h5py.org/en/latest/build.html for more details.
-ImportError: h5py is required for kerchunking HDF5/NetCDF4 files. Please install with `pip/conda install h5py`. See https://docs.h5py.org/en/latest/build.html for more details.
+File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/fsspec/registry.py:213[0m, in [0;36mget_filesystem_class[0;34m(protocol)[0m
+[1;32m    211[0m         register_implementation(protocol, _import_class(bit[[38;5;124m"[39m[38;5;124mclass[39m[38;5;124m"[39m]))
+[1;32m    212[0m     [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
+[0;32m--> 213[0m         [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(bit[[38;5;124m"[39m[38;5;124merr[39m[38;5;124m"[39m]) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
+[1;32m    214[0m [38;5;28mcls[39m [38;5;241m=[39m registry[protocol]
+[1;32m    215[0m [38;5;28;01mif[39;00m [38;5;28mgetattr[39m([38;5;28mcls[39m, [38;5;124m"[39m[38;5;124mprotocol[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m) [38;5;129;01min[39;00m ([38;5;124m"[39m[38;5;124mabstract[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m):
+
+[0;31mImportError[0m: Install s3fs to access S3
+ImportError: Install s3fs to access S3
 
