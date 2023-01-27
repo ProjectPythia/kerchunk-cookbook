@@ -9,9 +9,11 @@ dependencies:
   - jupyter_server<2
   - pip
   - fsspec
+  - netcdf4
   - numcodecs
   - numpy
   - s3fs
+  - scipy
   - tqdm
   - ujson
   - xarray
