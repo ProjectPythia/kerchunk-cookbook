@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - cfgrib
+  - h5py
   - jupyter-book
   - jupyterlab
   - jupyter_server<2
