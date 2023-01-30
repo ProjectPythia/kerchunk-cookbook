@@ -8,5 +8,5 @@ parts:
 
   - caption: Case Studies
     chapters:
+      - file: notebooks/case_studies/ARG_Weather
       - file: notebooks/case_studies/HRRR
-      - file: notebooks/case_studies/NWM
