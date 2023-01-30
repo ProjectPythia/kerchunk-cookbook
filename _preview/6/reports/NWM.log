@@ -17,7 +17,7 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# create an fsspec reference filesystem from the Kerchunk output
+# Load the Kerchunk index as an Xarray dataset.
 fs = fsspec.filesystem("reference", fo=output_fname)
 m = fs.get_mapper("")
 ds = xr.open_zarr(m)

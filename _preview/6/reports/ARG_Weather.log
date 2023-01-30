@@ -18,13 +18,12 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 # URL pointing to a single NetCDF file
-url = 's3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc'
+url = "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc"
 
 # Initialize a s3 filesystem
 fs = s3fs.S3FileSystem(anon=True)
 # Use Xarray to open a remote NetCDF file
-ds = xr.open_dataset(fs.open(url), engine='h5netcdf')
-
+ds = xr.open_dataset(fs.open(url), engine="h5netcdf")
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
@@ -32,7 +31,7 @@ ds = xr.open_dataset(fs.open(url), engine='h5netcdf')
 Cell [0;32mIn[2], line 7[0m
 [1;32m      5[0m fs [38;5;241m=[39m s3fs[38;5;241m.[39mS3FileSystem(anon[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
 [1;32m      6[0m [38;5;66;03m# Use Xarray to open a remote NetCDF file[39;00m
-[0;32m----> 7[0m ds [38;5;241m=[39m [43mxr[49m[38;5;241;43m.[39;49m[43mopen_dataset[49m[43m([49m[43mfs[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m)[49m[43m,[49m[43m [49m[43mengine[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mh5netcdf[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[0;32m----> 7[0m ds [38;5;241m=[39m [43mxr[49m[38;5;241;43m.[39;49m[43mopen_dataset[49m[43m([49m[43mfs[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m)[49m[43m,[49m[43m [49m[43mengine[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mh5netcdf[39;49m[38;5;124;43m"[39;49m[43m)[49m
 
 File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:527[0m, in [0;36mopen_dataset[0;34m(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, backend_kwargs, **kwargs)[0m
 [1;32m    524[0m [38;5;28;01mif[39;00m engine [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
