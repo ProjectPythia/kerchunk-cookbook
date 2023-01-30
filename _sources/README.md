@@ -82,11 +82,14 @@ If you are interested in running this material locally on your computer, you wil
    ```bash
    cd kerchunk-cookbook
    ```
-1. Create and activate your conda environment from the `environment.yml` file
+1. Create and activate your conda environment from the `environment.yml` file.
+   Note: In the `environment.yml` file, Kerchunk` is currently being installed from source as development is happening rapidly.
+
    ```bash
    conda env create -f environment.yml
    conda activate kerchunk-cookbook
    ```
+
 1. Move into the `notebooks` directory and start up Jupyterlab
    ```bash
    cd notebooks/
