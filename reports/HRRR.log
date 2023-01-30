@@ -17,7 +17,7 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Open the Kerchunk reference as an Xarray dataset
+# open dataset as zarr object using fsspec reference file system and Xarray
 fs = fsspec.filesystem(
     "reference", fo=multi_kerchunk, remote_protocol="s3", remote_options={"anon": True}
 )

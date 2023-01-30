@@ -326,13 +326,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   <a class="reference internal nav-link" href="#overview">
    Overview
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#within-this-notebook-we-will-cover">
-     Within this notebook, we will cover:
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
@@ -437,9 +430,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p><a class="reference internal" href="../../_images/GRIB2.png"><img alt="HRRR GRIB2" src="../../_images/GRIB2.png" style="width: 400px;" /></a></img></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>This notebook is largely based off of the work done by <a class="reference external" href="https://github.com/peterm790">Peter Marsh</a>. The GIST it was based off of can be found <a class="reference external" href="https://nbviewer.org/gist/peterm790/92eb1df3d58ba41d3411f8a840be2452">here</a>.</p>
-<div class="section" id="within-this-notebook-we-will-cover">
-<h3>Within this notebook, we will cover:<a class="headerlink" href="#within-this-notebook-we-will-cover" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>Within this notebook, we will cover:</p>
 <ol class="simple">
 <li><p>Generating a list of GRIB2 files on a remote filesystem using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code></p></li>
 <li><p>How to create reference files of GRIB2 files using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
@@ -447,7 +438,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
 </ol>
 <p>This notebook shares many similarities with the <a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> and the <a class="reference internal" href="NWM.html"><span class="doc std std-doc">NetCDF/HDF5 National Water Model Case Study</span></a>, however this case studies examines another data format and uses <code class="docutils literal notranslate"><span class="pre">kerchunk.scan_grib</span></code> to create reference files.</p>
-</div>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -549,6 +539,15 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230123/conus/hrrr.t04z.wrfsfcf01.grib2&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
@@ -594,6 +593,11 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 10/10 [43:32&lt;00:00, 261.26s/it]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="combine-kerchunk-reference-json-files">
 <h3>Combine <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#combine-kerchunk-reference-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
@@ -629,7 +633,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <h2>Load Kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open the Kerchunk reference as an Xarray dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and Xarray</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
     <span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="n">multi_kerchunk</span><span class="p">,</span> <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">remote_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 <span class="p">)</span>
@@ -650,6 +654,25 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x169a18d30&gt;
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x16990d8d0&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
 </div>
 </div>
 </div>
