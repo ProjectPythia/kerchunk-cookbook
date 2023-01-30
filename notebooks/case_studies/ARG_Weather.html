@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kerchunk and GRIB2: A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset &#8212; Project Pythia Kerchunk Cookbook</title>
+    <title>Kerchunk and NetCDF/HDF5: A Case Study using the Argentinian High Resolution Weather Forecast Dataset &#8212; Project Pythia Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,7 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Kerchunk and NetCDF/HDF5: A Case Study using the Argentinian High Resolution Weather Forecast Dataset" href="ARG_Weather.html" />
+    <link rel="next" title="Kerchunk and GRIB2: A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset" href="HRRR.html" />
+    <link rel="prev" title="Multi-File Datasets with Kerchunk" href="../foundations/kerchunk_multi_file.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -208,13 +209,13 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="ARG_Weather.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Kerchunk and NetCDF/HDF5:  A Case Study using the Argentinian High Resolution Weather Forecast Dataset
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="HRRR.html">
    Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset
   </a>
  </li>
@@ -256,7 +257,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/case_studies/HRRR.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/case_studies/ARG_Weather.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -276,10 +277,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/case_studies/HRRR.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/case_studies/ARG_Weather.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/case_studies/HRRR.ipynb"><button
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/case_studies/ARG_Weather.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -299,7 +300,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/case_studies/HRRR.ipynb"><button type="button"
+        <a class="binder-button" href="http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/case_studies/ARG_Weather.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -345,72 +346,56 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   <a class="reference internal nav-link" href="#imports">
    Imports
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-input-file-list">
-   Create Input File List
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
-   Iterate through list of files and create
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     Kerchunk
-    </span>
-   </code>
-   indicies as
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     .json
-    </span>
-   </code>
-   reference files
-  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#combine-kerchunk-reference-json-files">
-     Combine
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       Kerchunk
-      </span>
-     </code>
-     reference
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       .json
-      </span>
-     </code>
-     files
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#write-combined-kerchunk-reference-file-to-json">
-     Write combined
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       Kerchunk
-      </span>
-     </code>
-     reference file to
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       .json
-      </span>
-     </code>
+    <a class="reference internal nav-link" href="#examining-a-single-netcdf-file">
+     Examining a Single NetCDF File
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-kerchunked-dataset">
-   Load Kerchunked dataset
+  <a class="reference internal nav-link" href="#create-input-file-list">
+   Create Input File List
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optional-speedup">
+     Optional Speedup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
+   Combine .json
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   reference files and write a combined
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Kerchunk
+    </span>
+   </code>
+   index
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-a-slice-of-the-dataset">
-   Plot a slice of the dataset
+  <a class="reference internal nav-link" href="#load-kerchunked-dataset">
+   Load kerchunked dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-map">
+   Create a Map
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-time-series">
+   Create a Time-Series
   </a>
  </li>
 </ul>
@@ -424,19 +409,17 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-grib2-a-case-study-using-noaas-high-resolution-rapid-refresh-hrrr-dataset">
-<h1>Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset<a class="headerlink" href="#kerchunk-and-grib2-a-case-study-using-noaas-high-resolution-rapid-refresh-hrrr-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
-<p><a class="reference internal" href="../../_images/GRIB2.png"><img alt="HRRR GRIB2" src="../../_images/GRIB2.png" style="width: 400px;" /></a></img></p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-netcdf-hdf5-a-case-study-using-the-argentinian-high-resolution-weather-forecast-dataset">
+<h1>Kerchunk and NetCDF/HDF5:  A Case Study using the Argentinian High Resolution Weather Forecast Dataset<a class="headerlink" href="#kerchunk-and-netcdf-hdf5-a-case-study-using-the-argentinian-high-resolution-weather-forecast-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Within this notebook, we will cover:</p>
 <ol class="simple">
-<li><p>Generating a list of GRIB2 files on a remote filesystem using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code></p></li>
-<li><p>How to create reference files of GRIB2 files using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
+<li><p>How to access remote NetCDF data using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
 <li><p>Combining multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
 <li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
 </ol>
-<p>This notebook shares many similarities with the <a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> and the <span class="xref myst">NetCDF/HDF5 National Water Model Case Study</span>, however this case studies examines another data format and uses <code class="docutils literal notranslate"><span class="pre">kerchunk.scan_grib</span></code> to create reference files.</p>
+<p>This notebook shares many similarities with the <a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a>. If you are confused on the function of a block of code, please refer there for a more detailed breakdown of what each line is doing.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -473,139 +456,137 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <hr class="docutils" />
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
+<p>NetCDF/HDF5 is one of the most universally adopted file formats in earth sciences, with support of much of the community as well as scientific agencies, data centers and university labs. A huge amount of legacy data has been generated in this format. Fortunately, using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read these datasets as if they were an Analysis-Read Cloud-Optimized (ARCO) format such as <code class="docutils literal notranslate"><span class="pre">Zarr</span></code>.</p>
 </div>
 <div class="section" id="about-the-dataset">
 <h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">HRRR</span></code> is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
-NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
+<p>The SMN-Arg is a WRF deterministic weather forecasting dataset created by the <code class="docutils literal notranslate"><span class="pre">Servicio</span> <span class="pre">Meteorológico</span> <span class="pre">Nacional</span> <span class="pre">de</span> <span class="pre">Argentina</span></code> that covers Argentina as well as many neighboring countries at a 4km spatial resolution.<br />
+The model is initialized twice daily at 00 &amp; 12 UTC with hourly forecasts for variables such as temperature, relative humidity, precipitation, wind direction and magnitude etc. for multiple atmospheric levels.
+The data is output at hourly intervals with a maximum prediction lead time of 72 hours in NetCDF files.</p>
+<p>More details on this dataset can be found <a class="reference external" href="https://registry.opendata.aws/smn-ar-wrf-dataset/">here</a>.</p>
 </div>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-<span class="kn">import</span> <span class="nn">glob</span>
-
-<span class="kn">import</span> <span class="nn">fsspec</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">import</span> <span class="nn">s3fs</span>
 <span class="kn">import</span> <span class="nn">ujson</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
-<span class="kn">from</span> <span class="nn">kerchunk.grib2</span> <span class="kn">import</span> <span class="n">scan_grib</span>
+<span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="section" id="examining-a-single-netcdf-file">
+<h3>Examining a Single NetCDF File<a class="headerlink" href="#examining-a-single-netcdf-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>Before we use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create indices for multiple files, we can load a single NetCDF file to examine it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># URL pointing to a single NetCDF file</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc&quot;</span>
+
+<span class="c1"># Initialize a s3 filesystem</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">s3fs</span><span class="o">.</span><span class="n">S3FileSystem</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Use Xarray to open a remote NetCDF file</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;h5netcdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we see the <code class="docutils literal notranslate"><span class="pre">repr</span></code> from the <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> Dataset of a single <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file. From examining the output, we can tell that the Dataset dimensions are <code class="docutils literal notranslate"><span class="pre">['time','y','x']</span></code>, with time being only a single step.
+Later, when we use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code> functionality, we will need to know on which dimensions to concatenate across.</p>
+</div>
 </div>
 <div class="section" id="create-input-file-list">
 <h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Here we create <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> files-systems for reading remote files and writing local reference files.
-Next we are using <code class="docutils literal notranslate"><span class="pre">fsspec.glob</span></code> to retrieve a list of file paths and appending the <code class="docutils literal notranslate"><span class="pre">s3://</span></code> prefix to them.</p>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">fsspec's</span></code> glob functionality along with the <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em> wildcard operator and some string slicing to grab a list of NetCDF files from a <code class="docutils literal notranslate"><span class="pre">s3</span></code> <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
 <span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">fs_write</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<span class="c1"># retrieve list of available days in archive</span>
-<span class="n">days_available</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.*&quot;</span><span class="p">)</span>
-<span class="c1"># Read HRRR GRIB2 files from latest day</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://</span><span class="si">{</span><span class="n">days_available</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">/conus/*wrfsfcf01.grib2&quot;</span><span class="p">)</span>
-<span class="c1"># Append s3 prefix for filelist</span>
-<span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
+
+<span class="n">files_paths</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/*&quot;</span><span class="p">)</span>
+
+<span class="c1"># Here we prepend the prefix &#39;s3://&#39;, which points to AWS.</span>
+<span class="n">file_pattern</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This dictionary will be passed as kwargs to `fsspec`. For more details, check out the `foundations/kerchunk_basics` notebook.</span>
+<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+
+<span class="c1"># We are specifiying a local output directory to write the `.json` reference files.</span>
+<span class="c1"># Alternately, you could write these to cloud storage.</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optional-speedup">
+<h3>Optional Speedup<a class="headerlink" href="#optional-speedup" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example considerably.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
+<span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span>
+        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outf</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">outf</span>
+
+
+<span class="c1"># Iterate through filelist to generate Kerchunked files. Good use for `Dask`</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">):</span>
+    <span class="n">outf</span> <span class="o">=</span> <span class="n">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    <span class="n">output_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
+<h2>Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the following cell, we are combining all the <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files that were generated above into a single reference file and writing that file to disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
-<h2>Iterate through list of files and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files<a class="headerlink" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
-<span class="n">afilter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;typeOfLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
-<span class="n">so</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-<span class="n">json_dir</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
-
-
-<span class="k">def</span> <span class="nf">make_json_name</span><span class="p">(</span>
-    <span class="n">file_url</span><span class="p">,</span> <span class="n">message_number</span>
-<span class="p">):</span>  <span class="c1"># create a unique name for each reference file</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">json_dir</span><span class="si">}{</span><span class="n">date</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_message</span><span class="si">{</span><span class="n">message_number</span><span class="si">}</span><span class="s2">.json&quot;</span>
-
-
-<span class="k">def</span> <span class="nf">gen_json</span><span class="p">(</span><span class="n">file_url</span><span class="p">):</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">scan_grib</span><span class="p">(</span>
-        <span class="n">file_url</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">so</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">afilter</span>
-    <span class="p">)</span>  <span class="c1"># create the reference using scan_grib</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">message</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
-        <span class="n">out</span>
-    <span class="p">):</span>  <span class="c1"># scan_grib outputs a list containing one reference per grib message</span>
-        <span class="n">out_file_name</span> <span class="o">=</span> <span class="n">make_json_name</span><span class="p">(</span><span class="n">file_url</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>  <span class="c1"># get name</span>
-        <span class="k">with</span> <span class="n">fs_write</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>  <span class="c1"># write to file</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate through available input files and generate json reference files. Note: This could optionally be parallelized.</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
-    <span class="n">gen_json</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
-<span class="n">reference_jsons</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fs_write</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">json_dir</span> <span class="o">+</span> <span class="s2">&quot;*.json&quot;</span><span class="p">))</span>  <span class="c1"># get list of file names</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="combine-kerchunk-reference-json-files">
-<h3>Combine <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#combine-kerchunk-reference-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine individual references into single consolidated reference</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># combine individual references into single consolidated reference</span>
 <span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
-    <span class="n">reference_jsons</span><span class="p">,</span>
-    <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;valid_time&quot;</span><span class="p">],</span>
-    <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+    <span class="n">output_files</span><span class="p">,</span>
+    <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span>
+    <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">],</span>
 <span class="p">)</span>
+<span class="c1"># save translate reference in memory for later visualization</span>
 <span class="n">multi_kerchunk</span> <span class="o">=</span> <span class="n">mzz</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="write-combined-kerchunk-reference-file-to-json">
-<h3>Write combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference file to <code class="docutils literal notranslate"><span class="pre">.json</span></code><a class="headerlink" href="#write-combined-kerchunk-reference-file-to-json" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write Kerchunk .json record</span>
-<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;HRRR_combined.json&quot;</span>
+
+<span class="c1"># Write kerchunk .json record</span>
+<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;ARG_combined.json&quot;</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">multi_kerchunk</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
 </pre></div>
@@ -613,37 +594,36 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="load-kerchunked-dataset">
-<h2>Load Kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Load kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open dataset as zarr object using fsspec reference file system and Xarray</span>
-<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
-    <span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="n">multi_kerchunk</span><span class="p">,</span> <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">remote_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an fsspec reference filesystem from the Kerchunk output</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="n">output_fname</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span> <span class="n">backend_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;valid_time&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-<span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="plot-a-slice-of-the-dataset">
-<h2>Plot a slice of the dataset<a class="headerlink" href="#plot-a-slice-of-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Here we are using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> to select a single time slice of the dataset and plot a temperature map of CONUS.</p>
+<div class="section" id="create-a-map">
+<h2>Create a Map<a class="headerlink" href="#create-a-map" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> to select a single time slice and create a map of 2-m temperature across the region.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T2</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="create-a-time-series">
+<h2>Create a Time-Series<a class="headerlink" href="#create-a-time-series" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Next we are plotting temperature as a function of time for a specific point.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;T2&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -674,12 +654,19 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
               </div>
               <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="ARG_Weather.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../foundations/kerchunk_multi_file.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Kerchunk and NetCDF/HDF5:  A Case Study using the Argentinian High Resolution Weather Forecast Dataset</p>
+            <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="HRRR.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </div>
