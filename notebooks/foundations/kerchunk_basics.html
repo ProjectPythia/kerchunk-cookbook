@@ -392,7 +392,7 @@ In this tutorial we will:</p>
 <li><p>Scan a single NetCDF file to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> virtual dataset</p></li>
 <li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
 </ul>
-<p>While this notebook only examines using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on a single NetCDF file, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used to create virutal <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
+<p>While this notebook only examines using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on a single NetCDF file, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used to create virtual <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -458,9 +458,9 @@ In this tutorial we will:</p>
 <p>The steps in the cell below are as follows:</p>
 <ol class="simple">
 <li><p>Define the url that points to the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file we want to process</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> along with the dictionary of arguments we created about (<code class="docutils literal notranslate"><span class="pre">so</span></code>) to open the URL pointing to the NetCDF file.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> along with the dictionary of arguments we created (<code class="docutils literal notranslate"><span class="pre">so</span></code>) to open the URL pointing to the NetCDF file.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> method to read through the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and extract the byte ranges, compression information and metadata.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">.translate</span></code> method on the output from the <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> to translate content the NetCDF file into the <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> format.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">.translate</span></code> method on the output from the <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> to translate content of the NetCDF file into the <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> format.</p></li>
 <li><p>Create a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file named <code class="docutils literal notranslate"><span class="pre">single_file_kerchunk.json</span></code> and write the dataset information to disk.</p></li>
 </ol>
 <div class="cell docutils container">
@@ -597,7 +597,7 @@ In this tutorial we will:</p>
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 30 January 2023.
+          Last updated on 31 January 2023.
         </p>
       </div>
     </div>
