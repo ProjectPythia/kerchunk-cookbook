@@ -2,15 +2,15 @@
 
 # Kerchunk Cookbook
 
-[![nightly-build](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml)
-[![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks)
+[![nightly-build](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml)
+[![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
 
 This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/) library to access archival data formats as if they were ARCO (Analysis-Ready-Cloud-Optimized) data.
 
 ## Motivation
 
-The `Kerchunk` library allows you to access chunked and compressed data formats (such as NetCDF, GRIB2, TIFF & FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
-These summary files can then be combined to generated a `Kerchunk` reference for that dataset, which can be read via [Xarray](https://docs.xarray.dev/en/stable/).
+The `Kerchunk` library allows you to access chunked and compressed data formats (such as NetCDF, GRIB2, TIFF & FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (or alternate backends in future releases). For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
+These summary files can then be combined to generated a `Kerchunk` reference for that dataset, which can be read via [Zarr](https://zarr.readthedocs.io) and [Xarray](https://docs.xarray.dev/en/stable/).
 
 ## Authors
 
@@ -44,7 +44,7 @@ Some possible additions:
 
 - Diving into the details: The nitty-gritty on how `Kerchunk` works.
 - `Kerchunk` and `Dask`: How to use Dask to speed-up your `Kerchunk` dataset generation.
-- `Kerchunk` and `Parquet`, what are the benefits of using parquet for reference file storage.
+- `Kerchunk` and `Parquet`: what are the benefits of using parquet for reference file storage.
 - Appending to a Kerchunk dataset: How to schedule processing of newly added data files and how to add them to a `Kerchunk` dataset.
 
 ## Running the Notebooks
@@ -59,7 +59,7 @@ The simplest way to interact with a Jupyter Notebook is through
 important for now. All you need to know is how to launch a Pythia
 Cookbooks chapter via Binder. Simply navigate your mouse to
 the top right corner of the book chapter you are viewing and click
-on the rocket ship icon, (see figure below), and be sure to select
+on the rocket ship icon and be sure to select
 “launch Binder”. After a moment you should be presented with a
 notebook that you can interact with. I.e. you’ll be able to execute
 and even change the example programs. You’ll see that the code cells
