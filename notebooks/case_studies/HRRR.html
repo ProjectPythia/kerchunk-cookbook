@@ -437,6 +437,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <li><p>Reading the output with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Intake</span></code></p></li>
 </ol>
 <p>This notebook shares many similarities with the <a class="reference internal" href="../foundations/kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> and the <span class="xref myst">NetCDF/HDF5 National Water Model Case Study</span>, however this case studies examines another data format and uses <code class="docutils literal notranslate"><span class="pre">kerchunk.scan_grib</span></code> to create reference files.</p>
+<p>This notebook borrows heavily from this <a class="reference external" href="https://gist.github.com/peterm790/92eb1df3d58ba41d3411f8a840be2452">GIST</a> created by <a class="reference external" href="https://gist.github.com/peterm790">Peter Marsh</a>.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -596,22 +597,22 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/5 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|██        | 1/5 [00:14&lt;00:59, 14.81s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|██        | 1/5 [00:15&lt;01:02, 15.74s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|████      | 2/5 [00:28&lt;00:42, 14.16s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|████      | 2/5 [00:29&lt;00:43, 14.56s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|██████    | 3/5 [00:42&lt;00:28, 14.08s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|██████    | 3/5 [00:42&lt;00:28, 14.09s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 4/5 [00:56&lt;00:13, 13.90s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 4/5 [00:56&lt;00:13, 13.94s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5/5 [01:09&lt;00:00, 13.81s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5/5 [01:10&lt;00:00, 13.81s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5/5 [01:09&lt;00:00, 13.96s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5/5 [01:10&lt;00:00, 14.06s/it]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -676,7 +677,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fa0db99ab00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fc3dc4ca2f0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
@@ -689,7 +690,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa0db74bfa0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc3dc247b20&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />

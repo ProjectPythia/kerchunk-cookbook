@@ -16,7 +16,7 @@ These summary files can then be combined to generated a `Kerchunk` reference for
 
 [Raphael Hagen](https://github.com/norlandrhagen)
 
-Much of the content of this cookbook was inspired by Martin Durant, the creator of `Kerchunk` and the [Kerchunk documentation](https://fsspec.github.io/kerchunk/).
+Much of the content of this cookbook was inspired by [Martin Durant](https://github.com/martindurant), the creator of `Kerchunk` and the [Kerchunk documentation](https://fsspec.github.io/kerchunk/).
 
 ### Contributors
 
