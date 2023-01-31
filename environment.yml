@@ -3,12 +3,15 @@ channels:
   - conda-forge
 dependencies:
   - cfgrib
+  - dask
   - h5py
+  - h5netcdf
   - jupyter-book
   - jupyterlab
   - jupyter_server<2
   - pip
   - fsspec
+  - matplotlib
   - netcdf4
   - numcodecs
   - numpy
