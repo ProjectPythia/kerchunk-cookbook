@@ -580,13 +580,10 @@ After that, we use the <code class="docutils literal notranslate"><span class="p
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Note: Optional piece of code to view one of the NetCDF files using Xarray as fsspec.</span>
 
-<span class="c1"># import s3fs</span>
+<span class="kn">import</span> <span class="nn">s3fs</span>
 
-<span class="c1"># fs = s3fs.S3FileSystem(anon=True, default_fill_cache=False)</span>
-<span class="c1"># with fs.open(file_pattern[0]) as fileObj:</span>
-<span class="c1">#     ds = xr.open_dataset(fileObj)</span>
-<span class="c1">#     print(ds)</span>
-<span class="c1">#     print(ds.nbytes / 1e9)</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -679,7 +676,7 @@ In our example below we are passing in our list of reference files (<code class=
 <span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
     <span class="n">output_files</span><span class="p">,</span>
     <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span>
-    <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;south_north&quot;</span><span class="p">,</span> <span class="s2">&quot;west_east&quot;</span><span class="p">,</span> <span class="s2">&quot;interp_levels&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_layers_stag&quot;</span><span class="p">],</span>
+    <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;XLONG&quot;</span><span class="p">,</span> <span class="s2">&quot;XLAT&quot;</span><span class="p">,</span> <span class="s2">&quot;interp_levels&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 
 

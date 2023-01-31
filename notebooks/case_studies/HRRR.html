@@ -538,6 +538,15 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230131/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230131/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230131/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230131/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230131/conus/hrrr.t04z.wrfsfcf01.grib2&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
@@ -580,6 +589,32 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
     <span class="n">gen_json</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="n">reference_jsons</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fs_write</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">json_dir</span> <span class="o">+</span> <span class="s2">&quot;*.json&quot;</span><span class="p">))</span>  <span class="c1"># get list of file names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/5 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|██        | 1/5 [00:16&lt;01:06, 16.50s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|████      | 2/5 [00:32&lt;00:48, 16.04s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|██████    | 3/5 [00:47&lt;00:31, 15.85s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 4/5 [01:02&lt;00:15, 15.44s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5/5 [01:18&lt;00:00, 15.51s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5/5 [01:18&lt;00:00, 15.66s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -636,16 +671,28 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <p>Here we are using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> to select a single time slice of the dataset and plot a temperature map of CONUS.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;t2m&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f5f469ca140&gt;
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;2t&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;t2m&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f5f544d49a0&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
 </div>
 </div>
 </div>
