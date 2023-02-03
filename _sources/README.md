@@ -9,7 +9,7 @@ This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.i
 
 ## Motivation
 
-The `Kerchunk` library allows you to access chunked and compressed data formats (such as NetCDF, GRIB2, TIFF & FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (or alternate backends in future releases). For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
+The `Kerchunk` library allows you to access chunked and compressed data formats (such as NetCDF3. HDF5, GRIB2, TIFF & FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, `Kerchunk` reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (or alternate backends in future releases). For more details on how this process works please see this page on the [Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
 These summary files can then be combined to generated a `Kerchunk` reference for that dataset, which can be read via [Zarr](https://zarr.readthedocs.io) and [Xarray](https://docs.xarray.dev/en/stable/).
 
 ## Authors
@@ -30,11 +30,11 @@ This cookbook is broken up into two sections, Foundations and Example Notebooks.
 
 ### Section 1 Foundations
 
-In the `Foundations` section we will demonstrate how to use `Kerchunk` to create datasets from single file sources, as well as to create multi-file datasets from collections of files.
+In the `Foundations` section we will demonstrate how to use `Kerchunk` to create reference sets from single file sources, as well as to create multi-file virtual datasets from collections of files.
 
 ### Section 2 Case Studies
 
-The notebooks in the `Case Studies` section demonstrate how to use `Kerchunk` to create datasets for all the supported file formats. `Kerchunk` currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.
+The notebooks in the `Case Studies` section demonstrate how to use `Kerchunk` to create datasets for all the supported file formats. `Kerchunk` currently supports NetCDF3, NetCDF4/HDF5, GRIB2, TIFF (including CoG) and FITS, but more file formats will be available in the future.
 
 ### Future Additions / Wishlist
 
@@ -61,8 +61,8 @@ Cookbooks chapter via Binder. Simply navigate your mouse to
 the top right corner of the book chapter you are viewing and click
 on the rocket ship icon and be sure to select
 “launch Binder”. After a moment you should be presented with a
-notebook that you can interact with. I.e. you’ll be able to execute
-and even change the example programs. You’ll see that the code cells
+notebook that you can interact with. You’ll be able to execute
+and even change the example programs. The code cells
 have no output at first, until you execute them by pressing
 {kbd}`Shift`\+{kbd}`Enter`. Complete details on how to interact with
 a live Jupyter notebook are described in [Getting Started with

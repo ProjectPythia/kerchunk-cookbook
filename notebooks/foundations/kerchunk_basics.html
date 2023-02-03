@@ -389,7 +389,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>This notebook is intended as an introduction to using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.
 In this tutorial we will:</p>
 <ul class="simple">
-<li><p>Scan a single NetCDF file to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> virtual dataset</p></li>
+<li><p>Scan a single NetCDF4/HDF5 file to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> virtual dataset</p></li>
 <li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
 </ul>
 <p>While this notebook only examines using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on a single NetCDF file, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used to create virtual <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
@@ -420,7 +420,7 @@ In this tutorial we will:</p>
 <p>Here we will import a few <code class="docutils literal notranslate"><span class="pre">Python</span></code> libraries to help with our data processing.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">fsspec</span></code> will be used to read remote and local filesystems.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kerchunk.hdf</span></code> will be used to read a NetCDF file and create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kerchunk.hdf</span></code> will be used to read a NetCDF file and create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference set.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ujson</span></code> for writing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> output to the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file format.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Xarray</span></code> for examining out output dataset</p></li>
 </ul>
@@ -443,7 +443,7 @@ In this tutorial we will:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">default_fill_cache=False</span></code>: <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that avoids caching in between chunks of files. This may lower memory usage when reading large files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">default_cache_type=&quot;first&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> kwarg that specifies the caching strategy used buy <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>. In this case, <code class="docutils literal notranslate"><span class="pre">first</span></code> caches the first block of a file only.</p></li>
 </ul>
-<p>Don’t worry too much about the details here.</p>
+<p>Don’t worry too much about the details here; the cache options are those that have typically proven efficient for HDF5 files.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
@@ -489,23 +489,15 @@ In this tutorial we will:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use fsspec to create filesystem from .json reference file</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
     <span class="s2">&quot;reference&quot;</span><span class="p">,</span>
-    <span class="n">fo</span><span class="o">=</span><span class="s2">&quot;./single_file_kerchunk.json&quot;</span><span class="p">,</span>
+    <span class="n">fo</span><span class="o">=</span><span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span>
     <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span>
     <span class="n">remote_options</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># load kerchunked dataset with xarray</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2291/1112314070.py:11: RuntimeWarning: Failed to open Zarr store with consolidated metadata, but successfully read with non-consolidated metadata. This is typically much slower for opening a dataset. To silence this warning, consider:
-1. Consolidating metadata in this existing store with zarr.consolidate_metadata().
-2. Explicitly setting consolidated=False, to avoid trying to read consolidate metadata, or
-3. Explicitly setting consolidated=True, to raise an error in this case instead of falling back to try reading non-consolidated metadata.
-  ds = xr.open_dataset(fs.get_mapper(&quot;&quot;), engine=&quot;zarr&quot;)
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span>
+                     <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;consolidated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -520,12 +512,13 @@ In this tutorial we will:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f1249045780&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7ff665e8ef20&gt;
 </pre></div>
 </div>
 <img alt="../../_images/kerchunk_basics_13_1.png" src="../../_images/kerchunk_basics_13_1.png" />
 </div>
 </div>
+<p>Note that the original .nc file size here is 16.8MB, and the created JSON is 26.5kB. These files also tend to compress very well. As you can see, it the JSON can be written anywhere, and gives us access to the underlying data, reading only the chunks we need from remote without downloading the whole file.</p>
 </div>
 </div>
 </div>
@@ -612,7 +605,7 @@ In this tutorial we will:</p>
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 31 January 2023.
+          Last updated on 3 February 2023.
         </p>
       </div>
     </div>

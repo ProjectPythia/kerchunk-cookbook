@@ -379,7 +379,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk</a> library to access archival data formats as if they were ARCO (Analysis-Ready-Cloud-Optimized) data.</p>
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library allows you to access chunked and compressed data formats (such as NetCDF, GRIB2, TIFF &amp; FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (or alternate backends in future releases). For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).
+<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library allows you to access chunked and compressed data formats (such as NetCDF3. HDF5, GRIB2, TIFF &amp; FITS), many of which are the primary data formats for many data archives, as if they were in ARCO formats such as Zarr which allows for parallel, chunk-specific access. Instead of creating a new copy of the dataset in the Zarr spec/format, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reads through the data archive and extracts the byte range and compression information of each chunk, then writes that information to a .json file (or alternate backends in future releases). For more details on how this process works please see this page on the <a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).
 These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference for that dataset, which can be read via <a class="reference external" href="https://zarr.readthedocs.io">Zarr</a> and <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a>.</p>
 </div>
 <div class="section" id="authors">
@@ -398,11 +398,11 @@ These summary files can then be combined to generated a <code class="docutils li
 <p>This cookbook is broken up into two sections, Foundations and Example Notebooks.</p>
 <div class="section" id="section-1-foundations">
 <h3>Section 1 Foundations<a class="headerlink" href="#section-1-foundations" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Foundations</span></code> section we will demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create datasets from single file sources, as well as to create multi-file datasets from collections of files.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">Foundations</span></code> section we will demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create reference sets from single file sources, as well as to create multi-file virtual datasets from collections of files.</p>
 </div>
 <div class="section" id="section-2-case-studies">
 <h3>Section 2 Case Studies<a class="headerlink" href="#section-2-case-studies" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create datasets for all the supported file formats. <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> currently supports NetCDF/HDF, GRIB2, TIFF and FITS, but more file formats may be available in the future.</p>
+<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create datasets for all the supported file formats. <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> currently supports NetCDF3, NetCDF4/HDF5, GRIB2, TIFF (including CoG) and FITS, but more file formats will be available in the future.</p>
 </div>
 <div class="section" id="future-additions-wishlist">
 <h3>Future Additions / Wishlist<a class="headerlink" href="#future-additions-wishlist" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
@@ -429,8 +429,8 @@ Cookbooks chapter via Binder. Simply navigate your mouse to
 the top right corner of the book chapter you are viewing and click
 on the rocket ship icon and be sure to select
 “launch Binder”. After a moment you should be presented with a
-notebook that you can interact with. I.e. you’ll be able to execute
-and even change the example programs. You’ll see that the code cells
+notebook that you can interact with. You’ll be able to execute
+and even change the example programs. The code cells
 have no output at first, until you execute them by pressing
 <kbd class="kbd docutils literal notranslate">Shift</kbd>+<kbd class="kbd docutils literal notranslate">Enter</kbd>. Complete details on how to interact with
 a live Jupyter notebook are described in <a class="reference external" href="https://foundations.projectpythia.org/foundations/getting-started-jupyter.html">Getting Started with
@@ -547,7 +547,7 @@ jupyter<span class="w"> </span>lab
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 31 January 2023.
+          Last updated on 3 February 2023.
         </p>
       </div>
     </div>
