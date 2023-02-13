@@ -358,13 +358,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   <a class="reference internal nav-link" href="#create-input-file-list">
    Create Input File List
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optional-speedup">
-     Optional Speedup
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
@@ -457,7 +450,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <hr class="docutils" />
 <div class="section" id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>NetCDF/HDF5 is one of the most universally adopted file formats in earth sciences, with support of much of the community as well as scientific agencies, data centers and university labs. A huge amount of legacy data has been generated in this format. Fortunately, using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read these datasets as if they were an Analysis-Read Cloud-Optimized (ARCO) format such as <code class="docutils literal notranslate"><span class="pre">Zarr</span></code>.</p>
+<p>NetCDF4/HDF5 is one of the most universally adopted file formats in earth sciences, with support of much of the community as well as scientific agencies, data centers and university labs. A huge amount of legacy data has been generated in this format. Fortunately, using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read these datasets as if they were an Analysis-Read Cloud-Optimized (ARCO) format such as <code class="docutils literal notranslate"><span class="pre">Zarr</span></code>.</p>
 </div>
 <div class="section" id="about-the-dataset">
 <h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -538,9 +531,9 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 </div>
-<div class="section" id="optional-speedup">
-<h3>Optional Speedup<a class="headerlink" href="#optional-speedup" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example considerably.</p>
+<p>Next, we generate a reference set for each of the input files. We save these to local JSON, although in principle we could have written them to some shared storege to share with others, or operated purely in memory.</p>
+<p><strong>Optional Speedup</strong>
+To speed next section up, uncomment the next cell.  This will reduce the number of input files and speed up the example considerably.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># file_pattern = file_pattern[0:10]</span>
@@ -571,7 +564,6 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
 <h2>Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In the following cell, we are combining all the <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files that were generated above into a single reference file and writing that file to disk.</p>
@@ -597,6 +589,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 </div>
 <div class="section" id="load-kerchunked-dataset">
 <h2>Load kerchunked dataset<a class="headerlink" href="#load-kerchunked-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Now the dataset is a logical view over all of the files we scanned.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an fsspec reference filesystem from the Kerchunk output</span>
@@ -652,7 +645,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks/case_studies"
         },
         predefinedOutput: true
@@ -722,7 +715,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 3 February 2023.
+          Last updated on 13 February 2023.
         </p>
       </div>
     </div>
