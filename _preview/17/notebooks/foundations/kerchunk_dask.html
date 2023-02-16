@@ -355,20 +355,20 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-off-of-our-previous-work">
-   Building off of our previous work
+   Building off of our Previous Work
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lets-take-a-subset-of-the-dataset-40-files">
-     Let’s take a subset of the dataset (40 files)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dask-changes">
-     Dask Changes
+    <a class="reference internal nav-link" href="#subset-the-data">
+     Subset the Data
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dask-specific-changes">
+   Dask Specific Changes
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dask-task-graph">
@@ -411,7 +411,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <li><p>How to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> library.</p></li>
 <li><p>How to scale up the creation of large <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> datasets using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p></li>
 </ol>
-<p>This notebook builds upon the the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics notebook</span></a> and the <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a>. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the building of your <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index.</p>
+<p>This notebook builds upon the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics</span></a> and the <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> notebooks. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the the generation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -448,15 +448,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <hr class="docutils" />
 <div class="section" id="dask-and-parallel-processing">
 <h2>Dask and Parallel Processing<a class="headerlink" href="#dask-and-parallel-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is note intended to be a guide for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallize some <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
-<p>In the previous notebook <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a>, we were looking at daily downscaled climate data over SE Alaska. In our function named <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>, we were looping over, one at a time, the input NetCDF4 files and using <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> method to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index for each file.</p>
+<p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is not intended to be a guide for how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallelize some <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
+<p>In the previous notebook <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a>, we were looking at daily downscaled climate data over South-Eastern Alaska. In our function named <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>, we were looping over, one at a time, the input NetCDF4 files and using <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> method to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index for each file.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we can call <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> in parallel, which allows us to create multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files at the same time.</p>
 <p>Further on in this notebook, we will show how using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can greatly speed-up the process of creating a virtual dataset using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p>
 </div>
 <div class="section" id="setting-up-the-dask-client">
 <h2>Setting up the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> Client<a class="headerlink" href="#setting-up-the-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>In the code below, we are importing <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Disributed</span></code> and creating a <code class="docutils literal notranslate"><span class="pre">client</span></code>. This is the start of our parallel <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> data processing. Here, we are passing the argument <code class="docutils literal notranslate"><span class="pre">n_workers=8</span></code>. This will inform the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> client on some of the resource limitations.</p>
-<p>Note: Depending if you are running on a small machine such as a laptop or a larger compute hub, these resources could be tuned to improve performance.</p>
+<p>In the code below, we are importing <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Disributed</span></code> and creating a <code class="docutils literal notranslate"><span class="pre">client</span></code>. This is the start of our parallel <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> data processing. We are passing the argument <code class="docutils literal notranslate"><span class="pre">n_workers=8</span></code>. This will inform the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> client on some of the resource limitations.</p>
+<p>Note: Depending on if you are running on a small machine such as a laptop or a larger compute hub, these resources could be tuned to improve performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -468,10 +468,500 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-02-15 18:19:02,350 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-3jcsoj9m&#39;, purging
+2023-02-15 18:19:02,351 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-c9mtq7gg&#39;, purging
+2023-02-15 18:19:02,351 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-ngsy5hih&#39;, purging
+2023-02-15 18:19:02,352 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-v82wfn9f&#39;, purging
+2023-02-15 18:19:02,352 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-hy6521gx&#39;, purging
+2023-02-15 18:19:02,353 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-uc8y3xzf&#39;, purging
+2023-02-15 18:19:02,353 - distributed.diskutils - INFO - Found stale lock file and directory &#39;/var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-2d6qnecl&#39;, purging
+</pre></div>
+</div>
+<div class="output text_html"><div>
+    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
+    <div style="margin-left: 48px;">
+        <h3 style="margin-bottom: 0px;">Client</h3>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-e4ae99e4-ad97-11ed-a036-9286e0603dfb</p>
+        <table style="width: 100%; text-align: left;">
+
+        <tr>
+
+            <td style="text-align: left;"><strong>Connection method:</strong> Cluster object</td>
+            <td style="text-align: left;"><strong>Cluster type:</strong> distributed.LocalCluster</td>
+
+        </tr>
+
+
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Dashboard: </strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                </td>
+                <td style="text-align: left;"></td>
+            </tr>
+
+
+        </table>
+
+
+
+
+            <details>
+            <summary style="margin-bottom: 20px;"><h3 style="display: inline;">Cluster Info</h3></summary>
+            <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output">
+    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;">
+    </div>
+    <div style="margin-left: 48px;">
+        <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">0a36527c</p>
+        <table style="width: 100%; text-align: left;">
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                </td>
+                <td style="text-align: left;">
+                    <strong>Workers:</strong> 8
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Total threads:</strong> 8
+                </td>
+                <td style="text-align: left;">
+                    <strong>Total memory:</strong> 16.00 GiB
+                </td>
+            </tr>
+
+            <tr>
+    <td style="text-align: left;"><strong>Status:</strong> running</td>
+    <td style="text-align: left;"><strong>Using processes:</strong> True</td>
+</tr>
+
+
+        </table>
+
+        <details>
+            <summary style="margin-bottom: 20px;">
+                <h3 style="display: inline;">Scheduler Info</h3>
+            </summary>
+
+            <div style="">
+    <div>
+        <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
+        <div style="margin-left: 48px;">
+            <h3 style="margin-bottom: 0px;">Scheduler</h3>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-37ed6845-e67f-49d1-9ce4-f844874f82ea</p>
+            <table style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Comm:</strong> tcp://127.0.0.1:57758
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Workers:</strong> 8
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Total threads:</strong> 8
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Started:</strong> Just now
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Total memory:</strong> 16.00 GiB
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <details style="margin-left: 48px;">
+        <summary style="margin-bottom: 20px;">
+            <h3 style="display: inline;">Workers</h3>
+        </summary>
+
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 0</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57781
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57784/status" target="_blank">http://127.0.0.1:57784/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57761
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-kgdgxqb4
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 1</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57783
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57788/status" target="_blank">http://127.0.0.1:57788/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57762
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-mhn9sha8
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 2</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57782
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57787/status" target="_blank">http://127.0.0.1:57787/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57763
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-fzl3tawx
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 3</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57791
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57794/status" target="_blank">http://127.0.0.1:57794/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57764
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-998c7goe
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 4</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57786
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57792/status" target="_blank">http://127.0.0.1:57792/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57765
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-psezoz12
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 5</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57799
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57801/status" target="_blank">http://127.0.0.1:57801/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57766
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-27m2r16f
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 6</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57795
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57797/status" target="_blank">http://127.0.0.1:57797/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57767
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-stdh1kza
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 7</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:57800
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:57803/status" target="_blank">http://127.0.0.1:57803/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 2.00 GiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:57768
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /var/folders/mb/7d7yq_4j2qgdfm_j3j4tsyl40000gn/T/dask-worker-space/worker-tie1d1m3
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+
+    </details>
+</div>
+
+        </details>
+    </div>
+</div>
+            </details>
+
+
+    </div>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="building-off-of-our-previous-work">
-<h2>Building off of our previous work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h2>Building off of our Previous Work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In the next section, we will re-use some of the code from <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a> notebook. However, we will modify it slightly to make it compatable with <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
 <p>The following two cells should look the same as before.  As a reminder we are importing the required libraries, using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to create a list of our input files and setting up some kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to use.</p>
 <div class="cell docutils container">
@@ -505,8 +995,9 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-<div class="section" id="lets-take-a-subset-of-the-dataset-40-files">
-<h3>Let’s take a subset of the dataset (40 files)<a class="headerlink" href="#lets-take-a-subset-of-the-dataset-40-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="section" id="subset-the-data">
+<h3>Subset the Data<a class="headerlink" href="#subset-the-data" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>To speed up our example, lets take a subset of the year of data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
@@ -515,10 +1006,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-<div class="section" id="dask-changes">
-<h3>Dask Changes<a class="headerlink" href="#dask-changes" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
-<p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files in parallel.</p>
+</div>
+<div class="section" id="dask-specific-changes">
+<h2>Dask Specific Changes<a class="headerlink" href="#dask-specific-changes" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files, we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
+<p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list of delayed objects to create  <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files in parallel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
@@ -532,9 +1024,9 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <span class="k">return</span> <span class="n">outf</span>
 
 
+<span class="c1"># Generate Dask Delayed objects</span>
 <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_json_reference</span><span class="p">)(</span><span class="n">fil</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -542,12 +1034,12 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <div class="section" id="dask-task-graph">
 <h2>Dask Task Graph<a class="headerlink" href="#dask-task-graph" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Once you call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> it can be hard to understand what is happening and how far along the process is at any time. Fortunately, <code class="docutils literal notranslate"><span class="pre">Dask</span></code> has a built in dashboard to help visualize your progress.</p>
-<p>When you initialized the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> <code class="docutils literal notranslate"><span class="pre">client</span></code> earlier on, it should have returned some information including an address to the <code class="docutils literal notranslate"><span class="pre">dashboard</span></code></p>
+<p>When you first initialized the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> <code class="docutils literal notranslate"><span class="pre">client</span></code> earlier on, it should have returned some information including an address to the <code class="docutils literal notranslate"><span class="pre">dashboard</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8787/status</span></code></p>
 <p>By navigating to this address, you should a <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard that looks something like this.</p>
 <p><br/><br/></p>
 <a class="reference internal image-reference" href="../../_images/empty_dashboard.png"><img alt="../../_images/empty_dashboard.png" src="../../_images/empty_dashboard.png" style="width: 700px;" /></a>
 <p><br/><br/></p>
-<p>When you call <code class="docutils literal notranslate"><span class="pre">dask.compute(tasks)</span></code>, the dashboard should populate with a bunch of tasks.</p>
+<p>When you call <code class="docutils literal notranslate"><span class="pre">dask.compute(tasks)</span></code>, the dashboard should populate with a bunch of tasks. In the dashboard you can monitor your progress, see how resources are being used as well as well as countless other functionality.</p>
 <p><br/><br/></p>
 <a class="reference internal image-reference" href="../../_images/dashboard.png"><img alt="../../_images/dashboard.png" src="../../_images/dashboard.png" style="width: 700px;" /></a>
 <p><br/><br/></p>
@@ -578,21 +1070,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </tbody>
 </table>
 <p>Running our <code class="docutils literal notranslate"><span class="pre">Dask</span></code> version on a subset of 40 files took about 36 minutes, or 54 second per file. In comparison, computing the kerchunk indicies one-by-one in <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> took about 3 minutes and 45 seconds for each file.</p>
-<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run over <strong>4x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds it’s task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
+<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run over <strong>4x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds its task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
 <p>Note: These timings may vary for you. There are many factors that may affect performance, such as:</p>
 <ul class="simple">
-<li><p>Geographical location of your compute and the data</p></li>
+<li><p>Geographical location of your compute and the source data</p></li>
 <li><p>Internet speed</p></li>
 <li><p>Compute resources, IO limits and # of workers given to <code class="docutils literal notranslate"><span class="pre">Dask</span></code></p></li>
 <li><p>Location of where to write reference files to (cloud vs local)</p></li>
 <li><p>Type of reference files (<code class="docutils literal notranslate"><span class="pre">Parquet</span></code> vs <code class="docutils literal notranslate"><span class="pre">.JSON</span></code>)</p></li>
 </ul>
-<p>This is meant to be an example of how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to speed-up <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> not a detailed benchmark in <code class="docutils literal notranslate"><span class="pre">Kerchunk/Dask</span></code> preformance.</p>
+<p>This is meant to be an example of how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to speed-up <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> not a detailed benchmark in <code class="docutils literal notranslate"><span class="pre">Kerchunk/Dask</span></code> performance.</p>
 </div>
 <div class="section" id="next-steps">
 <h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In this notebook we demonstrated how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files. In the following <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section, we will walk though examples of using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> with <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to create virtual cloud-optimized datasets.</p>
-<p>Additoinally, if you wish to explore more of <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">Dask</span></code> integration, you can try checking out <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <a class="reference external" href="https://fsspec.github.io/kerchunk/reference.html?highlight=auto%20dask#kerchunk.combine.auto_dask">auto_dask</a> method, which combines many of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> setup steps into a single convenient function.</p>
+<p>Additionally, if you wish to explore more of <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">Dask</span></code> integration, you can try checking out <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <a class="reference external" href="https://fsspec.github.io/kerchunk/reference.html?highlight=auto%20dask#kerchunk.combine.auto_dask">auto_dask</a> method, which combines many of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> setup steps into a single convenient function.</p>
 </div>
 </div>
 
