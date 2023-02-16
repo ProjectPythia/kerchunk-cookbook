@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overview &#8212; Project Pythia Kerchunk Cookbook</title>
+    <title>Kerchunk and Dask &#8212; Project Pythia Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Overview
+   Kerchunk and Dask
   </a>
  </li>
 </ul>
@@ -327,22 +327,22 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
    Overview
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dask-and-parallel-processing">
    Dask and Parallel Processing
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setting-up-the-dask-client">
    Setting up the
    <code class="docutils literal notranslate">
@@ -353,39 +353,39 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
    Client
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-off-of-our-previous-work">
    Building off of our previous work
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lets-take-a-subset-of-the-dataset-40-files">
      Let’s take a subset of the dataset (40 files)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dask-changes">
      Dask Changes
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dask-task-graph">
    Dask Task Graph
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#start-the-dask-processing">
    Start the Dask Processing
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#timing">
    Timing
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#next-steps">
    Next Steps
   </a>
@@ -401,12 +401,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <p align="middle">
-  <img src="../../thumbnail.png" width="200" height = "200" />
-  <img src="../images/dask.png" width="200" height = "200"/> 
-</p>
-<center> <h1>Kerchunk and Dask</h1> </center><div class="section" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+  <p><a class="reference internal" href="../../_images/dask.png"><img alt="Dask Logo" src="../../_images/dask.png" style="width: 200px;" /></a></img></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-dask">
+<h1>Kerchunk and Dask<a class="headerlink" href="#kerchunk-and-dask" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In this notebook we will cover:</p>
 <ol class="simple">
 <li><p>How to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> library.</p></li>
@@ -415,7 +414,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>This notebook builds upon the the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics notebook</span></a> and the <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a>. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the building of your <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index.</p>
 </div>
 <div class="section" id="prerequisites">
-<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concepts</p></th>
@@ -448,14 +447,14 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 <hr class="docutils" />
 <div class="section" id="dask-and-parallel-processing">
-<h1>Dask and Parallel Processing<a class="headerlink" href="#dask-and-parallel-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Dask and Parallel Processing<a class="headerlink" href="#dask-and-parallel-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is note intended to be a guide for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallize some <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
 <p>In the previous notebook <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a>, we were looking at daily downscaled climate data over SE Alaska. In our function named <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>, we were looping over, one at a time, the input NetCDF4 files and using <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> method to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index for each file.</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we can call <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> in parallel, which allows us to create multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files at the same time.</p>
 <p>Further on in this notebook, we will show how using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can greatly speed-up the process of creating a virtual dataset using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p>
 </div>
 <div class="section" id="setting-up-the-dask-client">
-<h1>Setting up the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> Client<a class="headerlink" href="#setting-up-the-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Setting up the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> Client<a class="headerlink" href="#setting-up-the-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In the code below, we are importing <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Disributed</span></code> and creating a <code class="docutils literal notranslate"><span class="pre">client</span></code>. This is the start of our parallel <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> data processing. Here, we are passing the argument <code class="docutils literal notranslate"><span class="pre">n_workers=8</span></code>. This will inform the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> client on some of the resource limitations.</p>
 <p>Note: Depending if you are running on a small machine such as a laptop or a larger compute hub, these resources could be tuned to improve performance.</p>
 <div class="cell docutils container">
@@ -470,18 +469,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span>
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 <div class="section" id="building-off-of-our-previous-work">
-<h1>Building off of our previous work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Building off of our previous work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In the next section, we will re-use some of the code from <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a> notebook. However, we will modify it slightly to make it compatable with <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
-<p>The following two cells should look the same as before.  As a reminder we are importing the required libraries, using fsspec to create a list of our input files and setting up some kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to use.</p>
+<p>The following two cells should look the same as before.  As a reminder we are importing the required libraries, using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to create a list of our input files and setting up some kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to use.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dask</span>
@@ -514,7 +506,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="section" id="lets-take-a-subset-of-the-dataset-40-files">
-<h2>Let’s take a subset of the dataset (40 files)<a class="headerlink" href="#lets-take-a-subset-of-the-dataset-40-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h3>Let’s take a subset of the dataset (40 files)<a class="headerlink" href="#lets-take-a-subset-of-the-dataset-40-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
@@ -524,7 +516,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="section" id="dask-changes">
-<h2>Dask Changes<a class="headerlink" href="#dask-changes" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h3>Dask Changes<a class="headerlink" href="#dask-changes" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
 <p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files in parallel.</p>
 <div class="cell docutils container">
@@ -548,15 +540,20 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="section" id="dask-task-graph">
-<h1>Dask Task Graph<a class="headerlink" href="#dask-task-graph" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Dask Task Graph<a class="headerlink" href="#dask-task-graph" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Once you call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> it can be hard to understand what is happening and how far along the process is at any time. Fortunately, <code class="docutils literal notranslate"><span class="pre">Dask</span></code> has a built in dashboard to help visualize your progress.</p>
 <p>When you initialized the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> <code class="docutils literal notranslate"><span class="pre">client</span></code> earlier on, it should have returned some information including an address to the <code class="docutils literal notranslate"><span class="pre">dashboard</span></code></p>
-<a class="reference internal image-reference" href="../../_images/client.png"><img alt="../../_images/client.png" src="../../_images/client.png" style="width: 80%;" /></a>
 <p>By navigating to this address, you should a <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard that looks something like this.</p>
+<p><br/><br/></p>
+<a class="reference internal image-reference" href="../../_images/empty_dashboard.png"><img alt="../../_images/empty_dashboard.png" src="../../_images/empty_dashboard.png" style="width: 700px;" /></a>
+<p><br/><br/></p>
 <p>When you call <code class="docutils literal notranslate"><span class="pre">dask.compute(tasks)</span></code>, the dashboard should populate with a bunch of tasks.</p>
+<p><br/><br/></p>
+<a class="reference internal image-reference" href="../../_images/dashboard.png"><img alt="../../_images/dashboard.png" src="../../_images/dashboard.png" style="width: 700px;" /></a>
+<p><br/><br/></p>
 </div>
 <div class="section" id="start-the-dask-processing">
-<h1>Start the Dask Processing<a class="headerlink" href="#start-the-dask-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Start the Dask Processing<a class="headerlink" href="#start-the-dask-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel computation of `SingleHDF5ToZarr`</span>
@@ -567,7 +564,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="section" id="timing">
-<h1>Timing<a class="headerlink" href="#timing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Serial Kerchunk</p></th>
@@ -581,7 +578,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </tbody>
 </table>
 <p>Running our <code class="docutils literal notranslate"><span class="pre">Dask</span></code> version on a subset of 40 files took about 36 minutes, or 54 second per file. In comparison, computing the kerchunk indicies one-by-one in <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> took about 3 minutes and 45 seconds for each file.</p>
-<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run over 4x faster. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds it’s task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
+<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run over <strong>4x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds it’s task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
 <p>Note: These timings may vary for you. There are many factors that may affect performance, such as:</p>
 <ul class="simple">
 <li><p>Geographical location of your compute and the data</p></li>
@@ -593,9 +590,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>This is meant to be an example of how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to speed-up <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> not a detailed benchmark in <code class="docutils literal notranslate"><span class="pre">Kerchunk/Dask</span></code> preformance.</p>
 </div>
 <div class="section" id="next-steps">
-<h1>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In this notebook we demonstrated how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files. In the following <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section, we will walk though examples of using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> with <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to create virtual cloud-optimized datasets.</p>
 <p>Additoinally, if you wish to explore more of <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">Dask</span></code> integration, you can try checking out <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <a class="reference external" href="https://fsspec.github.io/kerchunk/reference.html?highlight=auto%20dask#kerchunk.combine.auto_dask">auto_dask</a> method, which combines many of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> setup steps into a single convenient function.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -680,7 +678,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 15 February 2023.
+          Last updated on 16 February 2023.
         </p>
       </div>
     </div>

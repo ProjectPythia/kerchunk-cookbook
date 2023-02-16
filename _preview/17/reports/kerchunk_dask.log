@@ -23,7 +23,7 @@ dask.compute(tasks)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[7], line 2[0m
+Cell [0;32mIn[6], line 2[0m
 [1;32m      1[0m [38;5;66;03m# Start parallel computation of `SingleHDF5ToZarr`[39;00m
 [0;32m----> 2[0m [43mdask[49m[38;5;241;43m.[39;49m[43mcompute[49m[43m([49m[43mtasks[49m[43m)[49m
 
@@ -87,7 +87,7 @@ File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages
 [1;32m   2170[0m     [38;5;28;01mraise[39;00m exc
 [1;32m   2171[0m [38;5;28;01mif[39;00m errors [38;5;241m==[39m [38;5;124m"[39m[38;5;124mskip[39m[38;5;124m"[39m:
 
-Cell [0;32mIn[6], line 7[0m, in [0;36mgenerate_json_reference[0;34m()[0m
+Cell [0;32mIn[5], line 7[0m, in [0;36mgenerate_json_reference[0;34m()[0m
 [1;32m      5[0m fname [38;5;241m=[39m fil[38;5;241m.[39msplit([38;5;124m"[39m[38;5;124m/[39m[38;5;124m"[39m)[[38;5;241m-[39m[38;5;241m1[39m][38;5;241m.[39mstrip([38;5;124m"[39m[38;5;124m.nc[39m[38;5;124m"[39m)
 [1;32m      6[0m outf [38;5;241m=[39m [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00moutput_dir[38;5;132;01m}[39;00m[38;5;124m/[39m[38;5;132;01m{[39;00mfname[38;5;132;01m}[39;00m[38;5;124m.json[39m[38;5;124m"[39m
 [0;32m----> 7[0m [38;5;28;01mwith[39;00m [38;5;28mopen[39m(outf, [38;5;124m"[39m[38;5;124mwb[39m[38;5;124m"[39m) [38;5;28;01mas[39;00m f:
@@ -103,6 +103,6 @@ File [0;32m/usr/share/miniconda3/envs/cookbook-dev/lib/python3.10/site-packages
 [1;32m    280[0m     )
 [0;32m--> 282[0m [38;5;28;01mreturn[39;00m io_open(file, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: './json_dir/WRFDS_2060-01-25.json'
-FileNotFoundError: [Errno 2] No such file or directory: './json_dir/WRFDS_2060-01-25.json'
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: './json_dir/WRFDS_2060-02-08.json'
+FileNotFoundError: [Errno 2] No such file or directory: './json_dir/WRFDS_2060-02-08.json'
 

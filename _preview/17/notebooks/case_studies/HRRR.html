@@ -203,7 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../foundations/kerchunk_dask.html">
-   Overview
+   Kerchunk and Dask
   </a>
  </li>
 </ul>
@@ -566,7 +566,9 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
  &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t18z.wrfsfcf01.grib2&#39;,
  &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t19z.wrfsfcf01.grib2&#39;,
  &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t20z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t21z.wrfsfcf01.grib2&#39;]
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t21z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t22z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230215/conus/hrrr.t23z.wrfsfcf01.grib2&#39;]
 </pre></div>
 </div>
 </div>
@@ -618,76 +620,82 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/22 [00:00&lt;?, ?it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/24 [00:00&lt;?, ?it/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▍         | 1/22 [00:19&lt;06:48, 19.45s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4%|▍         | 1/24 [00:13&lt;05:18, 13.85s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  9%|▉         | 2/22 [00:39&lt;06:41, 20.05s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  8%|▊         | 2/24 [00:29&lt;05:25, 14.80s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 14%|█▎        | 3/22 [00:58&lt;06:08, 19.38s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 12%|█▎        | 3/24 [00:42&lt;04:56, 14.11s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 18%|█▊        | 4/22 [01:17&lt;05:46, 19.27s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 17%|█▋        | 4/24 [00:55&lt;04:36, 13.81s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 23%|██▎       | 5/22 [01:35&lt;05:21, 18.93s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 21%|██        | 5/24 [01:09&lt;04:17, 13.55s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 27%|██▋       | 6/22 [01:53&lt;04:54, 18.38s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 6/24 [01:21&lt;03:57, 13.21s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 32%|███▏      | 7/22 [02:13&lt;04:47, 19.14s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 29%|██▉       | 7/24 [01:37&lt;04:00, 14.14s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 36%|███▋      | 8/22 [02:34&lt;04:34, 19.58s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 33%|███▎      | 8/24 [01:52&lt;03:47, 14.23s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 41%|████      | 9/22 [02:52&lt;04:07, 19.04s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 38%|███▊      | 9/24 [02:04&lt;03:26, 13.74s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 10/22 [03:10&lt;03:46, 18.89s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 42%|████▏     | 10/24 [02:18&lt;03:11, 13.64s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 11/22 [03:29&lt;03:28, 18.96s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 46%|████▌     | 11/24 [02:32&lt;03:00, 13.90s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▍    | 12/22 [03:50&lt;03:15, 19.54s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 12/24 [02:49&lt;02:56, 14.72s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 59%|█████▉    | 13/22 [04:09&lt;02:54, 19.37s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 54%|█████▍    | 13/24 [03:04&lt;02:42, 14.81s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 64%|██████▎   | 14/22 [04:28&lt;02:34, 19.31s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 58%|█████▊    | 14/24 [03:19&lt;02:28, 14.87s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 68%|██████▊   | 15/22 [04:49&lt;02:16, 19.53s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 62%|██████▎   | 15/24 [03:34&lt;02:13, 14.84s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 73%|███████▎  | 16/22 [05:10&lt;02:01, 20.17s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 67%|██████▋   | 16/24 [03:49&lt;01:59, 14.88s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 77%|███████▋  | 17/22 [05:27&lt;01:36, 19.29s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 71%|███████   | 17/24 [04:01&lt;01:38, 14.05s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 82%|████████▏ | 18/22 [05:46&lt;01:16, 19.02s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▌  | 18/24 [04:14&lt;01:23, 13.85s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 86%|████████▋ | 19/22 [06:06&lt;00:58, 19.39s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 79%|███████▉  | 19/24 [04:30&lt;01:12, 14.52s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 91%|█████████ | 20/22 [06:25&lt;00:38, 19.36s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 83%|████████▎ | 20/24 [04:44&lt;00:57, 14.31s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|█████████▌| 21/22 [06:43&lt;00:18, 18.86s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 88%|████████▊ | 21/24 [04:59&lt;00:43, 14.47s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 22/22 [07:00&lt;00:00, 18.22s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 92%|█████████▏| 22/24 [05:12&lt;00:28, 14.00s/it]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 22/22 [07:00&lt;00:00, 19.10s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 96%|█████████▌| 23/24 [05:25&lt;00:13, 13.68s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 24/24 [05:35&lt;00:00, 12.73s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 24/24 [05:35&lt;00:00, 13.98s/it]
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -753,7 +761,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f80c8923460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f0f79d59de0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
@@ -766,7 +774,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f80c869d840&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f0f78ad99f0&gt;]
 </pre></div>
 </div>
 <img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
@@ -850,7 +858,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 15 February 2023.
+          Last updated on 16 February 2023.
         </p>
       </div>
     </div>
