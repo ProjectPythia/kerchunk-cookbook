@@ -5,6 +5,7 @@ parts:
     chapters:
       - file: notebooks/foundations/kerchunk_basics
       - file: notebooks/foundations/kerchunk_multi_file
+      - file: notebooks/foundations/kerchunk_dask
 
   - caption: Case Studies
     chapters:
