@@ -17,75 +17,26 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# open dataset as zarr object using fsspec reference file system and Xarray
-fs = fsspec.filesystem(
-    "reference", fo=multi_kerchunk, remote_protocol="s3", remote_options={"anon": True}
-)
-m = fs.get_mapper("")
-ds = xr.open_dataset(
-    m, engine="zarr", backend_kwargs=dict(consolidated=False), chunks={"valid_time": 1}
-)
+ds["t2m"][:, 500, 500].plot()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[10], line 6[0m
-[1;32m      2[0m fs [38;5;241m=[39m fsspec[38;5;241m.[39mfilesystem(
-[1;32m      3[0m     [38;5;124m"[39m[38;5;124mreference[39m[38;5;124m"[39m, fo[38;5;241m=[39mmulti_kerchunk, remote_protocol[38;5;241m=[39m[38;5;124m"[39m[38;5;124ms3[39m[38;5;124m"[39m, remote_options[38;5;241m=[39m{[38;5;124m"[39m[38;5;124manon[39m[38;5;124m"[39m: [38;5;28;01mTrue[39;00m}
-[1;32m      4[0m )
-[1;32m      5[0m m [38;5;241m=[39m fs[38;5;241m.[39mget_mapper([38;5;124m"[39m[38;5;124m"[39m)
-[0;32m----> 6[0m ds [38;5;241m=[39m [43mxr[49m[38;5;241;43m.[39;49m[43mopen_dataset[49m[43m([49m
-[1;32m      7[0m [43m    [49m[43mm[49m[43m,[49m[43m [49m[43mengine[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mzarr[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mbackend_kwargs[49m[38;5;241;43m=[39;49m[38;5;28;43mdict[39;49m[43m([49m[43mconsolidated[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m[43m,[49m[43m [49m[43mchunks[49m[38;5;241;43m=[39;49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43mvalid_time[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;241;43m1[39;49m[43m}[49m
-[1;32m      8[0m [43m)[49m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[12], line 1[0m
+[0;32m----> 1[0m [43mds[49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mt2m[39;49m[38;5;124;43m"[39;49m[43m][49m[43m[[49m[43m:[49m[43m,[49m[43m [49m[38;5;241;43m500[39;49m[43m,[49m[43m [49m[38;5;241;43m500[39;49m[43m][49m[38;5;241;43m.[39;49m[43mplot[49m[43m([49m[43m)[49m
 
-File [0;32m/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:547[0m, in [0;36mopen_dataset[0;34m(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, backend_kwargs, **kwargs)[0m
-[1;32m    540[0m overwrite_encoded_chunks [38;5;241m=[39m kwargs[38;5;241m.[39mpop([38;5;124m"[39m[38;5;124moverwrite_encoded_chunks[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m)
-[1;32m    541[0m backend_ds [38;5;241m=[39m backend[38;5;241m.[39mopen_dataset(
-[1;32m    542[0m     filename_or_obj,
-[1;32m    543[0m     drop_variables[38;5;241m=[39mdrop_variables,
-[1;32m    544[0m     [38;5;241m*[39m[38;5;241m*[39mdecoders,
-[1;32m    545[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
-[1;32m    546[0m )
-[0;32m--> 547[0m ds [38;5;241m=[39m [43m_dataset_from_backend_dataset[49m[43m([49m
-[1;32m    548[0m [43m    [49m[43mbackend_ds[49m[43m,[49m
-[1;32m    549[0m [43m    [49m[43mfilename_or_obj[49m[43m,[49m
-[1;32m    550[0m [43m    [49m[43mengine[49m[43m,[49m
-[1;32m    551[0m [43m    [49m[43mchunks[49m[43m,[49m
-[1;32m    552[0m [43m    [49m[43mcache[49m[43m,[49m
-[1;32m    553[0m [43m    [49m[43moverwrite_encoded_chunks[49m[43m,[49m
-[1;32m    554[0m [43m    [49m[43minline_array[49m[43m,[49m
-[1;32m    555[0m [43m    [49m[43mdrop_variables[49m[38;5;241;43m=[39;49m[43mdrop_variables[49m[43m,[49m
-[1;32m    556[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mdecoders[49m[43m,[49m
-[1;32m    557[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m,[49m
-[1;32m    558[0m [43m[49m[43m)[49m
-[1;32m    559[0m [38;5;28;01mreturn[39;00m ds
+File [0;32m/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/xarray/plot/accessor.py:47[0m, in [0;36mDataArrayPlotAccessor.__call__[0;34m(self, **kwargs)[0m
+[1;32m     45[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(dataarray_plot[38;5;241m.[39mplot, assigned[38;5;241m=[39m([38;5;124m"[39m[38;5;124m__doc__[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124m__annotations__[39m[38;5;124m"[39m))
+[1;32m     46[0m [38;5;28;01mdef[39;00m [38;5;21m__call__[39m([38;5;28mself[39m, [38;5;241m*[39m[38;5;241m*[39mkwargs) [38;5;241m-[39m[38;5;241m>[39m Any:
+[0;32m---> 47[0m     [38;5;28;01mreturn[39;00m [43mdataarray_plot[49m[38;5;241;43m.[39;49m[43mplot[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_da[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
 
-File [0;32m/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:358[0m, in [0;36m_dataset_from_backend_dataset[0;34m(backend_ds, filename_or_obj, engine, chunks, cache, overwrite_encoded_chunks, inline_array, **extra_tokens)[0m
-[1;32m    356[0m     ds [38;5;241m=[39m backend_ds
-[1;32m    357[0m [38;5;28;01melse[39;00m:
-[0;32m--> 358[0m     ds [38;5;241m=[39m [43m_chunk_ds[49m[43m([49m
-[1;32m    359[0m [43m        [49m[43mbackend_ds[49m[43m,[49m
-[1;32m    360[0m [43m        [49m[43mfilename_or_obj[49m[43m,[49m
-[1;32m    361[0m [43m        [49m[43mengine[49m[43m,[49m
-[1;32m    362[0m [43m        [49m[43mchunks[49m[43m,[49m
-[1;32m    363[0m [43m        [49m[43moverwrite_encoded_chunks[49m[43m,[49m
-[1;32m    364[0m [43m        [49m[43minline_array[49m[43m,[49m
-[1;32m    365[0m [43m        [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mextra_tokens[49m[43m,[49m
-[1;32m    366[0m [43m    [49m[43m)[49m
-[1;32m    368[0m ds[38;5;241m.[39mset_close(backend_ds[38;5;241m.[39m_close)
-[1;32m    370[0m [38;5;66;03m# Ensure source filename always stored in dataset object[39;00m
+File [0;32m/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/xarray/plot/dataarray_plot.py:274[0m, in [0;36mplot[0;34m(darray, row, col, col_wrap, ax, hue, subplot_kws, **kwargs)[0m
+[1;32m    271[0m plotfunc: Callable
+[1;32m    273[0m [38;5;28;01mif[39;00m ndims [38;5;241m==[39m [38;5;241m0[39m [38;5;129;01mor[39;00m darray[38;5;241m.[39msize [38;5;241m==[39m [38;5;241m0[39m:
+[0;32m--> 274[0m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m([38;5;124m"[39m[38;5;124mNo numeric data to plot.[39m[38;5;124m"[39m)
+[1;32m    275[0m [38;5;28;01mif[39;00m ndims [38;5;129;01min[39;00m ([38;5;241m1[39m, [38;5;241m2[39m):
+[1;32m    276[0m     [38;5;28;01mif[39;00m row [38;5;129;01mor[39;00m col:
 
-File [0;32m/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/xarray/backends/api.py:318[0m, in [0;36m_chunk_ds[0;34m(backend_ds, filename_or_obj, engine, chunks, overwrite_encoded_chunks, inline_array, **extra_tokens)[0m
-[1;32m    309[0m [38;5;28;01mdef[39;00m [38;5;21m_chunk_ds[39m(
-[1;32m    310[0m     backend_ds,
-[1;32m    311[0m     filename_or_obj,
-[0;32m   (...)[0m
-[1;32m    316[0m     [38;5;241m*[39m[38;5;241m*[39mextra_tokens,
-[1;32m    317[0m ):
-[0;32m--> 318[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mdask[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m [38;5;28;01mimport[39;00m tokenize
-[1;32m    320[0m     mtime [38;5;241m=[39m _get_mtime(filename_or_obj)
-[1;32m    321[0m     token [38;5;241m=[39m tokenize(filename_or_obj, mtime, engine, chunks, [38;5;241m*[39m[38;5;241m*[39mextra_tokens)
-
-[0;31mModuleNotFoundError[0m: No module named 'dask'
-ModuleNotFoundError: No module named 'dask'
+[0;31mTypeError[0m: No numeric data to plot.
+TypeError: No numeric data to plot.
 
