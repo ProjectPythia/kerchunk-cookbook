@@ -74,14 +74,13 @@ would like to contribute, please open up a PR or issue.
 Some possible additions:
 
 - Diving into the details: The nitty-gritty on how `Kerchunk` works.
-- `Kerchunk` and `Dask`: How to use Dask to speed-up your `Kerchunk` dataset generation.
 - `Kerchunk` and `Parquet`: what are the benefits of using parquet for reference file storage.
 - Appending to a Kerchunk dataset:
   How to schedule processing of newly added data files and how to add them to a `Kerchunk` dataset.
 
 ## Running the Notebooks
 
-You can either run the notebook using [Binder](https://mybinder.org/)
+You can either run the notebook using [![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
 or on your local machine.
 
 ### Running on Binder
