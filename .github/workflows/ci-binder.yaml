@@ -1,6 +1,9 @@
 name: Binder
-on: [push]
-
+# on: [push]
+on:
+  push:
+    branches:
+      - CI
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -21,6 +21,10 @@ dependencies:
   - ujson
   - xarray
   - zarr
+    # JupyterLab extensions
+  - jupyterlab>=3
+  - dask-labextension
+  - ipywidgets
   - pip:
       - sphinx-pythia-theme
       - git+https://github.com/fsspec/kerchunk.git
