@@ -3,13 +3,29 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - jupyterlab=3
-  - dask=2023.1.0
   - dask-labextension
-  - distributed=2023.1.0
+  - distributed
   - pip
   - s3fs
   - zarr
   - pooch
   - xarray
   - mamba
+  - cfgrib
+  - dask
+  - h5py
+  - h5netcdf
+  - jupyter-book
+  - jupyterlab
+  - jupyter_server<2
+  - fsspec
+  - matplotlib
+  - netcdf4
+  - numcodecs
+  - numpy
+  - scipy
+  - tqdm
+  - ujson
+  - ipywidgets
+  - pip:
+      - git+https://github.com/fsspec/kerchunk.git
