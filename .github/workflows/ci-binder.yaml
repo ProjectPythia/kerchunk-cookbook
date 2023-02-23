@@ -1,4 +1,4 @@
-name: Binder
+name: Binder CI
 on: [push]
 
 jobs:

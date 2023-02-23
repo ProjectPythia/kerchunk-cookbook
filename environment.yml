@@ -22,8 +22,9 @@ dependencies:
   - xarray
   - zarr
     # JupyterLab extensions
-  - jupyterlab>=3
+  - jupyterlab=3
   - dask-labextension
+  - distributed=2023.1.0
   - ipywidgets
   - pip:
       - sphinx-pythia-theme

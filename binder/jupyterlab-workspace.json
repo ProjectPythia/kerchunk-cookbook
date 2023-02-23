@@ -3,11 +3,45 @@
     "file-browser-filebrowser:cwd": {
       "path": ""
     },
+    "layout-restorer:data": {
+      "main": {
+        "dock": {
+          "type": "split-area",
+          "orientation": "horizontal",
+          "sizes": [0.5, 0.5],
+          "children": [
+            {
+              "type": "tab-area",
+              "currentIndex": 1,
+              "widgets": ["notebook:00_overview.ipynb"]
+            },
+            {
+              "type": "tab-area",
+              "currentIndex": 0,
+              "widgets": ["dask-dashboard-launcher:/individual-task-stream"]
+            }
+          ]
+        },
+        "current": "notebook:00_overview.ipynb"
+      }
+    },
+    "notebook:00_overview.ipynb": {
+      "data": {
+        "path": "00_overview.ipynb",
+        "factory": "Notebook"
+      }
+    },
+    "dask-dashboard-launcher:/individual-task-stream": {
+      "data": {
+        "route": "/individual-task-stream",
+        "label": "Task Stream",
+        "key": "Task Stream"
+      }
+    },
+
     "dask-dashboard-launcher": {
-      "url": "DASK_DASHBOARD_URL"
+      "url": "DASK_DASHBOARD_URL",
+      "cluster": ""
     }
-  },
-  "metadata": {
-    "id": "/lab"
   }
 }
