@@ -13,6 +13,6 @@ jobs:
         with:
           miniconda-version: "latest"
           mamba-version: "*"
-          environment-file: environment.yml
-          activate-environment: kerchunk-cookbook
+          environment-file: binder/environment.yml
+          activate-environment: kerchunk-dask
           auto-activate-base: false

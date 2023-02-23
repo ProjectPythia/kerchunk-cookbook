@@ -10,7 +10,3 @@ jobs:
         with:
           NO_PUSH: true
           MYBINDERORG_TAG: ${{ github.event.ref }}
-
-      - name: Show link
-        run: |
-          echo "The binder link is: ${{ (github.event.pull_request_target || github.event.pull_request).head.repo.full_name }}/${{ (github.event.pull_request_target || github.event.pull_request).head.sha }})"

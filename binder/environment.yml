@@ -1,0 +1,15 @@
+name: kerchunk-dask
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - jupyterlab=3
+  - dask=2023.1.0
+  - dask-labextension
+  - distributed=2023.1.0
+  - pip
+  - s3fs
+  - zarr
+  - pooch
+  - xarray
+  - mamba
