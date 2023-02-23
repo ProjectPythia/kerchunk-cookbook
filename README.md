@@ -100,6 +100,8 @@ have no output at first, until you execute them by pressing
 a live Jupyter notebook are described in [Getting Started with
 Jupyter](https://foundations.projectpythia.org/foundations/getting-started-jupyter.html).
 
+Special thanks to the creators of the [Dask Tutorial]. Functionality from this repo allowed the [Kerchunk and Dask](foundations/kerchunk_dask.ipynb) to run Dask on Binder.
+
 ### Running on Your Own Machine
 
 If you are interested in running this material locally on your computer,
