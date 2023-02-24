@@ -354,6 +354,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binder-specific-setup">
+   Binder Specific Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#building-off-of-our-previous-work">
    Building off of our Previous Work
   </a>
@@ -374,6 +379,18 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   <a class="reference internal nav-link" href="#dask-task-graph">
    Dask Task Graph
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-this-notebook-locally">
+     Running this notebook locally
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-binder">
+     Running on Binder
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#start-the-dask-processing">
@@ -473,7 +490,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-8cc1b6db-b3d9-11ed-8f17-6045bdd56c87</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-5051966d-b46e-11ed-912b-0022484ef406</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -508,7 +525,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">a78d62dc</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">173a6299</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -545,11 +562,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-9efd6c28-2add-475f-92d4-d94536e05fde</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-dbb147fb-8737-47cf-ba0d-2e4282365b3f</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:44513
+                        <strong>Comm:</strong> tcp://127.0.0.1:42285
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -591,7 +608,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45195
+                            <strong>Comm: </strong> tcp://127.0.0.1:33567
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -599,7 +616,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37949/status" target="_blank">http://127.0.0.1:37949/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40375/status" target="_blank">http://127.0.0.1:40375/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -607,13 +624,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37525
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46021
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-yd7mwqr1
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-42ywaqee
                         </td>
                     </tr>
 
@@ -636,7 +653,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42355
+                            <strong>Comm: </strong> tcp://127.0.0.1:44549
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -644,7 +661,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35893/status" target="_blank">http://127.0.0.1:35893/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35529/status" target="_blank">http://127.0.0.1:35529/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -652,13 +669,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:33981
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34961
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-fibyhhwd
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-29o3ec94
                         </td>
                     </tr>
 
@@ -681,7 +698,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40089
+                            <strong>Comm: </strong> tcp://127.0.0.1:38405
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -689,7 +706,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36351/status" target="_blank">http://127.0.0.1:36351/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33019/status" target="_blank">http://127.0.0.1:33019/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -697,13 +714,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36881
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41563
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-vi4ebys_
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-btnjs3az
                         </td>
                     </tr>
 
@@ -726,7 +743,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42189
+                            <strong>Comm: </strong> tcp://127.0.0.1:38145
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -734,7 +751,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46187/status" target="_blank">http://127.0.0.1:46187/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35375/status" target="_blank">http://127.0.0.1:35375/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -742,13 +759,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39085
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46595
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-rm5s4fve
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-om98mu8v
                         </td>
                     </tr>
 
@@ -771,7 +788,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:33689
+                            <strong>Comm: </strong> tcp://127.0.0.1:43129
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -779,7 +796,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41183/status" target="_blank">http://127.0.0.1:41183/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43653/status" target="_blank">http://127.0.0.1:43653/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -787,13 +804,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38893
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43417
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-yjovt02a
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-hk_y_fib
                         </td>
                     </tr>
 
@@ -816,7 +833,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40183
+                            <strong>Comm: </strong> tcp://127.0.0.1:36411
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -824,7 +841,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42313/status" target="_blank">http://127.0.0.1:42313/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42373/status" target="_blank">http://127.0.0.1:42373/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -832,13 +849,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36717
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38213
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-qf5lgxm_
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-su4zrfa1
                         </td>
                     </tr>
 
@@ -861,7 +878,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44803
+                            <strong>Comm: </strong> tcp://127.0.0.1:44757
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -869,7 +886,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42555/status" target="_blank">http://127.0.0.1:42555/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34543/status" target="_blank">http://127.0.0.1:34543/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -877,13 +894,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:35487
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36927
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-krg8zqnv
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-flhu0fye
                         </td>
                     </tr>
 
@@ -906,7 +923,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:33211
+                            <strong>Comm: </strong> tcp://127.0.0.1:37417
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -914,7 +931,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46323/status" target="_blank">http://127.0.0.1:46323/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46607/status" target="_blank">http://127.0.0.1:46607/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 868.00 MiB
@@ -922,13 +939,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39983
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38005
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-mcaya3wb
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-21_gyp3c
                         </td>
                     </tr>
 
@@ -954,6 +971,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </div>
 </div></div></div>
 </div>
+</div>
+<div class="section" id="binder-specific-setup">
+<h2>Binder Specific Setup<a class="headerlink" href="#binder-specific-setup" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>If you are running this tutorial on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, the configuration may look slightly different.</p>
+<p>Once you start the client, some information should be returned to you as well as a button that says:</p>
+<p><strong>Launch Dashboard in JupyterLab</strong></p>
+<a class="reference internal image-reference" href="../../_images/client_binder.png"><img alt="../../_images/client_binder.png" src="../../_images/client_binder.png" style="width: 600px;" /></a>
+<p>Once you click that button, multiple windows of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard should open up.</p>
+<a class="reference internal image-reference" href="../../_images/binder_client2.png"><img alt="../../_images/binder_client2.png" src="../../_images/binder_client2.png" style="width: 600px;" /></a>
 </div>
 <div class="section" id="building-off-of-our-previous-work">
 <h2>Building off of our Previous Work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -1034,6 +1060,8 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <div class="section" id="dask-task-graph">
 <h2>Dask Task Graph<a class="headerlink" href="#dask-task-graph" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Once you call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> it can be hard to understand what is happening and how far along the process is at any time. Fortunately, <code class="docutils literal notranslate"><span class="pre">Dask</span></code> has a built in dashboard to help visualize your progress.</p>
+<div class="section" id="running-this-notebook-locally">
+<h3>Running this notebook locally<a class="headerlink" href="#running-this-notebook-locally" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <p>When you first initialized the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> <code class="docutils literal notranslate"><span class="pre">client</span></code> earlier on, it should have returned some information including an address to the <code class="docutils literal notranslate"><span class="pre">dashboard</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8787/status</span></code></p>
 <p>By navigating to this address, you should a <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard that looks something like this.</p>
 <p><br/><br/></p>
@@ -1043,6 +1071,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p><br/><br/></p>
 <a class="reference internal image-reference" href="../../_images/dashboard.png"><img alt="../../_images/dashboard.png" src="../../_images/dashboard.png" style="width: 700px;" /></a>
 <p><br/><br/></p>
+</div>
+<div class="section" id="running-on-binder">
+<h3>Running on Binder<a class="headerlink" href="#running-on-binder" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>If you are running this example notebook on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard should look slightly different. Since <code class="docutils literal notranslate"><span class="pre">Binder</span></code> is running the notebook on another computer, navigating to localhost will give you an error.
+The <code class="docutils literal notranslate"><span class="pre">Binder</span></code> specific <code class="docutils literal notranslate"><span class="pre">Dask</span></code> graph should look something more like this:</p>
+<p><br/><br/></p>
+<a class="reference internal image-reference" href="../../_images/task_stream_full.png"><img alt="../../_images/task_stream_full.png" src="../../_images/task_stream_full.png" style="width: 700px;" /></a>
+<p><br/><br/></p>
+</div>
 </div>
 <div class="section" id="start-the-dask-processing">
 <h2>Start the Dask Processing<a class="headerlink" href="#start-the-dask-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
