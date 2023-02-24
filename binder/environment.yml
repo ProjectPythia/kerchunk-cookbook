@@ -1,30 +1,23 @@
-name: dask-binder-template
+name: dask-tutorial
 channels:
   - conda-forge
 dependencies:
-  - cfgrib
-  - dask
-  - h5py
-  - h5netcdf
-  - jupyter-book
-  - jupyterlab
-  - jupyter_server<2
-  - pip
-  - fsspec
-  - matplotlib
-  - netcdf4
-  - numcodecs
+  - python=3.10
+  - jupyterlab=3
   - numpy
-  - s3fs>=2021.08.0
   - scipy
-  - tqdm
-  - ujson
-  - xarray
-  - zarr
-    # JupyterLab extensions
-  - jupyterlab>=3
+  - dask
   - dask-labextension
-  - ipywidgets
+  - distributed
+  - h5py
+  - matplotlib
+  - pandas
+  - pip
+  - s3fs
+  - zarr
+  - pooch
+  - xarray
+  - mamba
+  - ujson
   - pip:
-      - sphinx-pythia-theme
       - git+https://github.com/fsspec/kerchunk.git
