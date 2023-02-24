@@ -544,6 +544,30 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t04z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t05z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t06z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t07z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t08z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t09z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t10z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t11z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t12z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t13z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t14z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t15z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t16z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t17z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t18z.wrfsfcf01.grib2&#39;,
+ &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t19z.wrfsfcf01.grib2&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
@@ -567,7 +591,6 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 
 
 <span class="k">def</span> <span class="nf">gen_json</span><span class="p">(</span><span class="n">file_url</span><span class="p">):</span>
-
     <span class="n">out</span> <span class="o">=</span> <span class="n">scan_grib</span><span class="p">(</span>
         <span class="n">file_url</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">so</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">afilter</span>
     <span class="p">)</span>  <span class="c1"># create the reference using scan_grib</span>
@@ -588,6 +611,77 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
     <span class="n">gen_json</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="n">reference_jsons</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fs_write</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">json_dir</span> <span class="o">+</span> <span class="s2">&quot;*.json&quot;</span><span class="p">))</span>  <span class="c1"># get list of file names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/20 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 1/20 [00:14&lt;04:38, 14.65s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|█         | 2/20 [00:30&lt;04:36, 15.34s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▌        | 3/20 [00:45&lt;04:16, 15.09s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|██        | 4/20 [00:58&lt;03:51, 14.48s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 5/20 [01:13&lt;03:36, 14.46s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 30%|███       | 6/20 [01:26&lt;03:15, 13.93s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|███▌      | 7/20 [01:39&lt;02:59, 13.84s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|████      | 8/20 [01:53&lt;02:46, 13.84s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 9/20 [02:08&lt;02:35, 14.14s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 10/20 [02:23&lt;02:25, 14.57s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 11/20 [02:37&lt;02:08, 14.30s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|██████    | 12/20 [02:51&lt;01:52, 14.05s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 13/20 [03:05&lt;01:39, 14.25s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|███████   | 14/20 [03:21&lt;01:27, 14.61s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▌  | 15/20 [03:35&lt;01:12, 14.53s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 16/20 [03:49&lt;00:56, 14.23s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|████████▌ | 17/20 [04:04&lt;00:43, 14.49s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 90%|█████████ | 18/20 [04:19&lt;00:29, 14.87s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|█████████▌| 19/20 [04:35&lt;00:15, 15.12s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 20/20 [04:48&lt;00:00, 14.40s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 20/20 [04:48&lt;00:00, 14.42s/it]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -649,12 +743,24 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f32da0e5b70&gt;
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;t2m&quot;</span><span class="p">][:,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f32d9e6e350&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
 </div>
 </div>
 </div>
@@ -735,7 +841,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 22 February 2023.
+          Last updated on 24 February 2023.
         </p>
       </div>
     </div>
