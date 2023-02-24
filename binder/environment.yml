@@ -1,31 +1,23 @@
-name: kerchunk-dask
+name: dask-tutorial
 channels:
   - conda-forge
 dependencies:
   - python=3.10
+  - jupyterlab=3
+  - numpy
+  - scipy
+  - dask
   - dask-labextension
   - distributed
+  - h5py
+  - matplotlib
+  - pandas
   - pip
   - s3fs
   - zarr
   - pooch
   - xarray
   - mamba
-  - cfgrib
-  - dask
-  - h5py
-  - h5netcdf
-  - jupyter-book
-  - jupyterlab
-  - jupyter_server<2
-  - fsspec
-  - matplotlib
-  - netcdf4
-  - numcodecs
-  - numpy
-  - scipy
-  - tqdm
   - ujson
-  - ipywidgets
   - pip:
       - git+https://github.com/fsspec/kerchunk.git
