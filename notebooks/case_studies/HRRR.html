@@ -347,6 +347,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flags">
+   Flags
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#imports">
    Imports
   </a>
@@ -354,6 +359,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-input-file-list">
    Create Input File List
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-a-dask-client">
+   Start a Dask Client
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -462,11 +472,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../foundations/kerchunk_dask.html"><span class="doc std std-doc">Kerchunk and Dask</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
 <td><p>Required</p></td>
 <td><p>IO/Visualization</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://projectpythia.org/intake-cookbook/notebooks/intake_introduction.html">Intake Introduction</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://projectpythia.org/intake-cookbook/notebooks/intake_introduction.html">Intake Introduction</a></p></td>
 <td><p>Recommended</p></td>
 <td><p>IO</p></td>
 </tr>
@@ -486,16 +500,31 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>The <code class="docutils literal notranslate"><span class="pre">HRRR</span></code> is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
 NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 </div>
+<div class="section" id="flags">
+<h2>Flags<a class="headerlink" href="#flags" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the section below, set the <code class="docutils literal notranslate"><span class="pre">subset</span></code> flag to be <code class="docutils literal notranslate"><span class="pre">True</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">False</span></code> depending if you want this notebook to process the full file list. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then a subset of the file list will be processed (Recommended)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subset_flag</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
 <span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
 
+<span class="kn">import</span> <span class="nn">dask</span>
 <span class="kn">import</span> <span class="nn">fsspec</span>
 <span class="kn">import</span> <span class="nn">ujson</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
 <span class="kn">from</span> <span class="nn">kerchunk.grib2</span> <span class="kn">import</span> <span class="n">scan_grib</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
@@ -512,62 +541,519 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
 <span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fs_write</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 <span class="c1"># retrieve list of available days in archive</span>
 <span class="n">days_available</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.*&quot;</span><span class="p">)</span>
+
 <span class="c1"># Read HRRR GRIB2 files from latest day</span>
 <span class="n">files</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://</span><span class="si">{</span><span class="n">days_available</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">/conus/*wrfsfcf01.grib2&quot;</span><span class="p">)</span>
+
 <span class="c1"># Append s3 prefix for filelist</span>
 <span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
+
+<span class="c1"># If the subset_flag == True (default), the list of input files will be subset to speed up the processing</span>
+<span class="k">if</span> <span class="n">subset_flag</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="start-a-dask-client">
+<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <a class="reference internal" href="../foundations/kerchunk_dask.html"><span class="doc std std-doc">Kerchunk and Dask</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### OPTIONAL: To speed next section up, uncomment the next cell.  This will reduce the # of input files and speed up the example.</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># files = files[0:5]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">client</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t00z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t01z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t02z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t03z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t04z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t05z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t06z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t07z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t08z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t09z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t10z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t11z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t12z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t13z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t14z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t15z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t16z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t17z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t18z.wrfsfcf01.grib2&#39;,
- &#39;s3://noaa-hrrr-bdp-pds/hrrr.20230224/conus/hrrr.t19z.wrfsfcf01.grib2&#39;]
-</pre></div>
+<div class="output text_html"><div>
+    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
+    <div style="margin-left: 48px;">
+        <h3 style="margin-bottom: 0px;">Client</h3>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-63b64200-b7bc-11ed-8c82-002248ad38e4</p>
+        <table style="width: 100%; text-align: left;">
+
+        <tr>
+
+            <td style="text-align: left;"><strong>Connection method:</strong> Cluster object</td>
+            <td style="text-align: left;"><strong>Cluster type:</strong> distributed.LocalCluster</td>
+
+        </tr>
+
+
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Dashboard: </strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                </td>
+                <td style="text-align: left;"></td>
+            </tr>
+
+
+        </table>
+
+
+            <button style="margin-bottom: 12px;" data-commandlinker-command="dask:populate-and-launch-layout" data-commandlinker-args='{"url": "http://127.0.0.1:8787/status" }'>
+                Launch dashboard in JupyterLab
+            </button>
+
+
+
+            <details>
+            <summary style="margin-bottom: 20px;"><h3 style="display: inline;">Cluster Info</h3></summary>
+            <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output">
+    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;">
+    </div>
+    <div style="margin-left: 48px;">
+        <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">b32db590</p>
+        <table style="width: 100%; text-align: left;">
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                </td>
+                <td style="text-align: left;">
+                    <strong>Workers:</strong> 8
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Total threads:</strong> 8
+                </td>
+                <td style="text-align: left;">
+                    <strong>Total memory:</strong> 6.78 GiB
+                </td>
+            </tr>
+
+            <tr>
+    <td style="text-align: left;"><strong>Status:</strong> running</td>
+    <td style="text-align: left;"><strong>Using processes:</strong> True</td>
+</tr>
+
+
+        </table>
+
+        <details>
+            <summary style="margin-bottom: 20px;">
+                <h3 style="display: inline;">Scheduler Info</h3>
+            </summary>
+
+            <div style="">
+    <div>
+        <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
+        <div style="margin-left: 48px;">
+            <h3 style="margin-bottom: 0px;">Scheduler</h3>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-f5a86986-4d15-49b8-8d7c-d580a5ebb07c</p>
+            <table style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Comm:</strong> tcp://127.0.0.1:43031
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Workers:</strong> 8
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Total threads:</strong> 8
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Started:</strong> Just now
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Total memory:</strong> 6.78 GiB
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <details style="margin-left: 48px;">
+        <summary style="margin-bottom: 20px;">
+            <h3 style="display: inline;">Workers</h3>
+        </summary>
+
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 0</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:35481
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44541/status" target="_blank">http://127.0.0.1:44541/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39019
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-xv9sa30_
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 1</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:40393
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38791/status" target="_blank">http://127.0.0.1:38791/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38645
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-s_7cl9s4
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 2</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:36019
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43849/status" target="_blank">http://127.0.0.1:43849/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36725
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-odvyy8kj
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 3</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:35411
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33977/status" target="_blank">http://127.0.0.1:33977/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43321
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-hwmdvlto
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 4</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:33587
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37625/status" target="_blank">http://127.0.0.1:37625/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34837
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-0mibvg8f
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 5</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:44457
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36969/status" target="_blank">http://127.0.0.1:36969/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34713
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-p08b4m_g
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 6</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:34597
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45543/status" target="_blank">http://127.0.0.1:45543/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41339
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-m9f1cysg
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 7</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:40909
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39777/status" target="_blank">http://127.0.0.1:39777/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 868.00 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41907
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-worker-space/worker-rdc9qrl_
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </details>
+            </div>
+        </div>
+
+
+    </details>
 </div>
+
+        </details>
+    </div>
 </div>
+            </details>
+
+
+    </div>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
@@ -579,15 +1065,29 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
 <span class="n">afilter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;typeOfLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
 <span class="n">so</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-<span class="n">json_dir</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
 
-
-<span class="k">def</span> <span class="nf">make_json_name</span><span class="p">(</span>
+<span class="c1"># We are creating a temporary directory to store the .json reference files</span>
+<span class="c1"># Alternately, you could write these to cloud storage.</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">temp_dir</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">name</span>
+<span class="n">temp_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmp2gdqq8bd&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_json_name</span><span class="p">(</span>
     <span class="n">file_url</span><span class="p">,</span> <span class="n">message_number</span>
 <span class="p">):</span>  <span class="c1"># create a unique name for each reference file</span>
     <span class="n">date</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">json_dir</span><span class="si">}{</span><span class="n">date</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_message</span><span class="si">{</span><span class="n">message_number</span><span class="si">}</span><span class="s2">.json&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_message</span><span class="si">{</span><span class="n">message_number</span><span class="si">}</span><span class="s2">.json&quot;</span>
 
 
 <span class="k">def</span> <span class="nf">gen_json</span><span class="p">(</span><span class="n">file_url</span><span class="p">):</span>
@@ -598,90 +1098,25 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         <span class="n">out</span>
     <span class="p">):</span>  <span class="c1"># scan_grib outputs a list containing one reference per grib message</span>
         <span class="n">out_file_name</span> <span class="o">=</span> <span class="n">make_json_name</span><span class="p">(</span><span class="n">file_url</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>  <span class="c1"># get name</span>
-        <span class="k">with</span> <span class="n">fs_write</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>  <span class="c1"># write to file</span>
+
+
+<span class="c1"># Generate Dask Delayed objects</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">gen_json</span><span class="p">)(</span><span class="n">fil</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate through available input files and generate json reference files. Note: This could optionally be parallelized.</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
-    <span class="n">gen_json</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
-<span class="n">reference_jsons</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fs_write</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">json_dir</span> <span class="o">+</span> <span class="s2">&quot;*.json&quot;</span><span class="p">))</span>  <span class="c1"># get list of file names</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel processing</span>
+<span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/20 [00:00&lt;?, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5%|▌         | 1/20 [00:14&lt;04:38, 14.65s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10%|█         | 2/20 [00:30&lt;04:36, 15.34s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 15%|█▌        | 3/20 [00:45&lt;04:16, 15.09s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 20%|██        | 4/20 [00:58&lt;03:51, 14.48s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 25%|██▌       | 5/20 [01:13&lt;03:36, 14.46s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 30%|███       | 6/20 [01:26&lt;03:15, 13.93s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 35%|███▌      | 7/20 [01:39&lt;02:59, 13.84s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 40%|████      | 8/20 [01:53&lt;02:46, 13.84s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 45%|████▌     | 9/20 [02:08&lt;02:35, 14.14s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 50%|█████     | 10/20 [02:23&lt;02:25, 14.57s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 55%|█████▌    | 11/20 [02:37&lt;02:08, 14.30s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|██████    | 12/20 [02:51&lt;01:52, 14.05s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 65%|██████▌   | 13/20 [03:05&lt;01:39, 14.25s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 70%|███████   | 14/20 [03:21&lt;01:27, 14.61s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75%|███████▌  | 15/20 [03:35&lt;01:12, 14.53s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 80%|████████  | 16/20 [03:49&lt;00:56, 14.23s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 85%|████████▌ | 17/20 [04:04&lt;00:43, 14.49s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 90%|█████████ | 18/20 [04:19&lt;00:29, 14.87s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 95%|█████████▌| 19/20 [04:35&lt;00:15, 15.12s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 20/20 [04:48&lt;00:00, 14.40s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 20/20 [04:48&lt;00:00, 14.42s/it]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([None, None, None, None, None, None, None, None],)
 </pre></div>
 </div>
 </div>
@@ -691,9 +1126,12 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <p>We know that four coordinates are identical for every one of our component datasets - they are not functions of valid_time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine individual references into single consolidated reference</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of reference json files</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/*.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Combine individual references into single consolidated reference</span>
 <span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
-    <span class="n">reference_jsons</span><span class="p">,</span>
+    <span class="n">output_files</span><span class="p">,</span>
     <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;valid_time&quot;</span><span class="p">],</span>
     <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
 <span class="p">)</span>
@@ -744,10 +1182,10 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f32da0e5b70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f5d68584b50&gt;
 </pre></div>
 </div>
-<img alt="../../_images/HRRR_22_1.png" src="../../_images/HRRR_22_1.png" />
+<img alt="../../_images/HRRR_24_1.png" src="../../_images/HRRR_24_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -757,10 +1195,10 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f32d9e6e350&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f5d68352140&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/HRRR_23_1.png" src="../../_images/HRRR_23_1.png" />
+<img alt="../../_images/HRRR_25_1.png" src="../../_images/HRRR_25_1.png" />
 </div>
 </div>
 </div>
@@ -841,7 +1279,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 24 February 2023.
+          Last updated on 28 February 2023.
         </p>
       </div>
     </div>

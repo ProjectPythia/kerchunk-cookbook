@@ -348,6 +348,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flags">
+   Flags
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#imports">
    Imports
   </a>
@@ -362,6 +367,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-input-file-list">
    Create Input File List
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-a-dask-client">
+   Start a Dask Client
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -438,11 +448,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../foundations/kerchunk_dask.html"><span class="doc std std-doc">Kerchunk and Dask</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
 <td><p>Required</p></td>
 <td><p>IO/Visualization</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://projectpythia.org/intake-cookbook/notebooks/intake_introduction.html">Intake Introduction</a></p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://projectpythia.org/intake-cookbook/notebooks/intake_introduction.html">Intake Introduction</a></p></td>
 <td><p>Recommended</p></td>
 <td><p>IO</p></td>
 </tr>
@@ -464,14 +478,31 @@ The model is initialized twice daily at 00 &amp; 12 UTC with hourly forecasts fo
 The data is output at hourly intervals with a maximum prediction lead time of 72 hours in NetCDF files.</p>
 <p>More details on this dataset can be found <a class="reference external" href="https://registry.opendata.aws/smn-ar-wrf-dataset/">here</a>.</p>
 </div>
+<div class="section" id="flags">
+<h2>Flags<a class="headerlink" href="#flags" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the section below, set the <code class="docutils literal notranslate"><span class="pre">subset</span></code> flag to be <code class="docutils literal notranslate"><span class="pre">True</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">False</span></code> depending if you want this notebook to process the full file list. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then a subset of the file list will be processed (Recommended)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subset_flag</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">fsspec</span>
 <span class="kn">import</span> <span class="nn">s3fs</span>
 <span class="kn">import</span> <span class="nn">ujson</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
 <span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
@@ -484,20 +515,20 @@ The data is output at hourly intervals with a maximum prediction lead time of 72
 <p>Before we use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create indices for multiple files, we can load a single NetCDF file to examine it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># URL pointing to a single NetCDF file</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # URL pointing to a single NetCDF file</span>
+<span class="c1"># url = &quot;s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc&quot;</span>
 
-<span class="c1"># Initialize a s3 filesystem</span>
-<span class="n">fs</span> <span class="o">=</span> <span class="n">s3fs</span><span class="o">.</span><span class="n">S3FileSystem</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># Use Xarray to open a remote NetCDF file</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;h5netcdf&quot;</span><span class="p">)</span>
+<span class="c1"># # Initialize a s3 filesystem</span>
+<span class="c1"># fs = s3fs.S3FileSystem(anon=True)</span>
+<span class="c1"># # Use Xarray to open a remote NetCDF file</span>
+<span class="c1"># ds = xr.open_dataset(fs.open(url), engine=&quot;h5netcdf&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ds</span>
 </pre></div>
 </div>
 </div>
@@ -511,15 +542,18 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 <p>Here we are using <code class="docutils literal notranslate"><span class="pre">fsspec's</span></code> glob functionality along with the <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em> wildcard operator and some string slicing to grab a list of NetCDF files from a <code class="docutils literal notranslate"><span class="pre">s3</span></code> <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading</span>
 <span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fs_write</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-
 
 <span class="n">files_paths</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/*&quot;</span><span class="p">)</span>
 
 <span class="c1"># Here we prepend the prefix &#39;s3://&#39;, which points to AWS.</span>
 <span class="n">file_pattern</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
+
+
+<span class="c1"># If the subset_flag == True (default), the list of input files will be subset to speed up the processing</span>
+<span class="k">if</span> <span class="n">subset_flag</span><span class="p">:</span>
+    <span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -529,19 +563,23 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This dictionary will be passed as kwargs to `fsspec`. For more details, check out the `foundations/kerchunk_basics` notebook.</span>
 <span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
 
-<span class="c1"># We are specifiying a local output directory to write the `.json` reference files.</span>
+<span class="c1"># We are creating a temporary directory to store the .json reference files</span>
 <span class="c1"># Alternately, you could write these to cloud storage.</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">temp_dir</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">name</span>
+<span class="n">temp_dir</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Next, we generate a reference set for each of the input files. We save these to local JSON, although in principle we could have written them to some shared storege to share with others, or operated purely in memory.</p>
-<p><strong>Optional Speedup</strong>
-To speed next section up, uncomment the next cell.  This will reduce the number of input files and speed up the example considerably.</p>
+</div>
+<div class="section" id="start-a-dask-client">
+<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <a class="reference internal" href="../foundations/kerchunk_dask.html"><span class="doc std std-doc">Kerchunk and Dask</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># file_pattern = file_pattern[0:10]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">client</span>
 </pre></div>
 </div>
 </div>
@@ -549,21 +587,26 @@ To speed next section up, uncomment the next cell.  This will reduce the number 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
-<span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
-        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-        <span class="n">fname</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span>
-        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
+<span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">fil</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">fil</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span>
+        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outf</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">outf</span>
 
 
-<span class="c1"># Iterate through filelist to generate Kerchunked files. Good use for `Dask`</span>
-<span class="n">output_files</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">file_pattern</span><span class="p">):</span>
-    <span class="n">outf</span> <span class="o">=</span> <span class="n">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
-    <span class="n">output_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outf</span><span class="p">)</span>
+<span class="c1"># Generate Dask Delayed objects</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_json_reference</span><span class="p">)(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel processing</span>
+<span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -574,7 +617,10 @@ To speed next section up, uncomment the next cell.  This will reduce the number 
 <p>In the following cell, we are combining all the <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files that were generated above into a single reference file and writing that file to disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># combine individual references into single consolidated reference</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of reference json files</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/*.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># combine individual references into single consolidated reference</span>
 <span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
     <span class="n">output_files</span><span class="p">,</span>
     <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span>
@@ -720,7 +766,7 @@ To speed next section up, uncomment the next cell.  This will reduce the number 
         
           By the <a href="https://projectpythia.org/">Project Pythia</a> Community.
         
-          Last updated on 24 February 2023.
+          Last updated on 28 February 2023.
         </p>
       </div>
     </div>
