@@ -515,20 +515,20 @@ The data is output at hourly intervals with a maximum prediction lead time of 72
 <p>Before we use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create indices for multiple files, we can load a single NetCDF file to examine it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # URL pointing to a single NetCDF file</span>
-<span class="c1"># url = &quot;s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># URL pointing to a single NetCDF file</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/00/WRFDETAR_01H_20221231_00_072.nc&quot;</span>
 
-<span class="c1"># # Initialize a s3 filesystem</span>
-<span class="c1"># fs = s3fs.S3FileSystem(anon=True)</span>
-<span class="c1"># # Use Xarray to open a remote NetCDF file</span>
-<span class="c1"># ds = xr.open_dataset(fs.open(url), engine=&quot;h5netcdf&quot;)</span>
+<span class="c1"># Initialize a s3 filesystem</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">s3fs</span><span class="o">.</span><span class="n">S3FileSystem</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Use Xarray to open a remote NetCDF file</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;h5netcdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ds</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span>
 </pre></div>
 </div>
 </div>
