@@ -12,7 +12,9 @@ dependencies:
   - h5py
   - matplotlib
   - pandas
+  - pyOpenSSL
   - pip
+  - netcdf4
   - s3fs
   - zarr
   - pooch
