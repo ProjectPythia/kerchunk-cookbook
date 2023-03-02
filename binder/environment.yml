@@ -10,6 +10,7 @@ dependencies:
   - dask-labextension
   - distributed
   - h5py
+  - h5netcdf
   - matplotlib
   - pandas
   - pyOpenSSL
