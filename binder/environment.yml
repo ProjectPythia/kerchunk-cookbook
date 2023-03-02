@@ -6,6 +6,7 @@ dependencies:
   - jupyterlab=3
   - numpy
   - scipy
+  - cfgrib
   - dask
   - dask-labextension
   - distributed
