@@ -1,19 +1,25 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Project Pythia Kerchunk Cookbook
-author: the <a href="https://projectpythia.org/">Project Pythia</a> Community
+title: Kerchunk Cookbook
+author: Norland Raphael Hagen
 logo: notebooks/images/logos/pythia_logo-white-rtext.svg
 email: projectpythia@ucar.edu
 copyright: "2022"
 
 description: A Project Pythia Cookbook for Kerchunk
 thumbnail: thumbnail.png
+
 tags:
   domains:
-    - AWS cloud, Data access, HRRR model, zarr
+    - AWS Cloud
+    - Data Access
+    - HRRR model
+    - zarr
   packages:
-    - kerchunk, intake, xarray
+    - kerchunk
+    - intake
+    - xarray
 
 execute:
   # To execute notebooks via a binder instead, replace 'cache' with 'binder'
