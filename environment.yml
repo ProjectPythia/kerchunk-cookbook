@@ -9,6 +9,7 @@ dependencies:
   - s3fs
   - zarr
   - pooch
+  - git
   - xarray
   - mamba
   - cfgrib

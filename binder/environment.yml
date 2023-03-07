@@ -12,6 +12,7 @@ dependencies:
   - distributed
   - h5py
   - h5netcdf
+  - git
   - matplotlib
   - pandas
   - pyOpenSSL

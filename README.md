@@ -107,6 +107,8 @@ Special thanks to the creators of the [Dask Tutorial]. Functionality from this r
 If you are interested in running this material locally on your computer,
 you will need to follow this workflow:
 
+1. Install [micromamba/mamba](https://mamba.readthedocs.io/en/latest/installation.html)
+
 1. Clone the `https://github.com/ProjectPythia/kerchunk-cookbook` repository:
 
    ```bash
@@ -121,8 +123,8 @@ you will need to follow this workflow:
    Note: In the `environment.yml` file, Kerchunk` is currently being installed from source as development is happening rapidly.
 
    ```bash
-   conda env create -f environment.yml
-   conda activate kerchunk-cookbook
+   mamba env create -f environment.yml
+   mamba activate kerchunk-cookbook
    ```
 
 1. Move into the `notebooks` directory and start up Jupyterlab
