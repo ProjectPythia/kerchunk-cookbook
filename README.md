@@ -107,7 +107,7 @@ Special thanks to the creators of the [Dask Tutorial]. Functionality from this r
 If you are interested in running this material locally on your computer,
 you will need to follow this workflow:
 
-1. Install [micromamba/mamba](https://mamba.readthedocs.io/en/latest/installation.html)
+1. Install [mambaforge/mamba](https://mamba.readthedocs.io/en/latest/installation.html)
 
 1. Clone the `https://github.com/ProjectPythia/kerchunk-cookbook` repository:
 
