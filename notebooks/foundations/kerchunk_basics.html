@@ -26,9 +26,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     
   <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -42,7 +42,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../_static/design-tabs.js"></script>
     <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -461,7 +461,7 @@ In this tutorial we will:</p>
 <h3>Parse a single NetCDF file with kerchunk<a class="headerlink" href="#parse-a-single-netcdf-file-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <p>Below we will access a NetCDF file stored on the AWS cloud. This dataset is a single time slice of a climate downscaled product for Alaska.</p>
 <p>The steps in the cell below are as follows:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Define the url that points to the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file we want to process</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> along with the dictionary of arguments we created (<code class="docutils literal notranslate"><span class="pre">so</span></code>) to open the URL pointing to the NetCDF file.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> method to read through the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and extract the byte ranges, compression information and metadata.</p></li>
@@ -518,10 +518,10 @@ In this tutorial we will:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f60f5581b70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f888f27cbe0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/kerchunk_basics_13_1.png" src="../../_images/kerchunk_basics_13_1.png" />
+<img alt="../../_images/9c6d562de8d25c971c6f6ac2e475cd8e9972b5b2de1531bb5e6e3ffd6694e358.png" src="../../_images/9c6d562de8d25c971c6f6ac2e475cd8e9972b5b2de1531bb5e6e3ffd6694e358.png" />
 </div>
 </div>
 <p>Note that the original .nc file size here is 16.8MB, and the created JSON is 26.5kB. These files also tend to compress very well. As you can see, it the JSON can be written anywhere, and gives us access to the underlying data, reading only the chunks we need from remote without downloading the whole file.</p>
@@ -611,7 +611,7 @@ In this tutorial we will:</p>
         
           By Norland Raphael Hagen.
         
-          Last updated on 7 March 2023.
+          Last updated on 14 March 2023.
         </p>
       </div>
     </div>
