@@ -3,7 +3,7 @@
 # Kerchunk Cookbook
 
 [![nightly-build](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml)
-[![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
+[![Binder](https://binder.projectpythia.org/badge_logo.svg)](https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
 
 This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/)
 library to access archival data formats as if they were
@@ -80,13 +80,13 @@ Some possible additions:
 
 ## Running the Notebooks
 
-You can either run the notebook using [![Binder](http://binder.mypythia.org/badge_logo.svg)](http://binder.mypythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
+You can either run the notebook using [![Binder](https://binder.projectpythia.org/badge_logo.svg)](https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
 or on your local machine.
 
 ### Running on Binder
 
 The simplest way to interact with a Jupyter Notebook is through
-[Binder](https://mybinder.org/), which enables the execution of a
+[Binder](https://binder.projectpythia.org), which enables the execution of a
 [Jupyter Book](https://jupyterbook.org) in the cloud. The details of how this works are not
 important for now. All you need to know is how to launch a Pythia
 Cookbooks chapter via Binder. Simply navigate your mouse to
