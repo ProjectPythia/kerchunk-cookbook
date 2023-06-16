@@ -1,0 +1,1279 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kerchunk and Dask &#8212; Kerchunk Cookbook</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Kerchunk and NetCDF/HDF5: A Case Study using the Argentinian High Resolution Weather Forecast Dataset" href="../case_studies/ARG_Weather.html" />
+    <link rel="prev" title="Multi-File Datasets with Kerchunk" href="kerchunk_multi_file.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-T52X8HNYE8');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="132">
+    <div class="container-fluid" id="shim"></div>
+    <div class="container-fluid" id="banner"></div>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="https://projectpythia.org">
+  <img src="../../_static/pythia_logo-white-rtext.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class=" collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/ProjectPythia" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/project_pythia" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" rel="noopener" target="_blank" title="YouTube">
+            <span><i class="fab fa-youtube-square"></i></span>
+            <label class="sr-only">YouTube</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    <div class="container-xl">
+      <div class="row">
+        
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   Kerchunk Cookbook
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="kerchunk_basics.html">
+   Kerchunk Basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kerchunk_multi_file.html">
+   Multi-File Datasets with Kerchunk
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Kerchunk and Dask
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Case Studies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../case_studies/ARG_Weather.html">
+   Kerchunk and NetCDF/HDF5:  A Case Study using the Argentinian High Resolution Weather Forecast Dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../case_studies/HRRR.html">
+   Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by <a href="https://projectpythia.org">Project Pythia</a>.<br><br>
+All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code content is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 (CC BY 4.0)</a>.<br><br>
+
+</div>
+
+</div>
+
+        
+
+        <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main"><div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/foundations/kerchunk_dask.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ProjectPythia/kerchunk-cookbook/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/foundations/kerchunk_dask.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/foundations/kerchunk_dask.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/foundations/kerchunk_dask.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> On this page
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dask-and-parallel-processing">
+   Dask and Parallel Processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-the-dask-client">
+   Setting up the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Dask
+    </span>
+   </code>
+   Client
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#binder-specific-setup">
+   Binder Specific Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-off-of-our-previous-work">
+   Building off of our Previous Work
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subset-the-data">
+     Subset the Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dask-specific-changes">
+   Dask Specific Changes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dask-task-graph">
+   Dask Task Graph
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-this-notebook-locally">
+     Running this notebook locally
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-binder">
+     Running on Binder
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-the-dask-processing">
+   Start the Dask Processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#timing">
+   Timing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   Next Steps
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+          <div id="main-content" class="row">
+            <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+              
+              <div>
+                
+  <p><a class="reference internal" href="../../_images/dask.png"><img alt="Dask Logo" src="../../_images/dask.png" style="width: 200px;" /></a></img></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-dask">
+<h1>Kerchunk and Dask<a class="headerlink" href="#kerchunk-and-dask" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In this notebook we will cover:</p>
+<ol class="arabic simple">
+<li><p>How to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> library.</p></li>
+<li><p>How to scale up the creation of large <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> datasets using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p></li>
+</ol>
+<p>This notebook builds upon the <a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics</span></a> and the <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multi-File Datasets with Kerchunk</span></a> notebooks. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the the generation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepts</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="kerchunk_basics.html"><span class="doc std std-doc">Kerchunk Basics</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<td><p>Recommended</p></td>
+<td><p>IO/Visualization</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://tutorial.dask.org/00_overview.html">Intro to Dask</a></p></td>
+<td><p>Recommended</p></td>
+<td><p>Parallel Processing</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Time to learn</strong>: 45 minutes</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="dask-and-parallel-processing">
+<h2>Dask and Parallel Processing<a class="headerlink" href="#dask-and-parallel-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is not intended to be a guide for how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallelize some <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
+<p>In the previous notebook <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a>, we were looking at daily downscaled climate data over South-Eastern Alaska. In our function named <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>, we were looping over, one at a time, the input NetCDF4 files and using <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> method to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index for each file.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we can call <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> in parallel, which allows us to create multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files at the same time.</p>
+<p>Further on in this notebook, we will show how using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can greatly speed-up the process of creating a virtual dataset using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p>
+</div>
+<div class="section" id="setting-up-the-dask-client">
+<h2>Setting up the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> Client<a class="headerlink" href="#setting-up-the-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the code below, we are importing <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Disributed</span></code> and creating a <code class="docutils literal notranslate"><span class="pre">client</span></code>. This is the start of our parallel <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> data processing. We are passing the argument <code class="docutils literal notranslate"><span class="pre">n_workers=8</span></code>. This will inform the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> client on some of the resource limitations.</p>
+<p>Note: Depending on if you are running on a small machine such as a laptop or a larger compute hub, these resources could be tuned to improve performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">client</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
+    <div style="margin-left: 48px;">
+        <h3 style="margin-bottom: 0px;">Client</h3>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-f83550c0-0c8f-11ee-8dfa-00224802ae2b</p>
+        <table style="width: 100%; text-align: left;">
+
+        <tr>
+        
+            <td style="text-align: left;"><strong>Connection method:</strong> Cluster object</td>
+            <td style="text-align: left;"><strong>Cluster type:</strong> distributed.LocalCluster</td>
+        
+        </tr>
+
+        
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Dashboard: </strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                </td>
+                <td style="text-align: left;"></td>
+            </tr>
+        
+
+        </table>
+
+        
+            <button style="margin-bottom: 12px;" data-commandlinker-command="dask:populate-and-launch-layout" data-commandlinker-args='{"url": "http://127.0.0.1:8787/status" }'>
+                Launch dashboard in JupyterLab
+            </button>
+        
+
+        
+            <details>
+            <summary style="margin-bottom: 20px;"><h3 style="display: inline;">Cluster Info</h3></summary>
+            <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-mod-trusted jp-OutputArea-output">
+    <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;">
+    </div>
+    <div style="margin-left: 48px;">
+        <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">3d3583ab</p>
+        <table style="width: 100%; text-align: left;">
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                </td>
+                <td style="text-align: left;">
+                    <strong>Workers:</strong> 8
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">
+                    <strong>Total threads:</strong> 8
+                </td>
+                <td style="text-align: left;">
+                    <strong>Total memory:</strong> 6.78 GiB
+                </td>
+            </tr>
+            
+            <tr>
+    <td style="text-align: left;"><strong>Status:</strong> running</td>
+    <td style="text-align: left;"><strong>Using processes:</strong> True</td>
+</tr>
+
+            
+        </table>
+
+        <details>
+            <summary style="margin-bottom: 20px;">
+                <h3 style="display: inline;">Scheduler Info</h3>
+            </summary>
+
+            <div style="">
+    <div>
+        <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
+        <div style="margin-left: 48px;">
+            <h3 style="margin-bottom: 0px;">Scheduler</h3>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-58934e4c-99fe-431b-afa8-575e37d85d0a</p>
+            <table style="width: 100%; text-align: left;">
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Comm:</strong> tcp://127.0.0.1:45185
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Workers:</strong> 8
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Dashboard:</strong> <a href="http://127.0.0.1:8787/status" target="_blank">http://127.0.0.1:8787/status</a>
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Total threads:</strong> 8
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <strong>Started:</strong> Just now
+                    </td>
+                    <td style="text-align: left;">
+                        <strong>Total memory:</strong> 6.78 GiB
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <details style="margin-left: 48px;">
+        <summary style="margin-bottom: 20px;">
+            <h3 style="display: inline;">Workers</h3>
+        </summary>
+
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 0</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:43741
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46861/status" target="_blank">http://127.0.0.1:46861/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41009
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-3a_7cajt
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 1</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:40813
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36153/status" target="_blank">http://127.0.0.1:36153/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33429
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-_rfnmcwf
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 2</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:44865
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33911/status" target="_blank">http://127.0.0.1:33911/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43495
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-cx4q_2l9
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 3</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:38413
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44357/status" target="_blank">http://127.0.0.1:44357/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43863
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-vmfe8o9r
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 4</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:34557
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37567/status" target="_blank">http://127.0.0.1:37567/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39873
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-3ffp_ifz
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 5</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:39875
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40385/status" target="_blank">http://127.0.0.1:40385/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39079
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-9u4hdyw2
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 6</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:39771
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36203/status" target="_blank">http://127.0.0.1:36203/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41437
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-khufbycq
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="width: 24px; height: 24px; background-color: #DBF5FF; border: 3px solid #4CC9FF; border-radius: 5px; position: absolute;"> </div>
+            <div style="margin-left: 48px;">
+            <details>
+                <summary>
+                    <h4 style="margin-bottom: 0px; display: inline;">Worker: 7</h4>
+                </summary>
+                <table style="width: 100%; text-align: left;">
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Comm: </strong> tcp://127.0.0.1:38047
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Total threads: </strong> 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38055/status" target="_blank">http://127.0.0.1:38055/status</a>
+                        </td>
+                        <td style="text-align: left;">
+                            <strong>Memory: </strong> 867.99 MiB
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;">
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45575
+                        </td>
+                        <td style="text-align: left;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left;">
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-xonkiypf
+                        </td>
+                    </tr>
+
+                    
+
+                    
+
+                </table>
+            </details>
+            </div>
+        </div>
+        
+
+    </details>
+</div>
+
+        </details>
+    </div>
+</div>
+            </details>
+        
+
+    </div>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="binder-specific-setup">
+<h2>Binder Specific Setup<a class="headerlink" href="#binder-specific-setup" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>If you are running this tutorial on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, the configuration may look slightly different.</p>
+<p>Once you start the client, some information should be returned to you as well as a button that says:</p>
+<p><strong>Launch Dashboard in JupyterLab</strong></p>
+<a class="reference internal image-reference" href="../../_images/client_binder.png"><img alt="../../_images/client_binder.png" src="../../_images/client_binder.png" style="width: 600px;" /></a>
+<p>Once you click that button, multiple windows of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard should open up.</p>
+<a class="reference internal image-reference" href="../../_images/binder_client2.png"><img alt="../../_images/binder_client2.png" src="../../_images/binder_client2.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="building-off-of-our-previous-work">
+<h2>Building off of our Previous Work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the next section, we will re-use some of the code from <a class="reference internal" href="kerchunk_multi_file.html"><span class="doc std std-doc">Multiple Files and Kerchunk</span></a> notebook. However, we will modify it slightly to make it compatable with <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
+<p>The following two cells should look the same as before.  As a reminder we are importing the required libraries, using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to create a list of our input files and setting up some kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">import</span> <span class="nn">ujson</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
+<span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
+<span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fs_write</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Retrieve list of available days in archive for the year 2060.</span>
+<span class="n">files_paths</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/*&quot;</span><span class="p">)</span>
+
+<span class="c1"># Here we prepend the prefix &#39;s3://&#39;, which points to AWS.</span>
+<span class="n">file_pattern</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
+
+<span class="c1"># Define kwargs for `fsspec`</span>
+<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># We are creating a temporary directory to store the .json reference files</span>
+<span class="c1"># Alternately, you could write these to cloud storage.</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+<span class="n">temp_dir</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">name</span>
+<span class="n">temp_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpl2379vdn&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="subset-the-data">
+<h3>Subset the Data<a class="headerlink" href="#subset-the-data" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>To speed up our example, lets take a subset of the year of data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dask-specific-changes">
+<h2>Dask Specific Changes<a class="headerlink" href="#dask-specific-changes" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files, we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
+<p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list of delayed objects to create  <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files in parallel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
+<span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">fil</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">fil</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span>
+        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outf</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">outf</span>
+
+
+<span class="c1"># Generate Dask Delayed objects</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_json_reference</span><span class="p">)(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dask-task-graph">
+<h2>Dask Task Graph<a class="headerlink" href="#dask-task-graph" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Once you call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> it can be hard to understand what is happening and how far along the process is at any time. Fortunately, <code class="docutils literal notranslate"><span class="pre">Dask</span></code> has a built in dashboard to help visualize your progress.</p>
+<div class="section" id="running-this-notebook-locally">
+<h3>Running this notebook locally<a class="headerlink" href="#running-this-notebook-locally" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>When you first initialized the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> <code class="docutils literal notranslate"><span class="pre">client</span></code> earlier on, it should have returned some information including an address to the <code class="docutils literal notranslate"><span class="pre">dashboard</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8787/status</span></code></p>
+<p>By navigating to this address, you should a <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard that looks something like this.</p>
+<p><br/><br/></p>
+<a class="reference internal image-reference" href="../../_images/empty_dashboard.png"><img alt="../../_images/empty_dashboard.png" src="../../_images/empty_dashboard.png" style="width: 700px;" /></a>
+<p><br/><br/></p>
+<p>When you call <code class="docutils literal notranslate"><span class="pre">dask.compute(tasks)</span></code>, the dashboard should populate with a bunch of tasks. In the dashboard you can monitor your progress, see how resources are being used as well as well as countless other functionality.</p>
+<p><br/><br/></p>
+<a class="reference internal image-reference" href="../../_images/dashboard.png"><img alt="../../_images/dashboard.png" src="../../_images/dashboard.png" style="width: 700px;" /></a>
+<p><br/><br/></p>
+</div>
+<div class="section" id="running-on-binder">
+<h3>Running on Binder<a class="headerlink" href="#running-on-binder" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>If you are running this example notebook on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard should look slightly different. Since <code class="docutils literal notranslate"><span class="pre">Binder</span></code> is running the notebook on another computer, navigating to localhost will give you an error.
+The <code class="docutils literal notranslate"><span class="pre">Binder</span></code> specific <code class="docutils literal notranslate"><span class="pre">Dask</span></code> graph should look something more like this:</p>
+<p><br/><br/></p>
+<a class="reference internal image-reference" href="../../_images/task_stream_full.png"><img alt="../../_images/task_stream_full.png" src="../../_images/task_stream_full.png" style="width: 700px;" /></a>
+<p><br/><br/></p>
+</div>
+</div>
+<div class="section" id="start-the-dask-processing">
+<h2>Start the Dask Processing<a class="headerlink" href="#start-the-dask-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel computation of `SingleHDF5ToZarr`</span>
+<span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpl2379vdn/WRFDS_2060-01-01.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-02.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-03.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-04.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-05.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-06.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-07.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-08.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-09.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-10.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-11.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-12.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-13.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-14.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-15.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-16.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-17.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-18.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-19.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-20.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-21.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-22.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-23.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-24.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-25.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-26.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-27.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-28.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-29.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-30.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-01-31.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-01.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-02.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-03.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-04.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-05.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-06.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-07.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-08.json&#39;,
+  &#39;/tmp/tmpl2379vdn/WRFDS_2060-02-09.json&#39;],)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="timing">
+<h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>To demonstrate how Dask can speed-up your <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference generation, the next section will show the timing of generating reference files with and without Dask.
+For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fine folks at <a class="reference external" href="https://2i2c.org/">2i2c</a>) with ~32 CPU and ~256G RAM. It is also important to note that the data is also hosted on AWS.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Serial Kerchunk</p></th>
+<th class="head"><p>Parallel Kerchunk (Dask)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3min 41s</p></td>
+<td><p>39.2 s</p></td>
+</tr>
+</tbody>
+</table>
+<p>Running our <code class="docutils literal notranslate"><span class="pre">Dask</span></code> version on a subset of 40 files took only ~39 seconds. In comparison, computing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies one-by-one in  took about 3 minutes and 41 seconds.</p>
+<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run almost <strong>6x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds its task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
+<p>Note: These timings may vary for you. There are many factors that may affect performance, such as:</p>
+<ul class="simple">
+<li><p>Geographical location of your compute and the source data</p></li>
+<li><p>Internet speed</p></li>
+<li><p>Compute resources, IO limits and # of workers given to <code class="docutils literal notranslate"><span class="pre">Dask</span></code></p></li>
+<li><p>Location of where to write reference files to (cloud vs local)</p></li>
+<li><p>Type of reference files (<code class="docutils literal notranslate"><span class="pre">Parquet</span></code> vs <code class="docutils literal notranslate"><span class="pre">.JSON</span></code>)</p></li>
+</ul>
+<p>This is meant to be an example of how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to speed-up <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> not a detailed benchmark in <code class="docutils literal notranslate"><span class="pre">Kerchunk/Dask</span></code> performance.</p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In this notebook we demonstrated how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files. In the following <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section, we will walk though examples of using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> with <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to create virtual cloud-optimized datasets.</p>
+<p>Additionally, if you wish to explore more of <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">Dask</span></code> integration, you can try checking out <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <a class="reference external" href="https://fsspec.github.io/kerchunk/reference.html?highlight=auto%20dask#kerchunk.combine.auto_dask">auto_dask</a> method, which combines many of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> setup steps into a single convenient function.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/foundations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="kerchunk_multi_file.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../case_studies/ARG_Weather.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Kerchunk and NetCDF/HDF5:  A Case Study using the Argentinian High Resolution Weather Forecast Dataset</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+<footer class="footer">
+  <div class="container-fluid m-0 p-0">
+  
+    <div class="footer-item">
+    
+  <div class="container-fluid footer-logos">
+    <div class="container-xl">
+      <div class="row d-flex flex-wrap align-items-center">
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="NCAR" src="../../_images/NCAR-contemp-logo-blue.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="Unidata" src="../../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="UAlbany" src="../../_images/UAlbany-A2-logo-purple-gold.svg" style="width: 100%">
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+    <div class="footer-item">
+    
+    </div>
+  
+    <div class="footer-item">
+      <div class="container-fluid footer-info">
+    <div class="container-xl">
+      <div class="d-flex justify-content-center">
+        <p class="py-1 m-0">
+            &copy;&nbsp;2022.
+        
+          By Norland Raphael Hagen.
+        
+          Last updated on 16 June 2023.
+        </p>
+      </div>
+    </div>
+  </div>
+    </div>
+  
+    <div class="footer-item">
+    
+    </div>
+  
+  </div>
+</footer>
+  </body>
+</html>
