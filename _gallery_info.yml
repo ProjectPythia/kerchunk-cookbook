@@ -1,0 +1,11 @@
+thumbnail: thumbnail.png
+tags:
+  domains:
+    - AWS Cloud
+    - Data Access
+    - HRRR model
+    - zarr
+  packages:
+    - kerchunk
+    - intake
+    - xarray
