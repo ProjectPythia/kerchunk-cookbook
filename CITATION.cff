@@ -5,7 +5,7 @@ authors:
   - family-names: Hagen
     given-names: Norland Raphael
     website: https://github.com/norlandrhagen
-  - name: "Kerchunk Cookbook Cookbook contributors" # use the 'name' field to acknowledge organizations
+  - name: "Kerchunk Cookbook contributors" # use the 'name' field to acknowledge organizations
     website: "https://github.com/ProjectPythia/kerchunk-cookbook/graphs/contributors"
 title: "Kerchunk Cookbook"
 abstract: "A Project Pythia Cookbook for Kerchunk."
