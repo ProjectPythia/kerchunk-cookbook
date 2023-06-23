@@ -4,22 +4,7 @@
 title: Kerchunk Cookbook
 author: Norland Raphael Hagen
 logo: notebooks/images/logos/pythia_logo-white-rtext.svg
-email: projectpythia@ucar.edu
 copyright: "2022"
-
-description: A Project Pythia Cookbook for Kerchunk
-thumbnail: thumbnail.png
-
-tags:
-  domains:
-    - AWS Cloud
-    - Data Access
-    - HRRR model
-    - zarr
-  packages:
-    - kerchunk
-    - intake
-    - xarray
 
 execute:
   # To execute notebooks via a binder instead, replace 'cache' with 'binder'

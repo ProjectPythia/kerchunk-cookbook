@@ -4,6 +4,7 @@
 
 [![nightly-build](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml)
 [![Binder](https://binder.projectpythia.org/badge_logo.svg)](https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
+[![DOI](https://zenodo.org/badge/588661659.svg)](https://zenodo.org/badge/latestdoi/588661659)
 
 This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/)
 library to access archival data formats as if they were
