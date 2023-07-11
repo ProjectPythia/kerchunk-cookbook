@@ -3,26 +3,29 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - jupyterlab=3
-  - numpy
-  - scipy
   - cfgrib
   - dask
   - dask-labextension
   - distributed
-  - h5py
-  - h5netcdf
   - git
-  - matplotlib
-  - pandas
-  - pyOpenSSL
-  - pip
-  - netcdf4
-  - s3fs
-  - zarr
-  - pooch
-  - xarray
+  - h5netcdf
+  - h5py
+  - jupyterlab=3
   - mamba
+  - matplotlib
+  - netcdf4
+  - numpy
+  - pandas
+  - pip
+  - pooch
+  - pyOpenSSL
+  - rioxarray
+  - s3fs
+  - scipy
+  - tifffile
   - ujson
+  - xarray
+  - zarr
   - pip:
       - git+https://github.com/fsspec/kerchunk.git
+      - git+https://github.com/carbonplan/xrefcoord.git
