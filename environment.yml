@@ -2,33 +2,39 @@ name: kerchunk-cookbook
 channels:
   - conda-forge
 dependencies:
-  - python=3.10
-  - dask-labextension
-  - distributed
-  - pip
-  - s3fs
-  - zarr
-  - pooch
-  - git
-  - xarray
-  - mamba
   - cfgrib
   - dask
-  - h5py
+  - dask-labextension
+  - distributed
+  - fsspec
+  - git
   - h5netcdf
+  - h5py
+  - ipywidgets
+  - jupyter_server<2
   - jupyter-book
   - jupyterlab
-  - jupyter_server<2
-  - fsspec
+  - jupyterlab=3
+  - mamba
   - matplotlib
   - netcdf4
   - numcodecs
   - numpy
+  - pandas
+  - pip
+  - pooch
+  - pyOpenSSL
+  - python=3.10
+  - rioxarray
+  - s3fs
   - scipy
+  - tifffile
   - tqdm
   - ujson
-  - ipywidgets
+  - xarray
+  - zarr
 
   - pip:
       - sphinx-pythia-theme
       - git+https://github.com/fsspec/kerchunk.git
+      - git+https://github.com/carbonplan/xrefcoord.git
