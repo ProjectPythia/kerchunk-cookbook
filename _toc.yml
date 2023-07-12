@@ -14,3 +14,4 @@ parts:
     chapters:
       - file: notebooks/case_studies/ARG_Weather
       - file: notebooks/case_studies/HRRR
+      - file: notebooks/case_studies/TIFF
