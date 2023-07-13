@@ -21,7 +21,7 @@ dependencies:
   - numcodecs
   - numpy
   - pandas
-  - pangeo-forge-recipes>=0.1.0
+  - pangeo-forge-recipes==0.10.0
   - pip
   - pooch
   - pyOpenSSL
