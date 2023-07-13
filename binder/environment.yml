@@ -16,6 +16,7 @@ dependencies:
   - netcdf4
   - numpy
   - pandas
+  - pangeo-forge-recipes==0.10.0
   - pip
   - pooch
   - pyOpenSSL
@@ -29,3 +30,4 @@ dependencies:
   - pip:
       - git+https://github.com/fsspec/kerchunk.git
       - git+https://github.com/carbonplan/xrefcoord.git
+      - "apache-beam[interactive, dataframe]"
