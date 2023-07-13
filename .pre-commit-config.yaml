@@ -47,3 +47,4 @@ repos:
     rev: 0.5.0
     hooks:
       - id: nbstripout
+        exclude: "notebooks/case_studies/TIFF.ipynb"
