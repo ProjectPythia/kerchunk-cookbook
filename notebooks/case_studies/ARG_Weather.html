@@ -236,6 +236,16 @@ const thebe_selector_output = ".output, .cell_output"
    Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="TIFF.html">
+   Kerchunk, GeoTIFF and Generating Coordinates with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xrefcoord
+    </span>
+   </code>
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -936,19 +946,19 @@ Attributes: (12/18)
     DX:             4000.0
     DY:             4000.0
     START_DATE:     2022-12-31_00:00:00
-    Conventions:    CF-1.8</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-61142522-72f7-44bc-a208-a5205259e42a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-61142522-72f7-44bc-a208-a5205259e42a' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-a7861ea3-73de-470b-926a-b33adb79b905' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a7861ea3-73de-470b-926a-b33adb79b905' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2023-01-03</div><input id='attrs-b776fa83-0867-4a54-947d-f6909e84abe5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b776fa83-0867-4a54-947d-f6909e84abe5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d31ef2c6-186f-422c-8115-25b2fd878808' class='xr-var-data-in' type='checkbox'><label for='data-d31ef2c6-186f-422c-8115-25b2fd878808' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 00:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>axis :</span></dt><dd>T</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2023-01-03T00:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-1.996e+06 -1.992e+06 ... 1.996e+06</div><input id='attrs-be6842e3-92c7-4e4e-b1df-94241272ace3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-be6842e3-92c7-4e4e-b1df-94241272ace3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4e9fa4fd-41cf-4ec0-9115-1ff24e7f7792' class='xr-var-data-in' type='checkbox'><label for='data-4e9fa4fd-41cf-4ec0-9115-1ff24e7f7792' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd></dl></div><div class='xr-var-data'><pre>array([-1996000., -1992000., -1988000., ...,  1988000.,  1992000.,  1996000.],
-      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-2.496e+06 -2.492e+06 ... 2.496e+06</div><input id='attrs-169853b0-0206-4683-83b9-187601e11324' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-169853b0-0206-4683-83b9-187601e11324' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-79c403f5-21f1-4f27-a7db-5c07a8020130' class='xr-var-data-in' type='checkbox'><label for='data-79c403f5-21f1-4f27-a7db-5c07a8020130' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd></dl></div><div class='xr-var-data'><pre>array([-2495999.8, -2491999.8, -2487999.8, ...,  2488000.2,  2492000.2,
-        2496000.2], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-869d20d0-9b16-4f4f-97db-57d44e360e18' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-869d20d0-9b16-4f4f-97db-57d44e360e18' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9e762584-bed6-4a36-9a56-45302eded9e7' class='xr-var-data-in' type='checkbox'><label for='data-9e762584-bed6-4a36-9a56-45302eded9e7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b95e00d2-f7b8-44ae-a179-3017faaf10e7' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b95e00d2-f7b8-44ae-a179-3017faaf10e7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7aaed456-0d3a-47ae-94a6-cee716437fce' class='xr-var-data-in' type='checkbox'><label for='data-7aaed456-0d3a-47ae-94a6-cee716437fce' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-40fb307a-3165-4e12-8e64-9a66d5da1cae' class='xr-section-summary-in' type='checkbox'  checked><label for='section-40fb307a-3165-4e12-8e64-9a66d5da1cae' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-2c42efca-b83e-4c88-b183-6cbcab572e9c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2c42efca-b83e-4c88-b183-6cbcab572e9c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f88a576f-7bf9-473c-b3eb-634bb7bf57fe' class='xr-var-data-in' type='checkbox'><label for='data-f88a576f-7bf9-473c-b3eb-634bb7bf57fe' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>units :</span></dt><dd>millimeter</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-240d2ff7-453f-4c77-9190-3d246386cfb1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-240d2ff7-453f-4c77-9190-3d246386cfb1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-87295246-2062-4162-acbe-310e5a1cf277' class='xr-var-data-in' type='checkbox'><label for='data-87295246-2062-4162-acbe-310e5a1cf277' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b9930c5f-fefb-4a6f-b529-426127b6201d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b9930c5f-fefb-4a6f-b529-426127b6201d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-de9712f8-65cc-4c3b-94eb-f3a5f3327043' class='xr-var-data-in' type='checkbox'><label for='data-de9712f8-65cc-4c3b-94eb-f3a5f3327043' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>percent</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3db7f269-fba2-4803-a93f-12ce11ed7dc1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3db7f269-fba2-4803-a93f-12ce11ed7dc1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-602db0e6-1d11-4bc6-b013-7246f3091d58' class='xr-var-data-in' type='checkbox'><label for='data-602db0e6-1d11-4bc6-b013-7246f3091d58' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degree</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-63149d3d-aef1-4676-8c4c-2411062af6cb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-63149d3d-aef1-4676-8c4c-2411062af6cb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0bf34bb8-f00e-4d68-ad3b-49002fb25146' class='xr-var-data-in' type='checkbox'><label for='data-0bf34bb8-f00e-4d68-ad3b-49002fb25146' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>units :</span></dt><dd>meter / second</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a8d9a82f-4be2-44b5-9d7a-439357ddaee2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a8d9a82f-4be2-44b5-9d7a-439357ddaee2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-33604e49-7d26-4d97-8d77-5893a4c8efaa' class='xr-var-data-in' type='checkbox'><label for='data-33604e49-7d26-4d97-8d77-5893a4c8efaa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>standard_parallel :</span></dt><dd>[-35. -35.]</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.99999</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-09f28beb-0b6f-44f4-a52b-4c38c474445c' class='xr-section-summary-in' type='checkbox'  ><label for='section-09f28beb-0b6f-44f4-a52b-4c38c474445c' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-5a515ec8-f526-459b-852d-1610d5fb6996' class='xr-index-data-in' type='checkbox'/><label for='index-5a515ec8-f526-459b-852d-1610d5fb6996' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2023-01-03&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-0637cf45-5d6b-40ea-b3ca-daaa55ad61e7' class='xr-index-data-in' type='checkbox'/><label for='index-0637cf45-5d6b-40ea-b3ca-daaa55ad61e7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-1996000.0, -1992000.0, -1988000.0, -1984000.0, -1980000.0, -1976000.0,
+    Conventions:    CF-1.8</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-d119ceb8-ab31-4c90-b93b-3e0ad3a2b976' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d119ceb8-ab31-4c90-b93b-3e0ad3a2b976' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-a42549e0-b90a-4013-8f30-39e092826066' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a42549e0-b90a-4013-8f30-39e092826066' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2023-01-03</div><input id='attrs-eb9b6be5-74be-4ce6-9770-41896be069eb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eb9b6be5-74be-4ce6-9770-41896be069eb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-af1d3160-2750-4141-9ac3-7f16da389c40' class='xr-var-data-in' type='checkbox'><label for='data-af1d3160-2750-4141-9ac3-7f16da389c40' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 00:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>axis :</span></dt><dd>T</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2023-01-03T00:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-1.996e+06 -1.992e+06 ... 1.996e+06</div><input id='attrs-62cef4a7-1111-45aa-aa57-0842aa4a6c2e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-62cef4a7-1111-45aa-aa57-0842aa4a6c2e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b1ada4e3-b9d8-40c5-b2d0-cf4073fe9b55' class='xr-var-data-in' type='checkbox'><label for='data-b1ada4e3-b9d8-40c5-b2d0-cf4073fe9b55' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd></dl></div><div class='xr-var-data'><pre>array([-1996000., -1992000., -1988000., ...,  1988000.,  1992000.,  1996000.],
+      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-2.496e+06 -2.492e+06 ... 2.496e+06</div><input id='attrs-4a72fe55-aa2c-4d31-819e-2c7594e9c6e2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4a72fe55-aa2c-4d31-819e-2c7594e9c6e2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bb8de7b8-6da8-4eaf-adae-58a4ab4df4c4' class='xr-var-data-in' type='checkbox'><label for='data-bb8de7b8-6da8-4eaf-adae-58a4ab4df4c4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd></dl></div><div class='xr-var-data'><pre>array([-2495999.8, -2491999.8, -2487999.8, ...,  2488000.2,  2492000.2,
+        2496000.2], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-42c8d0e3-10b8-4ca5-abee-022ddc25289b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-42c8d0e3-10b8-4ca5-abee-022ddc25289b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1825e969-515b-4b74-a394-1d6e8580bd88' class='xr-var-data-in' type='checkbox'><label for='data-1825e969-515b-4b74-a394-1d6e8580bd88' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-ec49209e-a03a-4da4-8768-30d0a581d30f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ec49209e-a03a-4da4-8768-30d0a581d30f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c0e06a9f-308f-434a-8afe-b17d39bb86b5' class='xr-var-data-in' type='checkbox'><label for='data-c0e06a9f-308f-434a-8afe-b17d39bb86b5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d9f6a571-c513-4c44-a958-8d8018659ce7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d9f6a571-c513-4c44-a958-8d8018659ce7' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-bc16fddd-1fda-4f5a-9937-181613592054' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bc16fddd-1fda-4f5a-9937-181613592054' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-254207e7-14d1-456b-bd14-0465283f5a14' class='xr-var-data-in' type='checkbox'><label for='data-254207e7-14d1-456b-bd14-0465283f5a14' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>units :</span></dt><dd>millimeter</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f7f614b0-29f6-41df-a336-f701d2978de6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f7f614b0-29f6-41df-a336-f701d2978de6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c2b5be93-b3da-4063-bb04-7ed1e2ac4aec' class='xr-var-data-in' type='checkbox'><label for='data-c2b5be93-b3da-4063-bb04-7ed1e2ac4aec' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-9ea8b504-4cf8-4ac3-9eb2-49fc6eda7069' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9ea8b504-4cf8-4ac3-9eb2-49fc6eda7069' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-80944a03-887a-4730-9615-675e55023643' class='xr-var-data-in' type='checkbox'><label for='data-80944a03-887a-4730-9615-675e55023643' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>percent</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-0afdbc59-ac9b-471e-bed0-ee66b649e236' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0afdbc59-ac9b-471e-bed0-ee66b649e236' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-76628d75-e7bb-4dd6-a5c4-c29a9da70413' class='xr-var-data-in' type='checkbox'><label for='data-76628d75-e7bb-4dd6-a5c4-c29a9da70413' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degree</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f58b3bbc-b765-4d7d-a06d-214e1a7df201' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f58b3bbc-b765-4d7d-a06d-214e1a7df201' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1356a639-e26c-483b-b9b0-59bfa1993832' class='xr-var-data-in' type='checkbox'><label for='data-1356a639-e26c-483b-b9b0-59bfa1993832' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>units :</span></dt><dd>meter / second</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e7a420d5-d051-4d05-85e3-9f5a22b834a4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e7a420d5-d051-4d05-85e3-9f5a22b834a4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e7ff4028-a7a7-480a-9e61-182466e95ef2' class='xr-var-data-in' type='checkbox'><label for='data-e7ff4028-a7a7-480a-9e61-182466e95ef2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>standard_parallel :</span></dt><dd>[-35. -35.]</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.99999</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-5382b689-a489-4bce-b0da-8ec28b4192b7' class='xr-section-summary-in' type='checkbox'  ><label for='section-5382b689-a489-4bce-b0da-8ec28b4192b7' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-08be1523-8af6-4235-a205-49254b2306ad' class='xr-index-data-in' type='checkbox'/><label for='index-08be1523-8af6-4235-a205-49254b2306ad' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2023-01-03&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-a66663f0-efd5-412e-ab72-10bdff9074c5' class='xr-index-data-in' type='checkbox'/><label for='index-a66663f0-efd5-412e-ab72-10bdff9074c5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-1996000.0, -1992000.0, -1988000.0, -1984000.0, -1980000.0, -1976000.0,
        -1972000.0, -1968000.0, -1964000.0, -1960000.0,
        ...
         1960000.0,  1964000.0,  1968000.0,  1972000.0,  1976000.0,  1980000.0,
         1984000.0,  1988000.0,  1992000.0,  1996000.0],
-      dtype=&#x27;float32&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c75aeecb-af76-4b44-8ff3-7748c8e65471' class='xr-index-data-in' type='checkbox'/><label for='index-c75aeecb-af76-4b44-8ff3-7748c8e65471' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-2495999.75, -2491999.75, -2487999.75, -2483999.75, -2479999.75,
+      dtype=&#x27;float32&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-28fd5757-cd80-4e35-a95c-c60a2d6ee18c' class='xr-index-data-in' type='checkbox'/><label for='index-28fd5757-cd80-4e35-a95c-c60a2d6ee18c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-2495999.75, -2491999.75, -2487999.75, -2483999.75, -2479999.75,
        -2475999.75, -2471999.75, -2467999.75, -2463999.75, -2459999.75,
        ...
         2460000.25,  2464000.25,  2468000.25,  2472000.25,  2476000.25,
         2480000.25,  2484000.25,  2488000.25,  2492000.25,  2496000.25],
-      dtype=&#x27;float32&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cbf4681d-25b2-4987-a9df-7838cf01e70d' class='xr-section-summary-in' type='checkbox'  ><label for='section-cbf4681d-25b2-4987-a9df-7838cf01e70d' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837</dd><dt><span>start_lon :</span></dt><dd>-94.33081</dd><dt><span>end_lat :</span></dt><dd>-11.645958</dd><dt><span>end_lon :</span></dt><dd>-47.96869</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>CEN_LAT :</span></dt><dd>-34.99999</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_00:00:00</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd></dl></div></li></ul></div></div></div></div>
+      dtype=&#x27;float32&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-97319a32-ba4c-452d-b2bc-a74c95f4f704' class='xr-section-summary-in' type='checkbox'  ><label for='section-97319a32-ba4c-452d-b2bc-a74c95f4f704' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837</dd><dt><span>start_lon :</span></dt><dd>-94.33081</dd><dt><span>end_lat :</span></dt><dd>-11.645958</dd><dt><span>end_lon :</span></dt><dd>-47.96869</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>CEN_LAT :</span></dt><dd>-34.99999</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_00:00:00</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <p>Here we see the <code class="docutils literal notranslate"><span class="pre">repr</span></code> from the <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> Dataset of a single <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file. From examining the output, we can tell that the Dataset dimensions are <code class="docutils literal notranslate"><span class="pre">['time','y','x']</span></code>, with time being only a single step.
 Later, when we use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code> functionality, we will need to know on which dimensions to concatenate across.</p>
@@ -989,7 +999,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmp_nu6_v_r&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpyhej4nny&#39;
 </pre></div>
 </div>
 </div>
@@ -1010,7 +1020,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-f4f44b5d-11ec-11ee-8c71-000d3a32335e</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-f5250688-21bc-11ee-8d5a-0022481ea464</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -1045,7 +1055,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">0e54cbea</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">ec5e6d4e</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -1082,11 +1092,11 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-ca2db4e0-fa65-4b86-86db-661d05c419fe</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-3f1e3d32-beb6-4e8a-9b9d-490fd5667ac1</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:42231
+                        <strong>Comm:</strong> tcp://127.0.0.1:36327
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -1128,7 +1138,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37959
+                            <strong>Comm: </strong> tcp://127.0.0.1:34855
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1136,7 +1146,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46601/status" target="_blank">http://127.0.0.1:46601/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41589/status" target="_blank">http://127.0.0.1:41589/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1144,13 +1154,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46589
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46853
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1xqxdw8z
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-etplbfsi
                         </td>
                     </tr>
 
@@ -1173,7 +1183,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40145
+                            <strong>Comm: </strong> tcp://127.0.0.1:46259
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1181,7 +1191,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42021/status" target="_blank">http://127.0.0.1:42021/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38811/status" target="_blank">http://127.0.0.1:38811/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1189,13 +1199,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37599
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42141
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-dgu6opf2
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-buyvmpxt
                         </td>
                     </tr>
 
@@ -1218,7 +1228,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42753
+                            <strong>Comm: </strong> tcp://127.0.0.1:33447
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1226,7 +1236,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45079/status" target="_blank">http://127.0.0.1:45079/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39077/status" target="_blank">http://127.0.0.1:39077/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1234,13 +1244,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40101
+                            <strong>Nanny: </strong> tcp://127.0.0.1:40901
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-uvq_ss_m
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-cbvkxqvb
                         </td>
                     </tr>
 
@@ -1263,7 +1273,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37101
+                            <strong>Comm: </strong> tcp://127.0.0.1:45729
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1271,7 +1281,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39247/status" target="_blank">http://127.0.0.1:39247/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42355/status" target="_blank">http://127.0.0.1:42355/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1279,13 +1289,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40317
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46297
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-m9n8mrxx
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-3ay4dyuh
                         </td>
                     </tr>
 
@@ -1308,7 +1318,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39715
+                            <strong>Comm: </strong> tcp://127.0.0.1:35605
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1316,7 +1326,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39039/status" target="_blank">http://127.0.0.1:39039/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44097/status" target="_blank">http://127.0.0.1:44097/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1324,13 +1334,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:42823
+                            <strong>Nanny: </strong> tcp://127.0.0.1:40025
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ozhaoktw
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-eb27n17x
                         </td>
                     </tr>
 
@@ -1353,7 +1363,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43863
+                            <strong>Comm: </strong> tcp://127.0.0.1:42665
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1361,7 +1371,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45267/status" target="_blank">http://127.0.0.1:45267/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41225/status" target="_blank">http://127.0.0.1:41225/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1369,13 +1379,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:45357
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35213
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-2l3i2uyr
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-zwxxpdtm
                         </td>
                     </tr>
 
@@ -1398,7 +1408,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44199
+                            <strong>Comm: </strong> tcp://127.0.0.1:35931
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1406,7 +1416,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41159/status" target="_blank">http://127.0.0.1:41159/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36039/status" target="_blank">http://127.0.0.1:36039/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1414,13 +1424,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37219
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34013
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-0g229129
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-yom2v_6l
                         </td>
                     </tr>
 
@@ -1443,7 +1453,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42989
+                            <strong>Comm: </strong> tcp://127.0.0.1:36121
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1451,7 +1461,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37285/status" target="_blank">http://127.0.0.1:37285/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41071/status" target="_blank">http://127.0.0.1:41071/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 866.49 MiB
@@ -1459,13 +1469,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:44341
+                            <strong>Nanny: </strong> tcp://127.0.0.1:40729
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-sjhqct_z
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-iffru9b6
                         </td>
                     </tr>
 
@@ -1521,6 +1531,24 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:436: UserWarning: The following excepion was caught and quashed while traversing HDF5
+&#39;str&#39; object has no attribute &#39;extend&#39;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py&quot;, line 379, in _translator
+    za = self._zroot.create_dataset(
+  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/hierarchy.py&quot;, line 1043, in create_dataset
+    return self._write_op(self._create_dataset_nosync, name, **kwargs)
+  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/hierarchy.py&quot;, line 895, in _write_op
+    return f(*args, **kwargs)
+  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/hierarchy.py&quot;, line 1060, in _create_dataset_nosync
+    a = array(data, store=self._store, path=path, chunk_store=self._chunk_store,
+  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/creation.py&quot;, line 397, in array
+    z[...] = data
+AttributeError: &#39;str&#39; object has no attribute &#39;extend&#39;
+
+  warnings.warn(msg)
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:436: UserWarning: The following excepion was caught and quashed while traversing HDF5
 &#39;str&#39; object has no attribute &#39;extend&#39;
 Traceback (most recent call last):
@@ -1645,32 +1673,14 @@ AttributeError: &#39;str&#39; object has no attribute &#39;extend&#39;
   warnings.warn(msg)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py:436: UserWarning: The following excepion was caught and quashed while traversing HDF5
-&#39;str&#39; object has no attribute &#39;extend&#39;
-Traceback (most recent call last):
-  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/kerchunk/hdf.py&quot;, line 379, in _translator
-    za = self._zroot.create_dataset(
-  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/hierarchy.py&quot;, line 1043, in create_dataset
-    return self._write_op(self._create_dataset_nosync, name, **kwargs)
-  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/hierarchy.py&quot;, line 895, in _write_op
-    return f(*args, **kwargs)
-  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/hierarchy.py&quot;, line 1060, in _create_dataset_nosync
-    a = array(data, store=self._store, path=path, chunk_store=self._chunk_store,
-  File &quot;/usr/share/miniconda3/envs/kerchunk-cookbook-dev/lib/python3.10/site-packages/zarr/creation.py&quot;, line 397, in array
-    z[...] = data
-AttributeError: &#39;str&#39; object has no attribute &#39;extend&#39;
-
-  warnings.warn(msg)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_000.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_001.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_002.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_003.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_004.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_005.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_006.json&#39;,
-  &#39;/tmp/tmp_nu6_v_r/WRFDETAR_01H_20230126_12_007.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_000.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_001.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_002.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_003.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_004.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_005.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_006.json&#39;,
+  &#39;/tmp/tmpyhej4nny/WRFDETAR_01H_20230126_12_007.json&#39;],)
 </pre></div>
 </div>
 </div>
@@ -1734,10 +1744,10 @@ AttributeError: &#39;str&#39; object has no attribute &#39;extend&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fb4a8a334c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fd6b8b0bb80&gt;
 </pre></div>
 </div>
-<img alt="../../_images/777e51ef614bac268eb5b6427789f1aff3dcd610367eac3705e4c91729ff60f2.png" src="../../_images/777e51ef614bac268eb5b6427789f1aff3dcd610367eac3705e4c91729ff60f2.png" />
+<img alt="../../_images/8697eca3e3568b95ff927410f1729f7057869eef54f9be9648f4ce48f4d7841b.png" src="../../_images/8697eca3e3568b95ff927410f1729f7057869eef54f9be9648f4ce48f4d7841b.png" />
 </div>
 </div>
 </div>
@@ -1751,10 +1761,10 @@ AttributeError: &#39;str&#39; object has no attribute &#39;extend&#39;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb49c084460&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd6b80c7cd0&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/56c2c161936d2ad061eea085350b389a52c7b45c6f9e92eb8b94a1282c118200.png" src="../../_images/56c2c161936d2ad061eea085350b389a52c7b45c6f9e92eb8b94a1282c118200.png" />
+<img alt="../../_images/e11cc2a2e70b8ec014463257fed7267d666850c5a0f573756a130b21b4fee160.png" src="../../_images/e11cc2a2e70b8ec014463257fed7267d666850c5a0f573756a130b21b4fee160.png" />
 </div>
 </div>
 </div>
@@ -1842,7 +1852,7 @@ AttributeError: &#39;str&#39; object has no attribute &#39;extend&#39;
         
           By Norland Raphael Hagen.
         
-          Last updated on 23 June 2023.
+          Last updated on 13 July 2023.
         </p>
       </div>
     </div>
