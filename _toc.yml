@@ -12,7 +12,7 @@ parts:
 
   - caption: Case Studies
     chapters:
-      - file: notebooks/case_studies/ARG_Weather
-      - file: notebooks/case_studies/HRRR
-      - file: notebooks/case_studies/TIFF
-      - file: notebooks/case_studies/pangeo_forge
+      - file: notebooks/case_studies/NetCDF_Weather
+      - file: notebooks/case_studies/GRIB2_HRRR
+      - file: notebooks/case_studies/GeoTIFF_Radar
+      - file: notebooks/case_studies/Pangeo_Forge_Netc
