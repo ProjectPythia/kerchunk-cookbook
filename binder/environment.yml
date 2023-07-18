@@ -11,6 +11,7 @@ dependencies:
   - h5netcdf
   - h5py
   - jupyterlab=3
+  - kerchunk
   - mamba
   - matplotlib
   - netcdf4
@@ -28,6 +29,5 @@ dependencies:
   - xarray
   - zarr
   - pip:
-      - git+https://github.com/fsspec/kerchunk.git
       - git+https://github.com/carbonplan/xrefcoord.git
       - "apache-beam[interactive, dataframe]"
