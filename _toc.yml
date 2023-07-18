@@ -6,13 +6,13 @@ parts:
       - file: notebooks/how-to-cite
   - caption: Foundations
     chapters:
-      - file: notebooks/foundations/kerchunk_basics
-      - file: notebooks/foundations/kerchunk_multi_file
-      - file: notebooks/foundations/kerchunk_dask
+      - file: notebooks/foundations/01_kerchunk_basics
+      - file: notebooks/foundations/02_kerchunk_multi_file
+      - file: notebooks/foundations/03_kerchunk_dask
 
   - caption: Case Studies
     chapters:
-      - file: notebooks/case_studies/ARG_Weather
-      - file: notebooks/case_studies/HRRR
-      - file: notebooks/case_studies/TIFF
-      - file: notebooks/case_studies/pangeo_forge
+      - file: notebooks/case_studies/NetCDF_SMN_Arg
+      - file: notebooks/case_studies/GRIB2_HRRR
+      - file: notebooks/case_studies/GeoTIFF_FMI
+      - file: notebooks/case_studies/NetCDF_Pangeo_Forge_gridMET
