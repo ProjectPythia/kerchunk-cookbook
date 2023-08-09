@@ -9,4 +9,4 @@ authors:
   - name: "Kerchunk Cookbook contributors" # use the 'name' field to acknowledge organizations
     website: "https://github.com/ProjectPythia/kerchunk-cookbook/graphs/contributors"
 title: "Kerchunk Cookbook"
-abstract: "A Project Pythia Cookbook for Kerchunk."
+abstract: "Kerchunk 1 is a wrapper to make a netCDF file (and other older file formats) cloud optimized; i.e. makes loading the chunks of the data that you actually want, fast."
