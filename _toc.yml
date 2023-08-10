@@ -16,3 +16,4 @@ parts:
       - file: notebooks/case_studies/GRIB2_HRRR
       - file: notebooks/case_studies/GeoTIFF_FMI
       - file: notebooks/case_studies/NetCDF_Pangeo_Forge_gridMET
+      - file: notebooks/case_studies/Streaming_Visualizations_with_Hvplot_Datashader
