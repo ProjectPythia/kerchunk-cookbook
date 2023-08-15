@@ -9,4 +9,4 @@ authors:
   - name: "Kerchunk Cookbook contributors" # use the 'name' field to acknowledge organizations
     website: "https://github.com/ProjectPythia/kerchunk-cookbook/graphs/contributors"
 title: "Kerchunk Cookbook"
-abstract: "A Project Pythia Cookbook for Kerchunk."
+abstract: "Kerchunk provides cloud-friendly access to archival data. With Kerchunk you can read collections of legacy file formats (NetCDF, GRIB2 etc.) as if they were ARCO (Analysis-Ready Cloud-Optimized) formats such as Zarr, without creating a copy of the original dataset."
