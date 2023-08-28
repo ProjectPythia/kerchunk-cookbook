@@ -6,6 +6,7 @@ dependencies:
   - dask
   - dask-labextension
   - distributed
+  - fastparquet
   - fsspec
   - git
   - h5netcdf
