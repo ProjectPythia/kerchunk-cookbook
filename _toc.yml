@@ -9,6 +9,7 @@ parts:
       - file: notebooks/foundations/01_kerchunk_basics
       - file: notebooks/foundations/02_kerchunk_multi_file
       - file: notebooks/foundations/03_kerchunk_dask
+      - file: notebooks/foundations/04_kerchunk_reference_storage.ipynb
 
   - caption: Case Studies
     chapters:
