@@ -11,7 +11,7 @@ jobs:
   build:
     uses: ProjectPythia/cookbook-actions/.github/workflows/build-book.yaml@main
     with:
-      environment_name: kerchunk-tutorial
+      environment_name: kerchunk-cookbook
 
   deploy:
     needs: build

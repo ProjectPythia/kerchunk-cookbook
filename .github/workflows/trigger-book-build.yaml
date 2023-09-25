@@ -6,6 +6,6 @@ jobs:
   build:
     uses: ProjectPythia/cookbook-actions/.github/workflows/build-book.yaml@main
     with:
-      environment_name: kerchunk-tutorial
+      environment_name: kerchunk-cookbook
       artifact_name: book-zip-${{ github.event.number }}
-      environment_file: binder/environment.yml
+      # Other input options are possible, see ProjectPythia/cookbook-actions/.github/workflows/build-book.yaml

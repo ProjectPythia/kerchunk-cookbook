@@ -22,7 +22,7 @@ dependencies:
   - numcodecs
   - numpy
   - pandas
-  - pangeo-forge-recipes==0.10.0
+  - pangeo-forge-recipes>=0.10.0
   - pip
   - pooch
   - pyOpenSSL
@@ -34,6 +34,7 @@ dependencies:
   - tqdm
   - ujson
   - xarray
+  - xarray-datatree
   - zarr
   - hvplot
   - datashader
