@@ -5,6 +5,7 @@ dependencies:
   - python=3.10
   - bokeh<3.0
   - cfgrib
+  - datashader
   - dask
   - dask-labextension
   - distributed
