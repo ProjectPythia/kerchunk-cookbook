@@ -30,8 +30,8 @@ dependencies:
   - tifffile
   - ujson
   - xarray
+  - xarray-datatree
   - zarr
   - pip:
-      - git+https://github.com/xarray-contrib/datatree.git
       - git+https://github.com/carbonplan/xrefcoord.git
       - "apache-beam[interactive, dataframe]"
