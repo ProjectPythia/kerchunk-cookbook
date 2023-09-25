@@ -14,5 +14,5 @@ jobs:
           miniconda-version: "latest"
           mamba-version: "*"
           environment-file: binder/environment.yml
-          activate-environment: kerchunk-dask
+          activate-environment: kerchunk-tutorial
           auto-activate-base: false

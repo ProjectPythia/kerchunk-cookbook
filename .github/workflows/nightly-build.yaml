@@ -10,7 +10,7 @@ jobs:
     if: ${{ github.repository_owner == 'ProjectPythia' }}
     uses: ProjectPythia/cookbook-actions/.github/workflows/build-book.yaml@main
     with:
-      environment_name: kerchunk-cookbook-dev
+      environment_name: kerchunk-tutorial
 
   link-check:
     if: ${{ github.repository_owner == 'ProjectPythia' }}
