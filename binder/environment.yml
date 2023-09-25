@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
+  - bokeh<3.0
   - cfgrib
   - dask
   - dask-labextension
@@ -10,6 +11,7 @@ dependencies:
   - git
   - h5netcdf
   - h5py
+  - hvplot
   - jupyterlab=3
   - kerchunk
   - mamba
@@ -17,7 +19,7 @@ dependencies:
   - netcdf4
   - numpy
   - pandas
-  - pangeo-forge-recipes==0.10.0
+  - pangeo-forge-recipes>=0.10.0
   - pip
   - pooch
   - pyOpenSSL
@@ -27,6 +29,7 @@ dependencies:
   - tifffile
   - ujson
   - xarray
+  - xarray-datatree
   - zarr
   - pip:
       - git+https://github.com/carbonplan/xrefcoord.git
