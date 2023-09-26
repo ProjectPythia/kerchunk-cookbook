@@ -39,7 +39,6 @@ dependencies:
   - zarr
   - hvplot
   - datashader
-
   - pip:
       - sphinx-pythia-theme
       - "apache-beam[interactive, dataframe]"
