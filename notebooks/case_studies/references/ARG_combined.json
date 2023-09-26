@@ -2,571 +2,327 @@
   "version": 1,
   "refs": {
     ".zgroup": "{\"zarr_format\":2}",
-    "time/.zarray": "{\n    \"chunks\": [\n        8\n    ],\n    \"compressor\": null,\n    \"dtype\": \"<f8\",\n    \"fill_value\": 0.0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\": [\n        8\n    ],\n    \"zarr_format\": 2\n}",
-    "time/0": "base64:AAAAAAAAAAAAAAAAAADwPwAAAAAAAABAAAAAAAAACEAAAAAAAAAQQAAAAAAAABRAAAAAAAAAGEAAAAAAAAAcQA==",
-    "time/.zattrs": "{\n    \"_ARRAY_DIMENSIONS\": [\n        \"time\"\n    ],\n    \"axis\": \"T\",\n    \"calendar\": \"proleptic_gregorian\",\n    \"long_name\": \"hours since 2023-01-26 12:00:00\",\n    \"standard_name\": \"time\",\n    \"units\": \"hours since 2023-01-26T12:00:00\"\n}",
-    ".zattrs": "{\"CEN_LAT\":-34.9999885559082,\"CEN_LON\":-65.0,\"Conventions\":\"CF-1.8\",\"DX\":4000.0,\"DY\":4000.0,\"MAP_PROJ\":\"Lambert Conformal\",\"STAND_LON\":-65.0,\"START_DATE\":\"2023-01-26 12:00:00\",\"TRUELAT1\":-35.0,\"TRUELAT2\":-35.0,\"end_lat\":-11.645957946777344,\"end_lon\":-35.669189453125,\"institution\":\"Servicio Meteorologico Nacional\",\"source\":\" OUTPUT FROM WRF V4.0 MODEL\",\"start_lat\":-56.853172302246094,\"start_lon\":-94.330810546875,\"title\":\"Python PostProcessing for SMN WRF-ARW\"}",
-    "ACLWDNB/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "ACLWDNB/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Accumulated downwelling longwave flux at bottom\",\"standard_name\":\"integral_wrt_time_of_surface_downwelling_longwave_flux_in_air\",\"units\":\"J m-2\"}",
-    "ACLWDNB/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      8507708,
-      4871
-    ],
-    "ACLWUPB/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "ACLWUPB/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Accumulated upwelling longwave flux at bottom\",\"standard_name\":\"integral_wrt_time_of_surface_downwelling_longwave_flux_in_air\",\"units\":\"J m-2\"}",
-    "ACLWUPB/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      8517763,
-      4871
-    ],
-    "ACSWDNB/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "ACSWDNB/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Accumulated downwelling shortwave flux at bottom\",\"standard_name\":\"integral_wrt_time_of_surface_downwelling_shortwave_flux_in_air\",\"units\":\"J m-2\"}",
-    "ACSWDNB/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      8525770,
-      4871
-    ],
+    "time/.zarray": "{\n    \"chunks\": [\n        8\n    ],\n    \"compressor\": null,\n    \"dtype\": \"<i4\",\n    \"fill_value\": null,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\": [\n        8\n    ],\n    \"zarr_format\": 2\n}",
+    "time/0": "\u0000\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0003\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0005\u0000\u0000\u0000\u0006\u0000\u0000\u0000\u0007\u0000\u0000\u0000",
+    "time/.zattrs": "{\n    \"_ARRAY_DIMENSIONS\": [\n        \"time\"\n    ],\n    \"axis\": \"T\",\n    \"calendar\": \"proleptic_gregorian\",\n    \"long_name\": \"hours since 2022-12-31 12:00:00\",\n    \"standard_name\": \"time\",\n    \"units\": \"hours since 2022-12-31T12:00:00\"\n}",
+    ".zattrs": "{\"CEN_LAT\":-34.9999885559082,\"CEN_LON\":-65.0,\"Conventions\":\"CF-1.8\",\"DX\":4000.0,\"DY\":4000.0,\"MAP_PROJ\":1,\"MAP_PROJ_CHAR\":\"Lambert Conformal\",\"STAND_LON\":-65.0,\"START_DATE\":\"2022-12-31_12:00:00\",\"TRUELAT1\":-35.0,\"TRUELAT2\":-35.0,\"end_lat\":-11.645957946777344,\"end_lon\":-47.96868896484375,\"institution\":\"Servicio Meteorologico Nacional\",\"source\":\" OUTPUT FROM WRF V4.0 MODEL\",\"start_lat\":-54.386837005615234,\"start_lon\":-94.330810546875,\"title\":\"Python PostProcessing for SMN WRF-ARW Deterministic SFC\"}",
     "HR2/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "HR2/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"2-m Relative Humidity\",\"standard_name\":\"relative_humidity\",\"units\":\"percent\"}",
+    "HR2/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Relative humidity\",\"standard_name\":\"relative_humidity\",\"units\":\"percent\"}",
     "HR2/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      8535825,
-      3014479
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      2410834,
+      3051392
     ],
-    "Lambert_Conformal/.zarray": "{\"chunks\":[1],\"compressor\":null,\"dtype\":\"|O\",\"fill_value\":null,\"filters\":[{\"allow_nan\":true,\"check_circular\":true,\"encoding\":\"utf-8\",\"ensure_ascii\":true,\"id\":\"json2\",\"indent\":null,\"separators\":[\",\",\":\"],\"skipkeys\":false,\"sort_keys\":true,\"strict\":true}],\"order\":\"C\",\"shape\":[8],\"zarr_format\":2}",
-    "Lambert_Conformal/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\"]}",
+    "Lambert_Conformal/.zarray": "{\"chunks\":[1],\"compressor\":null,\"dtype\":\"<f4\",\"fill_value\":9.969209968386869e+36,\"filters\":null,\"order\":\"C\",\"shape\":[8],\"zarr_format\":2}",
+    "Lambert_Conformal/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\"],\"grid_mapping_name\":\"lambert_conformal_conic\",\"latitude_of_projection_origin\":-34.9999885559082,\"longitude_of_central_meridian\":-65.0,\"standard_parallel\":[-35.0,-35.0]}",
+    "Lambert_Conformal/0": "base64:AADAfw==",
     "PP/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "PP/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Accumulated Total Precipitation\",\"standard_name\":\"precipitation_amount\",\"units\":\"millimeter\"}",
+    "PP/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Accumulated total precipitation\",\"standard_name\":\"precipitation_amount\",\"units\":\"millimeter\"}",
     "PP/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      16515,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      16544,
       4871
-    ],
-    "PSFC/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "PSFC/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Surface Pressure\",\"standard_name\":\"surface_air_pressure\",\"units\":\"hPa\"}",
-    "PSFC/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      2391275,
-      2270926
-    ],
-    "SMOIS/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "SMOIS/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"SOIL MOISTURE\",\"standard_name\":\"mass_content_of_water_in_soil_layer\",\"units\":\"m3 m-3\"}",
-    "SMOIS/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      7109509,
-      1395063
     ],
     "T2/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
     "T2/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"description\":\"Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Calibrated 2-m Temperature\",\"standard_name\":\"air_temperature\",\"units\":\"degree_Celsius\"}",
     "T2/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      26890,
-      2359201
-    ],
-    "TSLB/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
-    "TSLB/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Soil Temperature\",\"standard_name\":\"soil_temperature\",\"units\":\"degree_Celsius\"}",
-    "TSLB/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      4667385,
-      2436940
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      26921,
+      2378729
     ],
     "dirViento10/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
     "dirViento10/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Wind Direction at 10m\",\"standard_name\":\"wind_from_direction\",\"units\":\"degree\"}",
     "dirViento10/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      11555488,
-      3125946
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      5467410,
+      3179602
     ],
     "lat/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":null,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
     "lat/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"long_name\":\"Latitude\",\"standard_name\":\"latitude\",\"units\":\"degrees_north\"}",
     "lat/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      19042530,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      12039775,
       1790805
     ],
     "lon/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":null,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
     "lon/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"long_name\":\"Longitude\",\"standard_name\":\"longitude\",\"units\":\"degrees_east\"}",
     "lon/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      18039420,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      13833196,
       992732
     ],
     "magViento10/.zarray": "{\"chunks\":[1,1249,999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":1.0000000200408773e+20,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[8,1249,999],\"zarr_format\":2}",
     "magViento10/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"time\",\"y\",\"x\"],\"coordinates\":\"lat lon\",\"description\":\"Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.\",\"grid_mapping\":\"Lambert_Conformal\",\"long_name\":\"Calibrated Wind Speed at 10m\",\"standard_name\":\"wind_speed\",\"units\":\"meter \\/ second\"}",
     "magViento10/0.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      14685594,
-      3349162
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      8652196,
+      3360227
     ],
     "x/.zarray": "{\"chunks\":[999],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":null,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[999],\"zarr_format\":2}",
     "x/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"x\"],\"axis\":\"X\",\"long_name\":\"x-coordinate in projected coordinate system\",\"standard_name\":\"projection_x_coordinate\",\"units\":\"m\"}",
     "x/0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      20853922,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      12030401,
       2089
     ],
     "y/.zarray": "{\"chunks\":[1249],\"compressor\":{\"id\":\"zlib\",\"level\":4},\"dtype\":\"<f4\",\"fill_value\":null,\"filters\":[{\"elementsize\":4,\"id\":\"shuffle\"}],\"order\":\"C\",\"shape\":[1249],\"zarr_format\":2}",
     "y/.zattrs": "{\"_ARRAY_DIMENSIONS\":[\"y\"],\"axis\":\"Y\",\"long_name\":\"y-coordinate in projected coordinate system\",\"standard_name\":\"projection_y_coordinate\",\"units\":\"m\"}",
     "y/0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_000.nc",
-      20858107,
-      2519
-    ],
-    "ACLWDNB/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      8263954,
-      2950617
-    ],
-    "ACLWUPB/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      11219755,
-      2849403
-    ],
-    "ACSWDNB/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      14072294,
-      3107125
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_000.nc",
+      12034586,
+      2573
     ],
     "HR2/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      17184603,
-      3148068
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      3382344,
+      3176534
     ],
+    "Lambert_Conformal/1": "base64:AADAfw==",
     "PP/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      16515,
-      760036
-    ],
-    "PSFC/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      3293875,
-      2344218
-    ],
-    "SMOIS/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      6861185,
-      1399633
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      16544,
+      834167
     ],
     "T2/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      782055,
-      2506636
-    ],
-    "TSLB/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      5643277,
-      1212724
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      856217,
+      2520943
     ],
     "dirViento10/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      20337855,
-      3261666
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      6564062,
+      3333434
     ],
     "lat/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      28109016,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      13447763,
       1790805
     ],
     "lon/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      27105906,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      15241184,
       992732
     ],
     "magViento10/1.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_001.nc",
-      23603681,
-      3497561
-    ],
-    "ACLWDNB/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      8635874,
-      2976728
-    ],
-    "ACLWUPB/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      11617786,
-      2866245
-    ],
-    "ACSWDNB/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      14487167,
-      3109057
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_001.nc",
+      9902680,
+      3517731
     ],
     "HR2/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      17601408,
-      3182232
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      3765268,
+      3209175
     ],
+    "Lambert_Conformal/2": "base64:AADAfw==",
     "PP/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      16515,
-      1076049
-    ],
-    "PSFC/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      3627318,
-      2338386
-    ],
-    "SMOIS/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      7224791,
-      1407947
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      16544,
+      1201772
     ],
     "T2/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      1098068,
-      2524066
-    ],
-    "TSLB/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      5970888,
-      1248719
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      1223822,
+      2536262
     ],
     "dirViento10/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      20788824,
-      3285489
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      6979627,
+      3369763
     ],
     "lat/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      28605580,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      13925060,
       1790805
     ],
     "lon/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      27602470,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      15718481,
       992732
     ],
     "magViento10/2.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_002.nc",
-      24078473,
-      3519333
-    ],
-    "ACLWDNB/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      8793769,
-      2990334
-    ],
-    "ACLWUPB/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      11789287,
-      2850231
-    ],
-    "ACSWDNB/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      14642654,
-      3133834
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_002.nc",
+      10354574,
+      3543134
     ],
     "HR2/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      17781672,
-      3212303
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      3963721,
+      3234758
     ],
+    "Lambert_Conformal/3": "base64:AADAfw==",
     "PP/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      16515,
-      1191998
-    ],
-    "PSFC/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      3759414,
-      2336458
-    ],
-    "SMOIS/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      7374525,
-      1416108
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      16544,
+      1383831
     ],
     "T2/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      1214017,
-      2540213
-    ],
-    "TSLB/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      6101056,
-      1268285
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      1405881,
+      2552656
     ],
     "dirViento10/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      20999159,
-      3306293
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      7203663,
+      3395514
     ],
     "lat/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      28859470,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      14199107,
       1790805
     ],
     "lon/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      27856360,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      15992528,
       992732
     ],
     "magViento10/3.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_003.nc",
-      24309612,
-      3542084
-    ],
-    "ACLWDNB/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      8957759,
-      2972308
-    ],
-    "ACLWUPB/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      11935251,
-      2888834
-    ],
-    "ACSWDNB/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      14827221,
-      3135847
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_003.nc",
+      10604361,
+      3567394
     ],
     "HR2/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      17968252,
-      3236803
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      4127389,
+      3259608
     ],
+    "Lambert_Conformal/4": "base64:AADAfw==",
     "PP/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      16515,
-      1314242
-    ],
-    "PSFC/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      3896584,
-      2345647
-    ],
-    "SMOIS/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      7529765,
-      1424858
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      16544,
+      1526888
     ],
     "T2/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      1336261,
-      2555139
-    ],
-    "TSLB/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      6247415,
-      1277166
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      1548938,
+      2573267
     ],
     "dirViento10/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      21210239,
-      3325737
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      7392181,
+      3419711
     ],
     "lat/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      29121359,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      14434968,
       1790805
     ],
     "lon/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      28118249,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      16228389,
       992732
     ],
     "magViento10/4.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_004.nc",
-      24540136,
-      3573449
-    ],
-    "ACLWDNB/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      9135420,
-      3002789
-    ],
-    "ACLWUPB/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      12143393,
-      2911590
-    ],
-    "ACSWDNB/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      15058119,
-      3151182
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_004.nc",
+      10817076,
+      3590540
     ],
     "HR2/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      18214485,
-      3255606
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      4287649,
+      3278030
     ],
+    "Lambert_Conformal/5": "base64:AADAfw==",
     "PP/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      16515,
-      1454675
-    ],
-    "PSFC/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      4050837,
-      2352510
-    ],
-    "SMOIS/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      7698841,
-      1433443
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      16544,
+      1673785
     ],
     "T2/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      1476694,
-      2568959
-    ],
-    "TSLB/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      6408531,
-      1285126
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      1695835,
+      2586630
     ],
     "dirViento10/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      21475275,
-      3345793
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      7570863,
+      3435618
     ],
     "lat/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      29433190,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      14646824,
       1790805
     ],
     "lon/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      28430080,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      16440245,
       992732
     ],
     "magViento10/5.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_005.nc",
-      24825228,
-      3600188
-    ],
-    "ACLWDNB/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      9307671,
-      3031600
-    ],
-    "ACLWUPB/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      12344455,
-      2885146
-    ],
-    "ACSWDNB/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      15232737,
-      3113276
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_005.nc",
+      11011665,
+      3607807
     ],
     "HR2/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      18351197,
-      3269425
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      4319869,
+      3289725
     ],
+    "Lambert_Conformal/6": "base64:AADAfw==",
     "PP/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      16515,
-      1600420
-    ],
-    "PSFC/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      4205313,
-      2359083
-    ],
-    "SMOIS/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      7862690,
-      1441845
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      16544,
+      1694628
     ],
     "T2/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      1622439,
-      2577690
-    ],
-    "TSLB/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      6569580,
-      1287926
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      1716678,
+      2598007
     ],
     "dirViento10/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      21625806,
-      3360920
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      7614778,
+      3446961
     ],
     "lat/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      29615140,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      14712973,
       1790805
     ],
     "lon/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      28612030,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      16506394,
       992732
     ],
     "magViento10/6.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_006.nc",
-      24990886,
-      3616480
-    ],
-    "ACLWDNB/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      9430339,
-      3032517
-    ],
-    "ACLWUPB/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      12468040,
-      2884642
-    ],
-    "ACSWDNB/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      15355818,
-      3121219
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_006.nc",
+      11066923,
+      3618698
     ],
     "HR2/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      18482221,
-      3274978
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      4288599,
+      3297109
     ],
+    "Lambert_Conformal/7": "base64:AADAfw==",
     "PP/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      16515,
-      1701718
-    ],
-    "PSFC/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      4310828,
-      2367311
-    ],
-    "SMOIS/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      7979230,
-      1447973
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      16544,
+      1661742
     ],
     "T2/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      1723737,
-      2581907
-    ],
-    "TSLB/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      6683323,
-      1290723
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      1683792,
+      2599623
     ],
     "dirViento10/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      21762383,
-      3371041
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      7590892,
+      3454483
     ],
     "lat/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      29772393,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      14704381,
       1790805
     ],
     "lon/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      28769283,
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      16497802,
       992732
     ],
     "magViento10/7.0.0": [
-      "s3://smn-ar-wrf/DATA/WRF/DET/2023/01/26/12/WRFDETAR_01H_20230126_12_007.nc",
-      25137584,
-      3627035
+      "s3://smn-ar-wrf/DATA/WRF/DET/2022/12/31/12/WRFDETAR_01H_20221231_12_007.nc",
+      11050559,
+      3626470
     ]
   }
 }
