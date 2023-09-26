@@ -7,5 +7,4 @@ jobs:
     uses: ProjectPythia/cookbook-actions/.github/workflows/build-book.yaml@main
     with:
       environment_name: kerchunk-cookbook
-      artifact_name: book-zip-${{ github.event.number }}
-      # Other input options are possible, see ProjectPythia/cookbook-actions/.github/workflows/build-book.yaml
+      environment_file: environment.yml
