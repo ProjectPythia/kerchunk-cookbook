@@ -5,16 +5,18 @@ dependencies:
   - cfgrib
   - dask
   - dask-labextension
+  - datashader
   - distributed
   - fastparquet
   - fsspec
   - git
   - h5netcdf
   - h5py
+  - hvplot
   - ipywidgets
+  - jupyter_bokeh
   - jupyter_server<2
   - jupyter-book
-  - jupyter_bokeh
   - jupyterlab
   - jupyterlab=3
   - mamba
@@ -30,16 +32,13 @@ dependencies:
   - rioxarray
   - s3fs
   - scipy
+  - sphinx-pythia-theme
   - tifffile
-  - tqdm
   - ujson
   - xarray
   - xarray-datatree
   - zarr
-  - hvplot
-  - datashader
   - pip:
-      - sphinx-pythia-theme
       - "apache-beam[interactive, dataframe]"
       - git+https://github.com/pangeo-forge/pangeo-forge-recipes
       - git+https://github.com/fsspec/kerchunk.git
