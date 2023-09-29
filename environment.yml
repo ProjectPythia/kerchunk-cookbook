@@ -41,5 +41,5 @@ dependencies:
   - pip:
       - "apache-beam[interactive, dataframe]"
       - git+https://github.com/pangeo-forge/pangeo-forge-recipes
-      - git+https://github.com/fsspec/kerchunk.git
+      - git+https://github.com/norlandrhagen/kerchunk@patch-2
       - git+https://github.com/carbonplan/xrefcoord.git

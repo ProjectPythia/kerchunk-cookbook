@@ -8,5 +8,3 @@ jobs:
     with:
       environment_name: kerchunk-cookbook
       environment_file: environment.yml
-
-      - name: Disable notebook execution during jupyterbook build
