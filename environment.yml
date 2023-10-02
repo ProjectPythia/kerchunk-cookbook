@@ -13,7 +13,6 @@ dependencies:
   - h5netcdf
   - h5py
   - hvplot
-  - kerchunk
   - ipywidgets
   - jupyter_bokeh
   - jupyter_server<2
@@ -34,13 +33,13 @@ dependencies:
   - rioxarray
   - s3fs
   - scipy
-  - sphinx-pythia-theme
   - tifffile
   - ujson
   - xarray
   - xarray-datatree
   - zarr
   - pip:
+      - sphinx-pythia-theme
       - "apache-beam[interactive, dataframe]"
       - git+https://github.com/pangeo-forge/pangeo-forge-recipes
       - git+https://github.com/carbonplan/xrefcoord.git
