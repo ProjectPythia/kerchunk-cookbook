@@ -20,6 +20,7 @@ dependencies:
   - jupyter-book
   - jupyterlab
   - jupyterlab=3
+  - kerchunk
   - mamba
   - matplotlib
   - netcdf4
