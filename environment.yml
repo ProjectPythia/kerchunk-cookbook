@@ -13,6 +13,7 @@ dependencies:
   - h5netcdf
   - h5py
   - hvplot
+  - kerchunk
   - ipywidgets
   - jupyter_bokeh
   - jupyter_server<2
@@ -41,5 +42,4 @@ dependencies:
   - pip:
       - "apache-beam[interactive, dataframe]"
       - git+https://github.com/pangeo-forge/pangeo-forge-recipes
-      - git+https://github.com/norlandrhagen/kerchunk@patch-2
       - git+https://github.com/carbonplan/xrefcoord.git
