@@ -126,6 +126,7 @@ you will need to follow this workflow:
    mamba activate kerchunk-cookbook
    ```
 
+
 1. Move into the `notebooks` directory and start up Jupyterlab
    ```bash
    cd notebooks/
