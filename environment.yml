@@ -5,13 +5,16 @@ dependencies:
   - cfgrib
   - dask
   - dask-labextension
+  - datashader
   - distributed
   - fastparquet
   - fsspec
   - git
   - h5netcdf
   - h5py
+  - hvplot
   - ipywidgets
+  - jupyter_bokeh
   - jupyter_server<2
   - jupyter-book
   - jupyterlab
@@ -23,7 +26,6 @@ dependencies:
   - numcodecs
   - numpy
   - pandas
-  - pangeo-forge-recipes==0.10.0
   - pip
   - pooch
   - pyOpenSSL
@@ -32,14 +34,12 @@ dependencies:
   - s3fs
   - scipy
   - tifffile
-  - tqdm
   - ujson
   - xarray
+  - xarray-datatree
   - zarr
-  - hvplot
-  - datashader
-
   - pip:
       - sphinx-pythia-theme
       - "apache-beam[interactive, dataframe]"
+      - git+https://github.com/pangeo-forge/pangeo-forge-recipes
       - git+https://github.com/carbonplan/xrefcoord.git
