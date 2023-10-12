@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Load Kerchunked dataset with Xarray" href="../using_references/Xarray.html" />
-    <link rel="prev" title="Generating Kerchunk References from NetCDF files" href="GeoTIFF.html" />
+    <link rel="prev" title="GeoTIFF" href="GeoTIFF.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -233,17 +233,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="NetCDF.html">
-   Generating Kerchunk References from NetCDF files
+   NetCDF
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="GRIB2.html">
-   # Generating Kerchunk References from GRIB2 files
+   GRIB2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="GeoTIFF.html">
-   Generating Kerchunk References from NetCDF files
+   GeoTIFF
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -276,7 +276,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../using_references/Datatree.html">
-   Kerchunk and Xarray-Datatree at Scale
+   Kerchunk and Xarray-Datatree
   </a>
  </li>
  <li class="toctree-l1">
@@ -393,11 +393,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pangeo-forge-kerchunk">
-   Pangeo-Forge &amp; Kerchunk
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
   </a>
@@ -452,9 +447,6 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>In this tutorial we are going to use the open-source ETL pipeline named pangeo-forge-recipes to generate Kerchunk references.</p>
-</div>
-<div class="section" id="pangeo-forge-kerchunk">
-<h2>Pangeo-Forge &amp; Kerchunk<a class="headerlink" href="#pangeo-forge-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Pangeo-Forge is a community project to build reproducible cloud-native ARCO (Analysis-Ready-Cloud-Optimized) datasets. The Python library (<code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code>) is the ETL pipeline to process these datasets or “recipes”. While a majority of the recipes convert a legacy format such as NetCDF to Zarr stores, <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> can also use Kerchunk under the hood to create reference recipes.</p>
 <p>It is important to note that <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used independently of <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> and in this example, <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> is acting as the runner for <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.</p>
 </div>
@@ -512,7 +504,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7fd8668dbf70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f23ee5e3f40&gt;
 </pre></div>
 </div>
 <img alt="../../_images/836cd871569da49aa0a6c4589e22a0e8e1ad5520001a1e22743c023acd2222c1.png" src="../../_images/836cd871569da49aa0a6c4589e22a0e8e1ad5520001a1e22743c023acd2222c1.png" />
@@ -638,8 +630,8 @@ Processing steps are chained together with the pipe operator (<code class="docut
           window.interactive_beam_jquery(document).ready(function($){
             
           });
-        }</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.77 s, sys: 219 ms, total: 1.99 s
-Wall time: 14.2 s
+        }</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.63 s, sys: 203 ms, total: 1.84 s
+Wall time: 34.8 s
 </pre></div>
 </div>
 </div>
@@ -674,7 +666,7 @@ Wall time: 14.2 s
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Generating Kerchunk References from NetCDF files</p>
+            <p class="prev-next-title">GeoTIFF</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../using_references/Xarray.html" title="next page">
