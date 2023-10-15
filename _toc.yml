@@ -9,14 +9,16 @@ parts:
       - file: notebooks/foundations/01_kerchunk_basics
       - file: notebooks/foundations/02_kerchunk_multi_file
       - file: notebooks/foundations/03_kerchunk_dask
-      - file: notebooks/foundations/04_kerchunk_reference_storage_parquet
+  - caption: Advanced
+    chapters:
+      - file: notebooks/advanced/04_kerchunk_reference_storage_parquet
+      - file: notebooks/advanced/Pangeo_Forge
 
   - caption: Generating Reference Files
     chapters:
       - file: notebooks/generating_references/NetCDF
       - file: notebooks/generating_references/GRIB2
       - file: notebooks/generating_references/GeoTIFF
-      - file: notebooks/generating_references/Pangeo_Forge
 
   - caption: Using Pre-Generated References
     chapters:
