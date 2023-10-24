@@ -4,11 +4,13 @@ parts:
   - caption: Preamble
     chapters:
       - file: notebooks/how-to-cite
+
   - caption: Foundations
     chapters:
       - file: notebooks/foundations/01_kerchunk_basics
       - file: notebooks/foundations/02_kerchunk_multi_file
       - file: notebooks/foundations/03_kerchunk_dask
+
   - caption: Advanced
     chapters:
       - file: notebooks/advanced/Parquet_Reference_Storage
