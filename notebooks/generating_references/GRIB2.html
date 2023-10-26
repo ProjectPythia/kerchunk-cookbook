@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kerchunk and Dask &#8212; Kerchunk Cookbook</title>
+    <title>GRIB2 &#8212; Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Store Kerchunk Reference Files as Parquet" href="../advanced/Parquet_Reference_Storage.html" />
-    <link rel="prev" title="Multi-File Datasets with Kerchunk" href="02_kerchunk_multi_file.html" />
+    <link rel="next" title="GeoTIFF" href="GeoTIFF.html" />
+    <link rel="prev" title="NetCDF" href="NetCDF.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -203,19 +203,19 @@ const thebe_selector_output = ".output, .cell_output"
   Foundations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="01_kerchunk_basics.html">
+  <a class="reference internal" href="../foundations/01_kerchunk_basics.html">
    Kerchunk Basics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_kerchunk_multi_file.html">
+  <a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">
    Multi-File Datasets with Kerchunk
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foundations/03_kerchunk_dask.html">
    Kerchunk and Dask
   </a>
  </li>
@@ -242,19 +242,19 @@ const thebe_selector_output = ".output, .cell_output"
   Generating Reference Files
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../generating_references/NetCDF.html">
+  <a class="reference internal" href="NetCDF.html">
    NetCDF
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../generating_references/GRIB2.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    GRIB2
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../generating_references/GeoTIFF.html">
+  <a class="reference internal" href="GeoTIFF.html">
    GeoTIFF
   </a>
  </li>
@@ -329,7 +329,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/foundations/03_kerchunk_dask.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/generating_references/GRIB2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -349,10 +349,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/foundations/03_kerchunk_dask.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/generating_references/GRIB2.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/foundations/03_kerchunk_dask.ipynb"><button
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/generating_references/GRIB2.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -372,7 +372,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/foundations/03_kerchunk_dask.ipynb"><button type="button"
+        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/generating_references/GRIB2.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -405,74 +405,86 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dask-and-parallel-processing">
-   Dask and Parallel Processing
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setting-up-the-dask-client">
-   Setting up the
+  <a class="reference internal nav-link" href="#about-the-dataset">
+   About the Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flags">
+   Flags
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-input-file-list">
+   Create Input File List
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#start-a-dask-client">
+   Start a Dask Client
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
+   Iterate through list of files and create
    <code class="docutils literal notranslate">
     <span class="pre">
-     Dask
+     Kerchunk
     </span>
    </code>
-   Client
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#binder-specific-setup">
-   Binder Specific Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#building-off-of-our-previous-work">
-   Building off of our Previous Work
+   indicies as
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     .json
+    </span>
+   </code>
+   reference files
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#subset-the-data">
-     Subset the Data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dask-specific-changes">
-   Dask Specific Changes
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dask-task-graph">
-   Dask Task Graph
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-this-notebook-locally">
-     Running this notebook locally
+    <a class="reference internal nav-link" href="#combine-kerchunk-reference-json-files">
+     Combine
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Kerchunk
+      </span>
+     </code>
+     reference
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .json
+      </span>
+     </code>
+     files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-on-binder">
-     Running on Binder
+    <a class="reference internal nav-link" href="#write-combined-kerchunk-reference-file-to-json">
+     Write combined
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       Kerchunk
+      </span>
+     </code>
+     reference file to
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       .json
+      </span>
+     </code>
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#start-the-dask-processing">
-   Start the Dask Processing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#timing">
-   Timing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#next-steps">
-   Next Steps
-  </a>
  </li>
 </ul>
 
@@ -485,17 +497,20 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <p><a class="reference internal" href="../../_images/dask.png"><img alt="Dask Logo" src="../../_images/dask.png" style="width: 200px;" /></a></img></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-dask">
-<h1>Kerchunk and Dask<a class="headerlink" href="#kerchunk-and-dask" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="grib2">
+<h1>GRIB2<a class="headerlink" href="#grib2" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<p>Generating Kerchunk References from GRIB2 files</p>
+<p><a class="reference internal" href="../../_images/GRIB2.png"><img alt="HRRR GRIB2" src="../../_images/GRIB2.png" style="width: 350px;" /></a></img></p>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>In this notebook we will cover:</p>
+<p>Within this notebook, we will cover:</p>
 <ol class="arabic simple">
-<li><p>How to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> library.</p></li>
-<li><p>How to scale up the creation of large <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> datasets using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p></li>
+<li><p>Generating a list of GRIB2 files on a remote filesystem using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code></p></li>
+<li><p>How to create reference files of GRIB2 files using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p></li>
+<li><p>Combining multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code></p></li>
 </ol>
-<p>This notebook builds upon the <span class="xref myst">Kerchunk Basics</span> and the <span class="xref myst">Multi-File Datasets with Kerchunk</span> notebooks. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the the generation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files.</p>
+<p>This notebook shares many similarities with the <span class="xref myst">Multi-File Datasets with Kerchunk</span> and the <span class="xref myst">NetCDF/HDF5 Argentinian Weather Dataset Case Study</span>, however this case studies examines another data format and uses <code class="docutils literal notranslate"><span class="pre">kerchunk.scan_grib</span></code> to create reference files.</p>
+<p>This notebook borrows heavily from this <a class="reference external" href="https://gist.github.com/peterm790/92eb1df3d58ba41d3411f8a840be2452">GIST</a> created by <a class="reference external" href="https://gist.github.com/peterm790">Peter Marsh</a>.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -515,13 +530,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
-<td><p>Recommended</p></td>
-<td><p>IO/Visualization</p></td>
+<tr class="row-even"><td><p><span class="xref myst">Kerchunk and Dask</span></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference external" href="https://tutorial.dask.org/00_overview.html">Intro to Dask</a></p></td>
-<td><p>Recommended</p></td>
-<td><p>Parallel Processing</p></td>
+<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<td><p>Required</p></td>
+<td><p>IO/Visualization</p></td>
 </tr>
 </tbody>
 </table>
@@ -530,24 +545,79 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="dask-and-parallel-processing">
-<h2>Dask and Parallel Processing<a class="headerlink" href="#dask-and-parallel-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is not intended to be a guide for how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallelize some <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
-<p>In the previous notebook <span class="xref myst">Multiple Files and Kerchunk</span>, we were looking at daily downscaled climate data over South-Eastern Alaska. In our function named <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>, we were looping over, one at a time, the input NetCDF4 files and using <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> method to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index for each file.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we can call <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> in parallel, which allows us to create multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files at the same time.</p>
-<p>Further on in this notebook, we will show how using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can greatly speed-up the process of creating a virtual dataset using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> supports multiple input file formats. One of these is <code class="docutils literal notranslate"><span class="pre">GRIB2(GRIdded</span> <span class="pre">Information</span> <span class="pre">in</span> <span class="pre">Binary</span> <span class="pre">form)</span></code>, which is a binary file format primary used in meteorology and weather datasets. Similar to NetCDF/HDF5, GRIB2 does not support efficient, parallel access. Using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read this legacy format as if it were an ARCO (Analysis-Ready, Cloud-Optimized) data format such as Zarr.</p>
 </div>
-<div class="section" id="setting-up-the-dask-client">
-<h2>Setting up the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> Client<a class="headerlink" href="#setting-up-the-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>In the code below, we are importing <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Disributed</span></code> and creating a <code class="docutils literal notranslate"><span class="pre">client</span></code>. This is the start of our parallel <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> data processing. We are passing the argument <code class="docutils literal notranslate"><span class="pre">n_workers=8</span></code>. This will inform the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> client on some of the resource limitations.</p>
-<p>Note: Depending on if you are running on a small machine such as a laptop or a larger compute hub, these resources could be tuned to improve performance.</p>
+<div class="section" id="about-the-dataset">
+<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">HRRR</span></code> is a NOAA real-time 3-km resolution, hourly updated, cloud-resolving, convection-allowing atmospheric model, initialized by 3km grids with 3km radar assimilation. Radar data is assimilated in the HRRR every 15 min over a 1-h period adding further detail to that provided by the hourly data assimilation from the 13km radar-enhanced Rapid Refresh.
+NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
+</div>
+<div class="section" id="flags">
+<h2>Flags<a class="headerlink" href="#flags" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>In the section below, set the <code class="docutils literal notranslate"><span class="pre">subset</span></code> flag to be <code class="docutils literal notranslate"><span class="pre">True</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">False</span></code> depending if you want this notebook to process the full file list. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then a subset of the file list will be processed (Recommended)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subset_flag</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
 
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">import</span> <span class="nn">ujson</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
+<span class="kn">from</span> <span class="nn">kerchunk.grib2</span> <span class="kn">import</span> <span class="n">scan_grib</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-input-file-list">
+<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Here we create <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> files-systems for reading remote files and writing local reference files.
+Next we are using <code class="docutils literal notranslate"><span class="pre">fsspec.glob</span></code> to retrieve a list of file paths and appending the <code class="docutils literal notranslate"><span class="pre">s3://</span></code> prefix to them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
+<span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="c1"># retrieve list of available days in archive</span>
+<span class="n">days_available</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.*&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read HRRR GRIB2 files from April 19, 2023</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.20230419/conus/*wrfsfcf01.grib2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Append s3 prefix for filelist</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
+
+<span class="c1"># If the subset_flag == True (default), the list of input files will be subset to speed up the processing</span>
+<span class="k">if</span> <span class="n">subset_flag</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="start-a-dask-client">
+<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <span class="xref myst">Kerchunk and Dask</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 <span class="n">client</span>
 </pre></div>
 </div>
@@ -557,7 +627,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-6abc5c5d-744c-11ee-8fdc-6045bde2c845</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-c7443742-744c-11ee-9091-6045bde2c845</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -592,7 +662,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">1b4ee37e</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">f12f970d</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -629,11 +699,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-6c048acd-7f72-42eb-8ae3-68d475211d38</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-7a9b4eca-18a6-45d6-840a-7d98b110a4a1</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:35597
+                        <strong>Comm:</strong> tcp://127.0.0.1:44245
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -675,7 +745,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37621
+                            <strong>Comm: </strong> tcp://127.0.0.1:39677
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -683,7 +753,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40947/status" target="_blank">http://127.0.0.1:40947/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41175/status" target="_blank">http://127.0.0.1:41175/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -691,13 +761,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40001
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34255
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-a8o_iolr
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-b4vj0kt3
                         </td>
                     </tr>
 
@@ -720,7 +790,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43381
+                            <strong>Comm: </strong> tcp://127.0.0.1:44023
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -728,7 +798,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34397/status" target="_blank">http://127.0.0.1:34397/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37225/status" target="_blank">http://127.0.0.1:37225/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -736,13 +806,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37609
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45095
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-fwb2cxy8
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5z7pl4_1
                         </td>
                     </tr>
 
@@ -765,7 +835,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42589
+                            <strong>Comm: </strong> tcp://127.0.0.1:38229
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -773,7 +843,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44809/status" target="_blank">http://127.0.0.1:44809/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34583/status" target="_blank">http://127.0.0.1:34583/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -781,13 +851,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46573
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45683
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6mcbson9
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-d87ti608
                         </td>
                     </tr>
 
@@ -810,7 +880,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41895
+                            <strong>Comm: </strong> tcp://127.0.0.1:44375
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -818,7 +888,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37393/status" target="_blank">http://127.0.0.1:37393/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36157/status" target="_blank">http://127.0.0.1:36157/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -826,13 +896,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37953
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36093
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-78qqdcjq
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6knqhpgj
                         </td>
                     </tr>
 
@@ -855,7 +925,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41549
+                            <strong>Comm: </strong> tcp://127.0.0.1:45837
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -863,7 +933,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42647/status" target="_blank">http://127.0.0.1:42647/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37671/status" target="_blank">http://127.0.0.1:37671/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -871,13 +941,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:33491
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41543
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-c4akel3a
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-4yps1prn
                         </td>
                     </tr>
 
@@ -900,7 +970,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:34667
+                            <strong>Comm: </strong> tcp://127.0.0.1:45427
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -908,7 +978,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42705/status" target="_blank">http://127.0.0.1:42705/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44623/status" target="_blank">http://127.0.0.1:44623/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -916,13 +986,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39329
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41493
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-2744y90o
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-a83zio_k
                         </td>
                     </tr>
 
@@ -945,7 +1015,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:38043
+                            <strong>Comm: </strong> tcp://127.0.0.1:33921
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -953,7 +1023,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44413/status" target="_blank">http://127.0.0.1:44413/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34521/status" target="_blank">http://127.0.0.1:34521/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -961,13 +1031,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34401
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45533
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-jclwxnc1
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1zedufxi
                         </td>
                     </tr>
 
@@ -990,7 +1060,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40627
+                            <strong>Comm: </strong> tcp://127.0.0.1:42365
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -998,7 +1068,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33749/status" target="_blank">http://127.0.0.1:33749/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46761/status" target="_blank">http://127.0.0.1:46761/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 865.25 MiB
@@ -1006,13 +1076,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46063
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39083
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-c7y160j8
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-dbc4knyb
                         </td>
                     </tr>
 
@@ -1039,48 +1109,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div></div></div>
 </div>
 </div>
-<div class="section" id="binder-specific-setup">
-<h2>Binder Specific Setup<a class="headerlink" href="#binder-specific-setup" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>If you are running this tutorial on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, the configuration may look slightly different.</p>
-<p>Once you start the client, some information should be returned to you as well as a button that says:</p>
-<p><strong>Launch Dashboard in JupyterLab</strong></p>
-<a class="reference internal image-reference" href="../../_images/client_binder.png"><img alt="../../_images/client_binder.png" src="../../_images/client_binder.png" style="width: 600px;" /></a>
-<p>Once you click that button, multiple windows of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard should open up.</p>
-<a class="reference internal image-reference" href="../../_images/binder_client2.png"><img alt="../../_images/binder_client2.png" src="../../_images/binder_client2.png" style="width: 600px;" /></a>
-</div>
-<div class="section" id="building-off-of-our-previous-work">
-<h2>Building off of our Previous Work<a class="headerlink" href="#building-off-of-our-previous-work" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>In the next section, we will re-use some of the code from <span class="xref myst">Multiple Files and Kerchunk</span> notebook. However, we will modify it slightly to make it compatable with <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
-<p>The following two cells should look the same as before.  As a reminder we are importing the required libraries, using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to create a list of our input files and setting up some kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to use.</p>
+<div class="section" id="iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files">
+<h2>Iterate through list of files and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files<a class="headerlink" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Each input GRIB2 file contains mutiple “messages”, each a measure of some variable on a grid, but with grid dimensions not necessarily compatible with one-another. The filter we create in the first line selects only certain types of messages, and indicated that heightAboveGround will be a coordinate of interest.</p>
+<p>We also write a separate JSON for each of the selected message, since these are the basic component data sets (see the loop over <code class="docutils literal notranslate"><span class="pre">out</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
-
-<span class="kn">import</span> <span class="nn">dask</span>
-<span class="kn">import</span> <span class="nn">fsspec</span>
-<span class="kn">import</span> <span class="nn">ujson</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
-<span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
-<span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Retrieve list of available days in archive for the year 2060.</span>
-<span class="n">files_paths</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/*&quot;</span><span class="p">)</span>
-
-<span class="c1"># Here we prepend the prefix &#39;s3://&#39;, which points to AWS.</span>
-<span class="n">file_pattern</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
-
-<span class="c1"># Define kwargs for `fsspec`</span>
-<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
+<span class="n">afilter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;typeOfLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">so</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
 <span class="c1"># We are creating a temporary directory to store the .json reference files</span>
 <span class="c1"># Alternately, you could write these to cloud storage.</span>
@@ -1091,158 +1128,88 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpaej90xv4&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpqxzjzi3d&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="subset-the-data">
-<h3>Subset the Data<a class="headerlink" href="#subset-the-data" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>To speed up our example, lets take a subset of the year of data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="dask-specific-changes">
-<h2>Dask Specific Changes<a class="headerlink" href="#dask-specific-changes" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files, we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
-<p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list of delayed objects to create  <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files in parallel.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
-<span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
-        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">fil</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-        <span class="n">fname</span> <span class="o">=</span> <span class="n">fil</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span>
-        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outf</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">outf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_json_name</span><span class="p">(</span>
+    <span class="n">file_url</span><span class="p">,</span> <span class="n">message_number</span>
+<span class="p">):</span>  <span class="c1"># create a unique name for each reference file</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_message</span><span class="si">{</span><span class="n">message_number</span><span class="si">}</span><span class="s2">.json&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">gen_json</span><span class="p">(</span><span class="n">file_url</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">scan_grib</span><span class="p">(</span>
+        <span class="n">file_url</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">so</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">afilter</span>
+    <span class="p">)</span>  <span class="c1"># create the reference using scan_grib</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">message</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="n">out</span>
+    <span class="p">):</span>  <span class="c1"># scan_grib outputs a list containing one reference per grib message</span>
+        <span class="n">out_file_name</span> <span class="o">=</span> <span class="n">make_json_name</span><span class="p">(</span><span class="n">file_url</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>  <span class="c1"># get name</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>  <span class="c1"># write to file</span>
 
 
 <span class="c1"># Generate Dask Delayed objects</span>
-<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_json_reference</span><span class="p">)(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">gen_json</span><span class="p">)(</span><span class="n">fil</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">files</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="dask-task-graph">
-<h2>Dask Task Graph<a class="headerlink" href="#dask-task-graph" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Once you call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> it can be hard to understand what is happening and how far along the process is at any time. Fortunately, <code class="docutils literal notranslate"><span class="pre">Dask</span></code> has a built in dashboard to help visualize your progress.</p>
-<div class="section" id="running-this-notebook-locally">
-<h3>Running this notebook locally<a class="headerlink" href="#running-this-notebook-locally" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>When you first initialized the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> <code class="docutils literal notranslate"><span class="pre">client</span></code> earlier on, it should have returned some information including an address to the <code class="docutils literal notranslate"><span class="pre">dashboard</span></code>. For example: <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8787/status</span></code></p>
-<p>By navigating to this address, you should a <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard that looks something like this.</p>
-<p><br/><br/></p>
-<a class="reference internal image-reference" href="../../_images/empty_dashboard.png"><img alt="../../_images/empty_dashboard.png" src="../../_images/empty_dashboard.png" style="width: 700px;" /></a>
-<p><br/><br/></p>
-<p>When you call <code class="docutils literal notranslate"><span class="pre">dask.compute(tasks)</span></code>, the dashboard should populate with a bunch of tasks. In the dashboard you can monitor your progress, see how resources are being used as well as well as countless other functionality.</p>
-<p><br/><br/></p>
-<a class="reference internal image-reference" href="../../_images/dashboard.png"><img alt="../../_images/dashboard.png" src="../../_images/dashboard.png" style="width: 700px;" /></a>
-<p><br/><br/></p>
-</div>
-<div class="section" id="running-on-binder">
-<h3>Running on Binder<a class="headerlink" href="#running-on-binder" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>If you are running this example notebook on <code class="docutils literal notranslate"><span class="pre">Binder</span></code>, the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> dashboard should look slightly different. Since <code class="docutils literal notranslate"><span class="pre">Binder</span></code> is running the notebook on another computer, navigating to localhost will give you an error.
-The <code class="docutils literal notranslate"><span class="pre">Binder</span></code> specific <code class="docutils literal notranslate"><span class="pre">Dask</span></code> graph should look something more like this:</p>
-<p><br/><br/></p>
-<a class="reference internal image-reference" href="../../_images/task_stream_full.png"><img alt="../../_images/task_stream_full.png" src="../../_images/task_stream_full.png" style="width: 700px;" /></a>
-<p><br/><br/></p>
-</div>
-</div>
-<div class="section" id="start-the-dask-processing">
-<h2>Start the Dask Processing<a class="headerlink" href="#start-the-dask-processing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel computation of `SingleHDF5ToZarr`</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel processing</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpaej90xv4/WRFDS_2060-01-01.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-02.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-03.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-04.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-05.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-06.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-07.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-08.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-09.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-10.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-11.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-12.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-13.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-14.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-15.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-16.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-17.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-18.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-19.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-20.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-21.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-22.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-23.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-24.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-25.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-26.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-27.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-28.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-29.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-30.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-01-31.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-01.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-02.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-03.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-04.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-05.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-06.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-07.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-08.json&#39;,
-  &#39;/tmp/tmpaej90xv4/WRFDS_2060-02-09.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([None, None],)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="combine-kerchunk-reference-json-files">
+<h3>Combine <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference <code class="docutils literal notranslate"><span class="pre">.json</span></code> files<a class="headerlink" href="#combine-kerchunk-reference-json-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>We know that four coordinates are identical for every one of our component datasets - they are not functions of valid_time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of reference json files</span>
+<span class="n">output_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/*.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Combine individual references into single consolidated reference</span>
+<span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
+    <span class="n">output_files</span><span class="p">,</span>
+    <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;valid_time&quot;</span><span class="p">],</span>
+    <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;step&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">multi_kerchunk</span> <span class="o">=</span> <span class="n">mzz</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="timing">
-<h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>To demonstrate how Dask can speed-up your <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference generation, the next section will show the timing of generating reference files with and without Dask.
-For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fine folks at <a class="reference external" href="https://2i2c.org/">2i2c</a>) with ~32 CPU and ~256G RAM. It is also important to note that the data is also hosted on AWS.</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Serial Kerchunk</p></th>
-<th class="head"><p>Parallel Kerchunk (Dask)</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>3min 41s</p></td>
-<td><p>39.2 s</p></td>
-</tr>
-</tbody>
-</table>
-<p>Running our <code class="docutils literal notranslate"><span class="pre">Dask</span></code> version on a subset of 40 files took only ~39 seconds. In comparison, computing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies one-by-one in  took about 3 minutes and 41 seconds.</p>
-<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run almost <strong>6x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds its task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
-<p>Note: These timings may vary for you. There are many factors that may affect performance, such as:</p>
-<ul class="simple">
-<li><p>Geographical location of your compute and the source data</p></li>
-<li><p>Internet speed</p></li>
-<li><p>Compute resources, IO limits and # of workers given to <code class="docutils literal notranslate"><span class="pre">Dask</span></code></p></li>
-<li><p>Location of where to write reference files to (cloud vs local)</p></li>
-<li><p>Type of reference files (<code class="docutils literal notranslate"><span class="pre">Parquet</span></code> vs <code class="docutils literal notranslate"><span class="pre">.JSON</span></code>)</p></li>
-</ul>
-<p>This is meant to be an example of how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to speed-up <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> not a detailed benchmark in <code class="docutils literal notranslate"><span class="pre">Kerchunk/Dask</span></code> performance.</p>
+<div class="section" id="write-combined-kerchunk-reference-file-to-json">
+<h3>Write combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference file to <code class="docutils literal notranslate"><span class="pre">.json</span></code><a class="headerlink" href="#write-combined-kerchunk-reference-file-to-json" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write Kerchunk .json record</span>
+<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;HRRR_combined.json&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">multi_kerchunk</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</pre></div>
 </div>
-<div class="section" id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>In this notebook we demonstrated how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files. In the following <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section, we will walk though examples of using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> with <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to create virtual cloud-optimized datasets.</p>
-<p>Additionally, if you wish to explore more of <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">Dask</span></code> integration, you can try checking out <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <a class="reference external" href="https://fsspec.github.io/kerchunk/reference.html?highlight=auto%20dask#kerchunk.combine.auto_dask">auto_dask</a> method, which combines many of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> setup steps into a single convenient function.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -1259,7 +1226,7 @@ For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fin
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/foundations"
+            path: "./notebooks/generating_references"
         },
         predefinedOutput: true
     }
@@ -1269,17 +1236,17 @@ For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fin
               </div>
               <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="02_kerchunk_multi_file.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="NetCDF.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
+            <p class="prev-next-title">NetCDF</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../advanced/Parquet_Reference_Storage.html" title="next page">
+    <a class='right-next' id="next-link" href="GeoTIFF.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Store Kerchunk Reference Files as Parquet</p>
+        <p class="prev-next-title">GeoTIFF</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

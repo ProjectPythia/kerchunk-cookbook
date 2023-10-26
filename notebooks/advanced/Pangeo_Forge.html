@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kerchunk Basics &#8212; Kerchunk Cookbook</title>
+    <title>Kerchunk and Pangeo-Forge &#8212; Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multi-File Datasets with Kerchunk" href="02_kerchunk_multi_file.html" />
-    <link rel="prev" title="How to Cite This Cookbook" href="../how-to-cite.html" />
+    <link rel="next" title="NetCDF" href="../generating_references/NetCDF.html" />
+    <link rel="prev" title="Store Kerchunk Reference Files as Parquet" href="Parquet_Reference_Storage.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -203,19 +203,19 @@ const thebe_selector_output = ".output, .cell_output"
   Foundations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foundations/01_kerchunk_basics.html">
    Kerchunk Basics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_kerchunk_multi_file.html">
+  <a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">
    Multi-File Datasets with Kerchunk
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_kerchunk_dask.html">
+  <a class="reference internal" href="../foundations/03_kerchunk_dask.html">
    Kerchunk and Dask
   </a>
  </li>
@@ -225,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
   Advanced
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">
+  <a class="reference internal" href="Parquet_Reference_Storage.html">
    Store Kerchunk Reference Files as Parquet
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../advanced/Pangeo_Forge.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Kerchunk and Pangeo-Forge
   </a>
  </li>
@@ -329,7 +329,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/foundations/01_kerchunk_basics.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/advanced/Pangeo_Forge.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -349,10 +349,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/foundations/01_kerchunk_basics.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/advanced/Pangeo_Forge.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/foundations/01_kerchunk_basics.ipynb"><button
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/advanced/Pangeo_Forge.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -372,7 +372,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/foundations/01_kerchunk_basics.ipynb"><button type="button"
+        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/advanced/Pangeo_Forge.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -405,42 +405,38 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#imports">
-   Imports
+  <a class="reference internal nav-link" href="#getting-to-know-the-data">
+   Getting to Know The Data
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-kwargs-for-fsspec">
-     Define kwargs for
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       fsspec
-      </span>
-     </code>
+    <a class="reference internal nav-link" href="#examine-a-single-file">
+     Examine a Single File
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parse-a-single-netcdf-file-with-kerchunk">
-     Parse a single NetCDF file with kerchunk
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-kerchunk-reference-file">
-     Load
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       Kerchunk
-      </span>
-     </code>
-     Reference File
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-dataset">
-     Plot Dataset
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plot-the-dataset">
+       Plot the Dataset
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-file-pattern">
+   Create a File Pattern
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-location-for-output">
+   Create a Location For Output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-pangeo-forge-beam-pipeline">
+   Build the Pangeo-Forge Beam Pipeline
+  </a>
  </li>
 </ul>
 
@@ -453,18 +449,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <p><a class="reference internal" href="../../_images/thumbnail.png"><img alt="Kerchunk Logo" src="../../_images/thumbnail.png" style="width: 500px;" /></a></img></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-basics">
-<h1>Kerchunk Basics<a class="headerlink" href="#kerchunk-basics" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-and-pangeo-forge">
+<h1>Kerchunk and Pangeo-Forge<a class="headerlink" href="#kerchunk-and-pangeo-forge" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>This notebook is intended as an introduction to using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.
-In this tutorial we will:</p>
-<ul class="simple">
-<li><p>Scan a single NetCDF4/HDF5 file to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> virtual dataset</p></li>
-<li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
-</ul>
-<p>While this notebook only examines using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on a single NetCDF file, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used to create virtual <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
+<p>In this tutorial we are going to use the open-source ETL pipeline named pangeo-forge-recipes to generate Kerchunk references.</p>
+<p>Pangeo-Forge is a community project to build reproducible cloud-native ARCO (Analysis-Ready-Cloud-Optimized) datasets. The Python library (<code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code>) is the ETL pipeline to process these datasets or “recipes”. While a majority of the recipes convert a legacy format such as NetCDF to Zarr stores, <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> can also use Kerchunk under the hood to create reference recipes.</p>
+<p>It is important to note that <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used independently of <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> and in this example, <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> is acting as the runner for <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.</p>
 </div>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
@@ -476,122 +467,181 @@ In this tutorial we will:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
-<td><p>Helpful</p></td>
-<td><p>Basic features</p></td>
+<tr class="row-even"><td><p><span class="xref myst">Kerchunk Basics</span></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref myst">Multiple Files and Kerchunk</span></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref myst">Multi-File Datasets with Kerchunk</span></p></td>
+<td><p>Required</p></td>
+<td><p>IO/Visualization</p></td>
 </tr>
 </tbody>
 </table>
 <ul class="simple">
-<li><p><strong>Time to learn</strong>: 60 minutes</p></li>
+<li><p><strong>Time to learn</strong>: 45 minutes</p></li>
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="imports">
-<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Here we will import a few <code class="docutils literal notranslate"><span class="pre">Python</span></code> libraries to help with our data processing.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">fsspec</span></code> will be used to read remote and local filesystems.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kerchunk.hdf</span></code> will be used to read a NetCDF file and create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference set.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ujson</span></code> for writing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> output to the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file format.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Xarray</span></code> for examining out output dataset</p></li>
-</ul>
+<div class="section" id="getting-to-know-the-data">
+<h2>Getting to Know The Data<a class="headerlink" href="#getting-to-know-the-data" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gridMET</span></code> is a high-resolution daily meteorological dataset covering CONUS from 1979-2023. It is produced by the Climatology Lab at UC Merced. In this example, we are going to look create a virtual Zarr dataset of a derived variable, Burn Index.</p>
+<div class="section" id="examine-a-single-file">
+<h3>Examine a Single File<a class="headerlink" href="#examine-a-single-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
-<span class="kn">import</span> <span class="nn">kerchunk.hdf</span>
-<span class="kn">import</span> <span class="nn">ujson</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="define-kwargs-for-fsspec">
-<h3>Define kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code><a class="headerlink" href="#define-kwargs-for-fsspec" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>In the dictionary definition in the next cell, we are passing options to <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/api.html?highlight=.open#fsspec.open"><code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code></a>. Any additional kwargs passed in this dictionary through <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> will pass as kwargs to the file system, in our case <code class="docutils literal notranslate"><span class="pre">s3</span></code>. The API docs for the <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> filesystem spec can be found <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/api.html">here</a>.</p>
-<p>In this example we are passing a few kwargs. In short they are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">anon=True</span></code>: This is a <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that specifies you are not passing any connection credentials and are connecting to a public bucket.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">default_fill_cache=False</span></code>: <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that avoids caching in between chunks of files. This may lower memory usage when reading large files.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">default_cache_type=&quot;first&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> kwarg that specifies the caching strategy used buy <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>. In this case, <code class="docutils literal notranslate"><span class="pre">first</span></code> caches the first block of a file only.</p></li>
-</ul>
-<p>Don’t worry too much about the details here; the cache options are those that have typically proven efficient for HDF5 files.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="parse-a-single-netcdf-file-with-kerchunk">
-<h3>Parse a single NetCDF file with kerchunk<a class="headerlink" href="#parse-a-single-netcdf-file-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>Below we will access a NetCDF file stored on the AWS cloud. This dataset is a single time slice of a climate downscaled product for Alaska.</p>
-<p>The steps in the cell below are as follows:</p>
-<ol class="arabic simple">
-<li><p>Define the url that points to the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file we want to process</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> along with the dictionary of arguments we created (<code class="docutils literal notranslate"><span class="pre">so</span></code>) to open the URL pointing to the NetCDF file.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> method to read through the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and extract the byte ranges, compression information and metadata.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">.translate</span></code> method on the output from the <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> to translate content of the NetCDF file into the <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> format.</p></li>
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file named <code class="docutils literal notranslate"><span class="pre">single_file_kerchunk.json</span></code> and write the dataset information to disk.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
-<span class="c1"># Uses kerchunk to scan through the netcdf file to create kerchunk mapping and then save output as .json</span>
-<span class="c1"># Note: In this example, we write the kerchunk output to a .json file.</span>
-<span class="c1"># You could also keep this information in memory and pass it to fsspec</span>
-<span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">inf</span><span class="p">:</span>
-    <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">kerchunk</span><span class="o">.</span><span class="n">hdf</span><span class="o">.</span><span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">inf</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="load-kerchunk-reference-file">
-<h3>Load <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> Reference File<a class="headerlink" href="#load-kerchunk-reference-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>In the section below we will use <code class="docutils literal notranslate"><span class="pre">fsspec.filesystem</span></code> along with the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file to open the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file as if it were a <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> dataset.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use fsspec to create filesystem from .json reference file</span>
-<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
-    <span class="s2">&quot;reference&quot;</span><span class="p">,</span>
-    <span class="n">fo</span><span class="o">=</span><span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span>
-    <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span>
-    <span class="n">remote_options</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-    <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># load kerchunked dataset with xarray</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span> <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;consolidated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="s2">&quot;http://thredds.northwestknowledge.net:8080/thredds/dodsC/MET/bi/bi_2021.nc&quot;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-dataset">
-<h3>Plot Dataset<a class="headerlink" href="#plot-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<div class="section" id="plot-the-dataset">
+<h4>Plot the Dataset<a class="headerlink" href="#plot-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="s2">&quot;2021-08-01&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">burning_index_g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f5629381b10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f3f15c477f0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/30c5fb1f5d3da715d3fca7e8580cd215decd5ba4174901bd04c44bc92ca91428.png" src="../../_images/30c5fb1f5d3da715d3fca7e8580cd215decd5ba4174901bd04c44bc92ca91428.png" />
+<img alt="../../_images/836cd871569da49aa0a6c4589e22a0e8e1ad5520001a1e22743c023acd2222c1.png" src="../../_images/836cd871569da49aa0a6c4589e22a0e8e1ad5520001a1e22743c023acd2222c1.png" />
 </div>
 </div>
-<p>Note that the original .nc file size here is 16.8MB, and the created JSON is 26.5kB. These files also tend to compress very well. As you can see, it the JSON can be written anywhere, and gives us access to the underlying data, reading only the chunks we need from remote without downloading the whole file.</p>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-file-pattern">
+<h2>Create a File Pattern<a class="headerlink" href="#create-a-file-pattern" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>To build our <code class="docutils literal notranslate"><span class="pre">pangeo-forge</span></code> pipeline, we need to create a <code class="docutils literal notranslate"><span class="pre">FilePattern</span></code> object, which is composed of all of our input urls. This dataset ranges from 1979 through 2023 and is composed of one year per file.</p>
+<p>To speed up our example, we will <code class="docutils literal notranslate"><span class="pre">prune</span></code> our recipe to select the first two entries in the <code class="docutils literal notranslate"><span class="pre">FilePattern</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pangeo_forge_recipes.patterns</span> <span class="kn">import</span> <span class="n">ConcatDim</span><span class="p">,</span> <span class="n">FilePattern</span><span class="p">,</span> <span class="n">MergeDim</span>
+
+<span class="n">years</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1979</span><span class="p">,</span> <span class="mi">2022</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+
+<span class="n">time_dim</span> <span class="o">=</span> <span class="n">ConcatDim</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">years</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">format_function</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;http://www.northwestknowledge.net/metdata/data/bi_</span><span class="si">{</span><span class="n">time</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">FilePattern</span><span class="p">(</span><span class="n">format_function</span><span class="p">,</span> <span class="n">time_dim</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">)</span>
+
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+
+<span class="n">pattern</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;FilePattern {&#39;time&#39;: 2}&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-location-for-output">
+<h2>Create a Location For Output<a class="headerlink" href="#create-a-location-for-output" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>We write to local storage for this example, but the reference file could also be shared via cloud storage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_root</span> <span class="o">=</span> <span class="s2">&quot;references&quot;</span>
+<span class="n">store_name</span> <span class="o">=</span> <span class="s2">&quot;Pangeo_Forge&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="build-the-pangeo-forge-beam-pipeline">
+<h2>Build the Pangeo-Forge Beam Pipeline<a class="headerlink" href="#build-the-pangeo-forge-beam-pipeline" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<p>Next, we will chain together a bunch of methods to create a Pangeo-Forge - Apache Beam pipeline.
+Processing steps are chained together with the pipe operator (<code class="docutils literal notranslate"><span class="pre">|</span></code>). Once the pipeline is built, it can be ran in the following cell.</p>
+<p>The steps are as follows:</p>
+<ol class="arabic simple">
+<li><p>Creates a starting collection of our input file patterns.</p></li>
+<li><p>Passes those file_patterns to <code class="docutils literal notranslate"><span class="pre">OpenWithKerchunk</span></code>, which creates references of each file.</p></li>
+<li><p>Combines the references files into a single reference file and write them with <code class="docutils literal notranslate"><span class="pre">WriteCombineReferences</span></code></p></li>
+</ol>
+<p>Just like Kerchunk, you can specify the reference file type as either <code class="docutils literal notranslate"><span class="pre">.json</span></code> or <code class="docutils literal notranslate"><span class="pre">.parquet</span></code>.</p>
+<p>Note: You can add additional processing steps in this pipeline.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">apache_beam</span> <span class="k">as</span> <span class="nn">beam</span>
+<span class="kn">from</span> <span class="nn">pangeo_forge_recipes.transforms</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">OpenWithKerchunk</span><span class="p">,</span>
+    <span class="n">WriteCombinedReference</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">transforms</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># Create a beam PCollection from our input file pattern</span>
+    <span class="n">beam</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="c1"># Open with Kerchunk and create references for each file</span>
+    <span class="o">|</span> <span class="n">OpenWithKerchunk</span><span class="p">(</span><span class="n">file_type</span><span class="o">=</span><span class="n">pattern</span><span class="o">.</span><span class="n">file_type</span><span class="p">)</span>
+    <span class="c1"># Use Kerchunk&#39;s `MultiZarrToZarr` functionality to combine and then write references.</span>
+    <span class="c1"># *Note*: Setting the correct contact_dims and identical_dims is important.</span>
+    <span class="o">|</span> <span class="n">WriteCombinedReference</span><span class="p">(</span>
+        <span class="n">target_root</span><span class="o">=</span><span class="n">target_root</span><span class="p">,</span>
+        <span class="n">store_name</span><span class="o">=</span><span class="n">store_name</span><span class="p">,</span>
+        <span class="n">output_file_name</span><span class="o">=</span><span class="s2">&quot;reference.json&quot;</span><span class="p">,</span>
+        <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">],</span>
+        <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;crs&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="k">with</span> <span class="n">beam</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">()</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">|</span> <span class="n">transforms</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+        if (typeof window.interactive_beam_jquery == 'undefined') {
+          var jqueryScript = document.createElement('script');
+          jqueryScript.src = 'https://code.jquery.com/jquery-3.4.1.slim.min.js';
+          jqueryScript.type = 'text/javascript';
+          jqueryScript.onload = function() {
+            var datatableScript = document.createElement('script');
+            datatableScript.src = 'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js';
+            datatableScript.type = 'text/javascript';
+            datatableScript.onload = function() {
+              window.interactive_beam_jquery = jQuery.noConflict(true);
+              window.interactive_beam_jquery(document).ready(function($){
+                
+              });
+            }
+            document.head.appendChild(datatableScript);
+          };
+          document.head.appendChild(jqueryScript);
+        } else {
+          window.interactive_beam_jquery(document).ready(function($){
+            
+          });
+        }</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.72 s, sys: 125 ms, total: 1.84 s
+Wall time: 24.9 s
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -609,7 +659,7 @@ In this tutorial we will:</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/foundations"
+            path: "./notebooks/advanced"
         },
         predefinedOutput: true
     }
@@ -619,17 +669,17 @@ In this tutorial we will:</p>
               </div>
               <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../how-to-cite.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Parquet_Reference_Storage.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">How to Cite This Cookbook</p>
+            <p class="prev-next-title">Store Kerchunk Reference Files as Parquet</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_kerchunk_multi_file.html" title="next page">
+    <a class='right-next' id="next-link" href="../generating_references/NetCDF.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
+        <p class="prev-next-title">NetCDF</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

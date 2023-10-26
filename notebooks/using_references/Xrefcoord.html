@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kerchunk Basics &#8212; Kerchunk Cookbook</title>
+    <title>Use xrefcoord to Generate Coordinates &#8212; Kerchunk Cookbook</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multi-File Datasets with Kerchunk" href="02_kerchunk_multi_file.html" />
-    <link rel="prev" title="How to Cite This Cookbook" href="../how-to-cite.html" />
+    <link rel="next" title="Kerchunk and Xarray-Datatree" href="Datatree.html" />
+    <link rel="prev" title="Load Kerchunked dataset with Xarray" href="Xarray.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -203,19 +203,19 @@ const thebe_selector_output = ".output, .cell_output"
   Foundations
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../foundations/01_kerchunk_basics.html">
    Kerchunk Basics
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="02_kerchunk_multi_file.html">
+  <a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">
    Multi-File Datasets with Kerchunk
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03_kerchunk_dask.html">
+  <a class="reference internal" href="../foundations/03_kerchunk_dask.html">
    Kerchunk and Dask
   </a>
  </li>
@@ -264,14 +264,14 @@ const thebe_selector_output = ".output, .cell_output"
   Using Pre-Generated References
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Xarray.html">
+  <a class="reference internal" href="Xarray.html">
    Load Kerchunked dataset with Xarray
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Xrefcoord.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Use
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -282,12 +282,12 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Datatree.html">
+  <a class="reference internal" href="Datatree.html">
    Kerchunk and Xarray-Datatree
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Hvplot_Datashader.html">
+  <a class="reference internal" href="Hvplot_Datashader.html">
    Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly
   </a>
  </li>
@@ -329,7 +329,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/foundations/01_kerchunk_basics.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../../_sources/notebooks/using_references/Xrefcoord.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -349,10 +349,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/foundations/01_kerchunk_basics.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/using_references/Xrefcoord.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/foundations/01_kerchunk_basics.ipynb"><button
+        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/using_references/Xrefcoord.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -372,7 +372,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/foundations/01_kerchunk_basics.ipynb"><button type="button"
+        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/using_references/Xrefcoord.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -394,53 +394,36 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Use
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     xrefcoord
+    </span>
+   </code>
+   to Generate Coordinates
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
    Overview
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#imports">
-   Imports
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-map">
+   Create a Map
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#define-kwargs-for-fsspec">
-     Define kwargs for
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       fsspec
-      </span>
-     </code>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parse-a-single-netcdf-file-with-kerchunk">
-     Parse a single NetCDF file with kerchunk
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-kerchunk-reference-file">
-     Load
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       Kerchunk
-      </span>
-     </code>
-     Reference File
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-dataset">
-     Plot Dataset
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-time-series">
+   Create a Time-Series
+  </a>
  </li>
 </ul>
 
@@ -453,21 +436,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
               
               <div>
                 
-  <p><a class="reference internal" href="../../_images/thumbnail.png"><img alt="Kerchunk Logo" src="../../_images/thumbnail.png" style="width: 500px;" /></a></img></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="kerchunk-basics">
-<h1>Kerchunk Basics<a class="headerlink" href="#kerchunk-basics" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+  <div class="section" id="use-xrefcoord-to-generate-coordinates">
+<h1>Use <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> to Generate Coordinates<a class="headerlink" href="#use-xrefcoord-to-generate-coordinates" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<p>When using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to generate reference datasets for GeoTIFF’s, only the dimensions are preserved. <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> is a small utility that allows us to generate coordinates for these reference datasets using the geospatial metadata. Similar to other accessor add-on libraries for <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> such as <code class="docutils literal notranslate"><span class="pre">rioxarray</span></code> and <code class="docutils literal notranslate"><span class="pre">xwrf</span></code>, <code class="docutils literal notranslate"><span class="pre">xrefcord</span></code> provides an accessor for an <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> dataset. Importing <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> allows us to use the <code class="docutils literal notranslate"><span class="pre">.xref</span></code> accessor to access additional methods.</p>
+<p>In this tutorial we will use the <code class="docutils literal notranslate"><span class="pre">generate_coords</span></code> method to build coordinates for the <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> dataset. <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> is <em>very experimental</em> and makes assumptions about the underlying data, such as each variable shares the same dimensions etc. Use with caution!</p>
+</div>
 <div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>This notebook is intended as an introduction to using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.
-In this tutorial we will:</p>
-<ul class="simple">
-<li><p>Scan a single NetCDF4/HDF5 file to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> virtual dataset</p></li>
-<li><p>Learn how to use the output  using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>.</p></li>
-</ul>
-<p>While this notebook only examines using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on a single NetCDF file, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used to create virtual <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> datasets from collections of many input files. In the following notebook, we will demonstrate this.</p>
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<p>Within this notebook, we will cover:</p>
+<ol class="arabic simple">
+<li><p>How to load a Kerchunk reference dataset created from a collection of GeoTIFFs</p></li>
+<li><p>How to use <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> to generate coordinates from a GeoTIFF reference dataset</p></li>
+</ol>
 </div>
 <div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concepts</p></th>
@@ -476,122 +459,85 @@ In this tutorial we will:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
-<td><p>Helpful</p></td>
-<td><p>Basic features</p></td>
+<tr class="row-even"><td><p><span class="xref myst">Kerchunk Basics</span></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://tutorial.xarray.dev/intro.html">Xarray Tutorial</a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
 </tr>
 </tbody>
 </table>
 <ul class="simple">
-<li><p><strong>Time to learn</strong>: 60 minutes</p></li>
+<li><p><strong>Time to learn</strong>: 45 minutes</p></li>
 </ul>
-</div>
 <hr class="docutils" />
-<div class="section" id="imports">
-<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>Here we will import a few <code class="docutils literal notranslate"><span class="pre">Python</span></code> libraries to help with our data processing.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">fsspec</span></code> will be used to read remote and local filesystems.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kerchunk.hdf</span></code> will be used to read a NetCDF file and create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference set.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ujson</span></code> for writing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> output to the <code class="docutils literal notranslate"><span class="pre">.json</span></code> file format.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Xarray</span></code> for examining out output dataset</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
-<span class="kn">import</span> <span class="nn">kerchunk.hdf</span>
-<span class="kn">import</span> <span class="nn">ujson</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="define-kwargs-for-fsspec">
-<h3>Define kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code><a class="headerlink" href="#define-kwargs-for-fsspec" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>In the dictionary definition in the next cell, we are passing options to <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/api.html?highlight=.open#fsspec.open"><code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code></a>. Any additional kwargs passed in this dictionary through <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> will pass as kwargs to the file system, in our case <code class="docutils literal notranslate"><span class="pre">s3</span></code>. The API docs for the <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> filesystem spec can be found <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/api.html">here</a>.</p>
-<p>In this example we are passing a few kwargs. In short they are:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">anon=True</span></code>: This is a <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that specifies you are not passing any connection credentials and are connecting to a public bucket.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">default_fill_cache=False</span></code>: <code class="docutils literal notranslate"><span class="pre">s3fs</span></code> kwarg that avoids caching in between chunks of files. This may lower memory usage when reading large files.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">default_cache_type=&quot;first&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> kwarg that specifies the caching strategy used buy <code class="docutils literal notranslate"><span class="pre">fsspec</span></code>. In this case, <code class="docutils literal notranslate"><span class="pre">first</span></code> caches the first block of a file only.</p></li>
-</ul>
-<p>Don’t worry too much about the details here; the cache options are those that have typically proven efficient for HDF5 files.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="parse-a-single-netcdf-file-with-kerchunk">
-<h3>Parse a single NetCDF file with kerchunk<a class="headerlink" href="#parse-a-single-netcdf-file-with-kerchunk" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>Below we will access a NetCDF file stored on the AWS cloud. This dataset is a single time slice of a climate downscaled product for Alaska.</p>
-<p>The steps in the cell below are as follows:</p>
-<ol class="arabic simple">
-<li><p>Define the url that points to the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file we want to process</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">fsspec.open</span></code> along with the dictionary of arguments we created (<code class="docutils literal notranslate"><span class="pre">so</span></code>) to open the URL pointing to the NetCDF file.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> method to read through the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file and extract the byte ranges, compression information and metadata.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">.translate</span></code> method on the output from the <code class="docutils literal notranslate"><span class="pre">kerchunk.hdf.SingleHdf5ToZarr</span></code> to translate content of the NetCDF file into the <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> format.</p></li>
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file named <code class="docutils literal notranslate"><span class="pre">single_file_kerchunk.json</span></code> and write the dataset information to disk.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc&quot;</span>
+<span class="kn">import</span> <span class="nn">xrefcoord</span>
 
-<span class="c1"># Uses kerchunk to scan through the netcdf file to create kerchunk mapping and then save output as .json</span>
-<span class="c1"># Note: In this example, we write the kerchunk output to a .json file.</span>
-<span class="c1"># You could also keep this information in memory and pass it to fsspec</span>
-<span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">inf</span><span class="p">:</span>
-    <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">kerchunk</span><span class="o">.</span><span class="n">hdf</span><span class="o">.</span><span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">inf</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="load-kerchunk-reference-file">
-<h3>Load <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> Reference File<a class="headerlink" href="#load-kerchunk-reference-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>In the section below we will use <code class="docutils literal notranslate"><span class="pre">fsspec.filesystem</span></code> along with the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file to open the <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file as if it were a <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> dataset.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use fsspec to create filesystem from .json reference file</span>
-<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span>
-    <span class="s2">&quot;reference&quot;</span><span class="p">,</span>
-    <span class="n">fo</span><span class="o">=</span><span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span>
-    <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span>
-    <span class="n">remote_options</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-    <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
 
-<span class="c1"># load kerchunked dataset with xarray</span>
+<span class="n">storage_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;remote_protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;s3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;skip_instance_cache&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>  <span class="c1"># options passed to fsspec</span>
+<span class="n">open_dataset_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;chunks&quot;</span><span class="p">:</span> <span class="p">{}}</span>  <span class="c1"># opens passed to xarray</span>
+
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="n">fs</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span> <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;consolidated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+    <span class="s2">&quot;references/RADAR.json&quot;</span><span class="p">,</span>
+    <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;kerchunk&quot;</span><span class="p">,</span>
+    <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span>
+    <span class="n">open_dataset_options</span><span class="o">=</span><span class="n">open_dataset_options</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-dataset">
-<h3>Plot Dataset<a class="headerlink" href="#plot-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">TMAX</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate coordinates from reference dataset</span>
+<span class="n">ref_ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">xref</span><span class="o">.</span><span class="n">generate_coords</span><span class="p">(</span><span class="n">time_dim_name</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">x_dim_name</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">y_dim_name</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="c1"># Rename to rain accumulation in 24 hour period</span>
+<span class="n">ref_ds</span> <span class="o">=</span> <span class="n">ref_ds</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="s2">&quot;rr24h&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-map">
+<h1>Create a Map<a class="headerlink" href="#create-a-map" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> to select a single time slice and create a map of 24 hour accumulated rainfall.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref_ds</span><span class="p">[</span><span class="s2">&quot;rr24h&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ref_ds</span><span class="o">.</span><span class="n">rr24h</span> <span class="o">&lt;</span> <span class="mi">60000</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f5629381b10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f39a2d7be80&gt;
 </pre></div>
 </div>
-<img alt="../../_images/30c5fb1f5d3da715d3fca7e8580cd215decd5ba4174901bd04c44bc92ca91428.png" src="../../_images/30c5fb1f5d3da715d3fca7e8580cd215decd5ba4174901bd04c44bc92ca91428.png" />
+<img alt="../../_images/98d3e311ae9d90062cc60add1df8647135d89f435b9cfece77df0e94e1642444.png" src="../../_images/98d3e311ae9d90062cc60add1df8647135d89f435b9cfece77df0e94e1642444.png" />
 </div>
 </div>
-<p>Note that the original .nc file size here is 16.8MB, and the created JSON is 26.5kB. These files also tend to compress very well. As you can see, it the JSON can be written anywhere, and gives us access to the underlying data, reading only the chunks we need from remote without downloading the whole file.</p>
+</div>
+<div class="section" id="create-a-time-series">
+<h1>Create a Time-Series<a class="headerlink" href="#create-a-time-series" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<p>Next we are plotting accumulated rain as a function of time for a specific point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ref_ds</span><span class="p">[</span><span class="s2">&quot;rr24h&quot;</span><span class="p">][:,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">700</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f39a3d15960&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/2407b7a877db427c9150681b908b3cdd777361fb0b8dc1bd1bcd147e7454e5b4.png" src="../../_images/2407b7a877db427c9150681b908b3cdd777361fb0b8dc1bd1bcd147e7454e5b4.png" />
 </div>
 </div>
 </div>
@@ -609,7 +555,7 @@ In this tutorial we will:</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./notebooks/foundations"
+            path: "./notebooks/using_references"
         },
         predefinedOutput: true
     }
@@ -619,17 +565,17 @@ In this tutorial we will:</p>
               </div>
               <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../how-to-cite.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Xarray.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">How to Cite This Cookbook</p>
+            <p class="prev-next-title">Load Kerchunked dataset with Xarray</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_kerchunk_multi_file.html" title="next page">
+    <a class='right-next' id="next-link" href="Datatree.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
+        <p class="prev-next-title">Kerchunk and Xarray-Datatree</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

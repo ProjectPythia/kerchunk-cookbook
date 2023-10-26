@@ -218,51 +218,76 @@ const thebe_selector_output = ".output, .cell_output"
    Kerchunk and Dask
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Advanced
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/foundations/04_kerchunk_reference_storage.html">
+  <a class="reference internal" href="notebooks/advanced/Parquet_Reference_Storage.html">
    Store Kerchunk Reference Files as Parquet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/advanced/Pangeo_Forge.html">
+   Kerchunk and Pangeo-Forge
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Case Studies
+  Generating Reference Files
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/case_studies/NetCDF_SMN_Arg.html">
-   Kerchunk and NetCDF/HDF5:  A Case Study using the Argentinian High Resolution Weather Forecast Dataset
+  <a class="reference internal" href="notebooks/generating_references/NetCDF.html">
+   NetCDF
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/case_studies/GRIB2_HRRR.html">
-   Kerchunk and GRIB2:  A Case Study using NOAA’s High-Resolution Rapid Refresh (HRRR) Dataset
+  <a class="reference internal" href="notebooks/generating_references/GRIB2.html">
+   GRIB2
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/case_studies/GeoTIFF_FMI.html">
-   Kerchunk, GeoTIFF and Generating Coordinates with
+  <a class="reference internal" href="notebooks/generating_references/GeoTIFF.html">
+   GeoTIFF
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using Pre-Generated References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/using_references/Xarray.html">
+   Load Kerchunked dataset with Xarray
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/using_references/Xrefcoord.html">
+   Use
    <code class="docutils literal notranslate">
     <span class="pre">
      xrefcoord
     </span>
    </code>
+   to Generate Coordinates
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/case_studies/NetCDF_Pangeo_Forge_gridMET.html">
-   Kerchunk and Pangeo-Forge
+  <a class="reference internal" href="notebooks/using_references/Datatree.html">
+   Kerchunk and Xarray-Datatree
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/case_studies/Streaming_Visualizations_with_Hvplot_Datashader.html">
+  <a class="reference internal" href="notebooks/using_references/Hvplot_Datashader.html">
    Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/case_studies/Kerchunk_DataTree.html">
-   Kerchunk and Xarray-Datatree at Scale
   </a>
  </li>
 </ul>
@@ -379,13 +404,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#section-2-case-studies">
-     Section 2 Case Studies
+    <a class="reference internal nav-link" href="#section-2-generating-reference-files">
+     Section 2 Generating Reference Files
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#future-additions-wishlist">
-     Future Additions / Wishlist
+    <a class="reference internal nav-link" href="#section-3-using-pre-generated-references">
+     Section 3 Using Pre-Generated References
     </a>
    </li>
   </ul>
@@ -470,29 +495,17 @@ how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk
 from single file sources, as well as to create
 multi-file virtual datasets from collections of files.</p>
 </div>
-<div class="section" id="section-2-case-studies">
-<h3>Section 2 Case Studies<a class="headerlink" href="#section-2-case-studies" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section
+<div class="section" id="section-2-generating-reference-files">
+<h3>Section 2 Generating Reference Files<a class="headerlink" href="#section-2-generating-reference-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Generating</span> <span class="pre">Reference</span> <span class="pre">Files</span></code> section
 demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create
 datasets for all the supported file formats.
 <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> currently supports NetCDF3,
-NetCDF4/HDF5, GRIB2, TIFF (including CoG)
-and FITS, but more file formats will
-be available in the future.</p>
+NetCDF4/HDF5, GRIB2, TIFF (including CoG).</p>
 </div>
-<div class="section" id="future-additions-wishlist">
-<h3>Future Additions / Wishlist<a class="headerlink" href="#future-additions-wishlist" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
-<p>This Pythia cookbook is a start, but there are
-many more details of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> that could be
-covered. If you have an idea of what to add or
-would like to contribute, please open up a PR or issue.</p>
-<p>Some possible additions:</p>
-<ul class="simple">
-<li><p>Diving into the details: The nitty-gritty on how <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> works.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">Parquet</span></code>: what are the benefits of using parquet for reference file storage.</p></li>
-<li><p>Appending to a Kerchunk dataset:
-How to schedule processing of newly added data files and how to add them to a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> dataset.</p></li>
-</ul>
+<div class="section" id="section-3-using-pre-generated-references">
+<h3>Section 3 Using Pre-Generated References<a class="headerlink" href="#section-3-using-pre-generated-references" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Pre-Generated</span> <span class="pre">References</span></code> section contains notebooks demonstrating how to load existing references into <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Xarray-Datatree</span></code>, generated coordinates for GeoTiffs using <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> and plotting using <code class="docutils literal notranslate"><span class="pre">Hvplot</span> <span class="pre">Datashader</span></code>.</p>
 </div>
 </div>
 <div class="section" id="running-the-notebooks">
@@ -547,6 +560,10 @@ jupyter<span class="w"> </span>lab
 </li>
 </ol>
 </div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -631,7 +648,7 @@ jupyter<span class="w"> </span>lab
         
           By Norland Raphael Hagen.
         
-          Last updated on 10 October 2023.
+          Last updated on 26 October 2023.
         </p>
       </div>
     </div>

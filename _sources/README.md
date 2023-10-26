@@ -55,29 +55,17 @@ how to use `Kerchunk` to create reference sets
 from single file sources, as well as to create
 multi-file virtual datasets from collections of files.
 
-### Section 2 Case Studies
+### Section 2 Generating Reference Files
 
-The notebooks in the `Case Studies` section
+The notebooks in the `Generating Reference Files` section
 demonstrate how to use `Kerchunk` to create
 datasets for all the supported file formats.
 `Kerchunk` currently supports NetCDF3,
-NetCDF4/HDF5, GRIB2, TIFF (including CoG)
-and FITS, but more file formats will
-be available in the future.
+NetCDF4/HDF5, GRIB2, TIFF (including CoG).
 
-### Future Additions / Wishlist
+### Section 3 Using Pre-Generated References
 
-This Pythia cookbook is a start, but there are
-many more details of `Kerchunk` that could be
-covered. If you have an idea of what to add or
-would like to contribute, please open up a PR or issue.
-
-Some possible additions:
-
-- Diving into the details: The nitty-gritty on how `Kerchunk` works.
-- `Kerchunk` and `Parquet`: what are the benefits of using parquet for reference file storage.
-- Appending to a Kerchunk dataset:
-  How to schedule processing of newly added data files and how to add them to a `Kerchunk` dataset.
+The `Pre-Generated References` section contains notebooks demonstrating how to load existing references into `Xarray` and `Xarray-Datatree`, generated coordinates for GeoTiffs using `xrefcoord` and plotting using `Hvplot Datashader`.
 
 ## Running the Notebooks
 
