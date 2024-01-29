@@ -447,6 +447,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
      Combine In-Memory References with MultiZarrToZarr
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shutdown-the-dask-cluster">
+   Shutdown the Dask cluster
+  </a>
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#load-kerchunked-dataset">
      Load kerchunked dataset
@@ -514,15 +521,16 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">fsspec.implementations.reference</span> <span class="kn">import</span> <span class="n">LazyReferenceMapper</span><span class="p">,</span> <span class="n">ReferenceFileSystem</span>
 <span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
 <span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">fsspec.implementations.reference</span> <span class="kn">import</span> <span class="n">LazyReferenceMapper</span><span class="p">,</span> <span class="n">ReferenceFileSystem</span>
-<span class="kn">import</span> <span class="nn">fsspec</span>
-<span class="kn">import</span> <span class="nn">dask</span>
-<span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 </pre></div>
 </div>
 </div>
@@ -542,7 +550,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-2c3aecb9-744c-11ee-8ed7-6045bde2c845</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-7bebecef-bee9-11ee-8e76-000d3a37e8a3</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -577,7 +585,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">810550d7</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">40d6833c</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -592,7 +600,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     <strong>Total threads:</strong> 8
                 </td>
                 <td style="text-align: left;">
-                    <strong>Total memory:</strong> 6.76 GiB
+                    <strong>Total memory:</strong> 15.61 GiB
                 </td>
             </tr>
             
@@ -614,11 +622,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-cb8d0ba1-8f10-473b-9f06-e82c3e3e2d63</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-f7074ab8-dbf2-4a58-8642-7c26cfe2b115</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:44853
+                        <strong>Comm:</strong> tcp://127.0.0.1:33471
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -637,7 +645,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                         <strong>Started:</strong> Just now
                     </td>
                     <td style="text-align: left;">
-                        <strong>Total memory:</strong> 6.76 GiB
+                        <strong>Total memory:</strong> 15.61 GiB
                     </td>
                 </tr>
             </table>
@@ -660,7 +668,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45861
+                            <strong>Comm: </strong> tcp://127.0.0.1:40801
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -668,21 +676,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36865/status" target="_blank">http://127.0.0.1:36865/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44719/status" target="_blank">http://127.0.0.1:44719/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40115
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45661
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-j5q0xlps
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-jebniwfi
                         </td>
                     </tr>
 
@@ -705,7 +713,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45567
+                            <strong>Comm: </strong> tcp://127.0.0.1:34829
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -713,21 +721,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35763/status" target="_blank">http://127.0.0.1:35763/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35661/status" target="_blank">http://127.0.0.1:35661/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40067
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38905
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-hz77pn_f
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-c2blgsw1
                         </td>
                     </tr>
 
@@ -750,7 +758,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:34137
+                            <strong>Comm: </strong> tcp://127.0.0.1:34397
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -758,21 +766,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36963/status" target="_blank">http://127.0.0.1:36963/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44723/status" target="_blank">http://127.0.0.1:44723/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39889
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42587
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-cekjj7jl
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-hfr0xwk8
                         </td>
                     </tr>
 
@@ -795,7 +803,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45953
+                            <strong>Comm: </strong> tcp://127.0.0.1:44399
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -803,21 +811,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42279/status" target="_blank">http://127.0.0.1:42279/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33881/status" target="_blank">http://127.0.0.1:33881/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:33671
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38589
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-7on7kwww
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-f8o_y3ig
                         </td>
                     </tr>
 
@@ -840,7 +848,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41077
+                            <strong>Comm: </strong> tcp://127.0.0.1:36495
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -848,21 +856,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36105/status" target="_blank">http://127.0.0.1:36105/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38155/status" target="_blank">http://127.0.0.1:38155/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:35437
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35265
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ui9uho9s
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-4j8l5jg7
                         </td>
                     </tr>
 
@@ -885,7 +893,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:33667
+                            <strong>Comm: </strong> tcp://127.0.0.1:44419
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -893,21 +901,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46883/status" target="_blank">http://127.0.0.1:46883/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44599/status" target="_blank">http://127.0.0.1:44599/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46473
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46399
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-i4at2up0
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-lsn67eri
                         </td>
                     </tr>
 
@@ -930,7 +938,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:33929
+                            <strong>Comm: </strong> tcp://127.0.0.1:37165
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -938,21 +946,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42751/status" target="_blank">http://127.0.0.1:42751/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34543/status" target="_blank">http://127.0.0.1:34543/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38317
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42139
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ohc5f9pn
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6hbg5sd9
                         </td>
                     </tr>
 
@@ -975,7 +983,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:36315
+                            <strong>Comm: </strong> tcp://127.0.0.1:35685
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -983,21 +991,21 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40499/status" target="_blank">http://127.0.0.1:40499/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45475/status" target="_blank">http://127.0.0.1:45475/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:45243
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43565
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-f53jlvtn
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-3izx135b
                         </td>
                     </tr>
 
@@ -1050,7 +1058,8 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>Below we will create a <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem to read the references from <code class="docutils literal notranslate"><span class="pre">s3</span></code> and create a function to generate dask delayed tasks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index from a NetCDF file.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk`</span>
+<span class="c1"># index from a NetCDF file.</span>
 <span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
 
@@ -1111,19 +1120,30 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;combined.parq&quot;</span><span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;combined.parq&quot;</span><span class="p">)</span>
 
-<span class="n">out</span> <span class="o">=</span> <span class="n">LazyReferenceMapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;combined.parq&quot;</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">LazyReferenceMapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;combined.parq&quot;</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span> <span class="n">record_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="n">mzz</span> <span class="o">=</span> <span class="n">MultiZarrToZarr</span><span class="p">(</span>
     <span class="n">single_refs</span><span class="p">,</span>
-    <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;memory&quot;</span><span class="p">,</span>
+    <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span>
     <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span>
     <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">],</span>
+    <span class="n">remote_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
     <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">,</span>
 <span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">()</span>
 
 <span class="n">out</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="shutdown-the-dask-cluster">
+<h1>Shutdown the Dask cluster<a class="headerlink" href="#shutdown-the-dask-cluster" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1524,8 +1544,8 @@ Coordinates:
     lat                (time, y, x) float32 ...
     lon                (time, y, x) float32 ...
   * time               (time) datetime64[ns] 2022-12-31T12:00:00 2022-12-31T1...
-  * x                  (x) float32 1.401e-45 3.089e-41 1.502e-42 ... 0.0 0.0 0.0
-  * y                  (y) float32 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0
+  * x                  (x) float32 1.401e-45 3.09e-41 1.502e-42 ... 0.0 0.0 0.0
+  * y                  (y) float32 1.123e-41 0.0 3.913e-39 0.0 ... 0.0 0.0 0.0
 Data variables:
     HR2                (time, y, x) float32 ...
     Lambert_Conformal  (time) float32 ...
@@ -1546,23 +1566,32 @@ Attributes: (12/18)
     source:          OUTPUT FROM WRF V4.0 MODEL
     start_lat:      -54.386837005615234
     start_lon:      -94.330810546875
-    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-288a0690-312f-46b4-b0d0-e9468096f8fe' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-288a0690-312f-46b4-b0d0-e9468096f8fe' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-035db67c-f330-4395-9447-6a705006e9f0' class='xr-section-summary-in' type='checkbox'  checked><label for='section-035db67c-f330-4395-9447-6a705006e9f0' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-aa2f50c6-dd18-4bdf-b7a7-0d0429c05beb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-aa2f50c6-dd18-4bdf-b7a7-0d0429c05beb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-09557acf-2c5e-49aa-86cf-621abbf7a013' class='xr-var-data-in' type='checkbox'><label for='data-09557acf-2c5e-49aa-86cf-621abbf7a013' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-7fa2c466-7fa3-4122-b6a0-5ad1d04ed114' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7fa2c466-7fa3-4122-b6a0-5ad1d04ed114' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9890979c-29ae-4089-9843-4647489686c0' class='xr-var-data-in' type='checkbox'><label for='data-9890979c-29ae-4089-9843-4647489686c0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-31T12:00:00 2022-12-31T1...</div><input id='attrs-45665de6-3551-403f-9686-663911dcf188' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-45665de6-3551-403f-9686-663911dcf188' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5062b669-f49e-46da-857e-0488d0357101' class='xr-var-data-in' type='checkbox'><label for='data-5062b669-f49e-46da-857e-0488d0357101' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 12:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-31T12:00:00.000000000&#x27;, &#x27;2022-12-31T13:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.401e-45 3.089e-41 ... 0.0 0.0</div><input id='attrs-368a9e68-6408-452b-acdc-fc6c2a4965f9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-368a9e68-6408-452b-acdc-fc6c2a4965f9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c1da5e72-9e5e-4380-a69a-a9b4d71a7a9d' class='xr-var-data-in' type='checkbox'><label for='data-c1da5e72-9e5e-4380-a69a-a9b4d71a7a9d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([1.4013e-45, 3.0889e-41, 1.5022e-42, ..., 0.0000e+00, 0.0000e+00,
-       0.0000e+00], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-9895f681-b56b-48b5-bc4b-33f1ca2270e0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9895f681-b56b-48b5-bc4b-33f1ca2270e0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-292bd44f-9616-4e10-8fee-93565c1626ea' class='xr-var-data-in' type='checkbox'><label for='data-292bd44f-9616-4e10-8fee-93565c1626ea' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([0., 0., 0., ..., 0., 0., 0.], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-659c6eeb-0524-4ccd-8b83-cfb2966ee019' class='xr-section-summary-in' type='checkbox'  checked><label for='section-659c6eeb-0524-4ccd-8b83-cfb2966ee019' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-6ccd210f-64ad-4aa4-8fc5-44dbd390bc9e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6ccd210f-64ad-4aa4-8fc5-44dbd390bc9e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ca9d8784-1c42-4552-9d34-356ec5ff402d' class='xr-var-data-in' type='checkbox'><label for='data-ca9d8784-1c42-4552-9d34-356ec5ff402d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>percent</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-fb08c365-4be3-4d3b-bf1b-efb28260f4a6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fb08c365-4be3-4d3b-bf1b-efb28260f4a6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5e34b173-593e-4f1c-bbb9-2a8d9cf38360' class='xr-var-data-in' type='checkbox'><label for='data-5e34b173-593e-4f1c-bbb9-2a8d9cf38360' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.9999885559082</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd><dt><span>standard_parallel :</span></dt><dd>[-35.0, -35.0]</dd></dl></div><div class='xr-var-data'><pre>[2 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f995746d-908d-4ee6-a626-7dcae6f4eb53' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f995746d-908d-4ee6-a626-7dcae6f4eb53' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-77cf75ef-42e4-4fbc-bb09-e474a4d6277a' class='xr-var-data-in' type='checkbox'><label for='data-77cf75ef-42e4-4fbc-bb09-e474a4d6277a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>units :</span></dt><dd>millimeter</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-abc5ea8f-d928-46fd-b05e-e6683c93f085' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-abc5ea8f-d928-46fd-b05e-e6683c93f085' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ec054821-9d2d-49e9-9757-ce538e66b59e' class='xr-var-data-in' type='checkbox'><label for='data-ec054821-9d2d-49e9-9757-ce538e66b59e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-1d92e900-8ebe-40bc-b052-65664ac6b07b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1d92e900-8ebe-40bc-b052-65664ac6b07b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1160b009-ba32-42cc-b8fc-d7b4b4700bf2' class='xr-var-data-in' type='checkbox'><label for='data-1160b009-ba32-42cc-b8fc-d7b4b4700bf2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>units :</span></dt><dd>degree</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a36e30ec-b1b4-42a4-a4f4-93c11825ae3a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a36e30ec-b1b4-42a4-a4f4-93c11825ae3a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6a3f9b1e-883c-4f50-a988-b76e0ee08869' class='xr-var-data-in' type='checkbox'><label for='data-6a3f9b1e-883c-4f50-a988-b76e0ee08869' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>meter / second</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-760af47d-0a26-43fc-97f4-a609d9d1e91a' class='xr-section-summary-in' type='checkbox'  ><label for='section-760af47d-0a26-43fc-97f4-a609d9d1e91a' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-d3f4ddde-6f19-403a-a46d-2b1675e31868' class='xr-index-data-in' type='checkbox'/><label for='index-d3f4ddde-6f19-403a-a46d-2b1675e31868' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-31 12:00:00&#x27;, &#x27;2022-12-31 13:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-50f68016-01a3-408c-84b9-e9e7719a7da2' class='xr-index-data-in' type='checkbox'/><label for='index-50f68016-01a3-408c-84b9-e9e7719a7da2' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([ 1.401298464324817e-45, 3.0888822049111943e-41,
+    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-cfe5140d-ff32-4eb4-9ab3-cf26ed423aec' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cfe5140d-ff32-4eb4-9ab3-cf26ed423aec' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 2</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-7802ef15-b133-4886-a4c4-1a5ed1b643e9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7802ef15-b133-4886-a4c4-1a5ed1b643e9' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-610dbeb3-47fd-464d-84e9-1b1f38884f22' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-610dbeb3-47fd-464d-84e9-1b1f38884f22' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e01e0803-ed9b-461e-9db7-408417d1fd7c' class='xr-var-data-in' type='checkbox'><label for='data-e01e0803-ed9b-461e-9db7-408417d1fd7c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f8c8af4e-b830-45af-b525-2a869c66a8d0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f8c8af4e-b830-45af-b525-2a869c66a8d0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d08734bf-89d1-4811-b266-56442bfab599' class='xr-var-data-in' type='checkbox'><label for='data-d08734bf-89d1-4811-b266-56442bfab599' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-31T12:00:00 2022-12-31T1...</div><input id='attrs-7759b127-bb83-4b1f-9973-443252686128' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7759b127-bb83-4b1f-9973-443252686128' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8fcb1bc3-8c89-4023-9faf-9289639fd5a8' class='xr-var-data-in' type='checkbox'><label for='data-8fcb1bc3-8c89-4023-9faf-9289639fd5a8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 12:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-31T12:00:00.000000000&#x27;, &#x27;2022-12-31T13:00:00.000000000&#x27;],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.401e-45 3.09e-41 ... 0.0 0.0</div><input id='attrs-c711a4e2-700b-4828-99ca-b5db3d58c15c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c711a4e2-700b-4828-99ca-b5db3d58c15c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bcb5bdaf-a905-475f-9d1a-1c0cc6d6052c' class='xr-var-data-in' type='checkbox'><label for='data-bcb5bdaf-a905-475f-9d1a-1c0cc6d6052c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([1.4013e-45, 3.0899e-41, 1.5022e-42, ..., 0.0000e+00, 0.0000e+00,
+       0.0000e+00], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.123e-41 0.0 3.913e-39 ... 0.0 0.0</div><input id='attrs-05e51ced-f767-40e3-80b1-3a3b0dc98f7b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-05e51ced-f767-40e3-80b1-3a3b0dc98f7b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f671bc62-28c0-42a5-8cb9-8347379f7e76' class='xr-var-data-in' type='checkbox'><label for='data-f671bc62-28c0-42a5-8cb9-8347379f7e76' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([1.123281e-41, 0.000000e+00, 3.913189e-39, ..., 0.000000e+00,
+       0.000000e+00, 0.000000e+00], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e0e3bb42-c4b2-4b21-a5f5-a3a64d24f69d' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e0e3bb42-c4b2-4b21-a5f5-a3a64d24f69d' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-12db5472-33b0-4773-83f2-1c603759454a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-12db5472-33b0-4773-83f2-1c603759454a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-545f50be-22e6-4c3d-9eeb-7ef809ae1be5' class='xr-var-data-in' type='checkbox'><label for='data-545f50be-22e6-4c3d-9eeb-7ef809ae1be5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>percent</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f44f6101-7766-47f9-90d3-d00b9949f484' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f44f6101-7766-47f9-90d3-d00b9949f484' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-343ac778-f6a3-4d3b-b0b1-7e03b81d91a2' class='xr-var-data-in' type='checkbox'><label for='data-343ac778-f6a3-4d3b-b0b1-7e03b81d91a2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.9999885559082</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd><dt><span>standard_parallel :</span></dt><dd>[-35.0, -35.0]</dd></dl></div><div class='xr-var-data'><pre>[2 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-bc3a478e-016b-4cd2-8586-5c74da8b54b9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bc3a478e-016b-4cd2-8586-5c74da8b54b9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d325caba-bef0-426c-99be-0f5af49e0a15' class='xr-var-data-in' type='checkbox'><label for='data-d325caba-bef0-426c-99be-0f5af49e0a15' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>units :</span></dt><dd>millimeter</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-dc337734-54a0-4094-97f9-487a99487e19' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dc337734-54a0-4094-97f9-487a99487e19' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fc750a00-5396-43d0-8762-e9612a9c6138' class='xr-var-data-in' type='checkbox'><label for='data-fc750a00-5396-43d0-8762-e9612a9c6138' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e9830a68-d9ee-4f5d-bc5b-b8809ed21cf5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e9830a68-d9ee-4f5d-bc5b-b8809ed21cf5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-504edab6-ec26-4b3a-ac3c-19fd8fbb2e7c' class='xr-var-data-in' type='checkbox'><label for='data-504edab6-ec26-4b3a-ac3c-19fd8fbb2e7c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>units :</span></dt><dd>degree</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a6ccb68a-ca8d-4d98-ae08-7dacac1b452a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a6ccb68a-ca8d-4d98-ae08-7dacac1b452a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c374e0e9-2905-4499-98ab-dc6b7309a96b' class='xr-var-data-in' type='checkbox'><label for='data-c374e0e9-2905-4499-98ab-dc6b7309a96b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>meter / second</dd></dl></div><div class='xr-var-data'><pre>[2495502 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b437de95-01b2-4811-9439-2a61992a0dbe' class='xr-section-summary-in' type='checkbox'  ><label for='section-b437de95-01b2-4811-9439-2a61992a0dbe' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-2dfb5c74-f316-422b-b12d-3b950d740d6a' class='xr-index-data-in' type='checkbox'/><label for='index-2dfb5c74-f316-422b-b12d-3b950d740d6a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-31 12:00:00&#x27;, &#x27;2022-12-31 13:00:00&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-0d3f92f0-4e65-41e2-8b6e-3984f2ff2229' class='xr-index-data-in' type='checkbox'/><label for='index-0d3f92f0-4e65-41e2-8b6e-3984f2ff2229' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([ 1.401298464324817e-45, 3.0898631138362216e-41,
                1.502191953756204e-42,                    0.0,
                4.203895392974451e-45,                    0.0,
-               2.072271254454272e+16, 4.5783223426420423e-41,
-              -6.280260673168902e+21, 3.0888822049111943e-41,
+               -0.013426338322460651, 4.5891123408173434e-41,
+              1.0636414554036916e-30, 3.0898631138362216e-41,
               ...
                                  0.0,                    0.0,
                                  0.0,                    0.0,
                                  0.0,                    0.0,
                                  0.0,                    0.0,
                                  0.0,                    0.0],
-             dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7513c3c7-936c-4ee3-a4a5-f9bd6c3cd929' class='xr-index-data-in' type='checkbox'/><label for='index-7513c3c7-936c-4ee3-a4a5-f9bd6c3cd929' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+             dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-e0b7d443-72ae-46b1-9c35-c19202ca4ea2' class='xr-index-data-in' type='checkbox'/><label for='index-e0b7d443-72ae-46b1-9c35-c19202ca4ea2' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([1.1232808490027734e-41,                    0.0,
+               3.913189020057946e-39,                    0.0,
+              1.3406693030423358e+37, 4.5891123408173434e-41,
+              1.3959713210676524e+37, 4.5891123408173434e-41,
+              1.3406551053556132e+37, 4.5891123408173434e-41,
               ...
-              0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-             dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-2c8c159b-9682-4f6a-ab03-62b266336860' class='xr-section-summary-in' type='checkbox'  ><label for='section-2c8c159b-9682-4f6a-ab03-62b266336860' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CEN_LAT :</span></dt><dd>-34.9999885559082</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_12:00:00</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>end_lat :</span></dt><dd>-11.645957946777344</dd><dt><span>end_lon :</span></dt><dd>-47.96868896484375</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837005615234</dd><dt><span>start_lon :</span></dt><dd>-94.330810546875</dd><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd></dl></div></li></ul></div></div></div></div>
+                                 0.0,                    0.0,
+                                 0.0,                    0.0,
+                                 0.0,                    0.0,
+                                 0.0,                    0.0,
+                                 0.0,                    0.0],
+             dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f17d2e80-1975-428c-bec0-67ca9648b667' class='xr-section-summary-in' type='checkbox'  ><label for='section-f17d2e80-1975-428c-bec0-67ca9648b667' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CEN_LAT :</span></dt><dd>-34.9999885559082</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_12:00:00</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>end_lat :</span></dt><dd>-11.645957946777344</dd><dt><span>end_lon :</span></dt><dd>-47.96868896484375</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837005615234</dd><dt><span>start_lon :</span></dt><dd>-94.330810546875</dd><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd></dl></div></li></ul></div></div></div></div>
 </div>
 </div>
 </div>
@@ -1649,7 +1678,7 @@ Attributes: (12/18)
         
           By Norland Raphael Hagen.
         
-          Last updated on 26 October 2023.
+          Last updated on 29 January 2024.
         </p>
       </div>
     </div>

@@ -540,7 +540,8 @@ In this tutorial we will:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Input URL to dataset. Note this is a netcdf file stored on s3 (cloud dataset).</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc&quot;</span>
 
-<span class="c1"># Uses kerchunk to scan through the netcdf file to create kerchunk mapping and then save output as .json</span>
+<span class="c1"># Uses kerchunk to scan through the netcdf file to create kerchunk mapping and</span>
+<span class="c1"># then save output as .json.</span>
 <span class="c1"># Note: In this example, we write the kerchunk output to a .json file.</span>
 <span class="c1"># You could also keep this information in memory and pass it to fsspec</span>
 <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">inf</span><span class="p">:</span>
@@ -585,10 +586,10 @@ In this tutorial we will:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f5629381b10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f025ed7f880&gt;
 </pre></div>
 </div>
-<img alt="../../_images/30c5fb1f5d3da715d3fca7e8580cd215decd5ba4174901bd04c44bc92ca91428.png" src="../../_images/30c5fb1f5d3da715d3fca7e8580cd215decd5ba4174901bd04c44bc92ca91428.png" />
+<img alt="../../_images/da03560a6243f04644cb1fc0300d8710809353756da64b228445383be9aa412d.png" src="../../_images/da03560a6243f04644cb1fc0300d8710809353756da64b228445383be9aa412d.png" />
 </div>
 </div>
 <p>Note that the original .nc file size here is 16.8MB, and the created JSON is 26.5kB. These files also tend to compress very well. As you can see, it the JSON can be written anywhere, and gives us access to the underlying data, reading only the chunks we need from remote without downloading the whole file.</p>
@@ -678,7 +679,7 @@ In this tutorial we will:</p>
         
           By Norland Raphael Hagen.
         
-          Last updated on 26 October 2023.
+          Last updated on 29 January 2024.
         </p>
       </div>
     </div>

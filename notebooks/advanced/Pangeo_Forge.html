@@ -511,10 +511,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f3f15c477f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f8406dde350&gt;
 </pre></div>
 </div>
-<img alt="../../_images/836cd871569da49aa0a6c4589e22a0e8e1ad5520001a1e22743c023acd2222c1.png" src="../../_images/836cd871569da49aa0a6c4589e22a0e8e1ad5520001a1e22743c023acd2222c1.png" />
+<img alt="../../_images/2e6d8d14858ff1ed844782cecbde8caf67ad27ea505e74ab7edcdb0c7ed0c668.png" src="../../_images/2e6d8d14858ff1ed844782cecbde8caf67ad27ea505e74ab7edcdb0c7ed0c668.png" />
 </div>
 </div>
 </div>
@@ -526,7 +526,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <p>To speed up our example, we will <code class="docutils literal notranslate"><span class="pre">prune</span></code> our recipe to select the first two entries in the <code class="docutils literal notranslate"><span class="pre">FilePattern</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pangeo_forge_recipes.patterns</span> <span class="kn">import</span> <span class="n">ConcatDim</span><span class="p">,</span> <span class="n">FilePattern</span><span class="p">,</span> <span class="n">MergeDim</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pangeo_forge_recipes.patterns</span> <span class="kn">import</span> <span class="n">ConcatDim</span><span class="p">,</span> <span class="n">FilePattern</span>
 
 <span class="n">years</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1979</span><span class="p">,</span> <span class="mi">2022</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
@@ -581,18 +581,16 @@ Processing steps are chained together with the pipe operator (<code class="docut
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">apache_beam</span> <span class="k">as</span> <span class="nn">beam</span>
-<span class="kn">from</span> <span class="nn">pangeo_forge_recipes.transforms</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">OpenWithKerchunk</span><span class="p">,</span>
-    <span class="n">WriteCombinedReference</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pangeo_forge_recipes.transforms</span> <span class="kn">import</span> <span class="n">OpenWithKerchunk</span><span class="p">,</span> <span class="n">WriteCombinedReference</span>
 
 <span class="n">transforms</span> <span class="o">=</span> <span class="p">(</span>
     <span class="c1"># Create a beam PCollection from our input file pattern</span>
     <span class="n">beam</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
     <span class="c1"># Open with Kerchunk and create references for each file</span>
     <span class="o">|</span> <span class="n">OpenWithKerchunk</span><span class="p">(</span><span class="n">file_type</span><span class="o">=</span><span class="n">pattern</span><span class="o">.</span><span class="n">file_type</span><span class="p">)</span>
-    <span class="c1"># Use Kerchunk&#39;s `MultiZarrToZarr` functionality to combine and then write references.</span>
-    <span class="c1"># *Note*: Setting the correct contact_dims and identical_dims is important.</span>
+    <span class="c1"># Use Kerchunk&#39;s `MultiZarrToZarr` functionality to combine and</span>
+    <span class="c1"># then write references. Note: Setting the correct contact_dims</span>
+    <span class="c1"># and identical_dims is important.</span>
     <span class="o">|</span> <span class="n">WriteCombinedReference</span><span class="p">(</span>
         <span class="n">target_root</span><span class="o">=</span><span class="n">target_root</span><span class="p">,</span>
         <span class="n">store_name</span><span class="o">=</span><span class="n">store_name</span><span class="p">,</span>
@@ -637,8 +635,80 @@ Processing steps are chained together with the pipe operator (<code class="docut
           window.interactive_beam_jquery(document).ready(function($){
             
           });
-        }</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.72 s, sys: 125 ms, total: 1.84 s
-Wall time: 24.9 s
+        }</script><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">2</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/transforms/ptransform.py:623,</span> in <span class="ni">PTransform.__ror__</span><span class="nt">(self, left, label)</span>
+<span class="g g-Whitespace">    </span><span class="mi">621</span> <span class="n">pvalueish</span> <span class="o">=</span> <span class="n">_SetInputPValues</span><span class="p">()</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">pvalueish</span><span class="p">,</span> <span class="n">replacements</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">p</span>
+<span class="ne">--&gt; </span><span class="mi">623</span> <span class="n">result</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pvalueish</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span> <span class="k">if</span> <span class="n">deferred</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">625</span>   <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/pipeline.py:731,</span> in <span class="ni">Pipeline.apply</span><span class="nt">(self, transform, pvalueish, label)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">if</span> <span class="n">type_options</span><span class="o">.</span><span class="n">pipeline_type_check</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>   <span class="n">transform</span><span class="o">.</span><span class="n">type_check_inputs</span><span class="p">(</span><span class="n">pvalueish</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">731</span> <span class="n">pvalueish_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">runner</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">pvalueish</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">733</span> <span class="k">if</span> <span class="n">type_options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">type_options</span><span class="o">.</span><span class="n">pipeline_type_check</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">734</span>   <span class="n">transform</span><span class="o">.</span><span class="n">type_check_outputs</span><span class="p">(</span><span class="n">pvalueish_result</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/runner.py:203,</span> in <span class="ni">PipelineRunner.apply</span><span class="nt">(self, transform, input, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>           <span class="n">transform</span><span class="p">,</span>  <span class="c1"># type: PTransform</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span>           <span class="nb">input</span><span class="p">,</span>  <span class="c1"># type: Optional[pvalue.PValue]</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span>           <span class="n">options</span>  <span class="c1"># type: PipelineOptions</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>          <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span>   <span class="c1"># TODO(robertwb): Remove indirection once internal references are fixed.</span>
+<span class="ne">--&gt; </span><span class="mi">203</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_PTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/runner.py:207,</span> in <span class="ni">PipelineRunner.apply_PTransform</span><span class="nt">(self, transform, input, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span> <span class="k">def</span> <span class="nf">apply_PTransform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>   <span class="c1"># TODO(robertwb): Remove indirection once internal references are fixed.</span>
+<span class="ne">--&gt; </span><span class="mi">207</span>   <span class="k">return</span> <span class="n">transform</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/transforms/ptransform.py:831,</span> in <span class="ni">_ChainedPTransform.expand</span><span class="nt">(self, pval)</span>
+<span class="g g-Whitespace">    </span><span class="mi">830</span> <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pval</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">831</span>   <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">or_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span><span class="p">,</span> <span class="n">pval</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/pvalue.py:137,</span> in <span class="ni">PValue.__or__</span><span class="nt">(self, ptransform)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="k">def</span> <span class="fm">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptransform</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">ptransform</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/pipeline.py:731,</span> in <span class="ni">Pipeline.apply</span><span class="nt">(self, transform, pvalueish, label)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">if</span> <span class="n">type_options</span><span class="o">.</span><span class="n">pipeline_type_check</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>   <span class="n">transform</span><span class="o">.</span><span class="n">type_check_inputs</span><span class="p">(</span><span class="n">pvalueish</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">731</span> <span class="n">pvalueish_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">runner</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">pvalueish</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">733</span> <span class="k">if</span> <span class="n">type_options</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">type_options</span><span class="o">.</span><span class="n">pipeline_type_check</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">734</span>   <span class="n">transform</span><span class="o">.</span><span class="n">type_check_outputs</span><span class="p">(</span><span class="n">pvalueish_result</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/runner.py:203,</span> in <span class="ni">PipelineRunner.apply</span><span class="nt">(self, transform, input, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>           <span class="n">transform</span><span class="p">,</span>  <span class="c1"># type: PTransform</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span>           <span class="nb">input</span><span class="p">,</span>  <span class="c1"># type: Optional[pvalue.PValue]</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span>           <span class="n">options</span>  <span class="c1"># type: PipelineOptions</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>          <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span>   <span class="c1"># TODO(robertwb): Remove indirection once internal references are fixed.</span>
+<span class="ne">--&gt; </span><span class="mi">203</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_PTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/runner.py:207,</span> in <span class="ni">PipelineRunner.apply_PTransform</span><span class="nt">(self, transform, input, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span> <span class="k">def</span> <span class="nf">apply_PTransform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>   <span class="c1"># TODO(robertwb): Remove indirection once internal references are fixed.</span>
+<span class="ne">--&gt; </span><span class="mi">207</span>   <span class="k">return</span> <span class="n">transform</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/transforms.py:543,</span> in <span class="ni">WriteCombinedReference.expand</span><span class="nt">(self, references)</span>
+<span class="g g-Whitespace">    </span><span class="mi">541</span> <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">references</span><span class="p">:</span> <span class="n">beam</span><span class="o">.</span><span class="n">PCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">PCollection</span><span class="p">[</span><span class="n">zarr</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">FSStore</span><span class="p">]:</span>
+<span class="g g-Whitespace">    </span><span class="mi">542</span>     <span class="c1"># unpack fsspec options that will be used below for transforms without dep injection</span>
+<span class="ne">--&gt; </span><span class="mi">543</span>     <span class="n">storage_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_root</span><span class="o">.</span><span class="n">fsspec_kwargs</span>  <span class="c1"># type: ignore[union-attr]</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span>     <span class="n">remote_protocol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_root</span><span class="o">.</span><span class="n">get_fsspec_remote_protocol</span><span class="p">()</span>  <span class="c1"># type: ignore[union-attr]</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span>     <span class="k">return</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">547</span>         <span class="n">references</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span>         <span class="o">|</span> <span class="n">CombineReferences</span><span class="p">(</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span>     <span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;str&#39; object has no attribute &#39;fsspec_kwargs&#39;
 </pre></div>
 </div>
 </div>
@@ -728,7 +798,7 @@ Wall time: 24.9 s
         
           By Norland Raphael Hagen.
         
-          Last updated on 26 October 2023.
+          Last updated on 29 January 2024.
         </p>
       </div>
     </div>

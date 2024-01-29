@@ -486,6 +486,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shut-down-the-dask-cluster">
+   Shut down the Dask cluster
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -569,15 +574,13 @@ NOAA releases a copy of this dataset via the AWS Registry of Open Data.</p>
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
-<span class="kn">import</span> <span class="nn">glob</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
 
 <span class="kn">import</span> <span class="nn">dask</span>
 <span class="kn">import</span> <span class="nn">fsspec</span>
 <span class="kn">import</span> <span class="nn">ujson</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">from</span> <span class="nn">distributed</span> <span class="kn">import</span> <span class="n">Client</span>
 <span class="kn">from</span> <span class="nn">kerchunk.combine</span> <span class="kn">import</span> <span class="n">MultiZarrToZarr</span>
 <span class="kn">from</span> <span class="nn">kerchunk.grib2</span> <span class="kn">import</span> <span class="n">scan_grib</span>
@@ -599,12 +602,13 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <span class="n">days_available</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.*&quot;</span><span class="p">)</span>
 
 <span class="c1"># Read HRRR GRIB2 files from April 19, 2023</span>
-<span class="n">files</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.20230419/conus/*wrfsfcf01.grib2&quot;</span><span class="p">)</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://noaa-hrrr-bdp-pds/hrrr.20230419/conus/*wrfsfcf01.grib2&quot;</span><span class="p">)</span>
 
 <span class="c1"># Append s3 prefix for filelist</span>
 <span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
 
-<span class="c1"># If the subset_flag == True (default), the list of input files will be subset to speed up the processing</span>
+<span class="c1"># If the subset_flag == True (default), the list of input files will be subset to</span>
+<span class="c1"># speed up the processing</span>
 <span class="k">if</span> <span class="n">subset_flag</span><span class="p">:</span>
     <span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
@@ -627,7 +631,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-c7443742-744c-11ee-9091-6045bde2c845</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-cbfd6864-bee9-11ee-8ffd-000d3a37e8a3</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -662,7 +666,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">f12f970d</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">310d4439</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -677,7 +681,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     <strong>Total threads:</strong> 8
                 </td>
                 <td style="text-align: left;">
-                    <strong>Total memory:</strong> 6.76 GiB
+                    <strong>Total memory:</strong> 15.61 GiB
                 </td>
             </tr>
             
@@ -699,11 +703,11 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-7a9b4eca-18a6-45d6-840a-7d98b110a4a1</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-b4032507-b816-4cce-8742-c34520241ce7</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:44245
+                        <strong>Comm:</strong> tcp://127.0.0.1:35069
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -722,7 +726,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                         <strong>Started:</strong> Just now
                     </td>
                     <td style="text-align: left;">
-                        <strong>Total memory:</strong> 6.76 GiB
+                        <strong>Total memory:</strong> 15.61 GiB
                     </td>
                 </tr>
             </table>
@@ -745,7 +749,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39677
+                            <strong>Comm: </strong> tcp://127.0.0.1:35983
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -753,21 +757,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41175/status" target="_blank">http://127.0.0.1:41175/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36841/status" target="_blank">http://127.0.0.1:36841/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34255
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35799
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-b4vj0kt3
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-7v0a_1bc
                         </td>
                     </tr>
 
@@ -790,7 +794,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44023
+                            <strong>Comm: </strong> tcp://127.0.0.1:39649
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -798,21 +802,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37225/status" target="_blank">http://127.0.0.1:37225/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40715/status" target="_blank">http://127.0.0.1:40715/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:45095
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33965
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5z7pl4_1
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-wsqwozqu
                         </td>
                     </tr>
 
@@ -835,7 +839,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:38229
+                            <strong>Comm: </strong> tcp://127.0.0.1:37379
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -843,21 +847,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34583/status" target="_blank">http://127.0.0.1:34583/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38703/status" target="_blank">http://127.0.0.1:38703/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:45683
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42079
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-d87ti608
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-y2lgaeha
                         </td>
                     </tr>
 
@@ -880,7 +884,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44375
+                            <strong>Comm: </strong> tcp://127.0.0.1:43245
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -888,21 +892,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36157/status" target="_blank">http://127.0.0.1:36157/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46477/status" target="_blank">http://127.0.0.1:46477/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36093
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34139
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6knqhpgj
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-u4lolo91
                         </td>
                     </tr>
 
@@ -925,7 +929,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45837
+                            <strong>Comm: </strong> tcp://127.0.0.1:43261
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -933,21 +937,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37671/status" target="_blank">http://127.0.0.1:37671/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40349/status" target="_blank">http://127.0.0.1:40349/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41543
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39309
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-4yps1prn
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-muqtp4h_
                         </td>
                     </tr>
 
@@ -970,7 +974,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45427
+                            <strong>Comm: </strong> tcp://127.0.0.1:40275
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -978,21 +982,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44623/status" target="_blank">http://127.0.0.1:44623/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34757/status" target="_blank">http://127.0.0.1:34757/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41493
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45051
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-a83zio_k
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-en9h_9q4
                         </td>
                     </tr>
 
@@ -1015,7 +1019,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:33921
+                            <strong>Comm: </strong> tcp://127.0.0.1:38557
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1023,21 +1027,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34521/status" target="_blank">http://127.0.0.1:34521/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38099/status" target="_blank">http://127.0.0.1:38099/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:45533
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35063
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1zedufxi
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-42gv8j6i
                         </td>
                     </tr>
 
@@ -1060,7 +1064,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42365
+                            <strong>Comm: </strong> tcp://127.0.0.1:43093
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1068,21 +1072,21 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46761/status" target="_blank">http://127.0.0.1:46761/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39313/status" target="_blank">http://127.0.0.1:39313/status</a>
                         </td>
                         <td style="text-align: left;">
-                            <strong>Memory: </strong> 865.25 MiB
+                            <strong>Memory: </strong> 1.95 GiB
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39083
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35719
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-dbc4knyb
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-3gde416w
                         </td>
                     </tr>
 
@@ -1113,10 +1117,10 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 <h2>Iterate through list of files and create <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indicies as <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files<a class="headerlink" href="#iterate-through-list-of-files-and-create-kerchunk-indicies-as-json-reference-files" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
 <p>Each input GRIB2 file contains mutiple “messages”, each a measure of some variable on a grid, but with grid dimensions not necessarily compatible with one-another. The filter we create in the first line selects only certain types of messages, and indicated that heightAboveGround will be a coordinate of interest.</p>
 <p>We also write a separate JSON for each of the selected message, since these are the basic component data sets (see the loop over <code class="docutils literal notranslate"><span class="pre">out</span></code>).</p>
+<p><strong>Note</strong>: <code class="docutils literal notranslate"><span class="pre">scan_grib</span></code> does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code> it is necessary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from <code class="docutils literal notranslate"><span class="pre">scan_grib</span></code> share a coordinate system we pass a filter argument.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: scan_grib does not require a filter and will happily create a reference file for each available grib message. However when combining the grib messages using MultiZarrToZarr it is neccassary for the messages to share a coordinate system. Thus to make our lives easier and ensure all reference outputs from scan_grib share a coordinate system we pass a filter argument.</span>
-<span class="n">afilter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;typeOfLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afilter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;typeOfLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;heightAboveGround&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
 <span class="n">so</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;anon&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
 
 <span class="c1"># We are creating a temporary directory to store the .json reference files</span>
@@ -1128,7 +1132,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpqxzjzi3d&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpazni7ksj&#39;
 </pre></div>
 </div>
 </div>
@@ -1207,6 +1211,16 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">multi_kerchunk</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="shut-down-the-dask-cluster">
+<h2>Shut down the Dask cluster<a class="headerlink" href="#shut-down-the-dask-cluster" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1295,7 +1309,7 @@ Next we are using <code class="docutils literal notranslate"><span class="pre">f
         
           By Norland Raphael Hagen.
         
-          Last updated on 26 October 2023.
+          Last updated on 29 January 2024.
         </p>
       </div>
     </div>
