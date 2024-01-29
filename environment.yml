@@ -15,10 +15,9 @@ dependencies:
   - hvplot
   - ipywidgets
   - jupyter_bokeh
-  - jupyter_server<2
+  - jupyter_server
   - jupyter-book
   - jupyterlab
-  - jupyterlab=3
   - mamba
   - matplotlib
   - netcdf4
@@ -27,6 +26,7 @@ dependencies:
   - pandas
   - pip
   - pooch
+  - pre-commit
   - pyOpenSSL
   - python=3.10
   - rioxarray

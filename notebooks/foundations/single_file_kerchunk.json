@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "refs": {
-    ".zgroup": "{\"zarr_format\":2}",
-    ".zattrs": "{\"contact\":\"rtladerjr@alaska.edu\",\"data\":\"Downscaled CCSM4\",\"date\":\"Mon Oct 21 11:37:23 AKDT 2019\",\"format\":\"version 2\",\"info\":\"Alaska CASC\"}"
-  }
-}
