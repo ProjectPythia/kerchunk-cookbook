@@ -236,6 +236,11 @@ const thebe_selector_output = ".output, .cell_output"
    Kerchunk and Pangeo-Forge
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced/appending.html">
+   Appending to Kerchunk references
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1092,11 +1097,11 @@ if (window.Jupyter !== undefined) {
   background-color: transparent !important;
 }
 </style></div><div class="output text_html"><div id='p1002'>
-  <div id="c1653a65-16e3-4585-8bb9-a2ffcf58985e" data-root-id="p1002" style="display: contents;"></div>
+  <div id="ad0d6a5d-597b-4599-81ff-e2bbf5b91ede" data-root-id="p1002" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"2f603833-4a75-484f-b699-5d3cdafaa336":{"version":"3.3.4","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1002"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1003","attributes":{"plot_id":"p1002","comm_id":"db992fbf554e4474bce87471dad690b7","client_comm_id":"90597f39d4004c4aa20d15b5b4935394"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"copy_to_clipboard1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"value","kind":"Any","default":null}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"2f603833-4a75-484f-b699-5d3cdafaa336","roots":{"p1002":"c1653a65-16e3-4585-8bb9-a2ffcf58985e"},"root_ids":["p1002"]}];
+  var docs_json = {"e2de1758-07cd-4c87-b3b3-6730bfb4003b":{"version":"3.3.4","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1002"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1003","attributes":{"plot_id":"p1002","comm_id":"b872b38304f84bc2a598ebd471974ac4","client_comm_id":"addbe70c978144309c9b77a29542a492"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"copy_to_clipboard1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"value","kind":"Any","default":null}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"e2de1758-07cd-4c87-b3b3-6730bfb4003b","roots":{"p1002":"ad0d6a5d-597b-4599-81ff-e2bbf5b91ede"},"root_ids":["p1002"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1228,7 +1233,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-f5bec6e1-bee9-11ee-91c0-000d3a37e8a3</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-53286910-bf9d-11ee-929e-6045bdd54a3e</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -1263,7 +1268,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">18c2fcd0</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">f097d73d</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -1300,11 +1305,11 @@ Because of this, these cannot be combined into a single <code class="docutils li
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-8131b775-80a1-46ab-b2d0-55145d633e6e</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-c661bddf-0292-4f02-b75f-c4a41df3d619</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:41313
+                        <strong>Comm:</strong> tcp://127.0.0.1:43641
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -1346,7 +1351,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:38865
+                            <strong>Comm: </strong> tcp://127.0.0.1:39167
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1354,7 +1359,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34311/status" target="_blank">http://127.0.0.1:34311/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45443/status" target="_blank">http://127.0.0.1:45443/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1362,13 +1367,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36199
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45481
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-7uq346hy
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6g3rlj7m
                         </td>
                     </tr>
 
@@ -1391,7 +1396,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42943
+                            <strong>Comm: </strong> tcp://127.0.0.1:36555
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1399,7 +1404,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44241/status" target="_blank">http://127.0.0.1:44241/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:32775/status" target="_blank">http://127.0.0.1:32775/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1407,13 +1412,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39637
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35669
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-r_87huel
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-8desecgm
                         </td>
                     </tr>
 
@@ -1436,7 +1441,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42903
+                            <strong>Comm: </strong> tcp://127.0.0.1:35795
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1444,7 +1449,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38985/status" target="_blank">http://127.0.0.1:38985/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43911/status" target="_blank">http://127.0.0.1:43911/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1452,13 +1457,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34665
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46171
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1ibm2hba
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-v3ifkqee
                         </td>
                     </tr>
 
@@ -1481,7 +1486,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43055
+                            <strong>Comm: </strong> tcp://127.0.0.1:35969
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1489,7 +1494,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33699/status" target="_blank">http://127.0.0.1:33699/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36853/status" target="_blank">http://127.0.0.1:36853/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1497,13 +1502,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46275
+                            <strong>Nanny: </strong> tcp://127.0.0.1:37125
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-m049t0i1
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-r818suyt
                         </td>
                     </tr>
 
@@ -1526,7 +1531,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:38981
+                            <strong>Comm: </strong> tcp://127.0.0.1:38763
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1534,7 +1539,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33693/status" target="_blank">http://127.0.0.1:33693/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42973/status" target="_blank">http://127.0.0.1:42973/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1542,13 +1547,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41591
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42303
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-wan_9qff
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-k4binsny
                         </td>
                     </tr>
 
@@ -1571,7 +1576,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44783
+                            <strong>Comm: </strong> tcp://127.0.0.1:33987
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1579,7 +1584,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34575/status" target="_blank">http://127.0.0.1:34575/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44815/status" target="_blank">http://127.0.0.1:44815/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1587,13 +1592,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:43097
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33265
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-qf1csvt0
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1rpik_sv
                         </td>
                     </tr>
 
@@ -1616,7 +1621,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39719
+                            <strong>Comm: </strong> tcp://127.0.0.1:34855
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1624,7 +1629,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35901/status" target="_blank">http://127.0.0.1:35901/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45651/status" target="_blank">http://127.0.0.1:45651/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1632,13 +1637,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36873
+                            <strong>Nanny: </strong> tcp://127.0.0.1:40017
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-_y2vn9xk
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-m44vafpu
                         </td>
                     </tr>
 
@@ -1661,7 +1666,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43527
+                            <strong>Comm: </strong> tcp://127.0.0.1:46625
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1669,7 +1674,7 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42815/status" target="_blank">http://127.0.0.1:42815/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37177/status" target="_blank">http://127.0.0.1:37177/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1677,13 +1682,13 @@ Because of this, these cannot be combined into a single <code class="docutils li
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37989
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45189
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-acvwc92d
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-kirqgc0w
                         </td>
                     </tr>
 
@@ -2106,8 +2111,8 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.DatasetView&gt;
 Dimensions:  (time: 31411, lat: 600, lon: 1440)
 Coordinates:
-  * lat      (lat) float64 6.911e-310 6.911e-310 6.911e-310 ... 0.0 0.0 0.0
-  * lon      (lon) float64 6.911e-310 6.911e-310 ... 4.028e+192 -7.585e+39
+  * lat      (lat) float64 6.946e-310 6.946e-310 ... -3.163e-189 1.607e-133
+  * lon      (lon) float64 6.946e-310 6.946e-310 6.946e-310 ... 0.0 0.0 0.0
   * time     (time) datetime64[ns] 2015-01-01T12:00:00 ... 2100-12-31T12:00:00
 Data variables:
     hurs     (time, lat, lon) float32 dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;
@@ -2132,12 +2137,12 @@ Attributes: (12/22)
     title:                 ACCESS-CM2, r1i1p1f1, ssp585, global downscaled CM...
     tracking_id:           dcae752c-5de5-4170-8a98-e7043538d702
     variant_label:         r1i1p1f1
-    version:               1.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>datatree.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-d1a3f630-75f1-498b-b837-f56f3d2ffed4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d1a3f630-75f1-498b-b837-f56f3d2ffed4' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%'></div></div></li><li class='xr-section-item'><input id='section-a850523f-29b7-4a28-a405-f368a982f1f9' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a850523f-29b7-4a28-a405-f368a982f1f9' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 31411</li><li><span class='xr-has-index'>lat</span>: 600</li><li><span class='xr-has-index'>lon</span>: 1440</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1192cb43-489e-4b1b-8699-d3f357e6a980' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1192cb43-489e-4b1b-8699-d3f357e6a980' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.911e-310 6.911e-310 ... 0.0 0.0</div><input id='attrs-d463e49e-8101-4547-a7c4-e5bbbb24a396' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d463e49e-8101-4547-a7c4-e5bbbb24a396' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cc74e4c7-8256-47d2-9c3f-dacdcdcdceca' class='xr-var-data-in' type='checkbox'><label for='data-cc74e4c7-8256-47d2-9c3f-dacdcdcdceca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>array([6.910836e-310, 6.910836e-310, 6.910837e-310, ..., 0.000000e+000,
-       0.000000e+000, 0.000000e+000])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.911e-310 ... -7.585e+39</div><input id='attrs-abccd429-b96d-42e9-af2f-a0bff75b5f27' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-abccd429-b96d-42e9-af2f-a0bff75b5f27' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7267fb1c-fcbb-4c7f-81af-3c7731840e82' class='xr-var-data-in' type='checkbox'><label for='data-7267fb1c-fcbb-4c7f-81af-3c7731840e82' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>array([ 6.910836e-310,  6.910836e-310,  6.910837e-310, ..., -8.607833e+113,
-        4.028463e+192, -7.584984e+039])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2015-01-01T12:00:00 ... 2100-12-...</div><input id='attrs-8f2c7724-5c4b-465a-a4fa-e4a5bcba6280' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8f2c7724-5c4b-465a-a4fa-e4a5bcba6280' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1b20a135-4057-4789-a07d-1da5f9a6806c' class='xr-var-data-in' type='checkbox'><label for='data-1b20a135-4057-4789-a07d-1da5f9a6806c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>time</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2015-01-01T12:00:00.000000000&#x27;, &#x27;2015-01-02T12:00:00.000000000&#x27;,
+    version:               1.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>datatree.DataTree</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-e2ae0a13-1662-4d1f-a983-c6c67cc0daca' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e2ae0a13-1662-4d1f-a983-c6c67cc0daca' class='xr-section-summary'  title='Expand/collapse section'>Groups: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><div style='display: inline-grid; grid-template-columns: 100%'></div></div></li><li class='xr-section-item'><input id='section-e952de5d-9a2f-4291-b283-775198e91d0e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e952de5d-9a2f-4291-b283-775198e91d0e' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 31411</li><li><span class='xr-has-index'>lat</span>: 600</li><li><span class='xr-has-index'>lon</span>: 1440</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-3c5d61d3-80e3-463d-85b2-42c0aeb63996' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3c5d61d3-80e3-463d-85b2-42c0aeb63996' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.946e-310 ... 1.607e-133</div><input id='attrs-5c25b4a4-2493-44c9-9bd0-3b572c3373fd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5c25b4a4-2493-44c9-9bd0-3b572c3373fd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-df179f32-ebf0-4c58-82e2-67bf691fc600' class='xr-var-data-in' type='checkbox'><label for='data-df179f32-ebf0-4c58-82e2-67bf691fc600' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>array([ 6.946042e-310,  6.946042e-310,  6.946042e-310, ...,  5.575228e-024,
+       -3.162982e-189,  1.607295e-133])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.946e-310 6.946e-310 ... 0.0 0.0</div><input id='attrs-a6762769-8285-48f5-a6b8-cdfe5477ca99' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a6762769-8285-48f5-a6b8-cdfe5477ca99' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2cfcf089-bf2a-4087-b8b3-7fc28831e66a' class='xr-var-data-in' type='checkbox'><label for='data-2cfcf089-bf2a-4087-b8b3-7fc28831e66a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>array([6.946042e-310, 6.946042e-310, 6.946042e-310, ..., 0.000000e+000,
+       0.000000e+000, 0.000000e+000])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2015-01-01T12:00:00 ... 2100-12-...</div><input id='attrs-2b557b92-c68c-43c2-b83c-5cefe68ce1d9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2b557b92-c68c-43c2-b83c-5cefe68ce1d9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f7d79d59-24fb-46a1-8f09-16d8dc6df764' class='xr-var-data-in' type='checkbox'><label for='data-f7d79d59-24fb-46a1-8f09-16d8dc6df764' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>time</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2015-01-01T12:00:00.000000000&#x27;, &#x27;2015-01-02T12:00:00.000000000&#x27;,
        &#x27;2015-01-03T12:00:00.000000000&#x27;, ..., &#x27;2100-12-29T12:00:00.000000000&#x27;,
        &#x27;2100-12-30T12:00:00.000000000&#x27;, &#x27;2100-12-31T12:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-53d7ba2d-feb7-48a4-8f4d-fc3b29b179f1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-53d7ba2d-feb7-48a4-8f4d-fc3b29b179f1' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>hurs</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-09bd1955-01f4-4153-bbcf-caa9912192e6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-09bd1955-01f4-4153-bbcf-caa9912192e6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b881d01b-1282-497d-8483-8efc0bfe4043' class='xr-var-data-in' type='checkbox'><label for='data-b881d01b-1282-497d-8483-8efc0bfe4043' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The relative humidity with respect to liquid water for T&gt; 0 C, and with respect to ice for T&lt;0 C.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Relative Humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>%</dd></dl></div><div class='xr-var-data'><table>
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a5926385-c11a-47b0-a24f-2a7a78e65d5b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a5926385-c11a-47b0-a24f-2a7a78e65d5b' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>hurs</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-c92d2009-f1da-4cf2-89d5-05a279c2b1c1' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c92d2009-f1da-4cf2-89d5-05a279c2b1c1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-849daf38-e4dc-4903-b425-6b674050b0b4' class='xr-var-data-in' type='checkbox'><label for='data-849daf38-e4dc-4903-b425-6b674050b0b4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The relative humidity with respect to liquid water for T&gt; 0 C, and with respect to ice for T&lt;0 C.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Relative Humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>%</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2251,7 +2256,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>huss</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-34021663-200c-4ced-a38b-5e601e08123f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-34021663-200c-4ced-a38b-5e601e08123f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-be7eadbd-6c5c-402e-b9e3-5438f8c39f20' class='xr-var-data-in' type='checkbox'><label for='data-be7eadbd-6c5c-402e-b9e3-5438f8c39f20' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Near-surface (usually, 2 meter) specific humidity.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Specific Humidity</dd><dt><span>standard_name :</span></dt><dd>specific_humidity</dd><dt><span>units :</span></dt><dd>1</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>huss</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-785b701d-e110-4700-b09e-822f855ba68e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-785b701d-e110-4700-b09e-822f855ba68e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ffa8fbee-60b3-45dc-bf70-e26d1175c74b' class='xr-var-data-in' type='checkbox'><label for='data-ffa8fbee-60b3-45dc-bf70-e26d1175c74b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Near-surface (usually, 2 meter) specific humidity.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Specific Humidity</dd><dt><span>standard_name :</span></dt><dd>specific_humidity</dd><dt><span>units :</span></dt><dd>1</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2365,7 +2370,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>pr</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-6e97a96e-c8a9-4b45-bcd7-159b767234b2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6e97a96e-c8a9-4b45-bcd7-159b767234b2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-978df59a-6fdc-4d8f-b8a2-8fa3930cc82e' class='xr-var-data-in' type='checkbox'><label for='data-978df59a-6fdc-4d8f-b8a2-8fa3930cc82e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>includes both liquid and solid phases</dd><dt><span>long_name :</span></dt><dd>Precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_flux</dd><dt><span>units :</span></dt><dd>kg m-2 s-1</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>pr</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-19ed89fb-8868-4370-8eaa-3e1bbffa0545' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-19ed89fb-8868-4370-8eaa-3e1bbffa0545' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e9849d57-053f-4929-b0c9-fba10d86d22f' class='xr-var-data-in' type='checkbox'><label for='data-e9849d57-053f-4929-b0c9-fba10d86d22f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>includes both liquid and solid phases</dd><dt><span>long_name :</span></dt><dd>Precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_flux</dd><dt><span>units :</span></dt><dd>kg m-2 s-1</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2479,7 +2484,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rlds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-62f916b9-5135-4d9a-a311-899ed8687c83' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-62f916b9-5135-4d9a-a311-899ed8687c83' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-58c36740-783a-44ef-97d4-135258b90ac1' class='xr-var-data-in' type='checkbox'><label for='data-58c36740-783a-44ef-97d4-135258b90ac1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The surface called &#x27;surface&#x27; means the lower boundary of the atmosphere. &#x27;longwave&#x27; means longwave radiation. Downwelling radiation is radiation from above. It does not mean &#x27;net downward&#x27;. When thought of as being incident on a surface, a radiative flux is sometimes called &#x27;irradiance&#x27;. In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called &#x27;vector irradiance&#x27;. In accordance with common usage in geophysical disciplines, &#x27;flux&#x27; implies per unit area, called &#x27;flux density&#x27; in physics.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Longwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_longwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rlds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-ca91886e-b2ba-4cba-b945-cbf23f6783e5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ca91886e-b2ba-4cba-b945-cbf23f6783e5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c4572543-8e3a-4159-b729-719df7b534bd' class='xr-var-data-in' type='checkbox'><label for='data-c4572543-8e3a-4159-b729-719df7b534bd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The surface called &#x27;surface&#x27; means the lower boundary of the atmosphere. &#x27;longwave&#x27; means longwave radiation. Downwelling radiation is radiation from above. It does not mean &#x27;net downward&#x27;. When thought of as being incident on a surface, a radiative flux is sometimes called &#x27;irradiance&#x27;. In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called &#x27;vector irradiance&#x27;. In accordance with common usage in geophysical disciplines, &#x27;flux&#x27; implies per unit area, called &#x27;flux density&#x27; in physics.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Longwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_longwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2593,7 +2598,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rsds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-4ec82975-6f84-4039-bffe-147a7c1d9cdc' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4ec82975-6f84-4039-bffe-147a7c1d9cdc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-70ae961a-608b-4f1e-8b7d-aa5999a3ad0c' class='xr-var-data-in' type='checkbox'><label for='data-70ae961a-608b-4f1e-8b7d-aa5999a3ad0c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Surface solar irradiance for UV calculations.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Shortwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_shortwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rsds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-8ff2125a-5c63-4085-a433-84dcbf92b490' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8ff2125a-5c63-4085-a433-84dcbf92b490' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-62341477-993f-43b0-9689-95dcf629fb37' class='xr-var-data-in' type='checkbox'><label for='data-62341477-993f-43b0-9689-95dcf629fb37' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Surface solar irradiance for UV calculations.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Shortwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_shortwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2707,7 +2712,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sfcWind</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-47090769-bca4-4b75-9cc8-3430e2ce538a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-47090769-bca4-4b75-9cc8-3430e2ce538a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-31a9cd09-d2a7-440e-b056-46dae5441a12' class='xr-var-data-in' type='checkbox'><label for='data-31a9cd09-d2a7-440e-b056-46dae5441a12' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 10 meters) wind speed.</dd><dt><span>long_name :</span></dt><dd>Daily-Mean Near-Surface Wind Speed</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>m s-1</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sfcWind</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-3497274c-0aff-4d89-965c-2156f73a9397' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3497274c-0aff-4d89-965c-2156f73a9397' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cec27ce6-c75b-412f-aa24-fc8289747e85' class='xr-var-data-in' type='checkbox'><label for='data-cec27ce6-c75b-412f-aa24-fc8289747e85' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 10 meters) wind speed.</dd><dt><span>long_name :</span></dt><dd>Daily-Mean Near-Surface Wind Speed</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>m s-1</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2821,7 +2826,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tas</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-b8a97d07-72c9-4720-b071-83c6e7555c2b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b8a97d07-72c9-4720-b071-83c6e7555c2b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-37a1e51c-56db-4aac-a555-9bc5917587a2' class='xr-var-data-in' type='checkbox'><label for='data-37a1e51c-56db-4aac-a555-9bc5917587a2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 2 meter) air temperature; derived from downscaled tasmax &amp; tasmin</dd><dt><span>long_name :</span></dt><dd>Daily Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tas</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-4f718703-bcf6-431e-9918-58a87b9d8a3b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4f718703-bcf6-431e-9918-58a87b9d8a3b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e37e153c-ba80-4873-8f85-a29576285706' class='xr-var-data-in' type='checkbox'><label for='data-e37e153c-ba80-4873-8f85-a29576285706' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 2 meter) air temperature; derived from downscaled tasmax &amp; tasmin</dd><dt><span>long_name :</span></dt><dd>Daily Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -2935,7 +2940,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmax</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-b896e199-caef-4f6a-a1f2-10110a01e220' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b896e199-caef-4f6a-a1f2-10110a01e220' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-51828704-6015-4f9c-a6b8-1fb31010ad64' class='xr-var-data-in' type='checkbox'><label for='data-51828704-6015-4f9c-a6b8-1fb31010ad64' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>maximum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: max&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Maximum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmax</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-1416cfb4-5de2-46d5-ab09-77578cee60c4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1416cfb4-5de2-46d5-ab09-77578cee60c4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2c52a0ff-1366-4812-97ae-ea10c896f07a' class='xr-var-data-in' type='checkbox'><label for='data-2c52a0ff-1366-4812-97ae-ea10c896f07a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>maximum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: max&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Maximum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -3049,7 +3054,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmin</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-85c3c3a1-a0f6-4c6d-b4c7-b33826cdbf4a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-85c3c3a1-a0f6-4c6d-b4c7-b33826cdbf4a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2df34bf8-2ceb-4573-afed-1d58800086d3' class='xr-var-data-in' type='checkbox'><label for='data-2df34bf8-2ceb-4573-afed-1d58800086d3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: minimum</dd><dt><span>comment :</span></dt><dd>minimum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: min&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Minimum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmin</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-af6c267f-e8f0-430b-8e9b-b09eb905c627' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-af6c267f-e8f0-430b-8e9b-b09eb905c627' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fe7b5809-861a-41bb-add4-aeddf537402e' class='xr-var-data-in' type='checkbox'><label for='data-fe7b5809-861a-41bb-add4-aeddf537402e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: minimum</dd><dt><span>comment :</span></dt><dd>minimum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: min&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Minimum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -3163,7 +3168,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-4ffe0ed5-1e4e-4519-a873-5c569f1de192' class='xr-section-summary-in' type='checkbox'  ><label for='section-4ffe0ed5-1e4e-4519-a873-5c569f1de192' class='xr-section-summary' >Attributes: <span>(22)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>CF-1.7</dd><dt><span>activity :</span></dt><dd>NEX-GDDP-CMIP6</dd><dt><span>cmip6_institution_id :</span></dt><dd>CSIRO-ARCCSS</dd><dt><span>cmip6_license :</span></dt><dd>CC-BY-SA 4.0</dd><dt><span>cmip6_source_id :</span></dt><dd>ACCESS-CM2</dd><dt><span>contact :</span></dt><dd>Dr. Rama Nemani: rama.nemani@nasa.gov, Dr. Bridget Thrasher: bridget@climateanalyticsgroup.org</dd><dt><span>creation_date :</span></dt><dd>2021-10-04T14:05:21.953850+00:00</dd><dt><span>disclaimer :</span></dt><dd>This data is considered provisional and subject to change. This data is provided as is without any warranty of any kind, either express or implied, arising by law or otherwise, including but not limited to warranties of completeness, non-infringement, accuracy, merchantability, or fitness for a particular purpose. The user assumes all risk associated with the use of, or inability to use, this data.</dd><dt><span>external_variables :</span></dt><dd>areacella</dd><dt><span>frequency :</span></dt><dd>day</dd><dt><span>history :</span></dt><dd>2021-10-04T14:05:21.953850+00:00: install global attributes</dd><dt><span>institution :</span></dt><dd>NASA Earth Exchange, NASA Ames Research Center, Moffett Field, CA 94035</dd><dt><span>product :</span></dt><dd>output</dd><dt><span>realm :</span></dt><dd>atmos</dd><dt><span>references :</span></dt><dd>BCSD method: Thrasher et al., 2012, Hydrol. Earth Syst. Sci.,16, 3309-3314. Ref period obs: latest version of the Princeton Global Meteorological Forcings (http://hydrology.princeton.edu/data.php), based on Sheffield et al., 2006, J. Climate, 19 (13), 3088-3111.</dd><dt><span>resolution_id :</span></dt><dd>0.25 degree</dd><dt><span>scenario :</span></dt><dd>ssp585</dd><dt><span>source :</span></dt><dd>BCSD</dd><dt><span>title :</span></dt><dd>ACCESS-CM2, r1i1p1f1, ssp585, global downscaled CMIP6 climate projection data</dd><dt><span>tracking_id :</span></dt><dd>dcae752c-5de5-4170-8a98-e7043538d702</dd><dt><span>variant_label :</span></dt><dd>r1i1p1f1</dd><dt><span>version :</span></dt><dd>1.0</dd></dl></div></li></ul></div></div></div></div>
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-8f597f82-a286-426f-bb35-1d21d5335393' class='xr-section-summary-in' type='checkbox'  ><label for='section-8f597f82-a286-426f-bb35-1d21d5335393' class='xr-section-summary' >Attributes: <span>(22)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>CF-1.7</dd><dt><span>activity :</span></dt><dd>NEX-GDDP-CMIP6</dd><dt><span>cmip6_institution_id :</span></dt><dd>CSIRO-ARCCSS</dd><dt><span>cmip6_license :</span></dt><dd>CC-BY-SA 4.0</dd><dt><span>cmip6_source_id :</span></dt><dd>ACCESS-CM2</dd><dt><span>contact :</span></dt><dd>Dr. Rama Nemani: rama.nemani@nasa.gov, Dr. Bridget Thrasher: bridget@climateanalyticsgroup.org</dd><dt><span>creation_date :</span></dt><dd>2021-10-04T14:05:21.953850+00:00</dd><dt><span>disclaimer :</span></dt><dd>This data is considered provisional and subject to change. This data is provided as is without any warranty of any kind, either express or implied, arising by law or otherwise, including but not limited to warranties of completeness, non-infringement, accuracy, merchantability, or fitness for a particular purpose. The user assumes all risk associated with the use of, or inability to use, this data.</dd><dt><span>external_variables :</span></dt><dd>areacella</dd><dt><span>frequency :</span></dt><dd>day</dd><dt><span>history :</span></dt><dd>2021-10-04T14:05:21.953850+00:00: install global attributes</dd><dt><span>institution :</span></dt><dd>NASA Earth Exchange, NASA Ames Research Center, Moffett Field, CA 94035</dd><dt><span>product :</span></dt><dd>output</dd><dt><span>realm :</span></dt><dd>atmos</dd><dt><span>references :</span></dt><dd>BCSD method: Thrasher et al., 2012, Hydrol. Earth Syst. Sci.,16, 3309-3314. Ref period obs: latest version of the Princeton Global Meteorological Forcings (http://hydrology.princeton.edu/data.php), based on Sheffield et al., 2006, J. Climate, 19 (13), 3088-3111.</dd><dt><span>resolution_id :</span></dt><dd>0.25 degree</dd><dt><span>scenario :</span></dt><dd>ssp585</dd><dt><span>source :</span></dt><dd>BCSD</dd><dt><span>title :</span></dt><dd>ACCESS-CM2, r1i1p1f1, ssp585, global downscaled CMIP6 climate projection data</dd><dt><span>tracking_id :</span></dt><dd>dcae752c-5de5-4170-8a98-e7043538d702</dd><dt><span>variant_label :</span></dt><dd>r1i1p1f1</dd><dt><span>version :</span></dt><dd>1.0</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="section" id="convert-a-datatree-node-to-a-dataset">
 <h4>Convert a Datatree node to a Dataset<a class="headerlink" href="#convert-a-datatree-node-to-a-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h4>
@@ -3540,8 +3545,8 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:  (time: 31411, lat: 600, lon: 1440)
 Coordinates:
-  * lat      (lat) float64 6.911e-310 6.911e-310 6.911e-310 ... 0.0 0.0 0.0
-  * lon      (lon) float64 6.911e-310 6.911e-310 ... 4.028e+192 -7.585e+39
+  * lat      (lat) float64 6.946e-310 6.946e-310 ... -3.163e-189 1.607e-133
+  * lon      (lon) float64 6.946e-310 6.946e-310 6.946e-310 ... 0.0 0.0 0.0
   * time     (time) datetime64[ns] 2015-01-01T12:00:00 ... 2100-12-31T12:00:00
 Data variables:
     hurs     (time, lat, lon) float32 dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;
@@ -3566,12 +3571,12 @@ Attributes: (12/22)
     title:                 ACCESS-CM2, r1i1p1f1, ssp585, global downscaled CM...
     tracking_id:           dcae752c-5de5-4170-8a98-e7043538d702
     variant_label:         r1i1p1f1
-    version:               1.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-78ea6b37-3b78-4bfa-a613-4d76b6baf34f' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-78ea6b37-3b78-4bfa-a613-4d76b6baf34f' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 31411</li><li><span class='xr-has-index'>lat</span>: 600</li><li><span class='xr-has-index'>lon</span>: 1440</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-e9484626-143b-4ace-90ff-6f84760e5204' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e9484626-143b-4ace-90ff-6f84760e5204' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.911e-310 6.911e-310 ... 0.0 0.0</div><input id='attrs-03ed7567-bb37-4c35-9075-b8c148e41117' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-03ed7567-bb37-4c35-9075-b8c148e41117' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-10384a4c-9ae3-4165-8e6c-dabc9cde809c' class='xr-var-data-in' type='checkbox'><label for='data-10384a4c-9ae3-4165-8e6c-dabc9cde809c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>array([6.910836e-310, 6.910836e-310, 6.910837e-310, ..., 0.000000e+000,
-       0.000000e+000, 0.000000e+000])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.911e-310 ... -7.585e+39</div><input id='attrs-a2bcc316-f234-4d8e-ab9d-41a6ac596674' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a2bcc316-f234-4d8e-ab9d-41a6ac596674' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2abfdfc2-a531-4e14-a9e2-d0aff7aa2912' class='xr-var-data-in' type='checkbox'><label for='data-2abfdfc2-a531-4e14-a9e2-d0aff7aa2912' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>array([ 6.910836e-310,  6.910836e-310,  6.910837e-310, ..., -8.607833e+113,
-        4.028463e+192, -7.584984e+039])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2015-01-01T12:00:00 ... 2100-12-...</div><input id='attrs-23ef7b13-a3ba-44d0-9960-2f157336df94' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-23ef7b13-a3ba-44d0-9960-2f157336df94' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-377fd29e-e04e-44a0-aec4-f9947ded47f8' class='xr-var-data-in' type='checkbox'><label for='data-377fd29e-e04e-44a0-aec4-f9947ded47f8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>time</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2015-01-01T12:00:00.000000000&#x27;, &#x27;2015-01-02T12:00:00.000000000&#x27;,
+    version:               1.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-dabb5eca-81e3-4400-bb86-e36501a0d189' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-dabb5eca-81e3-4400-bb86-e36501a0d189' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 31411</li><li><span class='xr-has-index'>lat</span>: 600</li><li><span class='xr-has-index'>lon</span>: 1440</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-b5a4a7f4-6ba2-4aff-a3aa-6c6e2dde3847' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b5a4a7f4-6ba2-4aff-a3aa-6c6e2dde3847' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lat</span></div><div class='xr-var-dims'>(lat)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.946e-310 ... 1.607e-133</div><input id='attrs-9e062a61-fc88-465a-a2bc-2c98ec11bf5f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9e062a61-fc88-465a-a2bc-2c98ec11bf5f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-145bc77d-5225-469a-994e-a1489cd48346' class='xr-var-data-in' type='checkbox'><label for='data-145bc77d-5225-469a-994e-a1489cd48346' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>array([ 6.946042e-310,  6.946042e-310,  6.946042e-310, ...,  5.575228e-024,
+       -3.162982e-189,  1.607295e-133])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>lon</span></div><div class='xr-var-dims'>(lon)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.946e-310 6.946e-310 ... 0.0 0.0</div><input id='attrs-74485dbd-c7d5-48f0-a7f3-d27e991f8765' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-74485dbd-c7d5-48f0-a7f3-d27e991f8765' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bff4d7b5-ce90-4a9b-bd4c-05c21cd26af6' class='xr-var-data-in' type='checkbox'><label for='data-bff4d7b5-ce90-4a9b-bd4c-05c21cd26af6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>array([6.946042e-310, 6.946042e-310, 6.946042e-310, ..., 0.000000e+000,
+       0.000000e+000, 0.000000e+000])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2015-01-01T12:00:00 ... 2100-12-...</div><input id='attrs-2d54a55d-390d-41d1-bf32-0b5891778a40' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2d54a55d-390d-41d1-bf32-0b5891778a40' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2d13d45a-1228-4aba-9f64-3a981aa71c74' class='xr-var-data-in' type='checkbox'><label for='data-2d13d45a-1228-4aba-9f64-3a981aa71c74' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>time</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2015-01-01T12:00:00.000000000&#x27;, &#x27;2015-01-02T12:00:00.000000000&#x27;,
        &#x27;2015-01-03T12:00:00.000000000&#x27;, ..., &#x27;2100-12-29T12:00:00.000000000&#x27;,
        &#x27;2100-12-30T12:00:00.000000000&#x27;, &#x27;2100-12-31T12:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f6c15e8c-7104-4d14-815b-7f98d49dd5c3' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f6c15e8c-7104-4d14-815b-7f98d49dd5c3' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>hurs</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-ad05f42e-52a8-4d6e-8231-096e1c32ca9c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ad05f42e-52a8-4d6e-8231-096e1c32ca9c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b4588061-d672-453f-a9c1-aa375f8a320f' class='xr-var-data-in' type='checkbox'><label for='data-b4588061-d672-453f-a9c1-aa375f8a320f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The relative humidity with respect to liquid water for T&gt; 0 C, and with respect to ice for T&lt;0 C.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Relative Humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>%</dd></dl></div><div class='xr-var-data'><table>
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a4fac23f-06ff-4aac-bd30-3df6f9747a12' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a4fac23f-06ff-4aac-bd30-3df6f9747a12' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>hurs</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-bc75a4df-943f-4922-b0de-d762ce8cf6e3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bc75a4df-943f-4922-b0de-d762ce8cf6e3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a0087839-af45-446d-bb48-7ac10cc61ccd' class='xr-var-data-in' type='checkbox'><label for='data-a0087839-af45-446d-bb48-7ac10cc61ccd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The relative humidity with respect to liquid water for T&gt; 0 C, and with respect to ice for T&lt;0 C.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Relative Humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>%</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -3685,7 +3690,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>huss</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-8a965715-107a-4adb-b422-444e80522888' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8a965715-107a-4adb-b422-444e80522888' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c863d9b2-eb6d-4cdc-94b7-305304e05127' class='xr-var-data-in' type='checkbox'><label for='data-c863d9b2-eb6d-4cdc-94b7-305304e05127' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Near-surface (usually, 2 meter) specific humidity.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Specific Humidity</dd><dt><span>standard_name :</span></dt><dd>specific_humidity</dd><dt><span>units :</span></dt><dd>1</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>huss</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-42b8c154-e22f-46b6-a2e7-e3e42c852f50' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-42b8c154-e22f-46b6-a2e7-e3e42c852f50' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3263b9c2-610a-4d8b-9cb6-e90e8bc09982' class='xr-var-data-in' type='checkbox'><label for='data-3263b9c2-610a-4d8b-9cb6-e90e8bc09982' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Near-surface (usually, 2 meter) specific humidity.</dd><dt><span>long_name :</span></dt><dd>Near-Surface Specific Humidity</dd><dt><span>standard_name :</span></dt><dd>specific_humidity</dd><dt><span>units :</span></dt><dd>1</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -3799,7 +3804,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>pr</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-06d5e691-fcee-49c3-88de-9aa0b432d2ce' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-06d5e691-fcee-49c3-88de-9aa0b432d2ce' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b6299134-21ed-49da-878a-cabe2f4c4a94' class='xr-var-data-in' type='checkbox'><label for='data-b6299134-21ed-49da-878a-cabe2f4c4a94' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>includes both liquid and solid phases</dd><dt><span>long_name :</span></dt><dd>Precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_flux</dd><dt><span>units :</span></dt><dd>kg m-2 s-1</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>pr</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-f39b475a-02c6-4fc5-88df-97907dcc73c8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f39b475a-02c6-4fc5-88df-97907dcc73c8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fe36b7d2-9e32-4e84-bcda-00cda7f879ab' class='xr-var-data-in' type='checkbox'><label for='data-fe36b7d2-9e32-4e84-bcda-00cda7f879ab' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>includes both liquid and solid phases</dd><dt><span>long_name :</span></dt><dd>Precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_flux</dd><dt><span>units :</span></dt><dd>kg m-2 s-1</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -3913,7 +3918,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rlds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-46242781-a2f4-461d-b369-791fa463a3e5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-46242781-a2f4-461d-b369-791fa463a3e5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6741a906-80cc-4b0b-8634-86d1262200e8' class='xr-var-data-in' type='checkbox'><label for='data-6741a906-80cc-4b0b-8634-86d1262200e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The surface called &#x27;surface&#x27; means the lower boundary of the atmosphere. &#x27;longwave&#x27; means longwave radiation. Downwelling radiation is radiation from above. It does not mean &#x27;net downward&#x27;. When thought of as being incident on a surface, a radiative flux is sometimes called &#x27;irradiance&#x27;. In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called &#x27;vector irradiance&#x27;. In accordance with common usage in geophysical disciplines, &#x27;flux&#x27; implies per unit area, called &#x27;flux density&#x27; in physics.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Longwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_longwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rlds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-51a03ec4-1356-45ce-8afc-0273275e66f5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-51a03ec4-1356-45ce-8afc-0273275e66f5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6bdff93f-3018-4988-aa76-00b1fc906c35' class='xr-var-data-in' type='checkbox'><label for='data-6bdff93f-3018-4988-aa76-00b1fc906c35' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>The surface called &#x27;surface&#x27; means the lower boundary of the atmosphere. &#x27;longwave&#x27; means longwave radiation. Downwelling radiation is radiation from above. It does not mean &#x27;net downward&#x27;. When thought of as being incident on a surface, a radiative flux is sometimes called &#x27;irradiance&#x27;. In addition, it is identical with the quantity measured by a cosine-collector light-meter and sometimes called &#x27;vector irradiance&#x27;. In accordance with common usage in geophysical disciplines, &#x27;flux&#x27; implies per unit area, called &#x27;flux density&#x27; in physics.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Longwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_longwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -4027,7 +4032,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rsds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-27a209f9-9896-4a07-a518-46c90720859b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-27a209f9-9896-4a07-a518-46c90720859b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-50b4d1d1-9c44-46a3-8b7c-7b261c873484' class='xr-var-data-in' type='checkbox'><label for='data-50b4d1d1-9c44-46a3-8b7c-7b261c873484' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Surface solar irradiance for UV calculations.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Shortwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_shortwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rsds</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-4d229b80-1515-47e6-a00a-7f6bf402fc11' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4d229b80-1515-47e6-a00a-7f6bf402fc11' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-941c305c-21e0-4863-9b69-91286f0e9aa1' class='xr-var-data-in' type='checkbox'><label for='data-941c305c-21e0-4863-9b69-91286f0e9aa1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>Surface solar irradiance for UV calculations.</dd><dt><span>long_name :</span></dt><dd>Surface Downwelling Shortwave Radiation</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_shortwave_flux_in_air</dd><dt><span>units :</span></dt><dd>W m-2</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -4141,7 +4146,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sfcWind</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-16e5256e-ff01-485d-8c09-921e24385b71' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-16e5256e-ff01-485d-8c09-921e24385b71' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fb65e28e-6d34-4ae3-a907-241decc99747' class='xr-var-data-in' type='checkbox'><label for='data-fb65e28e-6d34-4ae3-a907-241decc99747' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 10 meters) wind speed.</dd><dt><span>long_name :</span></dt><dd>Daily-Mean Near-Surface Wind Speed</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>m s-1</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sfcWind</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-73f0e900-b580-49d6-9e93-6943d0237fdd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-73f0e900-b580-49d6-9e93-6943d0237fdd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8b1a9ad3-e933-47e6-b69b-65cbccff506b' class='xr-var-data-in' type='checkbox'><label for='data-8b1a9ad3-e933-47e6-b69b-65cbccff506b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: time: mean</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 10 meters) wind speed.</dd><dt><span>long_name :</span></dt><dd>Daily-Mean Near-Surface Wind Speed</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>m s-1</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -4255,7 +4260,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tas</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-c4c5859e-10d8-49ec-b6f8-718cd7d5f7f3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c4c5859e-10d8-49ec-b6f8-718cd7d5f7f3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8dc38f85-3187-46b9-af73-9a5921c2fe74' class='xr-var-data-in' type='checkbox'><label for='data-8dc38f85-3187-46b9-af73-9a5921c2fe74' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 2 meter) air temperature; derived from downscaled tasmax &amp; tasmin</dd><dt><span>long_name :</span></dt><dd>Daily Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tas</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-98e8d821-d2cc-4e6a-867f-9b5030095dda' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-98e8d821-d2cc-4e6a-867f-9b5030095dda' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ac56d3ac-6799-4cab-9651-c0b649eaec7c' class='xr-var-data-in' type='checkbox'><label for='data-ac56d3ac-6799-4cab-9651-c0b649eaec7c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>near-surface (usually, 2 meter) air temperature; derived from downscaled tasmax &amp; tasmin</dd><dt><span>long_name :</span></dt><dd>Daily Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -4369,7 +4374,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmax</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-71794702-c958-4f10-9739-53e9a4b83ff3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-71794702-c958-4f10-9739-53e9a4b83ff3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1e771600-5e0e-4dd3-849f-e651d41dc17f' class='xr-var-data-in' type='checkbox'><label for='data-1e771600-5e0e-4dd3-849f-e651d41dc17f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>maximum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: max&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Maximum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmax</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-36e4100a-86e1-4109-8734-06c8e3e6950e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-36e4100a-86e1-4109-8734-06c8e3e6950e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1ff8ebe5-84cb-4674-bb78-0bba6b590682' class='xr-var-data-in' type='checkbox'><label for='data-1ff8ebe5-84cb-4674-bb78-0bba6b590682' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: maximum</dd><dt><span>comment :</span></dt><dd>maximum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: max&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Maximum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -4483,7 +4488,7 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmin</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-48f2b78c-529c-4293-9957-24837c39cac5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-48f2b78c-529c-4293-9957-24837c39cac5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e4f9d8ee-2817-4379-b144-24371e8ba4c1' class='xr-var-data-in' type='checkbox'><label for='data-e4f9d8ee-2817-4379-b144-24371e8ba4c1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: minimum</dd><dt><span>comment :</span></dt><dd>minimum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: min&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Minimum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
+</table></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tasmin</span></div><div class='xr-var-dims'>(time, lat, lon)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>dask.array&lt;chunksize=(300, 600, 1440), meta=np.ndarray&gt;</div><input id='attrs-646cf22d-527e-45b4-bcac-d3c8b4affdcc' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-646cf22d-527e-45b4-bcac-d3c8b4affdcc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-633fd53a-d42a-4dda-ad86-e86fc5e14eb0' class='xr-var-data-in' type='checkbox'><label for='data-633fd53a-d42a-4dda-ad86-e86fc5e14eb0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>cell_measures :</span></dt><dd>area: areacella</dd><dt><span>cell_methods :</span></dt><dd>area: mean time: minimum</dd><dt><span>comment :</span></dt><dd>minimum near-surface (usually, 2 meter) air temperature (add cell_method attribute &#x27;time: min&#x27;)</dd><dt><span>long_name :</span></dt><dd>Daily Minimum Near-Surface Air Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>K</dd></dl></div><div class='xr-var-data'><table>
     <tr>
         <td>
             <table style="border-collapse: collapse;">
@@ -4597,29 +4602,29 @@ Attributes: (12/22)
 </svg>
         </td>
     </tr>
-</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-64dfbc1b-f752-4313-bc9b-dea71b14192c' class='xr-section-summary-in' type='checkbox'  ><label for='section-64dfbc1b-f752-4313-bc9b-dea71b14192c' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>lat</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-51b2ce21-09df-4fc6-ab5b-076a8d6896e7' class='xr-index-data-in' type='checkbox'/><label for='index-51b2ce21-09df-4fc6-ab5b-076a8d6896e7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([6.91083631727156e-310, 6.91083631727156e-310,
-               6.9108369568415e-310,  6.9108369568415e-310,
-                                0.0,                   nan,
-                                nan,                   0.0,
-                             5e-324,                   0.0,
+</table></div></li></ul></div></li><li class='xr-section-item'><input id='section-c27b970d-de1d-498a-9c56-25aea75057d4' class='xr-section-summary-in' type='checkbox'  ><label for='section-c27b970d-de1d-498a-9c56-25aea75057d4' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>lat</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-dbc26377-2743-494d-9132-17e38c485203' class='xr-index-data-in' type='checkbox'/><label for='index-dbc26377-2743-494d-9132-17e38c485203' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([    6.9460415536942e-310,     6.9460415536942e-310,
+                 6.94604225206034e-310,    6.94604225206034e-310,
+                                   0.0,                      nan,
+                                   nan,   1.1335903803785217e-19,
+                2.135014942616635e-213,                      0.0,
+              ...
+                1.333027528329979e-112,   -1.693127288291282e-83,
+              -1.0231564223520063e-214,   -7.985600616034826e-17,
+                8.089241587978512e-295, -2.7659699497190316e+129,
+                    -64689141577788.44,    5.575227794460785e-24,
+               -3.162982273912369e-189,  1.6072952850394903e-133],
+             dtype=&#x27;float64&#x27;, name=&#x27;lat&#x27;, length=600))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>lon</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c075fcaa-a883-46b2-81fe-92c01f9017b0' class='xr-index-data-in' type='checkbox'/><label for='index-c075fcaa-a883-46b2-81fe-92c01f9017b0' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([6.94604155369104e-310, 6.94604155369104e-310,
+               6.9460422527046e-310,  6.9460422527046e-310,
+                                0.0,                   0.0,
+                                0.0,                   0.0,
+                                0.0,                   0.0,
               ...
                                 0.0,                   0.0,
                                 0.0,                   0.0,
                                 0.0,                   0.0,
                                 0.0,                   0.0,
                                 0.0,                   0.0],
-             dtype=&#x27;float64&#x27;, name=&#x27;lat&#x27;, length=600))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>lon</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-44579496-1b17-4178-80cc-f56d507236f5' class='xr-index-data-in' type='checkbox'/><label for='index-44579496-1b17-4178-80cc-f56d507236f5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([    6.9108363172692e-310,     6.9108363172692e-310,
-                  6.9108369574858e-310,     6.9108369574858e-310,
-                                   0.0,                      0.0,
-                                   0.0,                      0.0,
-                                   0.0,                      0.0,
-              ...
-              -2.5728352265116663e+219,  -3.468619499398214e-162,
-                3.6815670713106973e+74,    3.14915173927957e-299,
-               -3.756000120312988e-152,  -5.235585225133893e+268,
-              -1.6850490045786922e-158,  -8.607832636839274e+113,
-               4.0284628036308784e+192,   -7.584984305718218e+39],
-             dtype=&#x27;float64&#x27;, name=&#x27;lon&#x27;, length=1440))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c4643a26-188d-4801-aa79-5f8258e19b55' class='xr-index-data-in' type='checkbox'/><label for='index-c4643a26-188d-4801-aa79-5f8258e19b55' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2015-01-01 12:00:00&#x27;, &#x27;2015-01-02 12:00:00&#x27;,
+             dtype=&#x27;float64&#x27;, name=&#x27;lon&#x27;, length=1440))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-3f2bda05-969b-478c-90d5-be169124228d' class='xr-index-data-in' type='checkbox'/><label for='index-3f2bda05-969b-478c-90d5-be169124228d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2015-01-01 12:00:00&#x27;, &#x27;2015-01-02 12:00:00&#x27;,
                &#x27;2015-01-03 12:00:00&#x27;, &#x27;2015-01-04 12:00:00&#x27;,
                &#x27;2015-01-05 12:00:00&#x27;, &#x27;2015-01-06 12:00:00&#x27;,
                &#x27;2015-01-07 12:00:00&#x27;, &#x27;2015-01-08 12:00:00&#x27;,
@@ -4630,7 +4635,7 @@ Attributes: (12/22)
                &#x27;2100-12-26 12:00:00&#x27;, &#x27;2100-12-27 12:00:00&#x27;,
                &#x27;2100-12-28 12:00:00&#x27;, &#x27;2100-12-29 12:00:00&#x27;,
                &#x27;2100-12-30 12:00:00&#x27;, &#x27;2100-12-31 12:00:00&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, length=31411, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9a1a8a5d-9e86-4491-bddb-e4bad021953e' class='xr-section-summary-in' type='checkbox'  ><label for='section-9a1a8a5d-9e86-4491-bddb-e4bad021953e' class='xr-section-summary' >Attributes: <span>(22)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>CF-1.7</dd><dt><span>activity :</span></dt><dd>NEX-GDDP-CMIP6</dd><dt><span>cmip6_institution_id :</span></dt><dd>CSIRO-ARCCSS</dd><dt><span>cmip6_license :</span></dt><dd>CC-BY-SA 4.0</dd><dt><span>cmip6_source_id :</span></dt><dd>ACCESS-CM2</dd><dt><span>contact :</span></dt><dd>Dr. Rama Nemani: rama.nemani@nasa.gov, Dr. Bridget Thrasher: bridget@climateanalyticsgroup.org</dd><dt><span>creation_date :</span></dt><dd>2021-10-04T14:05:21.953850+00:00</dd><dt><span>disclaimer :</span></dt><dd>This data is considered provisional and subject to change. This data is provided as is without any warranty of any kind, either express or implied, arising by law or otherwise, including but not limited to warranties of completeness, non-infringement, accuracy, merchantability, or fitness for a particular purpose. The user assumes all risk associated with the use of, or inability to use, this data.</dd><dt><span>external_variables :</span></dt><dd>areacella</dd><dt><span>frequency :</span></dt><dd>day</dd><dt><span>history :</span></dt><dd>2021-10-04T14:05:21.953850+00:00: install global attributes</dd><dt><span>institution :</span></dt><dd>NASA Earth Exchange, NASA Ames Research Center, Moffett Field, CA 94035</dd><dt><span>product :</span></dt><dd>output</dd><dt><span>realm :</span></dt><dd>atmos</dd><dt><span>references :</span></dt><dd>BCSD method: Thrasher et al., 2012, Hydrol. Earth Syst. Sci.,16, 3309-3314. Ref period obs: latest version of the Princeton Global Meteorological Forcings (http://hydrology.princeton.edu/data.php), based on Sheffield et al., 2006, J. Climate, 19 (13), 3088-3111.</dd><dt><span>resolution_id :</span></dt><dd>0.25 degree</dd><dt><span>scenario :</span></dt><dd>ssp585</dd><dt><span>source :</span></dt><dd>BCSD</dd><dt><span>title :</span></dt><dd>ACCESS-CM2, r1i1p1f1, ssp585, global downscaled CMIP6 climate projection data</dd><dt><span>tracking_id :</span></dt><dd>dcae752c-5de5-4170-8a98-e7043538d702</dd><dt><span>variant_label :</span></dt><dd>r1i1p1f1</dd><dt><span>version :</span></dt><dd>1.0</dd></dl></div></li></ul></div></div></div></div>
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, length=31411, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-209d166c-520a-4e12-9950-ed8f1d1f8bcb' class='xr-section-summary-in' type='checkbox'  ><label for='section-209d166c-520a-4e12-9950-ed8f1d1f8bcb' class='xr-section-summary' >Attributes: <span>(22)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>Conventions :</span></dt><dd>CF-1.7</dd><dt><span>activity :</span></dt><dd>NEX-GDDP-CMIP6</dd><dt><span>cmip6_institution_id :</span></dt><dd>CSIRO-ARCCSS</dd><dt><span>cmip6_license :</span></dt><dd>CC-BY-SA 4.0</dd><dt><span>cmip6_source_id :</span></dt><dd>ACCESS-CM2</dd><dt><span>contact :</span></dt><dd>Dr. Rama Nemani: rama.nemani@nasa.gov, Dr. Bridget Thrasher: bridget@climateanalyticsgroup.org</dd><dt><span>creation_date :</span></dt><dd>2021-10-04T14:05:21.953850+00:00</dd><dt><span>disclaimer :</span></dt><dd>This data is considered provisional and subject to change. This data is provided as is without any warranty of any kind, either express or implied, arising by law or otherwise, including but not limited to warranties of completeness, non-infringement, accuracy, merchantability, or fitness for a particular purpose. The user assumes all risk associated with the use of, or inability to use, this data.</dd><dt><span>external_variables :</span></dt><dd>areacella</dd><dt><span>frequency :</span></dt><dd>day</dd><dt><span>history :</span></dt><dd>2021-10-04T14:05:21.953850+00:00: install global attributes</dd><dt><span>institution :</span></dt><dd>NASA Earth Exchange, NASA Ames Research Center, Moffett Field, CA 94035</dd><dt><span>product :</span></dt><dd>output</dd><dt><span>realm :</span></dt><dd>atmos</dd><dt><span>references :</span></dt><dd>BCSD method: Thrasher et al., 2012, Hydrol. Earth Syst. Sci.,16, 3309-3314. Ref period obs: latest version of the Princeton Global Meteorological Forcings (http://hydrology.princeton.edu/data.php), based on Sheffield et al., 2006, J. Climate, 19 (13), 3088-3111.</dd><dt><span>resolution_id :</span></dt><dd>0.25 degree</dd><dt><span>scenario :</span></dt><dd>ssp585</dd><dt><span>source :</span></dt><dd>BCSD</dd><dt><span>title :</span></dt><dd>ACCESS-CM2, r1i1p1f1, ssp585, global downscaled CMIP6 climate projection data</dd><dt><span>tracking_id :</span></dt><dd>dcae752c-5de5-4170-8a98-e7043538d702</dd><dt><span>variant_label :</span></dt><dd>r1i1p1f1</dd><dt><span>version :</span></dt><dd>1.0</dd></dl></div></li></ul></div></div></div></div>
 </div>
 </div>
 </div>
@@ -4656,7 +4661,11 @@ Attributes: (12/22)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:param.dynamic_operation: Callable raised &quot;ValueError(&#39;cannot convert float NaN to integer&#39;)&quot;.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/holoviews/core/util.py:2125: RuntimeWarning: overflow encountered in scalar divide
+  return length/diff
+/home/runner/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/holoviews/core/sheetcoords.py:232: RuntimeWarning: invalid value encountered in scalar multiply
+  float_col = (x-self.lbrt[0]) * xdensity
+WARNING:param.dynamic_operation: Callable raised &quot;ValueError(&#39;cannot convert float NaN to integer&#39;)&quot;.
 Invoked as dynamic_operation(numpy.datetime64(&#39;2015-01-01T12:00:00.000000000&#39;))
 </pre></div>
 </div>
@@ -4938,12 +4947,12 @@ Invoked as dynamic_operation(numpy.datetime64(&#39;2015-01-01T12:00:00.000000000
 <span class="ne">--&gt; </span><span class="mi">166</span> <span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span> <span class="o">=</span> <span class="n">Slice</span><span class="o">.</span><span class="n">_boundsspec2slicespec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lbrt</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">167</span> <span class="bp">self</span><span class="o">.</span><span class="n">__shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">r2</span><span class="o">-</span><span class="n">r1</span><span class="p">,</span><span class="n">c2</span><span class="o">-</span><span class="n">c1</span><span class="p">)</span>
 
-<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/holoviews/core/sheetcoords.py:519,</span> in <span class="ni">Slice._boundsspec2slicespec</span><span class="nt">(boundsspec, scs)</span>
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/holoviews/core/sheetcoords.py:518,</span> in <span class="ni">Slice._boundsspec2slicespec</span><span class="nt">(boundsspec, scs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">515</span> <span class="n">t_m</span><span class="p">,</span><span class="n">l_m</span> <span class="o">=</span> <span class="n">scs</span><span class="o">.</span><span class="n">sheet2matrix</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">516</span> <span class="n">b_m</span><span class="p">,</span><span class="n">r_m</span> <span class="o">=</span> <span class="n">scs</span><span class="o">.</span><span class="n">sheet2matrix</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="n">l_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">l_m</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
-<span class="ne">--&gt; </span><span class="mi">519</span> <span class="n">t_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">t_m</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">518</span> <span class="n">l_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">l_m</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">519</span> <span class="n">t_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">t_m</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
 <span class="g g-Whitespace">    </span><span class="mi">520</span> <span class="n">r_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">r_m</span><span class="o">+</span><span class="mf">0.5</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="n">b_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">b_m</span><span class="o">+</span><span class="mf">0.5</span><span class="p">))</span>
 
 <span class="ne">ValueError</span>: cannot convert float NaN to integer
 </pre></div>
@@ -5049,7 +5058,7 @@ Invoked as dynamic_operation(numpy.datetime64(&#39;2015-01-01T12:00:00.000000000
         
           By Norland Raphael Hagen.
         
-          Last updated on 29 January 2024.
+          Last updated on 30 January 2024.
         </p>
       </div>
     </div>
