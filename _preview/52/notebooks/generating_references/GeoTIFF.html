@@ -236,6 +236,11 @@ const thebe_selector_output = ".output, .cell_output"
    Kerchunk and Pangeo-Forge
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced/appending.html">
+   Appending to Kerchunk references
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -912,9 +917,9 @@ Attributes:
     AREA_OR_POINT:  Area
     GDAL_METADATA:  &lt;GDALMetadata&gt;\n&lt;Item name=&quot;Observation time&quot; format=&quot;YYY...
     scale_factor:   1.0
-    add_offset:     0.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>y</span>: 1345</li><li><span class='xr-has-index'>x</span>: 850</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-8e700b00-56ee-4db0-88dc-99e4e1aa8d29' class='xr-array-in' type='checkbox' checked><label for='section-8e700b00-56ee-4db0-88dc-99e4e1aa8d29' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[1143250 values with dtype=uint16]</pre></div></div></li><li class='xr-section-item'><input id='section-57a72d00-594e-4671-b9f9-ee328192cb1b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-57a72d00-594e-4671-b9f9-ee328192cb1b' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-e880c80f-d623-4570-95e6-b676b8965609' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e880c80f-d623-4570-95e6-b676b8965609' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4117bcfd-7af5-448a-af6a-95863bb157d1' class='xr-var-data-in' type='checkbox'><label for='data-4117bcfd-7af5-448a-af6a-95863bb157d1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.177e+05 -1.166e+05 ... 8.75e+05</div><input id='attrs-11f39c1a-ace7-4a02-a45f-5faab9378a56' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-11f39c1a-ace7-4a02-a45f-5faab9378a56' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f935dd86-ed4d-44a7-9b1d-0e36a21ca5b6' class='xr-var-data-in' type='checkbox'><label for='data-f935dd86-ed4d-44a7-9b1d-0e36a21ca5b6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-117746.71988 , -116577.426823, -115408.133766, ...,  872644.499264,
-        873813.792321,  874983.085378])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.907e+06 7.906e+06 ... 6.336e+06</div><input id='attrs-7297f6f7-da23-4929-b89a-4393acfdc57a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7297f6f7-da23-4929-b89a-4393acfdc57a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8dc2be5e-7762-4e6e-9771-816093354729' class='xr-var-data-in' type='checkbox'><label for='data-8dc2be5e-7762-4e6e-9771-816093354729' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([7907167.102182, 7905998.232018, 7904829.361854, ..., 6338543.342424,
-       6337374.47226 , 6336205.602096])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-fab141dc-585e-43ce-97c7-31c3d57e97dd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fab141dc-585e-43ce-97c7-31c3d57e97dd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5e55e202-1020-475f-91aa-45131391ae06' class='xr-var-data-in' type='checkbox'><label for='data-5e55e202-1020-475f-91aa-45131391ae06' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89 / TM35FIN(E,N)</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>27.0</dd><dt><span>false_easting :</span></dt><dd>500000.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-118331.36640835612 1169.2930568410832 0.0 7907751.537263516 0.0 -1168.8701637541064</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-043ce570-3b34-4b30-a61a-741a9201f2b6' class='xr-section-summary-in' type='checkbox'  ><label for='section-043ce570-3b34-4b30-a61a-741a9201f2b6' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-46422e7b-e6bc-47b1-98e9-54f3ae15702f' class='xr-index-data-in' type='checkbox'/><label for='index-46422e7b-e6bc-47b1-98e9-54f3ae15702f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([1], dtype=&#x27;int64&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-f06b13fc-88e8-48d1-abad-71d982b53f37' class='xr-index-data-in' type='checkbox'/><label for='index-f06b13fc-88e8-48d1-abad-71d982b53f37' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([-117746.71987993557, -116577.42682309449,  -115408.1337662534,
+    add_offset:     0.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>y</span>: 1345</li><li><span class='xr-has-index'>x</span>: 850</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-39765437-1d11-4251-bc34-b18282982df0' class='xr-array-in' type='checkbox' checked><label for='section-39765437-1d11-4251-bc34-b18282982df0' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[1143250 values with dtype=uint16]</pre></div></div></li><li class='xr-section-item'><input id='section-3291513f-6c25-4958-a308-dde6695fad99' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3291513f-6c25-4958-a308-dde6695fad99' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-dce65872-db46-473f-b60e-8ae4aa744b12' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-dce65872-db46-473f-b60e-8ae4aa744b12' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0fbeab61-491e-4220-95f8-e039ac3864b4' class='xr-var-data-in' type='checkbox'><label for='data-0fbeab61-491e-4220-95f8-e039ac3864b4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.177e+05 -1.166e+05 ... 8.75e+05</div><input id='attrs-8c5a79e1-cc88-4f54-9e26-7961bc687138' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8c5a79e1-cc88-4f54-9e26-7961bc687138' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f913aa1c-fa44-4c43-92d2-3671187e878d' class='xr-var-data-in' type='checkbox'><label for='data-f913aa1c-fa44-4c43-92d2-3671187e878d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-117746.71988 , -116577.426823, -115408.133766, ...,  872644.499264,
+        873813.792321,  874983.085378])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.907e+06 7.906e+06 ... 6.336e+06</div><input id='attrs-1b975514-b2ab-4aff-ac0c-8edb3b0d5185' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1b975514-b2ab-4aff-ac0c-8edb3b0d5185' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c4318c97-1733-4d10-ae8f-8e661a96726f' class='xr-var-data-in' type='checkbox'><label for='data-c4318c97-1733-4d10-ae8f-8e661a96726f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([7907167.102182, 7905998.232018, 7904829.361854, ..., 6338543.342424,
+       6337374.47226 , 6336205.602096])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-c4fa4e15-3a46-492c-b0fe-318ba5d295ed' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c4fa4e15-3a46-492c-b0fe-318ba5d295ed' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-43368f00-3404-4541-949d-16381a0fc31b' class='xr-var-data-in' type='checkbox'><label for='data-43368f00-3404-4541-949d-16381a0fc31b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89 / TM35FIN(E,N)</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>27.0</dd><dt><span>false_easting :</span></dt><dd>500000.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-118331.36640835612 1169.2930568410832 0.0 7907751.537263516 0.0 -1168.8701637541064</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-2d03b0f4-f24a-402a-8308-9b99c77d550d' class='xr-section-summary-in' type='checkbox'  ><label for='section-2d03b0f4-f24a-402a-8308-9b99c77d550d' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-d80634f9-9f33-4047-a0e2-b3d770451cd2' class='xr-index-data-in' type='checkbox'/><label for='index-d80634f9-9f33-4047-a0e2-b3d770451cd2' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([1], dtype=&#x27;int64&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-90935213-1e19-4ec9-95af-fdb4efe63cf7' class='xr-index-data-in' type='checkbox'/><label for='index-90935213-1e19-4ec9-95af-fdb4efe63cf7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([-117746.71987993557, -116577.42682309449,  -115408.1337662534,
               -114238.84070941232, -113069.54765257123, -111900.25459573015,
               -110730.96153888907, -109561.66848204799,  -108392.3754252069,
               -107223.08236836582,
@@ -923,7 +928,7 @@ Attributes:
                 867967.3270370975,   869136.6200939385,   870305.9131507797,
                 871475.2062076208,   872644.4992644618,   873813.7923213029,
                  874983.085378144],
-             dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=850))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-7ec10f66-ffe0-4ab7-9a4c-fbdf29b68cfb' class='xr-index-data-in' type='checkbox'/><label for='index-7ec10f66-ffe0-4ab7-9a4c-fbdf29b68cfb' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([7907167.1021816395,  7905998.232017885,  7904829.361854131,
+             dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=850))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-9a091a33-74a4-48f6-b9d4-a3c814bc5021' class='xr-index-data-in' type='checkbox'/><label for='index-9a091a33-74a4-48f6-b9d4-a3c814bc5021' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([7907167.1021816395,  7905998.232017885,  7904829.361854131,
                7903660.491690377,  7902491.621526623,  7901322.751362869,
                7900153.881199115,   7898985.01103536,  7897816.140871607,
                7896647.270707852,
@@ -932,7 +937,7 @@ Attributes:
                6343218.823078645,  6342049.952914891,  6340881.082751137,
                6339712.212587383,  6338543.342423629,  6337374.472259874,
                 6336205.60209612],
-             dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1345))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-13d57716-8ef0-425e-86b2-9634503db291' class='xr-section-summary-in' type='checkbox'  checked><label for='section-13d57716-8ef0-425e-86b2-9634503db291' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>GDAL_METADATA :</span></dt><dd>&lt;GDALMetadata&gt;
+             dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1345))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b88b7da9-3d58-44dd-ada1-61ea477a5503' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b88b7da9-3d58-44dd-ada1-61ea477a5503' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>GDAL_METADATA :</span></dt><dd>&lt;GDALMetadata&gt;
 &lt;Item name=&quot;Observation time&quot; format=&quot;YYYYMMDDhhmm&quot;&gt;202307010100&lt;/Item&gt;
 &lt;Item name=&quot;Quantity&quot; unit=&quot;mm&quot;&gt;Precipitation accumulation&lt;/Item&gt;
 &lt;Item name=&quot;Gain&quot;&gt;0.010000&lt;/Item&gt;
@@ -953,7 +958,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f9cf9289180&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f104f651360&gt;
 </pre></div>
 </div>
 <img alt="../../_images/8b8d939b71a81b499043efdceb34e288dfba86a926abb6702095a801e7f399ad.png" src="../../_images/8b8d939b71a81b499043efdceb34e288dfba86a926abb6702095a801e7f399ad.png" />
@@ -993,7 +998,7 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpqkuuizs9&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpdrzl8g44&#39;
 </pre></div>
 </div>
 </div>
@@ -1014,7 +1019,7 @@ Attributes:
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-341acd01-bf0d-11ee-91f2-6045bd84ca46</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-2d3b697a-bf97-11ee-9205-000d3a35d143</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -1049,7 +1054,7 @@ Attributes:
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">390638c2</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">4d65738c</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -1086,11 +1091,11 @@ Attributes:
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-b0240fbb-abb9-4717-9d05-13bb48e28e25</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-10d7dc35-ce39-452e-a295-995e0895c59f</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:44733
+                        <strong>Comm:</strong> tcp://127.0.0.1:35993
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -1132,7 +1137,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45087
+                            <strong>Comm: </strong> tcp://127.0.0.1:38451
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1140,7 +1145,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46845/status" target="_blank">http://127.0.0.1:46845/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39315/status" target="_blank">http://127.0.0.1:39315/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1148,13 +1153,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36031
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42139
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-qexl9tiv
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ponudj5b
                         </td>
                     </tr>
 
@@ -1177,7 +1182,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43639
+                            <strong>Comm: </strong> tcp://127.0.0.1:42161
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1185,7 +1190,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36815/status" target="_blank">http://127.0.0.1:36815/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42025/status" target="_blank">http://127.0.0.1:42025/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1193,13 +1198,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:35579
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33343
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-m3315zf5
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-vblizi3q
                         </td>
                     </tr>
 
@@ -1222,7 +1227,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:36447
+                            <strong>Comm: </strong> tcp://127.0.0.1:33509
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1230,7 +1235,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44671/status" target="_blank">http://127.0.0.1:44671/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38373/status" target="_blank">http://127.0.0.1:38373/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1238,13 +1243,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:33703
+                            <strong>Nanny: </strong> tcp://127.0.0.1:40415
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-9b4528cw
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-z2hwx19t
                         </td>
                     </tr>
 
@@ -1267,7 +1272,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42249
+                            <strong>Comm: </strong> tcp://127.0.0.1:35349
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1275,7 +1280,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37169/status" target="_blank">http://127.0.0.1:37169/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42361/status" target="_blank">http://127.0.0.1:42361/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1283,13 +1288,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36885
+                            <strong>Nanny: </strong> tcp://127.0.0.1:37475
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-s656m8lg
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-f12zt_dm
                         </td>
                     </tr>
 
@@ -1312,7 +1317,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37935
+                            <strong>Comm: </strong> tcp://127.0.0.1:45239
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1320,7 +1325,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35573/status" target="_blank">http://127.0.0.1:35573/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37191/status" target="_blank">http://127.0.0.1:37191/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1328,13 +1333,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40973
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33809
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-_vezj_y3
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-tfhxhsm5
                         </td>
                     </tr>
 
@@ -1357,7 +1362,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37477
+                            <strong>Comm: </strong> tcp://127.0.0.1:39477
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1365,7 +1370,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43189/status" target="_blank">http://127.0.0.1:43189/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43693/status" target="_blank">http://127.0.0.1:43693/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1373,13 +1378,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:42953
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41539
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-e87drp69
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-e2hx6zju
                         </td>
                     </tr>
 
@@ -1402,7 +1407,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37501
+                            <strong>Comm: </strong> tcp://127.0.0.1:42861
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1410,7 +1415,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40725/status" target="_blank">http://127.0.0.1:40725/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39353/status" target="_blank">http://127.0.0.1:39353/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1418,13 +1423,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:44313
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41533
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-a9o39vfu
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-gfeijgxa
                         </td>
                     </tr>
 
@@ -1447,7 +1452,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42453
+                            <strong>Comm: </strong> tcp://127.0.0.1:46795
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1455,7 +1460,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43965/status" target="_blank">http://127.0.0.1:43965/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44349/status" target="_blank">http://127.0.0.1:44349/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1463,13 +1468,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:43845
+                            <strong>Nanny: </strong> tcp://127.0.0.1:37821
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-z2_ku3g_
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5mpaixso
                         </td>
                     </tr>
 
@@ -1526,29 +1531,29 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpqkuuizs9/202301010100.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010200.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010300.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010400.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010500.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010600.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010700.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010800.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301010900.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011000.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011100.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011200.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011300.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011400.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011500.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011600.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011700.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011800.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301011900.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301012000.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301012100.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301012200.json&#39;,
-  &#39;/tmp/tmpqkuuizs9/202301012300.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpdrzl8g44/202301010100.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010200.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010300.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010400.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010500.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010600.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010700.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010800.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301010900.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011000.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011100.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011200.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011300.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011400.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011500.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011600.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011700.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011800.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301011900.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301012000.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301012100.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301012200.json&#39;,
+  &#39;/tmp/tmpdrzl8g44/202301012300.json&#39;],)
 </pre></div>
 </div>
 </div>
