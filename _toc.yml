@@ -4,17 +4,28 @@ parts:
   - caption: Preamble
     chapters:
       - file: notebooks/how-to-cite
+
   - caption: Foundations
     chapters:
       - file: notebooks/foundations/01_kerchunk_basics
       - file: notebooks/foundations/02_kerchunk_multi_file
       - file: notebooks/foundations/03_kerchunk_dask
-      - file: notebooks/foundations/04_kerchunk_reference_storage.ipynb
 
-  - caption: Case Studies
+  - caption: Advanced
     chapters:
-      - file: notebooks/case_studies/NetCDF_SMN_Arg
-      - file: notebooks/case_studies/GRIB2_HRRR
-      - file: notebooks/case_studies/GeoTIFF_FMI
-      - file: notebooks/case_studies/NetCDF_Pangeo_Forge_gridMET
-      - file: notebooks/case_studies/Streaming_Visualizations_with_Hvplot_Datashader
+      - file: notebooks/advanced/Parquet_Reference_Storage
+      - file: notebooks/advanced/Pangeo_Forge
+      - file: notebooks/advanced/appending
+
+  - caption: Generating Reference Files
+    chapters:
+      - file: notebooks/generating_references/NetCDF
+      - file: notebooks/generating_references/GRIB2
+      - file: notebooks/generating_references/GeoTIFF
+
+  - caption: Using Pre-Generated References
+    chapters:
+      - file: notebooks/using_references/Xarray
+      - file: notebooks/using_references/Xrefcoord
+      - file: notebooks/using_references/Datatree
+      - file: notebooks/using_references/Hvplot_Datashader
