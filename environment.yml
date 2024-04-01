@@ -37,8 +37,8 @@ dependencies:
   - xarray
   - xarray-datatree
   - zarr
+  - sphinx-pythia-theme
   - pip:
-      - sphinx-pythia-theme
       - "apache-beam[interactive, dataframe]"
       - git+https://github.com/pangeo-forge/pangeo-forge-recipes
       - git+https://github.com/carbonplan/xrefcoord.git
