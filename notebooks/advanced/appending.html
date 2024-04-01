@@ -1,103 +1,133 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Appending to Kerchunk references &#8212; Kerchunk Cookbook</title>
-    
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css?v=e502140d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-    
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=c54c090a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/advanced/appending';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="NetCDF" href="../generating_references/NetCDF.html" />
     <link rel="prev" title="Kerchunk and Pangeo-Forge" href="Pangeo_Forge.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-T52X8HNYE8');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="1 April 2024"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="132">
-    <div class="container-fluid" id="shim"></div>
-    <div class="container-fluid" id="banner"></div>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
-
-  <div id="navbar-start">
-    
-    
-
-<a class="navbar-brand" href="https://projectpythia.org">
-  <img src="../../_static/pythia_logo-white-rtext.svg" class="logo" alt="logo">
-</a>
-
-
-    
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
   
-  <div id="navbar-collapsible" class=" collapse navbar-collapse">
-    <div id="navbar-center" class="mr-auto">
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <div class="pst-scroll-pixel-helper"></div>
+    <header class="bd-header navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+   
+
+<a class="navbar-brand logo" href="https://projectpythia.org">
+  
+  
+  
+  
+  
+    
+    
       
-      <div class="navbar-center-item">
-        <ul id="navbar-main-elements" class="navbar-nav">
+    
+    
+    <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-light" alt="Kerchunk Cookbook - Home"/>
+    <script>document.write(`<img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-dark" alt="Kerchunk Cookbook - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
   
   <li class="nav-item">
     
@@ -135,353 +165,273 @@ const thebe_selector_output = ".output, .cell_output"
   </li>
   
   
-</ul>
-      </div>
+</ul></div>
       
     </div>
-
-    <div id="navbar-end">
-      
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/ProjectPythia" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/project_pythia" rel="noopener" target="_blank" title="Twitter">
-            <span><i class="fab fa-twitter-square"></i></span>
-            <label class="sr-only">Twitter</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" rel="noopener" target="_blank" title="YouTube">
-            <span><i class="fab fa-youtube-square"></i></span>
-            <label class="sr-only">YouTube</label>
-          </a>
-        </li>
-      </ul>
-      </div>
-      
-    </div>
-  </div>
-</div>
-    </nav>
-    <div class="container-xl">
-      <div class="row">
-        
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
-        <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../README.html">
-   Kerchunk Cookbook
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Preamble
- </span>
-</p>
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+        
+        
+        
+        <div class="bd-sidebar-primary bd-sidebar">
+          
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Kerchunk Cookbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../how-to-cite.html">
-   How to Cite This Cookbook
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to-cite.html">How to Cite This Cookbook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../foundations/01_kerchunk_basics.html">
-   Kerchunk Basics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">
-   Multi-File Datasets with Kerchunk
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../foundations/03_kerchunk_dask.html">
-   Kerchunk and Dask
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/01_kerchunk_basics.html">Kerchunk Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">Multi-File Datasets with Kerchunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/03_kerchunk_dask.html">Kerchunk and Dask</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Parquet_Reference_Storage.html">
-   Store Kerchunk Reference Files as Parquet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Pangeo_Forge.html">
-   Kerchunk and Pangeo-Forge
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Appending to Kerchunk references
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Pangeo_Forge.html">Kerchunk and Pangeo-Forge</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Appending to Kerchunk references</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Generating Reference Files
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Reference Files</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../generating_references/NetCDF.html">
-   NetCDF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../generating_references/GRIB2.html">
-   GRIB2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../generating_references/GeoTIFF.html">
-   GeoTIFF
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/NetCDF.html">NetCDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/GRIB2.html">GRIB2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/GeoTIFF.html">GeoTIFF</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Using Pre-Generated References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Pre-Generated References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Xarray.html">
-   Load Kerchunked dataset with Xarray
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Xrefcoord.html">
-   Use
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     xrefcoord
-    </span>
-   </code>
-   to Generate Coordinates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Datatree.html">
-   Kerchunk and Xarray-Datatree
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Hvplot_Datashader.html">
-   Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xarray.html">Load Kerchunked dataset with Xarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xrefcoord.html">Use <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> to Generate Coordinates</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Datatree.html">Kerchunk and Xarray-Datatree</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Hvplot_Datashader.html">Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by <a href="https://projectpythia.org">Project Pythia</a>.<br><br>
-All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code content is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 (CC BY 4.0)</a>.<br><br>
-
-</div>
-
-</div>
-
-        
-
-        <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main"><div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/advanced/appending.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/advanced/appending.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/advanced/appending.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/advanced/appending.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
 
         </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> On this page
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prerequisites">
-   Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#imports">
-   Imports
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-input-file-list">
-   Create Input File List
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#start-a-dask-client">
-   Start a Dask Client
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-a-kerchunk-reference-file-for-the-first-24-hours">
-   Create a
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     Kerchunk
-    </span>
-   </code>
-   reference file for the first 24 hours
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-   Combine .json
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     Kerchunk
-    </span>
-   </code>
-   reference files and write a combined
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     Kerchunk
-    </span>
-   </code>
-   index
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#append-references-for-the-next-24-hours">
-   Append references for the next 24 hours
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#opening-reference-dataset-with-fsspec-and-xarray">
-   Opening Reference Dataset with Fsspec and Xarray
-  </a>
- </li>
-</ul>
+        
+        <main id="main-content" class="bd-main" role="main">
+          
 
-            </nav>
-        </div>
-    </div>
-</div>
-          <div id="main-content" class="row">
-            <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-              
-              <div>
+            <div class="bd-content">
+
+              <div class="bd-article-container">
+
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="appending-to-kerchunk-references">
-<h1>Appending to Kerchunk references<a class="headerlink" href="#appending-to-kerchunk-references" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>In this tutorial we’ll show how to append to a pre-existing Kerchunk reference. We’ll use the same datasets as in the <a class="reference internal" href="../generating_references/NetCDF.html"><span class="doc std std-doc">NetCDF reference generation</span></a> example.</p>
-</div>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<table class="colwidths-auto table">
+                  
+                  
+<div id="searchbox"></div>
+                  <article class="bd-article">
+                    
+  <section class="tex2jax_ignore mathjax_ignore" id="appending-to-kerchunk-references">
+<h1>Appending to Kerchunk references<a class="headerlink" href="#appending-to-kerchunk-references" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>In this tutorial we’ll show how to append to a pre-existing Kerchunk reference. We’ll use the same datasets as in the <a class="reference internal" href="../generating_references/NetCDF.html"><span class="std std-doc">NetCDF reference generation</span></a> example.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concepts</p></th>
 <th class="head"><p>Importance</p></th>
@@ -489,15 +439,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><span class="xref myst">Kerchunk Basics</span></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#../foundations/kerchunk_basics"><span class="xref myst">Kerchunk Basics</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="xref myst">Multiple Files and Kerchunk</span></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#../foundations/kerchunk_multi_file"><span class="xref myst">Multiple Files and Kerchunk</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-even"><td><p><span class="xref myst">Multi-File Datasets with Kerchunk</span></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#../case_studies/ARG_Weather.ipynb"><span class="xref myst">Multi-File Datasets with Kerchunk</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>IO/Visualization</p></td>
 </tr>
@@ -506,10 +456,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <ul class="simple">
 <li><p><strong>Time to learn</strong>: 45 minutes</p></li>
 </ul>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="imports">
-<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -526,9 +476,9 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="create-input-file-list">
-<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="create-input-file-list">
+<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>Here we are using <code class="docutils literal notranslate"><span class="pre">fsspec's</span></code> glob functionality along with the <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em> wildcard operator and some string slicing to grab a list of NetCDF files from a <code class="docutils literal notranslate"><span class="pre">s3</span></code> <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -559,10 +509,10 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="start-a-dask-client">
-<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <span class="xref myst">Kerchunk and Dask</span>.</p>
+</section>
+<section id="start-a-dask-client">
+<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <a class="reference internal" href="#../foundations/kerchunk_dask"><span class="xref myst">Kerchunk and Dask</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
@@ -575,7 +525,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-6627f20c-bf9c-11ee-8ef2-6045bdd54a3e</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-01fd82ff-f06f-11ee-8b40-000d3ae34a06</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -610,7 +560,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">41714e22</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">8a8c8cd3</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -647,11 +597,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-1d743471-99b1-4616-824a-4e978ae1c0c9</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-c5e7983e-e15c-4014-ac83-662d6c06c115</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:40519
+                        <strong>Comm:</strong> tcp://127.0.0.1:40063
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -693,7 +643,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39009
+                            <strong>Comm: </strong> tcp://127.0.0.1:37429
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -701,7 +651,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36223/status" target="_blank">http://127.0.0.1:36223/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34763/status" target="_blank">http://127.0.0.1:34763/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -709,13 +659,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36719
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35947
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-jkdh6hgx
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-0dsvlxub
                         </td>
                     </tr>
 
@@ -738,7 +688,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:35333
+                            <strong>Comm: </strong> tcp://127.0.0.1:33361
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -746,7 +696,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36333/status" target="_blank">http://127.0.0.1:36333/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43011/status" target="_blank">http://127.0.0.1:43011/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -754,13 +704,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41329
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36435
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-lm4gai1c
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1vqrid1e
                         </td>
                     </tr>
 
@@ -783,7 +733,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:35485
+                            <strong>Comm: </strong> tcp://127.0.0.1:39049
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -791,7 +741,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34761/status" target="_blank">http://127.0.0.1:34761/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33713/status" target="_blank">http://127.0.0.1:33713/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -799,13 +749,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:43181
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42245
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-hqrzve40
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1b97pnjf
                         </td>
                     </tr>
 
@@ -828,7 +778,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42093
+                            <strong>Comm: </strong> tcp://127.0.0.1:39899
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -836,7 +786,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42465/status" target="_blank">http://127.0.0.1:42465/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35415/status" target="_blank">http://127.0.0.1:35415/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -844,13 +794,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38971
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36311
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-q4_ga9hy
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6qtuixll
                         </td>
                     </tr>
 
@@ -873,7 +823,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40019
+                            <strong>Comm: </strong> tcp://127.0.0.1:34139
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -881,7 +831,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46779/status" target="_blank">http://127.0.0.1:46779/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44425/status" target="_blank">http://127.0.0.1:44425/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -889,13 +839,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:36095
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43483
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-694oh8wx
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-7ni279oz
                         </td>
                     </tr>
 
@@ -918,7 +868,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42997
+                            <strong>Comm: </strong> tcp://127.0.0.1:40667
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -926,7 +876,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:32867/status" target="_blank">http://127.0.0.1:32867/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40989/status" target="_blank">http://127.0.0.1:40989/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -934,13 +884,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37979
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34891
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-13zzh6e9
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-l1gftijv
                         </td>
                     </tr>
 
@@ -963,7 +913,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:38815
+                            <strong>Comm: </strong> tcp://127.0.0.1:45381
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -971,7 +921,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33029/status" target="_blank">http://127.0.0.1:33029/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45235/status" target="_blank">http://127.0.0.1:45235/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -979,13 +929,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38255
+                            <strong>Nanny: </strong> tcp://127.0.0.1:46605
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-rrbvkm9a
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-fnhq1q19
                         </td>
                     </tr>
 
@@ -1008,7 +958,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39221
+                            <strong>Comm: </strong> tcp://127.0.0.1:33661
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1016,7 +966,7 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44045/status" target="_blank">http://127.0.0.1:44045/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34305/status" target="_blank">http://127.0.0.1:34305/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1024,13 +974,13 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38487
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38793
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-o_d6owld
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-pagov4rx
                         </td>
                     </tr>
 
@@ -1056,9 +1006,9 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
     </div>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="create-a-kerchunk-reference-file-for-the-first-24-hours">
-<h2>Create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference file for the first 24 hours<a class="headerlink" href="#create-a-kerchunk-reference-file-for-the-first-24-hours" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="create-a-kerchunk-reference-file-for-the-first-24-hours">
+<h2>Create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference file for the first 24 hours<a class="headerlink" href="#create-a-kerchunk-reference-file-for-the-first-24-hours" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_24_hrs</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[:</span><span class="mi">24</span><span class="p">]</span>
@@ -1099,37 +1049,37 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_000.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_001.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_002.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_003.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_004.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_005.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_006.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_007.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_008.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_009.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_010.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_011.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_012.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_013.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_014.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_015.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_016.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_017.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_018.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_019.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_020.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_021.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_022.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_023.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_000.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_001.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_002.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_003.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_004.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_005.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_006.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_007.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_008.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_009.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_010.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_011.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_012.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_013.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_014.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_015.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_016.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_017.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_018.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_019.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_020.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_021.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_022.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_023.json&#39;],)
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
-<h2>Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">
+<h2>Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index<a class="headerlink" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>In the following cell, we are combining all the <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference files that were generated above into a single reference file and writing that file to disk.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1158,9 +1108,9 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="append-references-for-the-next-24-hours">
-<h2>Append references for the next 24 hours<a class="headerlink" href="#append-references-for-the-next-24-hours" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="append-references-for-the-next-24-hours">
+<h2>Append references for the next 24 hours<a class="headerlink" href="#append-references-for-the-next-24-hours" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>We’ll now append the references for the next 24 hours. First, we create an individual temporary reference file for each input data file. Then,
 we load the original references and append the new references.</p>
 <div class="cell docutils container">
@@ -1178,30 +1128,30 @@ we load the original references and append the new references.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_024.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_025.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_026.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_027.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_028.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_029.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_030.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_031.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_032.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_033.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_034.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_035.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_036.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_037.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_038.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_039.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_040.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_041.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_042.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_043.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_044.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_045.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_046.json&#39;,
-  &#39;/tmp/tmp00jxg9a9/WRFDETAR_01H_20221231_12_047.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_024.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_025.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_026.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_027.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_028.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_029.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_030.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_031.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_032.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_033.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_034.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_035.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_036.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_037.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_038.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_039.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_040.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_041.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_042.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_043.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_044.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_045.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_046.json&#39;,
+  &#39;/tmp/tmppd87jz2i/WRFDETAR_01H_20221231_12_047.json&#39;],)
 </pre></div>
 </div>
 </div>
@@ -1243,9 +1193,9 @@ we load the original references and append the new references.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="opening-reference-dataset-with-fsspec-and-xarray">
-<h2>Opening Reference Dataset with Fsspec and Xarray<a class="headerlink" href="#opening-reference-dataset-with-fsspec-and-xarray" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="opening-reference-dataset-with-fsspec-and-xarray">
+<h2>Opening Reference Dataset with Fsspec and Xarray<a class="headerlink" href="#opening-reference-dataset-with-fsspec-and-xarray" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">storage_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -1629,21 +1579,21 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 2GB
 Dimensions:            (time: 48, y: 1249, x: 999)
 Coordinates:
-    lat                (time, y, x) float32 ...
-    lon                (time, y, x) float32 ...
-  * time               (time) datetime64[ns] 2022-12-31T12:00:00 ... 2023-01-...
-  * x                  (x) float32 2.276e+16 4.591e-41 ... 4.591e-41 2.414e+16
-  * y                  (y) float32 2.276e+16 4.591e-41 ... 0.0 -1.419e+32
+    lat                (time, y, x) float32 240MB ...
+    lon                (time, y, x) float32 240MB ...
+  * time               (time) datetime64[ns] 384B 2022-12-31T12:00:00 ... 202...
+  * x                  (x) float32 4kB 1.088e+09 4.585e-41 ... 4.362e-07
+  * y                  (y) float32 5kB 1.088e+09 4.585e-41 ... 0.0 -2.857e-19
 Data variables:
-    HR2                (time, y, x) float32 ...
-    Lambert_Conformal  (time) float32 ...
-    PP                 (time, y, x) float32 ...
-    T2                 (time, y, x) float32 ...
-    dirViento10        (time, y, x) float32 ...
-    magViento10        (time, y, x) float32 ...
+    HR2                (time, y, x) float32 240MB ...
+    Lambert_Conformal  (time) float32 192B ...
+    PP                 (time, y, x) float32 240MB ...
+    T2                 (time, y, x) float32 240MB ...
+    dirViento10        (time, y, x) float32 240MB ...
+    magViento10        (time, y, x) float32 240MB ...
 Attributes: (12/18)
     CEN_LAT:        -34.9999885559082
     CEN_LON:        -65.0
@@ -1657,7 +1607,7 @@ Attributes: (12/18)
     source:          OUTPUT FROM WRF V4.0 MODEL
     start_lat:      -54.386837005615234
     start_lon:      -94.330810546875
-    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-48ce354d-05c2-4873-a590-4baa1e96eec1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-48ce354d-05c2-4873-a590-4baa1e96eec1' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 48</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-4c62a651-19b3-4dc3-bb55-c30dd31d1aea' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4c62a651-19b3-4dc3-bb55-c30dd31d1aea' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-23148551-a4c2-4cc4-96d9-5b2e35dfd25d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-23148551-a4c2-4cc4-96d9-5b2e35dfd25d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d399071e-e8bd-45f7-b46a-bc9b9c808cbf' class='xr-var-data-in' type='checkbox'><label for='data-d399071e-e8bd-45f7-b46a-bc9b9c808cbf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-7d048db5-6009-430a-acce-44ee2f838056' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7d048db5-6009-430a-acce-44ee2f838056' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-df82f471-af20-4ffe-ac84-87854dd95ab8' class='xr-var-data-in' type='checkbox'><label for='data-df82f471-af20-4ffe-ac84-87854dd95ab8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-31T12:00:00 ... 2023-01-...</div><input id='attrs-80ee6782-4eb3-403b-ba6a-49ebd4175939' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-80ee6782-4eb3-403b-ba6a-49ebd4175939' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1ad92326-e1d5-4a41-91fb-0bd0b1ffe258' class='xr-var-data-in' type='checkbox'><label for='data-1ad92326-e1d5-4a41-91fb-0bd0b1ffe258' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 12:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-31T12:00:00.000000000&#x27;, &#x27;2022-12-31T13:00:00.000000000&#x27;,
+    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-5c3747bd-057c-472a-9c95-a93022dc7970' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-5c3747bd-057c-472a-9c95-a93022dc7970' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 48</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-6586a048-6873-4050-a9e4-c999764bb454' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6586a048-6873-4050-a9e4-c999764bb454' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5aa036ed-8302-4999-afcb-9fef6bcc4999' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5aa036ed-8302-4999-afcb-9fef6bcc4999' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-daa16310-3bd2-4b81-8b99-aed72bc768f2' class='xr-var-data-in' type='checkbox'><label for='data-daa16310-3bd2-4b81-8b99-aed72bc768f2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3d76c9fd-3a6d-4b4e-9958-04f115095e42' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3d76c9fd-3a6d-4b4e-9958-04f115095e42' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9129db32-be2a-40ec-a988-986e78a43b46' class='xr-var-data-in' type='checkbox'><label for='data-9129db32-be2a-40ec-a988-986e78a43b46' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-31T12:00:00 ... 2023-01-...</div><input id='attrs-85018a4b-e5c5-4aea-8dd2-c02bae25763e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-85018a4b-e5c5-4aea-8dd2-c02bae25763e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-782c98a7-fa60-4207-83c2-85f0aca43973' class='xr-var-data-in' type='checkbox'><label for='data-782c98a7-fa60-4207-83c2-85f0aca43973' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 12:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-31T12:00:00.000000000&#x27;, &#x27;2022-12-31T13:00:00.000000000&#x27;,
        &#x27;2022-12-31T14:00:00.000000000&#x27;, &#x27;2022-12-31T15:00:00.000000000&#x27;,
        &#x27;2022-12-31T16:00:00.000000000&#x27;, &#x27;2022-12-31T17:00:00.000000000&#x27;,
        &#x27;2022-12-31T18:00:00.000000000&#x27;, &#x27;2022-12-31T19:00:00.000000000&#x27;,
@@ -1681,9 +1631,9 @@ Attributes: (12/18)
        &#x27;2023-01-02T06:00:00.000000000&#x27;, &#x27;2023-01-02T07:00:00.000000000&#x27;,
        &#x27;2023-01-02T08:00:00.000000000&#x27;, &#x27;2023-01-02T09:00:00.000000000&#x27;,
        &#x27;2023-01-02T10:00:00.000000000&#x27;, &#x27;2023-01-02T11:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>2.276e+16 4.591e-41 ... 2.414e+16</div><input id='attrs-586d30d1-35a6-494c-a4c1-2f3036681987' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-586d30d1-35a6-494c-a4c1-2f3036681987' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-062286c5-c827-4bce-a9c2-e89565862c66' class='xr-var-data-in' type='checkbox'><label for='data-062286c5-c827-4bce-a9c2-e89565862c66' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([2.275735e+16, 4.590794e-41, 2.275735e+16, ..., 2.410470e+16,
-       4.590794e-41, 2.413713e+16], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>2.276e+16 4.591e-41 ... -1.419e+32</div><input id='attrs-766e1ae6-d212-4f81-81cb-656486fda7f3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-766e1ae6-d212-4f81-81cb-656486fda7f3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1e2d93ae-c532-41ff-9030-9d53bff72969' class='xr-var-data-in' type='checkbox'><label for='data-1e2d93ae-c532-41ff-9030-9d53bff72969' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([ 2.275728e+16,  4.590794e-41,  2.275728e+16, ...,  0.000000e+00,
-        0.000000e+00, -1.418580e+32], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-768cd3a4-edfc-4535-b0a5-a9362539bd40' class='xr-section-summary-in' type='checkbox'  checked><label for='section-768cd3a4-edfc-4535-b0a5-a9362539bd40' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a1566e9a-7f4c-4b97-a622-7bb7f1076d6c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a1566e9a-7f4c-4b97-a622-7bb7f1076d6c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-af34b186-d1c0-4a69-8871-ad1243112d77' class='xr-var-data-in' type='checkbox'><label for='data-af34b186-d1c0-4a69-8871-ad1243112d77' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>percent</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-24188882-a0ab-4c57-a5a3-4089aaeb4ff8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-24188882-a0ab-4c57-a5a3-4089aaeb4ff8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-688b5c46-216f-4fbf-a370-f1beb05610a0' class='xr-var-data-in' type='checkbox'><label for='data-688b5c46-216f-4fbf-a370-f1beb05610a0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.9999885559082</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd><dt><span>standard_parallel :</span></dt><dd>[-35.0, -35.0]</dd></dl></div><div class='xr-var-data'><pre>[48 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-dc1f4928-fbff-4c4d-9557-9b34a7b7838f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dc1f4928-fbff-4c4d-9557-9b34a7b7838f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2f1993a7-aad4-4f1c-bda9-ffb78aac6bde' class='xr-var-data-in' type='checkbox'><label for='data-2f1993a7-aad4-4f1c-bda9-ffb78aac6bde' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>units :</span></dt><dd>millimeter</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d1a87eaa-6d9e-4e83-b1a1-7cc775df6328' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d1a87eaa-6d9e-4e83-b1a1-7cc775df6328' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9fc5b585-ae0d-4306-befe-faf9841a3fc3' class='xr-var-data-in' type='checkbox'><label for='data-9fc5b585-ae0d-4306-befe-faf9841a3fc3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d55824e9-a747-40c4-90f9-a97b32776bcd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d55824e9-a747-40c4-90f9-a97b32776bcd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-147846d0-2d65-4580-873b-9b55563f79c3' class='xr-var-data-in' type='checkbox'><label for='data-147846d0-2d65-4580-873b-9b55563f79c3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>units :</span></dt><dd>degree</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a2176c2e-087e-4833-8b49-1eb19139705f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a2176c2e-087e-4833-8b49-1eb19139705f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-06f6bd64-74d5-444c-9f27-58517c4a54ea' class='xr-var-data-in' type='checkbox'><label for='data-06f6bd64-74d5-444c-9f27-58517c4a54ea' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>meter / second</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-eec344dd-bda8-4d84-98a3-696d727a603e' class='xr-section-summary-in' type='checkbox'  ><label for='section-eec344dd-bda8-4d84-98a3-696d727a603e' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-526366a1-e9f7-412e-ab93-58ae94406f53' class='xr-index-data-in' type='checkbox'/><label for='index-526366a1-e9f7-412e-ab93-58ae94406f53' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-31 12:00:00&#x27;, &#x27;2022-12-31 13:00:00&#x27;,
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.088e+09 4.585e-41 ... 4.362e-07</div><input id='attrs-bc77b684-5c66-4570-a091-81fcb58bd5be' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bc77b684-5c66-4570-a091-81fcb58bd5be' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0aba34d9-b0aa-48b1-8c94-8f7b1b46fbb3' class='xr-var-data-in' type='checkbox'><label for='data-0aba34d9-b0aa-48b1-8c94-8f7b1b46fbb3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([1.088002e+09, 4.584768e-41, 1.088002e+09, ..., 7.868111e+00,
+       4.584768e-41, 4.361964e-07], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.088e+09 4.585e-41 ... -2.857e-19</div><input id='attrs-93d2bacd-f94c-445a-a525-7309523ee56f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-93d2bacd-f94c-445a-a525-7309523ee56f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4f67186b-0505-42dc-86e8-ce3ce103b4e2' class='xr-var-data-in' type='checkbox'><label for='data-4f67186b-0505-42dc-86e8-ce3ce103b4e2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([ 1.088004e+09,  4.584768e-41,  1.088004e+09, ...,  0.000000e+00,
+        0.000000e+00, -2.856619e-19], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4d392396-750a-44f7-ab32-737f0fff12a2' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4d392396-750a-44f7-ab32-737f0fff12a2' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-972b25ed-9371-4c75-bba2-39992261bb62' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-972b25ed-9371-4c75-bba2-39992261bb62' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-67f7b89d-d465-46d0-93cc-0857b653630d' class='xr-var-data-in' type='checkbox'><label for='data-67f7b89d-d465-46d0-93cc-0857b653630d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>percent</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-66ea6758-f3fa-4c2b-89fd-92eb16521949' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-66ea6758-f3fa-4c2b-89fd-92eb16521949' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ea93802c-506f-4433-a9bc-efbfaff36aa8' class='xr-var-data-in' type='checkbox'><label for='data-ea93802c-506f-4433-a9bc-efbfaff36aa8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.9999885559082</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd><dt><span>standard_parallel :</span></dt><dd>[-35.0, -35.0]</dd></dl></div><div class='xr-var-data'><pre>[48 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-25e580c2-d2af-44af-98d1-b0a28b4fe895' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-25e580c2-d2af-44af-98d1-b0a28b4fe895' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-19fec1ee-46ad-4639-bcd2-875d947a3efc' class='xr-var-data-in' type='checkbox'><label for='data-19fec1ee-46ad-4639-bcd2-875d947a3efc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>units :</span></dt><dd>millimeter</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-65d4aeaa-631f-4557-b351-1bc5fa5075ed' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-65d4aeaa-631f-4557-b351-1bc5fa5075ed' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-21ea08ae-d7d9-4a97-a6a0-c065042ed27a' class='xr-var-data-in' type='checkbox'><label for='data-21ea08ae-d7d9-4a97-a6a0-c065042ed27a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-c153ec30-9161-4217-af48-9919327d3cf2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c153ec30-9161-4217-af48-9919327d3cf2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d4d0761a-a4ef-4de5-97fc-81f86fab048f' class='xr-var-data-in' type='checkbox'><label for='data-d4d0761a-a4ef-4de5-97fc-81f86fab048f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>units :</span></dt><dd>degree</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e488a23a-0c39-4461-96d0-21ba355728ed' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e488a23a-0c39-4461-96d0-21ba355728ed' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f09de175-0b72-4986-8976-2c249d281bc8' class='xr-var-data-in' type='checkbox'><label for='data-f09de175-0b72-4986-8976-2c249d281bc8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>meter / second</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d8d4c7a2-46e6-463c-ae77-657728c34c09' class='xr-section-summary-in' type='checkbox'  ><label for='section-d8d4c7a2-46e6-463c-ae77-657728c34c09' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-04cc2d04-7492-46c5-90b7-7c6681fb13e3' class='xr-index-data-in' type='checkbox'/><label for='index-04cc2d04-7492-46c5-90b7-7c6681fb13e3' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-31 12:00:00&#x27;, &#x27;2022-12-31 13:00:00&#x27;,
                &#x27;2022-12-31 14:00:00&#x27;, &#x27;2022-12-31 15:00:00&#x27;,
                &#x27;2022-12-31 16:00:00&#x27;, &#x27;2022-12-31 17:00:00&#x27;,
                &#x27;2022-12-31 18:00:00&#x27;, &#x27;2022-12-31 19:00:00&#x27;,
@@ -1707,32 +1657,30 @@ Attributes: (12/18)
                &#x27;2023-01-02 06:00:00&#x27;, &#x27;2023-01-02 07:00:00&#x27;,
                &#x27;2023-01-02 08:00:00&#x27;, &#x27;2023-01-02 09:00:00&#x27;,
                &#x27;2023-01-02 10:00:00&#x27;, &#x27;2023-01-02 11:00:00&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-21b0f4f6-4ebf-46da-bbbc-cf5cf2402122' class='xr-index-data-in' type='checkbox'/><label for='index-21b0f4f6-4ebf-46da-bbbc-cf5cf2402122' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([  2.275734807432397e+16,   4.590793898974533e-41,
-                2.275734807432397e+16,   4.590793898974533e-41,
-               3.6041082607284977e-25,  3.0644996116319425e-41,
-               3.6041082607284977e-25,  3.0644996116319425e-41,
-               1.2187259641748688e-23,   4.590793898974533e-41,
-              ...
-                   -1917.727294921875,  2.5621610224418816e+16,
-                4.590793898974533e-41,         2922607804416.0,
-                4.590793898974533e-41, -1.9556985406210713e+34,
-               -6.410966482385536e-37,   2.410469649494835e+16,
-                4.590793898974533e-41,  2.4137132087967744e+16],
-             dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-b0da5382-c605-48a0-90fe-aacc081f5b6f' class='xr-index-data-in' type='checkbox'/><label for='index-b0da5382-c605-48a0-90fe-aacc081f5b6f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([ 2.275727935484723e+16,  4.590793898974533e-41,
-               2.275727935484723e+16,  4.590793898974533e-41,
-              2.8406092336103414e-25, 3.0644996116319425e-41,
-              2.8406092336103414e-25, 3.0644996116319425e-41,
-              1.2187259641748688e-23,  4.590793898974533e-41,
-              ...
-              4.5906537691281007e-41,                    0.0,
-               8.828180325246348e-44,                    0.0,
-                                 0.0,                    0.0,
-                                 0.0,                    0.0,
-                                 0.0, -1.418580249817903e+32],
-             dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-763fb55b-ce09-4c2d-a95c-67b2fe732992' class='xr-section-summary-in' type='checkbox'  ><label for='section-763fb55b-ce09-4c2d-a95c-67b2fe732992' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CEN_LAT :</span></dt><dd>-34.9999885559082</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_12:00:00</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>end_lat :</span></dt><dd>-11.645957946777344</dd><dt><span>end_lon :</span></dt><dd>-47.96868896484375</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837005615234</dd><dt><span>start_lon :</span></dt><dd>-94.330810546875</dd><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd></dl></div></li></ul></div></div></div></div>
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4df70cdf-2d42-477b-9c46-bea1856db57a' class='xr-index-data-in' type='checkbox'/><label for='index-4df70cdf-2d42-477b-9c46-bea1856db57a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([           1088002048.0,  4.5847683155779365e-41,
+                  1088002048.0,  4.5847683155779365e-41,
+          6.09490800488905e+23,   3.066741689174862e-41,
+          6.09490800488905e+23,   3.066741689174862e-41,
+                           0.0,                     0.0,
+       ...
+        4.5847683155779365e-41,         7.8680419921875,
+        4.5847683155779365e-41,      197.50454711914062,
+       -2.4756810797094454e+33,       7.747611999511719,
+        4.5847683155779365e-41,       7.868110656738281,
+        4.5847683155779365e-41,  4.3619641587611113e-07],
+      dtype=&#x27;float32&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-cdf4e910-5f44-499d-81de-ea653761382d' class='xr-index-data-in' type='checkbox'/><label for='index-cdf4e910-5f44-499d-81de-ea653761382d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([          1088004096.0, 4.5847683155779365e-41,           1088004096.0,
+       4.5847683155779365e-41, 5.0625763250565567e+23,  3.066741689174862e-41,
+       5.0625763250565567e+23,  3.066741689174862e-41,                    0.0,
+                          0.0,
+       ...
+        4.584628185731504e-41,                    0.0,   8.96831017167883e-44,
+                          0.0,                    0.0,                    0.0,
+                          0.0,                    0.0,                    0.0,
+       -2.856618614615128e-19],
+      dtype=&#x27;float32&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-08fc8488-8412-4cce-98c2-449882914e9b' class='xr-section-summary-in' type='checkbox'  ><label for='section-08fc8488-8412-4cce-98c2-449882914e9b' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CEN_LAT :</span></dt><dd>-34.9999885559082</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_12:00:00</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>end_lat :</span></dt><dd>-11.645957946777344</dd><dt><span>end_lon :</span></dt><dd>-47.96868896484375</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837005615234</dd><dt><span>start_lon :</span></dt><dd>-94.330810546875</dd><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd></dl></div></li></ul></div></div></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1754,43 +1702,337 @@ Attributes: (12/18)
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="Pangeo_Forge.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Kerchunk and Pangeo-Forge</p>
-        </div>
+                  </article>
+
+                
+                
+
+                
+                
+                  <footer class="prev-next-footer">
+                    
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Pangeo_Forge.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Kerchunk and Pangeo-Forge</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="../generating_references/NetCDF.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="../generating_references/NetCDF.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">NetCDF</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </div>
-          </div>
-        </main>
+                  </footer>
+                
+              </div>
 
-      </div>
+              
+              
+                
+                  <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-input-file-list">Create Input File List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-dask-client">Start a Dask Client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-kerchunk-reference-file-for-the-first-24-hours">Create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference file for the first 24 hours</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-json-kerchunk-reference-files-and-write-a-combined-kerchunk-index">Combine .json <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files and write a combined <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#append-references-for-the-next-24-hours">Append references for the next 24 hours</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-reference-dataset-with-fsspec-and-xarray">Opening Reference Dataset with Fsspec and Xarray</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+                
+              
+
+
+                
+                <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
-
-<footer class="footer">
-  <div class="container-fluid m-0 p-0">
   
-    <div class="footer-item">
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/advanced/appending.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/advanced/appending.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/advanced/appending.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/advanced/appending.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+            </div>
+
+            <footer class="bd-footer-content">
+              
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
     
+<p class="component-author">
+By Norland Raphael Hagen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on 1 April 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+            </footer>
+
+        </main>
+    </div>
+  </div>
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+     
+  
+  
+  
+  
+    <div class="footer-items__start">
+      <div class="container-fluid m-0 p-0">
+      
+        <div class="footer-item">
   <div class="container-fluid footer-logos">
     <div class="container-xl">
       <div class="row d-flex flex-wrap align-items-center">
         <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
-          <img alt="NCAR" src="../../_images/NCAR-contemp-logo-blue.svg" style="width: 100%">
+          <img alt="NCAR" src="../../_images/NSF-NCAR_Lockup-UCAR-Dark_102523.svg" style="width: 100%">
         </div>
         <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
           <img alt="Unidata" src="../../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
@@ -1800,34 +2042,26 @@ Attributes: (12/18)
         </div>
       </div>
     </div>
-  </div>
-    </div>
-  
-    <div class="footer-item">
-    
-    </div>
-  
-    <div class="footer-item">
-      <div class="container-fluid footer-info">
+  </div></div>
+      
+        <div class="footer-item">  <div class="container-fluid footer-info">
     <div class="container-xl">
       <div class="d-flex justify-content-center">
         <p class="py-1 m-0">
-            &copy;&nbsp;2022.
+            &copy;&nbsp;2024.
         
           By Norland Raphael Hagen.
         
-          Last updated on 30 January 2024.
+          Last updated on 1 April 2024.
         </p>
       </div>
     </div>
-  </div>
+  </div></div>
+      
+      </div>
     </div>
   
-    <div class="footer-item">
-    
-    </div>
-  
-  </div>
-</footer>
+
+  </footer>
   </body>
 </html>

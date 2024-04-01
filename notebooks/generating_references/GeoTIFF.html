@@ -1,103 +1,133 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>GeoTIFF &#8212; Kerchunk Cookbook</title>
-    
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css?v=e502140d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-    
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=c54c090a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/generating_references/GeoTIFF';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Load Kerchunked dataset with Xarray" href="../using_references/Xarray.html" />
     <link rel="prev" title="GRIB2" href="GRIB2.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-T52X8HNYE8');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="1 April 2024"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="132">
-    <div class="container-fluid" id="shim"></div>
-    <div class="container-fluid" id="banner"></div>
-    <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
-
-  <div id="navbar-start">
-    
-    
-
-<a class="navbar-brand" href="https://projectpythia.org">
-  <img src="../../_static/pythia_logo-white-rtext.svg" class="logo" alt="logo">
-</a>
-
-
-    
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
   
-  <div id="navbar-collapsible" class=" collapse navbar-collapse">
-    <div id="navbar-center" class="mr-auto">
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <div class="pst-scroll-pixel-helper"></div>
+    <header class="bd-header navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+   
+
+<a class="navbar-brand logo" href="https://projectpythia.org">
+  
+  
+  
+  
+  
+    
+    
       
-      <div class="navbar-center-item">
-        <ul id="navbar-main-elements" class="navbar-nav">
+    
+    
+    <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-light" alt="Kerchunk Cookbook - Home"/>
+    <script>document.write(`<img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-dark" alt="Kerchunk Cookbook - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
   
   <li class="nav-item">
     
@@ -135,338 +165,279 @@ const thebe_selector_output = ".output, .cell_output"
   </li>
   
   
-</ul>
-      </div>
+</ul></div>
       
     </div>
-
-    <div id="navbar-end">
-      
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/ProjectPythia" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/project_pythia" rel="noopener" target="_blank" title="Twitter">
-            <span><i class="fab fa-twitter-square"></i></span>
-            <label class="sr-only">Twitter</label>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" rel="noopener" target="_blank" title="YouTube">
-            <span><i class="fab fa-youtube-square"></i></span>
-            <label class="sr-only">YouTube</label>
-          </a>
-        </li>
-      </ul>
-      </div>
-      
-    </div>
-  </div>
-</div>
-    </nav>
-    <div class="container-xl">
-      <div class="row">
-        
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
-        <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../README.html">
-   Kerchunk Cookbook
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Preamble
- </span>
-</p>
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+        
+        
+        
+        <div class="bd-sidebar-primary bd-sidebar">
+          
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Kerchunk Cookbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../how-to-cite.html">
-   How to Cite This Cookbook
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to-cite.html">How to Cite This Cookbook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Foundations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../foundations/01_kerchunk_basics.html">
-   Kerchunk Basics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">
-   Multi-File Datasets with Kerchunk
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../foundations/03_kerchunk_dask.html">
-   Kerchunk and Dask
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/01_kerchunk_basics.html">Kerchunk Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">Multi-File Datasets with Kerchunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/03_kerchunk_dask.html">Kerchunk and Dask</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Advanced
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">
-   Store Kerchunk Reference Files as Parquet
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../advanced/Pangeo_Forge.html">
-   Kerchunk and Pangeo-Forge
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../advanced/appending.html">
-   Appending to Kerchunk references
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../advanced/Pangeo_Forge.html">Kerchunk and Pangeo-Forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/appending.html">Appending to Kerchunk references</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Generating Reference Files
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Reference Files</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="NetCDF.html">
-   NetCDF
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="GRIB2.html">
-   GRIB2
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   GeoTIFF
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="NetCDF.html">NetCDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GRIB2.html">GRIB2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">GeoTIFF</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Using Pre-Generated References
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Pre-Generated References</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Xarray.html">
-   Load Kerchunked dataset with Xarray
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Xrefcoord.html">
-   Use
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     xrefcoord
-    </span>
-   </code>
-   to Generate Coordinates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Datatree.html">
-   Kerchunk and Xarray-Datatree
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../using_references/Hvplot_Datashader.html">
-   Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xarray.html">Load Kerchunked dataset with Xarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xrefcoord.html">Use <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> to Generate Coordinates</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Datatree.html">Kerchunk and Xarray-Datatree</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Hvplot_Datashader.html">Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by <a href="https://projectpythia.org">Project Pythia</a>.<br><br>
-All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code content is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 (CC BY 4.0)</a>.<br><br>
-
-</div>
-
-</div>
-
-        
-
-        <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main"><div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/generating_references/GeoTIFF.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ProjectPythia/kerchunk-cookbook//issues/new?title=Issue%20on%20page%20%2Fnotebooks/generating_references/GeoTIFF.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/generating_references/GeoTIFF.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/generating_references/GeoTIFF.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
 
         </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> On this page
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prerequisites">
-   Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#about-the-dataset">
-   About the Dataset
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examining-a-single-geotiff-file">
-     Examining a Single GeoTIFF File
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-input-file-list">
-   Create Input File List
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#start-a-dask-client">
-   Start a Dask Client
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combine-reference-files-into-multi-file-reference-dataset">
-   Combine Reference Files into Multi-File Reference Dataset
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#shut-down-the-dask-cluster">
-   Shut down the Dask cluster
-  </a>
- </li>
-</ul>
+        
+        <main id="main-content" class="bd-main" role="main">
+          
 
-            </nav>
-        </div>
-    </div>
-</div>
-          <div id="main-content" class="row">
-            <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-              
-              <div>
+            <div class="bd-content">
+
+              <div class="bd-article-container">
+
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="geotiff">
-<h1>GeoTIFF<a class="headerlink" href="#geotiff" title="Permalink to this headline"><i class="fas fa-link"></i></a></h1>
+                  
+                  
+<div id="searchbox"></div>
+                  <article class="bd-article">
+                    
+  <section class="tex2jax_ignore mathjax_ignore" id="geotiff">
+<h1>GeoTIFF<a class="headerlink" href="#geotiff" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <p>Generating Kerchunk References from GeoTIFF files</p>
 <p><a class="reference internal" href="../../_images/radar.png"><img alt="ARG" src="../../_images/radar.png" style="width: 400px;" /></a></img></p>
-<div class="section" id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>In this tutorial we will cover:</p>
 <ol class="arabic simple">
 <li><p>How to generate <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> references of GeoTIFFs.</p></li>
 <li><p>Combining <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> references into a virtual dataset.</p></li>
 </ol>
-</div>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<table class="colwidths-auto table">
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concepts</p></th>
 <th class="head"><p>Importance</p></th>
@@ -474,15 +445,15 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><span class="xref myst">Kerchunk Basics</span></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#../foundations/kerchunk_basics"><span class="xref myst">Kerchunk Basics</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-odd"><td><p><span class="xref myst">Multiple Files and Kerchunk</span></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#../foundations/kerchunk_multi_file"><span class="xref myst">Multiple Files and Kerchunk</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-even"><td><p><span class="xref myst">Kerchunk and Dask</span></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#../foundations/kerchunk_dask"><span class="xref myst">Kerchunk and Dask</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
@@ -495,11 +466,11 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 <ul class="simple">
 <li><p><strong>Time to learn</strong>: 30 minutes</p></li>
 </ul>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="about-the-dataset">
-<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>The Finish Meterological Institute (FMI) Weather Radar Dataset is a collection of GeoTIFF files containing multiple radar specific variables, such as rainfall intensity, precipitation accumulation (in 1, 12 and 24 hour increments),  radar reflectivity, radial velocity, rain classification and the cloud top height. It is available through the <a class="reference external" href="https://aws.amazon.com/marketplace/pp/prodview-koodet467asui?sr=0-19&amp;ref_=beagle&amp;applicationId=AWSMPContessa">AWS public data portal</a> and is updated frequently.</p>
+<section id="about-the-dataset">
+<h2>About the Dataset<a class="headerlink" href="#about-the-dataset" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>The Finish Meterological Institute (FMI) Weather Radar Dataset is a collection of GeoTIFF files containing multiple radar specific variables, such as rainfall intensity, precipitation accumulation (in 1, 12 and 24 hour increments),  radar reflectivity, radial velocity, rain classification and the cloud top height. It is available through the <a class="reference external" href="https://aws.amazon.com/marketplace/pp/prodview-koodet467asui?sr=0-19&amp;amp;ref_=beagle&amp;amp;applicationId=AWSMPContessa">AWS public data portal</a> and is updated frequently.</p>
 <p>More details on this dataset can be found <a class="reference external" href="https://en.ilmatieteenlaitos.fi/radar-data-on-aws-s3">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -520,8 +491,8 @@ All code in Pythia Cookbooks is licensed under Apache 2.0. All other non-code co
 </div>
 </div>
 </div>
-<div class="section" id="examining-a-single-geotiff-file">
-<h3>Examining a Single GeoTIFF File<a class="headerlink" href="#examining-a-single-geotiff-file" title="Permalink to this headline"><i class="fas fa-link"></i></a></h3>
+<section id="examining-a-single-geotiff-file">
+<h3>Examining a Single GeoTIFF File<a class="headerlink" href="#examining-a-single-geotiff-file" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
 <p>Before we use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create indices for multiple files, we can load a single GeoTiff file to examine it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -906,38 +877,38 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray (band: 1, y: 1345, x: 850)&gt;
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray (band: 1, y: 1345, x: 850)&gt; Size: 2MB
 [1143250 values with dtype=uint16]
 Coordinates:
-  * band         (band) int64 1
-  * x            (x) float64 -1.177e+05 -1.166e+05 ... 8.738e+05 8.75e+05
-  * y            (y) float64 7.907e+06 7.906e+06 ... 6.337e+06 6.336e+06
-    spatial_ref  int64 0
+  * band         (band) int64 8B 1
+  * x            (x) float64 7kB -1.177e+05 -1.166e+05 ... 8.738e+05 8.75e+05
+  * y            (y) float64 11kB 7.907e+06 7.906e+06 ... 6.337e+06 6.336e+06
+    spatial_ref  int64 8B 0
 Attributes:
     AREA_OR_POINT:  Area
     GDAL_METADATA:  &lt;GDALMetadata&gt;\n&lt;Item name=&quot;Observation time&quot; format=&quot;YYY...
     scale_factor:   1.0
-    add_offset:     0.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>y</span>: 1345</li><li><span class='xr-has-index'>x</span>: 850</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-e314d30e-bd4e-4ff9-9e7e-36baff36b1df' class='xr-array-in' type='checkbox' checked><label for='section-e314d30e-bd4e-4ff9-9e7e-36baff36b1df' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[1143250 values with dtype=uint16]</pre></div></div></li><li class='xr-section-item'><input id='section-9feb092a-1d0a-48b0-9ac8-b409efb27489' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9feb092a-1d0a-48b0-9ac8-b409efb27489' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-47c69aab-b8e6-405a-aee4-b24a6eddfa62' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-47c69aab-b8e6-405a-aee4-b24a6eddfa62' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-12a1775a-cc0d-4b97-b767-7b27b639829b' class='xr-var-data-in' type='checkbox'><label for='data-12a1775a-cc0d-4b97-b767-7b27b639829b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.177e+05 -1.166e+05 ... 8.75e+05</div><input id='attrs-345c70f5-74c0-429b-8b81-202ac62c6605' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-345c70f5-74c0-429b-8b81-202ac62c6605' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-365e1d4e-ed47-42ea-9fca-0ff9211ae13f' class='xr-var-data-in' type='checkbox'><label for='data-365e1d4e-ed47-42ea-9fca-0ff9211ae13f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-117746.71988 , -116577.426823, -115408.133766, ...,  872644.499264,
-        873813.792321,  874983.085378])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.907e+06 7.906e+06 ... 6.336e+06</div><input id='attrs-b3992dfc-c145-4a66-8616-a0865d3c698c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b3992dfc-c145-4a66-8616-a0865d3c698c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-87beea7d-a6d9-48ea-973f-af4c80b7e9dc' class='xr-var-data-in' type='checkbox'><label for='data-87beea7d-a6d9-48ea-973f-af4c80b7e9dc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([7907167.102182, 7905998.232018, 7904829.361854, ..., 6338543.342424,
-       6337374.47226 , 6336205.602096])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-cd2e077c-4000-4f97-a1eb-6d4332e1f3f9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cd2e077c-4000-4f97-a1eb-6d4332e1f3f9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-48a76af5-d15c-414d-90da-026f1d60460f' class='xr-var-data-in' type='checkbox'><label for='data-48a76af5-d15c-414d-90da-026f1d60460f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89 / TM35FIN(E,N)</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>27.0</dd><dt><span>false_easting :</span></dt><dd>500000.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-118331.36640835612 1169.2930568410832 0.0 7907751.537263516 0.0 -1168.8701637541064</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-717ed16c-6dab-420d-b44a-d3438a86a456' class='xr-section-summary-in' type='checkbox'  ><label for='section-717ed16c-6dab-420d-b44a-d3438a86a456' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-facdbfc6-5ad9-4353-9e25-c945a23138a3' class='xr-index-data-in' type='checkbox'/><label for='index-facdbfc6-5ad9-4353-9e25-c945a23138a3' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([1], dtype=&#x27;int64&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-cd825af6-b195-454d-8b8f-a55f8e74c79f' class='xr-index-data-in' type='checkbox'/><label for='index-cd825af6-b195-454d-8b8f-a55f8e74c79f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([-117746.71987993557, -116577.42682309449,  -115408.1337662534,
-              -114238.84070941232, -113069.54765257123, -111900.25459573015,
-              -110730.96153888907, -109561.66848204799,  -108392.3754252069,
-              -107223.08236836582,
-              ...
-                864459.4478665743,   865628.7409234153,   866798.0339802564,
-                867967.3270370975,   869136.6200939385,   870305.9131507797,
-                871475.2062076208,   872644.4992644618,   873813.7923213029,
-                 874983.085378144],
-             dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=850))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-1b0d7c68-d8c7-4f4b-96ef-02910d769dc4' class='xr-index-data-in' type='checkbox'/><label for='index-1b0d7c68-d8c7-4f4b-96ef-02910d769dc4' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([7907167.1021816395,  7905998.232017885,  7904829.361854131,
-               7903660.491690377,  7902491.621526623,  7901322.751362869,
-               7900153.881199115,   7898985.01103536,  7897816.140871607,
-               7896647.270707852,
-              ...
-               6346725.433569907,  6345556.563406154,  6344387.693242399,
-               6343218.823078645,  6342049.952914891,  6340881.082751137,
-               6339712.212587383,  6338543.342423629,  6337374.472259874,
-                6336205.60209612],
-             dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1345))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-63831f64-2d6b-4563-9eef-17f7e61a8c49' class='xr-section-summary-in' type='checkbox'  checked><label for='section-63831f64-2d6b-4563-9eef-17f7e61a8c49' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>GDAL_METADATA :</span></dt><dd>&lt;GDALMetadata&gt;
+    add_offset:     0.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>y</span>: 1345</li><li><span class='xr-has-index'>x</span>: 850</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-2a0ab3dc-a1b9-4a18-afc4-83980250c4a1' class='xr-array-in' type='checkbox' checked><label for='section-2a0ab3dc-a1b9-4a18-afc4-83980250c4a1' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[1143250 values with dtype=uint16]</pre></div></div></li><li class='xr-section-item'><input id='section-56aeb5c7-fdb1-4126-b7ac-05a1290a5672' class='xr-section-summary-in' type='checkbox'  checked><label for='section-56aeb5c7-fdb1-4126-b7ac-05a1290a5672' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-8f820280-d888-4a22-a14f-c5dbe70ad0d9' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8f820280-d888-4a22-a14f-c5dbe70ad0d9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a1b07960-036f-40c8-bdd5-dfaf8af3592a' class='xr-var-data-in' type='checkbox'><label for='data-a1b07960-036f-40c8-bdd5-dfaf8af3592a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.177e+05 -1.166e+05 ... 8.75e+05</div><input id='attrs-21424377-8796-4779-bf3f-3ce5f886edc7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-21424377-8796-4779-bf3f-3ce5f886edc7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a07dc5a8-4bd6-4d58-b753-72e6daf766fe' class='xr-var-data-in' type='checkbox'><label for='data-a07dc5a8-4bd6-4d58-b753-72e6daf766fe' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-117746.71988 , -116577.426823, -115408.133766, ...,  872644.499264,
+        873813.792321,  874983.085378])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>7.907e+06 7.906e+06 ... 6.336e+06</div><input id='attrs-5efd221c-0fba-414a-bd52-6460e103d0cb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5efd221c-0fba-414a-bd52-6460e103d0cb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b82f8ef6-7928-4bb1-894e-96b8f85f8728' class='xr-var-data-in' type='checkbox'><label for='data-b82f8ef6-7928-4bb1-894e-96b8f85f8728' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([7907167.102182, 7905998.232018, 7904829.361854, ..., 6338543.342424,
+       6337374.47226 , 6336205.602096])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-7dfa5510-c26d-402e-a423-dc2f630e1dfc' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7dfa5510-c26d-402e-a423-dc2f630e1dfc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9de16598-3d16-4bc8-a2fa-29f9732e140a' class='xr-var-data-in' type='checkbox'><label for='data-9de16598-3d16-4bc8-a2fa-29f9732e140a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314140356</dd><dt><span>inverse_flattening :</span></dt><dd>298.257222101</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>GRS 1980</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>ETRS89</dd><dt><span>horizontal_datum_name :</span></dt><dd>European Terrestrial Reference System 1989</dd><dt><span>projected_crs_name :</span></dt><dd>ETRS89 / TM35FIN(E,N)</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>27.0</dd><dt><span>false_easting :</span></dt><dd>500000.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;ETRS89 / TM35FIN(E,N)&quot;,GEOGCS[&quot;ETRS89&quot;,DATUM[&quot;European_Terrestrial_Reference_System_1989&quot;,SPHEROID[&quot;GRS 1980&quot;,6378137,298.257222101,AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6258&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4258&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,27],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;3067&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>-118331.36640835612 1169.2930568410832 0.0 7907751.537263516 0.0 -1168.8701637541064</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1fc6c45c-5ec5-42d6-94bd-64f426223432' class='xr-section-summary-in' type='checkbox'  ><label for='section-1fc6c45c-5ec5-42d6-94bd-64f426223432' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c69a35cc-246e-4954-8ccb-498c91151da3' class='xr-index-data-in' type='checkbox'/><label for='index-c69a35cc-246e-4954-8ccb-498c91151da3' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int64&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-abd98e76-621f-493f-9b46-c879ff12afd5' class='xr-index-data-in' type='checkbox'/><label for='index-abd98e76-621f-493f-9b46-c879ff12afd5' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-117746.71987993557, -116577.42682309449,  -115408.1337662534,
+       -114238.84070941232, -113069.54765257123, -111900.25459573015,
+       -110730.96153888907, -109561.66848204799,  -108392.3754252069,
+       -107223.08236836582,
+       ...
+         864459.4478665743,   865628.7409234153,   866798.0339802564,
+         867967.3270370975,   869136.6200939385,   870305.9131507797,
+         871475.2062076208,   872644.4992644618,   873813.7923213029,
+          874983.085378144],
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=850))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-00b995bb-12db-43fa-a406-a841e67c1d86' class='xr-index-data-in' type='checkbox'/><label for='index-00b995bb-12db-43fa-a406-a841e67c1d86' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([7907167.1021816395,  7905998.232017885,  7904829.361854131,
+        7903660.491690377,  7902491.621526623,  7901322.751362869,
+        7900153.881199115,   7898985.01103536,  7897816.140871607,
+        7896647.270707852,
+       ...
+        6346725.433569907,  6345556.563406154,  6344387.693242399,
+        6343218.823078645,  6342049.952914891,  6340881.082751137,
+        6339712.212587383,  6338543.342423629,  6337374.472259874,
+         6336205.60209612],
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=1345))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-bd154c91-e436-4b35-b5c7-4501f6f019c1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-bd154c91-e436-4b35-b5c7-4501f6f019c1' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>GDAL_METADATA :</span></dt><dd>&lt;GDALMetadata&gt;
 &lt;Item name=&quot;Observation time&quot; format=&quot;YYYYMMDDhhmm&quot;&gt;202307010100&lt;/Item&gt;
 &lt;Item name=&quot;Quantity&quot; unit=&quot;mm&quot;&gt;Precipitation accumulation&lt;/Item&gt;
 &lt;Item name=&quot;Gain&quot;&gt;0.010000&lt;/Item&gt;
@@ -958,16 +929,16 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7faeda9a5210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f2672a23d30&gt;
 </pre></div>
 </div>
-<img alt="../../_images/8b8d939b71a81b499043efdceb34e288dfba86a926abb6702095a801e7f399ad.png" src="../../_images/8b8d939b71a81b499043efdceb34e288dfba86a926abb6702095a801e7f399ad.png" />
+<img alt="../../_images/c869f5f8e313463750a77644db38a0af9718dbd02bbba87ea8ff585877186e4a.png" src="../../_images/c869f5f8e313463750a77644db38a0af9718dbd02bbba87ea8ff585877186e4a.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="create-input-file-list">
-<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+</section>
+<section id="create-input-file-list">
+<h2>Create Input File List<a class="headerlink" href="#create-input-file-list" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>Here we are using <code class="docutils literal notranslate"><span class="pre">fsspec's</span></code> glob functionality along with the <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em> wildcard operator and some string slicing to grab a list of GeoTIFF files from a <code class="docutils literal notranslate"><span class="pre">s3</span></code> <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> filesystem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -998,15 +969,15 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpxdnjshik&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmpkwgim15d&#39;
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="start-a-dask-client">
-<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
-<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <span class="xref myst">Kerchunk and Dask</span>.</p>
+</section>
+<section id="start-a-dask-client">
+<h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>To parallelize the creation of our reference files, we will use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>. For a detailed guide on how to use Dask and Kerchunk, see the Foundations notebook: <a class="reference internal" href="#../foundations/kerchunk_dask"><span class="xref myst">Kerchunk and Dask</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">silence_logs</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
@@ -1019,7 +990,7 @@ Attributes:
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-36620aef-bf9d-11ee-913e-6045bdd54a3e</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-c73942cc-f06f-11ee-8d76-000d3ae34a06</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -1054,7 +1025,7 @@ Attributes:
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">8e79dce3</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">2c11491c</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -1091,11 +1062,11 @@ Attributes:
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-f6d87df0-0631-43ee-b52a-8e35f5102c61</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-7104ccf9-0e7b-4165-b8ae-f5c248224164</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:45955
+                        <strong>Comm:</strong> tcp://127.0.0.1:40573
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -1137,7 +1108,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41243
+                            <strong>Comm: </strong> tcp://127.0.0.1:41605
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1145,7 +1116,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42327/status" target="_blank">http://127.0.0.1:42327/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37973/status" target="_blank">http://127.0.0.1:37973/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1153,13 +1124,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:33163
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41361
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-32_buu4n
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-juze0ocr
                         </td>
                     </tr>
 
@@ -1182,7 +1153,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43301
+                            <strong>Comm: </strong> tcp://127.0.0.1:38357
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1190,7 +1161,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38791/status" target="_blank">http://127.0.0.1:38791/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35387/status" target="_blank">http://127.0.0.1:35387/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1198,13 +1169,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37749
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42931
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-0o13nzq0
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-f8d1qdvk
                         </td>
                     </tr>
 
@@ -1227,7 +1198,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:32987
+                            <strong>Comm: </strong> tcp://127.0.0.1:44363
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1235,7 +1206,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36903/status" target="_blank">http://127.0.0.1:36903/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37735/status" target="_blank">http://127.0.0.1:37735/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1243,13 +1214,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41517
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39123
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-7uo20mnb
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-p_ka_ess
                         </td>
                     </tr>
 
@@ -1272,7 +1243,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42177
+                            <strong>Comm: </strong> tcp://127.0.0.1:35967
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1280,7 +1251,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35845/status" target="_blank">http://127.0.0.1:35845/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44579/status" target="_blank">http://127.0.0.1:44579/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1288,13 +1259,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34891
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33577
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-wif5abjw
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-v9rd1oxp
                         </td>
                     </tr>
 
@@ -1317,7 +1288,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37057
+                            <strong>Comm: </strong> tcp://127.0.0.1:44521
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1325,7 +1296,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45409/status" target="_blank">http://127.0.0.1:45409/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34381/status" target="_blank">http://127.0.0.1:34381/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1333,13 +1304,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:35825
+                            <strong>Nanny: </strong> tcp://127.0.0.1:44387
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-zy5_217p
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ok1lynuy
                         </td>
                     </tr>
 
@@ -1362,7 +1333,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:35991
+                            <strong>Comm: </strong> tcp://127.0.0.1:38633
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1370,7 +1341,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45293/status" target="_blank">http://127.0.0.1:45293/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39367/status" target="_blank">http://127.0.0.1:39367/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1378,13 +1349,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34339
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36981
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ayzvi1hi
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-f52iig_w
                         </td>
                     </tr>
 
@@ -1407,7 +1378,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44407
+                            <strong>Comm: </strong> tcp://127.0.0.1:43873
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1415,7 +1386,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42995/status" target="_blank">http://127.0.0.1:42995/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34901/status" target="_blank">http://127.0.0.1:34901/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1423,13 +1394,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38401
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45815
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-mbdpmqt7
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ou5k_0_n
                         </td>
                     </tr>
 
@@ -1452,7 +1423,7 @@ Attributes:
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:34067
+                            <strong>Comm: </strong> tcp://127.0.0.1:39783
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1460,7 +1431,7 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39745/status" target="_blank">http://127.0.0.1:39745/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42667/status" target="_blank">http://127.0.0.1:42667/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1468,13 +1439,13 @@ Attributes:
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46779
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42833
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-dle0xa3v
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-fc9cdf_k
                         </td>
                     </tr>
 
@@ -1531,36 +1502,36 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpxdnjshik/202301010100.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010200.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010300.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010400.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010500.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010600.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010700.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010800.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301010900.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011000.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011100.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011200.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011300.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011400.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011500.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011600.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011700.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011800.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301011900.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301012000.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301012100.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301012200.json&#39;,
-  &#39;/tmp/tmpxdnjshik/202301012300.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpkwgim15d/202301010100.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010200.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010300.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010400.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010500.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010600.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010700.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010800.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301010900.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011000.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011100.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011200.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011300.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011400.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011500.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011600.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011700.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011800.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301011900.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301012000.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301012100.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301012200.json&#39;,
+  &#39;/tmp/tmpkwgim15d/202301012300.json&#39;],)
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="combine-reference-files-into-multi-file-reference-dataset">
-<h2>Combine Reference Files into Multi-File Reference Dataset<a class="headerlink" href="#combine-reference-files-into-multi-file-reference-dataset" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="combine-reference-files-into-multi-file-reference-dataset">
+<h2>Combine Reference Files into Multi-File Reference Dataset<a class="headerlink" href="#combine-reference-files-into-multi-file-reference-dataset" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>Now we will combine all the reference files generated into a single reference dataset. Since each TIFF file is a single timeslice and the only temporal information is stored in the filepath, we will have to specify the <code class="docutils literal notranslate"><span class="pre">coo_map</span></code> kwarg in <code class="docutils literal notranslate"><span class="pre">MultiZarrToZarr</span></code> to build a dimension from the filepath attributes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1597,9 +1568,9 @@ Attributes:
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="shut-down-the-dask-cluster">
-<h2>Shut down the Dask cluster<a class="headerlink" href="#shut-down-the-dask-cluster" title="Permalink to this headline"><i class="fas fa-link"></i></a></h2>
+</section>
+<section id="shut-down-the-dask-cluster">
+<h2>Shut down the Dask cluster<a class="headerlink" href="#shut-down-the-dask-cluster" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
@@ -1607,8 +1578,8 @@ Attributes:
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1630,43 +1601,338 @@ Attributes:
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
-              <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="GRIB2.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">GRIB2</p>
-        </div>
+                  </article>
+
+                
+                
+
+                
+                
+                  <footer class="prev-next-footer">
+                    
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="GRIB2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">GRIB2</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="../using_references/Xarray.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="../using_references/Xarray.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Load Kerchunked dataset with Xarray</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </div>
-          </div>
-        </main>
+                  </footer>
+                
+              </div>
 
-      </div>
+              
+              
+                
+                  <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-dataset">About the Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-a-single-geotiff-file">Examining a Single GeoTIFF File</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-input-file-list">Create Input File List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-dask-client">Start a Dask Client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-reference-files-into-multi-file-reference-dataset">Combine Reference Files into Multi-File Reference Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shut-down-the-dask-cluster">Shut down the Dask cluster</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+                
+              
+
+
+                
+                <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
-
-<footer class="footer">
-  <div class="container-fluid m-0 p-0">
   
-    <div class="footer-item">
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/generating_references/GeoTIFF.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/generating_references/GeoTIFF.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/generating_references/GeoTIFF.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/generating_references/GeoTIFF.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+            </div>
+
+            <footer class="bd-footer-content">
+              
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
     
+<p class="component-author">
+By Norland Raphael Hagen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on 1 April 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+            </footer>
+
+        </main>
+    </div>
+  </div>
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+     
+  
+  
+  
+  
+    <div class="footer-items__start">
+      <div class="container-fluid m-0 p-0">
+      
+        <div class="footer-item">
   <div class="container-fluid footer-logos">
     <div class="container-xl">
       <div class="row d-flex flex-wrap align-items-center">
         <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
-          <img alt="NCAR" src="../../_images/NCAR-contemp-logo-blue.svg" style="width: 100%">
+          <img alt="NCAR" src="../../_images/NSF-NCAR_Lockup-UCAR-Dark_102523.svg" style="width: 100%">
         </div>
         <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
           <img alt="Unidata" src="../../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
@@ -1676,34 +1942,26 @@ Attributes:
         </div>
       </div>
     </div>
-  </div>
-    </div>
-  
-    <div class="footer-item">
-    
-    </div>
-  
-    <div class="footer-item">
-      <div class="container-fluid footer-info">
+  </div></div>
+      
+        <div class="footer-item">  <div class="container-fluid footer-info">
     <div class="container-xl">
       <div class="d-flex justify-content-center">
         <p class="py-1 m-0">
-            &copy;&nbsp;2022.
+            &copy;&nbsp;2024.
         
           By Norland Raphael Hagen.
         
-          Last updated on 30 January 2024.
+          Last updated on 1 April 2024.
         </p>
       </div>
     </div>
-  </div>
+  </div></div>
+      
+      </div>
     </div>
   
-    <div class="footer-item">
-    
-    </div>
-  
-  </div>
-</footer>
+
+  </footer>
   </body>
 </html>
