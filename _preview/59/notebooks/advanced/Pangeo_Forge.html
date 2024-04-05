@@ -1,0 +1,1304 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kerchunk and Pangeo-Forge &#8212; Kerchunk Cookbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css?v=e502140d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=c54c090a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/advanced/Pangeo_Forge';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Appending to Kerchunk references" href="appending.html" />
+    <link rel="prev" title="Store Kerchunk Reference Files as Parquet" href="Parquet_Reference_Storage.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="5 April 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <div class="pst-scroll-pixel-helper"></div>
+    <header class="bd-header navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+   
+
+<a class="navbar-brand logo" href="https://projectpythia.org">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-light" alt="Kerchunk Cookbook - Home"/>
+    <script>document.write(`<img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-dark" alt="Kerchunk Cookbook - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+        
+        
+        
+        <div class="bd-sidebar-primary bd-sidebar">
+          
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Kerchunk Cookbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../how-to-cite.html">How to Cite This Cookbook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../foundations/01_kerchunk_basics.html">Kerchunk Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/02_kerchunk_multi_file.html">Multi-File Datasets with Kerchunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../foundations/03_kerchunk_dask.html">Kerchunk and Dask</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Kerchunk and Pangeo-Forge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appending.html">Appending to Kerchunk references</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Reference Files</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/NetCDF.html">NetCDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/GRIB2.html">GRIB2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/GeoTIFF.html">GeoTIFF</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Pre-Generated References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xarray.html">Load Kerchunked dataset with Xarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xrefcoord.html">Use <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> to Generate Coordinates</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Datatree.html">Kerchunk and Xarray-Datatree</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Hvplot_Datashader.html">Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+        </div>
+
+        
+        <main id="main-content" class="bd-main" role="main">
+          
+
+            <div class="bd-content">
+
+              <div class="bd-article-container">
+
+                
+                  
+                  
+<div id="searchbox"></div>
+                  <article class="bd-article">
+                    
+  <section class="tex2jax_ignore mathjax_ignore" id="kerchunk-and-pangeo-forge">
+<h1>Kerchunk and Pangeo-Forge<a class="headerlink" href="#kerchunk-and-pangeo-forge" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>In this tutorial we are going to use the open-source ETL pipeline named pangeo-forge-recipes to generate Kerchunk references.</p>
+<p>Pangeo-Forge is a community project to build reproducible cloud-native ARCO (Analysis-Ready-Cloud-Optimized) datasets. The Python library (<code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code>) is the ETL pipeline to process these datasets or “recipes”. While a majority of the recipes convert a legacy format such as NetCDF to Zarr stores, <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> can also use Kerchunk under the hood to create reference recipes.</p>
+<p>It is important to note that <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> can be used independently of <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> and in this example, <code class="docutils literal notranslate"><span class="pre">pangeo-forge-recipes</span></code> is acting as the runner for <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepts</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#../foundations/kerchunk_basics"><span class="xref myst">Kerchunk Basics</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#../foundations/kerchunk_multi_file"><span class="xref myst">Multiple Files and Kerchunk</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Core</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#../case_studies/ARG_Weather.ipynb"><span class="xref myst">Multi-File Datasets with Kerchunk</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>IO/Visualization</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Time to learn</strong>: 45 minutes</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="getting-to-know-the-data">
+<h2>Getting to Know The Data<a class="headerlink" href="#getting-to-know-the-data" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gridMET</span></code> is a high-resolution daily meteorological dataset covering CONUS from 1979-2023. It is produced by the Climatology Lab at UC Merced. In this example, we are going to look create a virtual Zarr dataset of a derived variable, Burn Index.</p>
+<section id="examine-a-single-file">
+<h3>Examine a Single File<a class="headerlink" href="#examine-a-single-file" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;http://thredds.northwestknowledge.net:8080/thredds/dodsC/MET/bi/bi_2021.nc&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="plot-the-dataset">
+<h4>Plot the Dataset<a class="headerlink" href="#plot-the-dataset" title="Link to this heading"><i class="fas fa-link"></i></a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">day</span><span class="o">=</span><span class="s2">&quot;2021-08-01&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">burning_index_g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f8a9bf0c7f0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/1924f5baf6fc152c3bb7b7b6e9636ad9b7eeba036a2383c1c2dfe18581ab6e7d.png" src="../../_images/1924f5baf6fc152c3bb7b7b6e9636ad9b7eeba036a2383c1c2dfe18581ab6e7d.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="create-a-file-pattern">
+<h2>Create a File Pattern<a class="headerlink" href="#create-a-file-pattern" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>To build our <code class="docutils literal notranslate"><span class="pre">pangeo-forge</span></code> pipeline, we need to create a <code class="docutils literal notranslate"><span class="pre">FilePattern</span></code> object, which is composed of all of our input urls. This dataset ranges from 1979 through 2023 and is composed of one year per file.</p>
+<p>To speed up our example, we will <code class="docutils literal notranslate"><span class="pre">prune</span></code> our recipe to select the first two entries in the <code class="docutils literal notranslate"><span class="pre">FilePattern</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pangeo_forge_recipes.patterns</span> <span class="kn">import</span> <span class="n">ConcatDim</span><span class="p">,</span> <span class="n">FilePattern</span>
+
+<span class="n">years</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1979</span><span class="p">,</span> <span class="mi">2022</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+
+<span class="n">time_dim</span> <span class="o">=</span> <span class="n">ConcatDim</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">years</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">format_function</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;http://www.northwestknowledge.net/metdata/data/bi_</span><span class="si">{</span><span class="n">time</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">FilePattern</span><span class="p">(</span><span class="n">format_function</span><span class="p">,</span> <span class="n">time_dim</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;netcdf4&quot;</span><span class="p">)</span>
+
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+
+<span class="n">pattern</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;FilePattern {&#39;time&#39;: 2}&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-location-for-output">
+<h2>Create a Location For Output<a class="headerlink" href="#create-a-location-for-output" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>We write to local storage for this example, but the reference file could also be shared via cloud storage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_root</span> <span class="o">=</span> <span class="s2">&quot;references&quot;</span>
+<span class="n">store_name</span> <span class="o">=</span> <span class="s2">&quot;Pangeo_Forge&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="build-the-pangeo-forge-beam-pipeline">
+<h2>Build the Pangeo-Forge Beam Pipeline<a class="headerlink" href="#build-the-pangeo-forge-beam-pipeline" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>Next, we will chain together a bunch of methods to create a Pangeo-Forge - Apache Beam pipeline.
+Processing steps are chained together with the pipe operator (<code class="docutils literal notranslate"><span class="pre">|</span></code>). Once the pipeline is built, it can be ran in the following cell.</p>
+<p>The steps are as follows:</p>
+<ol class="arabic simple">
+<li><p>Creates a starting collection of our input file patterns.</p></li>
+<li><p>Passes those file_patterns to <code class="docutils literal notranslate"><span class="pre">OpenWithKerchunk</span></code>, which creates references of each file.</p></li>
+<li><p>Combines the references files into a single reference file and write them with <code class="docutils literal notranslate"><span class="pre">WriteCombineReferences</span></code></p></li>
+</ol>
+<p>Just like Kerchunk, you can specify the reference file type as either <code class="docutils literal notranslate"><span class="pre">.json</span></code> or <code class="docutils literal notranslate"><span class="pre">.parquet</span></code>.</p>
+<p>Note: You can add additional processing steps in this pipeline.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">apache_beam</span> <span class="k">as</span> <span class="nn">beam</span>
+<span class="kn">from</span> <span class="nn">pangeo_forge_recipes.transforms</span> <span class="kn">import</span> <span class="n">OpenWithKerchunk</span><span class="p">,</span> <span class="n">WriteCombinedReference</span>
+
+<span class="n">transforms</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># Create a beam PCollection from our input file pattern</span>
+    <span class="n">beam</span><span class="o">.</span><span class="n">Create</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="c1"># Open with Kerchunk and create references for each file</span>
+    <span class="o">|</span> <span class="n">OpenWithKerchunk</span><span class="p">(</span><span class="n">file_type</span><span class="o">=</span><span class="n">pattern</span><span class="o">.</span><span class="n">file_type</span><span class="p">)</span>
+    <span class="c1"># Use Kerchunk&#39;s `MultiZarrToZarr` functionality to combine and</span>
+    <span class="c1"># then write references. Note: Setting the correct contact_dims</span>
+    <span class="c1"># and identical_dims is important.</span>
+    <span class="o">|</span> <span class="n">WriteCombinedReference</span><span class="p">(</span>
+        <span class="n">target_root</span><span class="o">=</span><span class="n">target_root</span><span class="p">,</span>
+        <span class="n">store_name</span><span class="o">=</span><span class="n">store_name</span><span class="p">,</span>
+        <span class="n">output_file_name</span><span class="o">=</span><span class="s2">&quot;reference.json&quot;</span><span class="p">,</span>
+        <span class="n">concat_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">],</span>
+        <span class="n">identical_dims</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;crs&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="k">with</span> <span class="n">beam</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">()</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">|</span> <span class="n">transforms</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+        if (typeof window.interactive_beam_jquery == 'undefined') {
+          var jqueryScript = document.createElement('script');
+          jqueryScript.src = 'https://code.jquery.com/jquery-3.4.1.slim.min.js';
+          jqueryScript.type = 'text/javascript';
+          jqueryScript.onload = function() {
+            var datatableScript = document.createElement('script');
+            datatableScript.src = 'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js';
+            datatableScript.type = 'text/javascript';
+            datatableScript.onload = function() {
+              window.interactive_beam_jquery = jQuery.noConflict(true);
+              window.interactive_beam_jquery(document).ready(function($){
+                
+              });
+            }
+            document.head.appendChild(datatableScript);
+          };
+          document.head.appendChild(jqueryScript);
+        } else {
+          window.interactive_beam_jquery(document).ready(function($){
+            
+          });
+        }</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:apache_beam.runners.common:No dimension found with name day [while running &#39;[6]: Create|OpenWithKerchunk|WriteCombinedReference/WriteCombinedReference/CombineReferences/Get just the positions&#39;]
+Traceback (most recent call last):
+  File &quot;apache_beam/runners/common.py&quot;, line 1435, in apache_beam.runners.common.DoFnRunner.process
+  File &quot;apache_beam/runners/common.py&quot;, line 637, in apache_beam.runners.common.SimpleInvoker.invoke_process
+  File &quot;/home/runner/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/transforms/core.py&quot;, line 2040, in &lt;lambda&gt;
+    wrapper = lambda x: [fn(*x)]
+  File &quot;/home/runner/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/transforms.py&quot;, line 533, in &lt;lambda&gt;
+    &gt;&gt; beam.MapTuple(lambda k, v: k.find_position(self.sort_dimension))
+  File &quot;/home/runner/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/types.py&quot;, line 81, in find_position
+    raise ValueError(f&quot;No dimension found with name {dim_name}&quot;)
+ValueError: No dimension found with name day
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1435,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:637,</span> in <span class="ni">apache_beam.runners.common.SimpleInvoker.invoke_process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/transforms/core.py:2040,</span> in <span class="ni">MapTuple.&lt;locals&gt;.&lt;lambda&gt;</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2039</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2040</span>   <span class="n">wrapper</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2042</span> <span class="c1"># Proxy the type-hint information from the original function to this new</span>
+<span class="g g-Whitespace">   </span><span class="mi">2043</span> <span class="c1"># wrapped function.</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/transforms.py:533,</span> in <span class="ni">CombineReferences.expand.&lt;locals&gt;.&lt;lambda&gt;</span><span class="nt">(k, v)</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_lists</span><span class="p">:</span> <span class="n">beam</span><span class="o">.</span><span class="n">PCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">PCollection</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>     <span class="n">min_max_count_positions</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">531</span>         <span class="n">reference_lists</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span>         <span class="o">|</span> <span class="s2">&quot;Get just the positions&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">533</span>         <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">MapTuple</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">find_position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_dimension</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">534</span>         <span class="o">|</span> <span class="s2">&quot;Get minimum/maximum positions&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">CombineGlobally</span><span class="p">(</span><span class="n">MinMaxCountCombineFn</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="k">return</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span>         <span class="n">reference_lists</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span>         <span class="o">|</span> <span class="s2">&quot;Handle special case of gribs&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_gribs</span><span class="p">)</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span>         <span class="o">|</span> <span class="s2">&quot;Global reduce&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">MapTuple</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">refs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_combine_refs</span><span class="p">(</span><span class="n">refs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>     <span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/types.py:81,</span> in <span class="ni">Index.find_position</span><span class="nt">(self, dim_name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">81</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No dimension found with name </span><span class="si">{</span><span class="n">dim_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: No dimension found with name day
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/pipeline.py:612,</span> in <span class="ni">Pipeline.__exit__</span><span class="nt">(self, exc_type, exc_val, exc_tb)</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span>   <span class="k">if</span> <span class="ow">not</span> <span class="n">exc_type</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">612</span>     <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span>     <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">wait_until_finish</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">614</span> <span class="k">finally</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/pipeline.py:586,</span> in <span class="ni">Pipeline.run</span><span class="nt">(self, test_runner_api)</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span>     <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span>       <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">586</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runner</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span>   <span class="k">if</span> <span class="ow">not</span> <span class="n">is_in_ipython</span><span class="p">():</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/direct/direct_runner.py:128,</span> in <span class="ni">SwitchingDirectRunner.run_pipeline</span><span class="nt">(self, pipeline, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>   <span class="n">runner</span> <span class="o">=</span> <span class="n">BundleBasedDirectRunner</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">128</span> <span class="k">return</span> <span class="n">runner</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/fn_runner.py:203,</span> in <span class="ni">FnApiRunner.run_pipeline</span><span class="nt">(self, pipeline, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span>   <span class="n">_LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>       <span class="s1">&#39;If direct_num_workers is not equal to 1, direct_running_mode &#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span>       <span class="s1">&#39;should be `multi_processing` or `multi_threading` instead of &#39;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span>       <span class="bp">self</span><span class="o">.</span><span class="n">_num_workers</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>       <span class="n">running_mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiler_factory</span> <span class="o">=</span> <span class="n">Profile</span><span class="o">.</span><span class="n">factory_from_options</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="n">options</span><span class="o">.</span><span class="n">view_as</span><span class="p">(</span><span class="n">pipeline_options</span><span class="o">.</span><span class="n">ProfilingOptions</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">203</span> <span class="bp">self</span><span class="o">.</span><span class="n">_latest_run_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_via_runner_api</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="n">pipeline</span><span class="o">.</span><span class="n">to_runner_api</span><span class="p">(</span><span class="n">default_environment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_environment</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span>     <span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_latest_run_result</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/fn_runner.py:226,</span> in <span class="ni">FnApiRunner.run_via_runner_api</span><span class="nt">(self, pipeline_proto, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">224</span> <span class="n">pipeline_proto</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_any_environments</span><span class="p">(</span><span class="n">pipeline_proto</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="n">stage_context</span><span class="p">,</span> <span class="n">stages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_stages</span><span class="p">(</span><span class="n">pipeline_proto</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">226</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_stages</span><span class="p">(</span><span class="n">stage_context</span><span class="p">,</span> <span class="n">stages</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/fn_runner.py:481,</span> in <span class="ni">FnApiRunner.run_stages</span><span class="nt">(self, stage_context, stages)</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span> <span class="k">assert</span> <span class="n">consuming_stage_name</span> <span class="o">==</span> <span class="n">bundle_context_manager</span><span class="o">.</span><span class="n">stage</span><span class="o">.</span><span class="n">name</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="n">bundle_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">--&gt; </span><span class="mi">481</span> <span class="n">bundle_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_bundle</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="n">runner_execution_context</span><span class="p">,</span> <span class="n">bundle_context_manager</span><span class="p">,</span> <span class="n">bundle_input</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">484</span> <span class="k">if</span> <span class="n">consuming_stage_name</span> <span class="ow">in</span> <span class="n">monitoring_infos_by_stage</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>   <span class="n">monitoring_infos_by_stage</span><span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">486</span>       <span class="n">consuming_stage_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">consolidate_monitoring_infos</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">487</span>           <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span>               <span class="n">bundle_results</span><span class="o">.</span><span class="n">process_bundle</span><span class="o">.</span><span class="n">monitoring_infos</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">489</span>               <span class="n">monitoring_infos_by_stage</span><span class="p">[</span><span class="n">consuming_stage_name</span><span class="p">]))</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/fn_runner.py:809,</span> in <span class="ni">FnApiRunner._execute_bundle</span><span class="nt">(self, runner_execution_context, bundle_context_manager, bundle_input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">804</span> <span class="c1"># We create the bundle manager here, as it can be reused for bundles of</span>
+<span class="g g-Whitespace">    </span><span class="mi">805</span> <span class="c1"># the same stage, but it may have to be created by-bundle later on.</span>
+<span class="g g-Whitespace">    </span><span class="mi">806</span> <span class="n">bundle_manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bundle_manager</span><span class="p">(</span><span class="n">bundle_context_manager</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">808</span> <span class="n">last_result</span><span class="p">,</span> <span class="n">deferred_inputs</span><span class="p">,</span> <span class="n">newly_set_timers</span><span class="p">,</span> <span class="n">watermark_updates</span> <span class="o">=</span> <span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">809</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_run_bundle</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">810</span>         <span class="n">runner_execution_context</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">811</span>         <span class="n">bundle_context_manager</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span>         <span class="n">bundle_input</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">813</span>         <span class="n">bundle_context_manager</span><span class="o">.</span><span class="n">stage_data_outputs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">814</span>         <span class="n">bundle_context_manager</span><span class="o">.</span><span class="n">stage_timer_outputs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">815</span>         <span class="n">bundle_manager</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span> <span class="k">for</span> <span class="n">pc_name</span><span class="p">,</span> <span class="n">watermark</span> <span class="ow">in</span> <span class="n">watermark_updates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span>   <span class="n">_BUNDLE_LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Update: </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pc_name</span><span class="p">,</span> <span class="n">watermark</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/fn_runner.py:1046,</span> in <span class="ni">FnApiRunner._run_bundle</span><span class="nt">(self, runner_execution_context, bundle_context_manager, bundle_input, data_output, expected_timer_output, bundle_manager)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1037</span> <span class="n">input_timers</span> <span class="o">=</span> <span class="n">bundle_input</span><span class="o">.</span><span class="n">timers</span>
+<span class="g g-Whitespace">   </span><span class="mi">1038</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_bundle_multiple_times_for_testing</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span>     <span class="n">runner_execution_context</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1040</span>     <span class="n">bundle_manager</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span>     <span class="n">input_timers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1044</span>     <span class="n">expected_timer_output</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1046</span> <span class="n">result</span><span class="p">,</span> <span class="n">splits</span> <span class="o">=</span> <span class="n">bundle_manager</span><span class="o">.</span><span class="n">process_bundle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1047</span>     <span class="n">data_input</span><span class="p">,</span> <span class="n">data_output</span><span class="p">,</span> <span class="n">input_timers</span><span class="p">,</span> <span class="n">expected_timer_output</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span> <span class="c1"># Now we collect all the deferred inputs remaining from bundle execution.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span> <span class="c1"># Deferred inputs can be:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1050</span> <span class="c1"># - timers</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> <span class="c1"># - SDK-initiated deferred applications of root elements</span>
+<span class="g g-Whitespace">   </span><span class="mi">1052</span> <span class="c1"># - Runner-initiated deferred applications of root elements</span>
+<span class="g g-Whitespace">   </span><span class="mi">1053</span> <span class="n">deferred_inputs</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict[str, execution.PartitionableBuffer]</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/fn_runner.py:1382,</span> in <span class="ni">BundleManager.process_bundle</span><span class="nt">(self, inputs, expected_outputs, fired_timers, expected_output_timers, dry_run)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1375</span> <span class="c1"># Actually start the bundle.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1376</span> <span class="n">process_bundle_req</span> <span class="o">=</span> <span class="n">beam_fn_api_pb2</span><span class="o">.</span><span class="n">InstructionRequest</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1377</span>     <span class="n">instruction_id</span><span class="o">=</span><span class="n">process_bundle_id</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1378</span>     <span class="n">process_bundle</span><span class="o">=</span><span class="n">beam_fn_api_pb2</span><span class="o">.</span><span class="n">ProcessBundleRequest</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1379</span>         <span class="n">process_bundle_descriptor_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bundle_context_manager</span><span class="o">.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1380</span>         <span class="n">process_bundle_descriptor</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1381</span>         <span class="n">cache_tokens</span><span class="o">=</span><span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_token_generator</span><span class="p">)]))</span>
+<span class="ne">-&gt; </span><span class="mi">1382</span> <span class="n">result_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_worker_handler</span><span class="o">.</span><span class="n">control_conn</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">process_bundle_req</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1384</span> <span class="n">split_results</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># type: List[beam_fn_api_pb2.ProcessBundleSplitResponse]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1385</span> <span class="k">with</span> <span class="n">ProgressRequester</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_worker_handler</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1386</span>                        <span class="n">process_bundle_id</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1387</span>                        <span class="bp">self</span><span class="o">.</span><span class="n">_progress_frequency</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/portability/fn_api_runner/worker_handlers.py:384,</span> in <span class="ni">EmbeddedWorkerHandler.push</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>   <span class="bp">self</span><span class="o">.</span><span class="n">_uid_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>   <span class="n">request</span><span class="o">.</span><span class="n">instruction_id</span> <span class="o">=</span> <span class="s1">&#39;control_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_uid_counter</span>
+<span class="ne">--&gt; </span><span class="mi">384</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">worker</span><span class="o">.</span><span class="n">do_instruction</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">385</span> <span class="k">return</span> <span class="n">ControlFuture</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">instruction_id</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/sdk_worker.py:650,</span> in <span class="ni">SdkWorker.do_instruction</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">    </span><span class="mi">647</span> <span class="n">request_type</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">WhichOneof</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span> <span class="k">if</span> <span class="n">request_type</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span>   <span class="c1"># E.g. if register is set, this will call self.register(request.register))</span>
+<span class="ne">--&gt; </span><span class="mi">650</span>   <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request_type</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">651</span>       <span class="nb">getattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">request_type</span><span class="p">),</span> <span class="n">request</span><span class="o">.</span><span class="n">instruction_id</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">652</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span>   <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/sdk_worker.py:688,</span> in <span class="ni">SdkWorker.process_bundle</span><span class="nt">(self, request, instruction_id)</span>
+<span class="g g-Whitespace">    </span><span class="mi">684</span> <span class="k">with</span> <span class="n">bundle_processor</span><span class="o">.</span><span class="n">state_handler</span><span class="o">.</span><span class="n">process_instruction_id</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">685</span>     <span class="n">instruction_id</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">cache_tokens</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">686</span>   <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">maybe_profile</span><span class="p">(</span><span class="n">instruction_id</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span>     <span class="n">delayed_applications</span><span class="p">,</span> <span class="n">requests_finalization</span> <span class="o">=</span> <span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">688</span>         <span class="n">bundle_processor</span><span class="o">.</span><span class="n">process_bundle</span><span class="p">(</span><span class="n">instruction_id</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">689</span>     <span class="n">monitoring_infos</span> <span class="o">=</span> <span class="n">bundle_processor</span><span class="o">.</span><span class="n">monitoring_infos</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span>     <span class="n">response</span> <span class="o">=</span> <span class="n">beam_fn_api_pb2</span><span class="o">.</span><span class="n">InstructionResponse</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span>         <span class="n">instruction_id</span><span class="o">=</span><span class="n">instruction_id</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span>         <span class="n">process_bundle</span><span class="o">=</span><span class="n">beam_fn_api_pb2</span><span class="o">.</span><span class="n">ProcessBundleResponse</span><span class="p">(</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">698</span>             <span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">699</span>             <span class="n">requires_finalization</span><span class="o">=</span><span class="n">requests_finalization</span><span class="p">))</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/bundle_processor.py:1113,</span> in <span class="ni">BundleProcessor.process_bundle</span><span class="nt">(self, instruction_id)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1110</span>         <span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">transform_id</span><span class="p">]</span><span class="o">.</span><span class="n">process_timer</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1111</span>             <span class="n">element</span><span class="o">.</span><span class="n">timer_family_id</span><span class="p">,</span> <span class="n">timer_data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1112</span>     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">beam_fn_api_pb2</span><span class="o">.</span><span class="n">Elements</span><span class="o">.</span><span class="n">Data</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1113</span>       <span class="n">input_op_by_transform_id</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">transform_id</span><span class="p">]</span><span class="o">.</span><span class="n">process_encoded</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1114</span>           <span class="n">element</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1116</span> <span class="c1"># Finish all operations.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1117</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/bundle_processor.py:237,</span> in <span class="ni">DataInputOperation.process_encoded</span><span class="nt">(self, encoded_windowed_values)</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span> <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exn</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>   <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span>       <span class="s2">&quot;Error decoding input stream with coder &quot;</span> <span class="o">+</span>
+<span class="g g-Whitespace">    </span><span class="mi">236</span>       <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windowed_coder</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">exn</span>
+<span class="ne">--&gt; </span><span class="mi">237</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">decoded_value</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:570,</span> in <span class="ni">apache_beam.runners.worker.operations.Operation.output</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:572,</span> in <span class="ni">apache_beam.runners.worker.operations.Operation.output</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:263,</span> in <span class="ni">apache_beam.runners.worker.operations.SingletonElementConsumerSet.receive</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:266,</span> in <span class="ni">apache_beam.runners.worker.operations.SingletonElementConsumerSet.receive</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:953,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:954,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1437,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1526,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner._reraise_augmented</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1435,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:636,</span> in <span class="ni">apache_beam.runners.common.SimpleInvoker.invoke_process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1621,</span> in <span class="ni">apache_beam.runners.common._OutputHandler.handle_process_outputs</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1734,</span> in <span class="ni">apache_beam.runners.common._OutputHandler._write_value_to_tag</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:266,</span> in <span class="ni">apache_beam.runners.worker.operations.SingletonElementConsumerSet.receive</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:953,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:954,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1437,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1526,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner._reraise_augmented</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1435,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:636,</span> in <span class="ni">apache_beam.runners.common.SimpleInvoker.invoke_process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1621,</span> in <span class="ni">apache_beam.runners.common._OutputHandler.handle_process_outputs</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1734,</span> in <span class="ni">apache_beam.runners.common._OutputHandler._write_value_to_tag</span><span class="nt">()</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">DoFnRunner</span><span class="o">.</span><span class="n">_reraise_augmented</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">1526</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">DoFnRunner</span><span class="o">.</span><span class="n">process</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">1437</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">DoFnRunner</span><span class="o">.</span><span class="n">process</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">1435</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">SimpleInvoker</span><span class="o">.</span><span class="n">invoke_process</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">636</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">_OutputHandler</span><span class="o">.</span><span class="n">_write_value_to_tag</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">1734</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">_OutputHandler</span><span class="o">.</span><span class="n">handle_process_outputs</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">1621</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">worker</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">DoOperation</span><span class="o">.</span><span class="n">process</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">953</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">worker</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">DoOperation</span><span class="o">.</span><span class="n">process</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">954</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">),</span> <span class="n">apache_beam</span><span class="o">.</span><span class="n">runners</span><span class="o">.</span><span class="n">worker</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">SingletonElementConsumerSet</span><span class="o">.</span><span class="n">receive</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">266</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:266,</span> in <span class="ni">apache_beam.runners.worker.operations.SingletonElementConsumerSet.receive</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:953,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:954,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1437,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1526,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner._reraise_augmented</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1435,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:636,</span> in <span class="ni">apache_beam.runners.common.SimpleInvoker.invoke_process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1621,</span> in <span class="ni">apache_beam.runners.common._OutputHandler.handle_process_outputs</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1734,</span> in <span class="ni">apache_beam.runners.common._OutputHandler._write_value_to_tag</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:352,</span> in <span class="ni">apache_beam.runners.worker.operations.GeneralPurposeConsumerSet.receive</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:951,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:953,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/worker/operations.py:954,</span> in <span class="ni">apache_beam.runners.worker.operations.DoOperation.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1437,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1547,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner._reraise_augmented</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:1435,</span> in <span class="ni">apache_beam.runners.common.DoFnRunner.process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/runners/common.py:637,</span> in <span class="ni">apache_beam.runners.common.SimpleInvoker.invoke_process</span><span class="nt">()</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/apache_beam/transforms/core.py:2040,</span> in <span class="ni">MapTuple.&lt;locals&gt;.&lt;lambda&gt;</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2038</span>   <span class="n">wrapper</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2039</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2040</span>   <span class="n">wrapper</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)]</span>
+<span class="g g-Whitespace">   </span><span class="mi">2042</span> <span class="c1"># Proxy the type-hint information from the original function to this new</span>
+<span class="g g-Whitespace">   </span><span class="mi">2043</span> <span class="c1"># wrapped function.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2044</span> <span class="n">type_hints</span> <span class="o">=</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">with_defaults</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2045</span>     <span class="n">typehints</span><span class="o">.</span><span class="n">decorators</span><span class="o">.</span><span class="n">IOTypeHints</span><span class="o">.</span><span class="n">from_callable</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/transforms.py:533,</span> in <span class="ni">CombineReferences.expand.&lt;locals&gt;.&lt;lambda&gt;</span><span class="nt">(k, v)</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_lists</span><span class="p">:</span> <span class="n">beam</span><span class="o">.</span><span class="n">PCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">PCollection</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>     <span class="n">min_max_count_positions</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">531</span>         <span class="n">reference_lists</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span>         <span class="o">|</span> <span class="s2">&quot;Get just the positions&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">533</span>         <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">MapTuple</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">k</span><span class="o">.</span><span class="n">find_position</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sort_dimension</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">534</span>         <span class="o">|</span> <span class="s2">&quot;Get minimum/maximum positions&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">CombineGlobally</span><span class="p">(</span><span class="n">MinMaxCountCombineFn</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="k">return</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span>         <span class="n">reference_lists</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span>         <span class="o">|</span> <span class="s2">&quot;Handle special case of gribs&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_gribs</span><span class="p">)</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span>         <span class="o">|</span> <span class="s2">&quot;Global reduce&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">beam</span><span class="o">.</span><span class="n">MapTuple</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">refs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_combine_refs</span><span class="p">(</span><span class="n">refs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>     <span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/kerchunk-cookbook/lib/python3.10/site-packages/pangeo_forge_recipes/types.py:81,</span> in <span class="ni">Index.find_position</span><span class="nt">(self, dim_name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span>     <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">dimension</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">81</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No dimension found with name </span><span class="si">{</span><span class="n">dim_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: No dimension found with name day [while running &#39;[6]: Create|OpenWithKerchunk|WriteCombinedReference/WriteCombinedReference/CombineReferences/Get just the positions&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/advanced"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                  </article>
+
+                
+                
+
+                
+                
+                  <footer class="prev-next-footer">
+                    
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Parquet_Reference_Storage.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Store Kerchunk Reference Files as Parquet</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="appending.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Appending to Kerchunk references</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                  </footer>
+                
+              </div>
+
+              
+              
+                
+                  <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-to-know-the-data">Getting to Know The Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-a-single-file">Examine a Single File</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-dataset">Plot the Dataset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-file-pattern">Create a File Pattern</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-location-for-output">Create a Location For Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-pangeo-forge-beam-pipeline">Build the Pangeo-Forge Beam Pipeline</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+                
+              
+
+
+                
+                <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/advanced/Pangeo_Forge.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/advanced/Pangeo_Forge.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/advanced/Pangeo_Forge.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/advanced/Pangeo_Forge.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+            </div>
+
+            <footer class="bd-footer-content">
+              
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Norland Raphael Hagen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on 5 April 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+            </footer>
+
+        </main>
+    </div>
+  </div>
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+     
+  
+  
+  
+  
+    <div class="footer-items__start">
+      <div class="container-fluid m-0 p-0">
+      
+        <div class="footer-item">
+  <div class="container-fluid footer-logos">
+    <div class="container-xl">
+      <div class="row d-flex flex-wrap align-items-center">
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="NCAR" src="../../_images/NSF-NCAR_Lockup-UCAR-Dark_102523.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="Unidata" src="../../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="UAlbany" src="../../_images/UAlbany-A2-logo-purple-gold.svg" style="width: 100%">
+        </div>
+      </div>
+    </div>
+  </div></div>
+      
+        <div class="footer-item">  <div class="container-fluid footer-info">
+    <div class="container-xl">
+      <div class="d-flex justify-content-center">
+        <p class="py-1 m-0">
+            &copy;&nbsp;2024.
+        
+          By Norland Raphael Hagen.
+        
+          Last updated on 5 April 2024.
+        </p>
+      </div>
+    </div>
+  </div></div>
+      
+      </div>
+    </div>
+  
+
+  </footer>
+  </body>
+</html>
