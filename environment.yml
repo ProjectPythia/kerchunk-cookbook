@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - cfgrib
-  - dask
+  - dask>=2024.10.0
   - dask-labextension
   - datashader
   - distributed
@@ -24,6 +24,7 @@ dependencies:
   - numcodecs
   - numpy
   - pandas
+  - pangeo-forge-recipes
   - pip
   - pooch
   - pre-commit
@@ -40,6 +41,5 @@ dependencies:
   - sphinx-pythia-theme
   - pip:
       - "apache-beam[interactive, dataframe]"
-      - git+https://github.com/pangeo-forge/pangeo-forge-recipes
       - git+https://github.com/carbonplan/xrefcoord.git
       - git+https://github.com/fsspec/kerchunk
