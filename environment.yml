@@ -36,10 +36,9 @@ dependencies:
   - tifffile
   - ujson
   - xarray
-  - xarray-datatree
+  - virtualizarr
   - zarr
   - sphinx-pythia-theme
   - pip:
-      - "apache-beam[interactive, dataframe]"
-      - git+https://github.com/carbonplan/xrefcoord.git
       - git+https://github.com/fsspec/kerchunk
+      - git+https://github.com/carbonplan/xrefcoord.git
