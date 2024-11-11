@@ -39,7 +39,5 @@ dependencies:
   - zarr
   - sphinx-pythia-theme
   - pip:
-      - "apache-beam[interactive, dataframe]"
-      - git+https://github.com/pangeo-forge/pangeo-forge-recipes
       - git+https://github.com/carbonplan/xrefcoord.git
       - git+https://github.com/fsspec/kerchunk
