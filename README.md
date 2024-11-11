@@ -1,32 +1,32 @@
 <img src="thumbnail.png" alt="thumbnail" width="300"/>
 
-# Kerchunk Cookbook
+# Virtual Zarr Cookbook (Kerchunk and VirtualiZarr)
 
 [![nightly-build](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml)
 [![Binder](https://binder.projectpythia.org/badge_logo.svg)](https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks)
 [![DOI](https://zenodo.org/badge/588661659.svg)](https://zenodo.org/badge/latestdoi/588661659)
 
-This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/)
-library to access archival data formats as if they were
-ARCO (Analysis-Ready-Cloud-Optimized) data.
+This Project Pythia Cookbook covers using the [Kerchunk](https://fsspec.github.io/kerchunk/), [VirtualiZarr](https://virtualizarr.readthedocs.io/en/latest/index.html), and [Zarr-Python](https://zarr.readthedocs.io/en/stable/) libraries to access archival data formats as if they were ARCO (Analysis-Ready-Cloud-Optimized) data.
 
 ## Motivation
 
-The `Kerchunk` library allows you to access chunked and compressed
+The `Kerchunk` library pioneered the access of chunked and compressed
 data formats (such as NetCDF3. HDF5, GRIB2, TIFF & FITS), many of
 which are the primary data formats for many data archives, as if
 they were in ARCO formats such as Zarr which allows for parallel,
 chunk-specific access. Instead of creating a new copy of the dataset
 in the Zarr spec/format, `Kerchunk` reads through the data archive
 and extracts the byte range and compression information of each
-chunk, then writes that information to a .json file (or alternate
-backends in future releases). For more details on how this process
-works please see this page on the
-[Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
-These summary files can then be combined to generated a `Kerchunk`
-reference for that dataset, which can be read via
-[Zarr](https://zarr.readthedocs.io) and
+chunk, then writes that information to a "virtual Zarr store" using a
+JSON or Parquet "reference file". The `VirtualiZarr`
+library provides a simple way to create these "virtual stores" using familiary
+`xarray` syntax. Lastly, the `icechunk` provides a new way to store and re-use these references.
+
+These virtual Zarr stores can be re-used and read via [Zarr](https://zarr.readthedocs.io) and
 [Xarray](https://docs.xarray.dev/en/stable/).
+
+For more details on how this process works please see this page on the
+[Kerchunk docs](https://fsspec.github.io/kerchunk/detail.html)).
 
 ## Authors
 
@@ -48,24 +48,24 @@ the creator of `Kerchunk` and the
 This cookbook is broken up into two sections,
 Foundations and Example Notebooks.
 
-### Section 1 Foundations
+### Section 1 - Foundations
 
 In the `Foundations` section we will demonstrate
-how to use `Kerchunk` to create reference sets
+how to use `Kerchunk` and `VirtualiZarr` to create reference files
 from single file sources, as well as to create
-multi-file virtual datasets from collections of files.
+multi-file virtual Zarr stores from collections of files.
 
-### Section 2 Generating Reference Files
+### Section 2 - Generating Virtual Zarr Stores
 
-The notebooks in the `Generating Reference Files` section
-demonstrate how to use `Kerchunk` to create
+The notebooks in the `Generating Virtual Zarr Stores` section
+demonstrates how to use `Kerchunk` and `VirtualiZarr` to create
 datasets for all the supported file formats.
-`Kerchunk` currently supports NetCDF3,
-NetCDF4/HDF5, GRIB2, TIFF (including CoG).
+These libraries currently support virtualizing NetCDF3,
+NetCDF4/HDF5, GRIB2, TIFF (including COG).
 
-### Section 3 Using Pre-Generated References
+### Section 3 - Using Virtual Zarr Stores
 
-The `Pre-Generated References` section contains notebooks demonstrating how to load existing references into `Xarray` and `Xarray-Datatree`, generated coordinates for GeoTiffs using `xrefcoord` and plotting using `Hvplot Datashader`.
+The `Using Virtual Zarr Stores` section contains notebooks demonstrating how to load existing references into `Xarray`, generating coordinates for GeoTiffs using `xrefcoord`, and plotting using `Hvplot Datashader`.
 
 ## Running the Notebooks
 

@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - cfgrib
-  - dask
+  - dask>=2024.10.0
   - dask-labextension
   - datashader
   - distributed
@@ -28,12 +28,12 @@ dependencies:
   - pooch
   - pre-commit
   - pyOpenSSL
-  - python=3.10
   - rioxarray
   - s3fs
   - scipy
   - tifffile
   - ujson
+  - virtualizarr
   - xarray>=2024.10.0
   - zarr
   - sphinx-pythia-theme
