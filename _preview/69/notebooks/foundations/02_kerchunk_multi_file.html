@@ -1,0 +1,1840 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Multi-file virtual datasets with VirtualiZarr &#8212; Kerchunk Cookbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css?v=ba7ce088" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=c54c090a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-T52X8HNYE8"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-T52X8HNYE8');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/foundations/02_kerchunk_multi_file';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask" href="03_kerchunk_dask.html" />
+    <link rel="prev" title="Basics of virtual Zarr stores" href="01_kerchunk_basics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="11 November 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div class="pst-scroll-pixel-helper"></div>
+    <header class="bd-header navbar navbar-dark navbar-expand-lg bg-dark fixed-top bd-navbar shadow" id="navbar-main">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://projectpythia.org">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-light" alt="Kerchunk Cookbook - Home"/>
+    <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-dark pst-js-only" alt="Kerchunk Cookbook - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+        
+        
+        
+        <div class="bd-sidebar-primary bd-sidebar">
+          
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org">Home</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://foundations.projectpythia.org">Foundations</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://cookbooks.projectpythia.org">Cookbooks</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/resource-gallery.html">Resources</a>
+  </li>
+  
+  <li class="nav-item">
+    
+    
+    
+    <a class="nav-link nav-internal" href="https://projectpythia.org/index.html#join-us">Community</a>
+  </li>
+  
+  
+</ul></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ProjectPythia" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/project_pythia" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw" title="YouTube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-youtube-square fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Virtual Zarr Cookbook (Kerchunk and VirtualiZarr)
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../how-to-cite.html">How to Cite This Cookbook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_kerchunk_basics.html">Basics of virtual Zarr stores</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multi-file virtual datasets with VirtualiZarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_kerchunk_dask.html">Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../advanced/appending.html">Appending to Kerchunk references</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Reference Files</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/NetCDF.html">NetCDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/GRIB2.html">GRIB2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../generating_references/GeoTIFF.html">GeoTIFF</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Using Pre-Generated References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xarray.html">Load Kerchunked dataset with Xarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Xrefcoord.html">Use <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> to Generate Coordinates</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Datatree.html">Kerchunk and Xarray-Datatree</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../using_references/Hvplot_Datashader.html">Kerchunk, hvPlot, and Datashader: Visualizing datasets on-the-fly</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+        </div>
+
+        
+        <main id="main-content" class="bd-main" role="main">
+          
+
+            <div class="bd-content">
+
+              <div class="bd-article-container">
+
+                
+                  
+                  
+<div id="searchbox"></div>
+                  <article class="bd-article">
+                    
+  <p><a class="reference internal" href="../../_images/thumbnail.png"><img alt="Kerchunk Logo" src="../../_images/thumbnail.png" style="width: 500px;" /></a></img></p>
+<section class="tex2jax_ignore mathjax_ignore" id="multi-file-virtual-datasets-with-virtualizarr">
+<h1>Multi-file virtual datasets with VirtualiZarr<a class="headerlink" href="#multi-file-virtual-datasets-with-virtualizarr" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>This notebook is intends to build off of the <a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores</span></a>.</p>
+<p>In this tutorial we will:</p>
+<ul class="simple">
+<li><p>Create a list of input paths for a collection of NetCDF files stored on the cloud.</p></li>
+<li><p>Create virtual datasets for each input datasets</p></li>
+<li><p>Combine the virtual datasets using combine_nested</p></li>
+<li><p>Read the combined dataset using <a class="reference external" href="https://docs.xarray.dev/en/stable/"><code class="docutils literal notranslate"><span class="pre">Xarray</span></code></a> and <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">fsspec</span></code></a>.</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepts</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores</span></a></p></td>
+<td><p>Required</p></td>
+<td><p>Basic features</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/xarray/xarray-intro.html">Introduction to Xarray</a></p></td>
+<td><p>Recommended</p></td>
+<td><p>IO</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Time to learn</strong>: 60 minutes</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="flags">
+<h2>Flags<a class="headerlink" href="#flags" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>In the section below, set the <code class="docutils literal notranslate"><span class="pre">subset</span></code> flag to be <code class="docutils literal notranslate"><span class="pre">True</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">False</span></code> depending if you want this notebook to process the full file list. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, then a subset of the file list will be processed (Recommended)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subset_flag</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>In our imports block we are using similar imports to the <a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores tutorial</span></a>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fsspec</span></code> for reading and writing to remote file systems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtualizarr</span></code> will be used to generate the virtual Zarr store</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Xarray</span></code> for examining the output dataset</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">virtualizarr</span> <span class="kn">import</span> <span class="n">open_virtual_dataset</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="create-a-file-pattern-from-a-list-of-input-netcdf-files">
+<h3>Create a File Pattern from a list of  input NetCDF files<a class="headerlink" href="#create-a-file-pattern-from-a-list-of-input-netcdf-files" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<p>Below we will create a list of input files we want to virtualize. In the <a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores tutorial</span></a>, we looked at a single file of climate downscaled data over Southern Alaska. In this example, we will build off of that work and use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> to combine multiple NetCDF files of this dataset into a virtual dataset that can be read as if it were a <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> store - without copying any data.</p>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> <code class="docutils literal notranslate"><span class="pre">s3</span></code> filesystem’s <em>glob</em> method to create a list of files matching a file pattern. We supply the base url of <code class="docutils literal notranslate"><span class="pre">s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/</span></code>, which is pointing to an <code class="docutils literal notranslate"><span class="pre">AWS</span></code> public bucket, for daily rcp85 ccsm downscaled data for the year 2060. After this base url, we tacked on <em><code class="docutils literal notranslate"><span class="pre">*</span></code></em>, which acts as a wildcard for all the files in the directory. We should expect 365 daily <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> files.</p>
+<p>Finally, we are appending the string <code class="docutils literal notranslate"><span class="pre">s3://</span></code> to the list of return files. This will ensure the list of files we get back are <code class="docutils literal notranslate"><span class="pre">s3</span></code> urls and can be read by <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate fsspec filesystems for reading and writing</span>
+<span class="n">fs_read</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Retrieve list of available days in archive for the year 2060.</span>
+<span class="n">files_paths</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/*&quot;</span><span class="p">)</span>
+
+<span class="c1"># Here we prepend the prefix &#39;s3://&#39;, which points to AWS.</span>
+<span class="n">files_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="as-a-quick-check-it-looks-like-we-have-a-list-365-file-paths-which-should-be-a-year-of-downscaled-climte-data">
+<h4>As a quick check, it looks like we have a list 365 file paths, which should be a year of downscaled climte data.<a class="headerlink" href="#as-a-quick-check-it-looks-like-we-have-a-list-365-file-paths-which-should-be-a-year-of-downscaled-climte-data" title="Link to this heading"><i class="fas fa-link"></i></a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">files_paths</span><span class="p">)</span><span class="si">}</span><span class="s2"> file paths were retrieved.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>365 file paths were retrieved.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If the subset_flag == True (default), the list of input files will</span>
+<span class="c1"># be subset to speed up the processing</span>
+<span class="k">if</span> <span class="n">subset_flag</span><span class="p">:</span>
+    <span class="n">files_paths</span> <span class="o">=</span> <span class="n">files_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="optional-if-you-want-to-examine-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below">
+<h3>Optional: If you want to examine one NetCDF files before creating the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index, try uncommenting this code snippet below.<a class="headerlink" href="#optional-if-you-want-to-examine-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Note: Optional piece of code to view one of the NetCDFs</span>
+
+<span class="c1"># import s3fs</span>
+
+<span class="c1"># fs = fsspec.filesystem(&quot;s3&quot;,anon=True)</span>
+<span class="c1"># ds = xr.open_dataset(fs.open(file_pattern[0]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="create-virtual-datasets-for-every-file-in-the-file-pattern-list">
+<h2>Create virtual datasets for every file in the <code class="docutils literal notranslate"><span class="pre">File_Pattern</span></code> list<a class="headerlink" href="#create-virtual-datasets-for-every-file-in-the-file-pattern-list" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>Now that we have a list of NetCDF files, we can use <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> to create virtual datasets for each one of these.</p>
+<section id="define-kwargs-for-fsspec">
+<h3>Define kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code><a class="headerlink" href="#define-kwargs-for-fsspec" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<p>In the cell below, we are creating a dictionary of <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> to pass to <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> and the <code class="docutils literal notranslate"><span class="pre">s3</span></code> filesystem. Details on this can be found in the <a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores tutorial</span></a> in the <strong>Define storage_options arguments</strong> section</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">storage_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the cell below, we are reusing some of the functionality from the previous tutorial.
+First we are defining a function named: <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>.
+This function:</p>
+<ul class="simple">
+<li><p>Uses an <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> <code class="docutils literal notranslate"><span class="pre">s3</span></code> filesystem to read in a <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> from a given url.</p></li>
+<li><p>Generates a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index using the <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> method.</p></li>
+<li><p>Creates a simplified filename using some string slicing.</p></li>
+<li><p>Uses the local filesystem created with <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to write the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index to a <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file.</p></li>
+</ul>
+<p>Below the <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> function we created, we have a simple <code class="docutils literal notranslate"><span class="pre">for</span></code> loop that iterates through our list of <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file urls and passes them to our <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> function, which appends the name of each <code class="docutils literal notranslate"><span class="pre">.json</span></code> reference file to a list named <strong>output_files</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">virtual_datasets</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">open_virtual_dataset</span><span class="p">(</span>
+        <span class="n">filepath</span><span class="p">,</span> <span class="n">indexes</span><span class="o">=</span><span class="p">{},</span> <span class="n">reader_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;storage_options&quot;</span><span class="p">:</span> <span class="n">storage_options</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">files_paths</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="combine-virtual-datasets">
+<h2>Combine virtual datasets<a class="headerlink" href="#combine-virtual-datasets" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>After we have generated a virtual dataset for each <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file, we can combine these into a single virtual dataset using Xarray’s <code class="docutils literal notranslate"><span class="pre">combine_nested</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_vds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">combine_nested</span><span class="p">(</span>
+    <span class="n">virtual_datasets</span><span class="p">,</span> <span class="n">concat_dim</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">coords</span><span class="o">=</span><span class="s2">&quot;minimal&quot;</span><span class="p">,</span> <span class="n">compat</span><span class="o">=</span><span class="s2">&quot;override&quot;</span>
+<span class="p">)</span>
+<span class="n">combined_vds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+html[data-theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 123MB
+Dimensions:        (Time: 4, south_north: 250, west_east: 320,
+                    interp_levels: 9, soil_layers_stag: 4)
+Coordinates:
+    Time           (Time) int32 16B ManifestArray&lt;shape=(4,), dtype=int32, ch...
+    interp_levels  (interp_levels) float32 36B ManifestArray&lt;shape=(9,), dtyp...
+Dimensions without coordinates: south_north, west_east, soil_layers_stag
+Data variables: (12/39)
+    HFX            (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    LWUPB          (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    LWUPBC         (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    PW             (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    ACSNOW         (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    PSFC           (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    ...             ...
+    SWUPB          (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    TMAX           (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    SNOW           (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    LH             (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    U10            (Time, south_north, west_east) float32 1MB ManifestArray&lt;s...
+    V              (Time, interp_levels, south_north, west_east) float32 12MB ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-75ec9ce2-6f31-4962-b8c4-485ff25e7661' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-75ec9ce2-6f31-4962-b8c4-485ff25e7661' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>Time</span>: 4</li><li><span>south_north</span>: 250</li><li><span>west_east</span>: 320</li><li><span>interp_levels</span>: 9</li><li><span>soil_layers_stag</span>: 4</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-f1c649ae-091e-4aa5-abe5-0c6a51c25c1a' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f1c649ae-091e-4aa5-abe5-0c6a51c25c1a' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>Time</span></div><div class='xr-var-dims'>(Time)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4,), dtype=...</div><input id='attrs-e024f513-5cbd-4f84-8164-66bad7c8704d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e024f513-5cbd-4f84-8164-66bad7c8704d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f82c1e9a-9c2f-4155-b3ed-cbdb8a219239' class='xr-var-data-in' type='checkbox'><label for='data-f82c1e9a-9c2f-4155-b3ed-cbdb8a219239' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4,), dtype=int32, chunks=(1024,)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>interp_levels</span></div><div class='xr-var-dims'>(interp_levels)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(9,), dtype=...</div><input id='attrs-37fa7871-c72e-4ce5-b111-0e82fb9a3998' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-37fa7871-c72e-4ce5-b111-0e82fb9a3998' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1ad07a00-ba77-4635-a6ee-9721e5589f5f' class='xr-var-data-in' type='checkbox'><label for='data-1ad07a00-ba77-4635-a6ee-9721e5589f5f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(9,), dtype=float32, chunks=(9,)&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ee0d97f5-cc29-4e60-8609-32ecd4a5c769' class='xr-section-summary-in' type='checkbox'  ><label for='section-ee0d97f5-cc29-4e60-8609-32ecd4a5c769' class='xr-section-summary' >Data variables: <span>(39)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HFX</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-4524e890-b2a6-4782-a068-e711b22201d1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4524e890-b2a6-4782-a068-e711b22201d1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2fb63ace-dccd-45fc-9cfe-d60efd06e6e3' class='xr-var-data-in' type='checkbox'><label for='data-2fb63ace-dccd-45fc-9cfe-d60efd06e6e3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWUPB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-0ffdf46e-d875-42c9-8bae-2b9300f95ecf' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0ffdf46e-d875-42c9-8bae-2b9300f95ecf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-60de99f8-407a-4a36-9acf-105127f6b5c5' class='xr-var-data-in' type='checkbox'><label for='data-60de99f8-407a-4a36-9acf-105127f6b5c5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWUPBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-1536dbad-2c1e-419b-8063-b8a1af25a033' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1536dbad-2c1e-419b-8063-b8a1af25a033' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ccf715cc-98bc-42e2-b35b-0abc7d70f0d8' class='xr-var-data-in' type='checkbox'><label for='data-ccf715cc-98bc-42e2-b35b-0abc7d70f0d8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PW</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-3b20a644-1bb2-45be-9220-ffa60523c7e7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3b20a644-1bb2-45be-9220-ffa60523c7e7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0ba7988c-1e76-457c-86ed-e7b91d4ca7a1' class='xr-var-data-in' type='checkbox'><label for='data-0ba7988c-1e76-457c-86ed-e7b91d4ca7a1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>ACSNOW</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-9e34df52-7ec6-4bb3-9e5b-90f84cc6d1d5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9e34df52-7ec6-4bb3-9e5b-90f84cc6d1d5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3c1ba8e5-f495-414b-a1a1-26d7ba908a8e' class='xr-var-data-in' type='checkbox'><label for='data-3c1ba8e5-f495-414b-a1a1-26d7ba908a8e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PSFC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-261f92ff-1b01-4406-b604-ec8c2d925b16' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-261f92ff-1b01-4406-b604-ec8c2d925b16' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-069c22c8-77fa-4518-ad03-8942834ef710' class='xr-var-data-in' type='checkbox'><label for='data-069c22c8-77fa-4518-ad03-8942834ef710' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>U</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 9, 250, ...</div><input id='attrs-fdc147d2-f6d8-4535-8a2c-b800fc42a3a8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fdc147d2-f6d8-4535-8a2c-b800fc42a3a8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-44c44e05-a2ed-4f55-a306-1e5bf6733dfd' class='xr-var-data-in' type='checkbox'><label for='data-44c44e05-a2ed-4f55-a306-1e5bf6733dfd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWDNB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-93f22dc8-e41f-4052-bb61-52bd19ed469e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-93f22dc8-e41f-4052-bb61-52bd19ed469e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c9eca43f-aef1-427c-8b7a-cde7e22fcb27' class='xr-var-data-in' type='checkbox'><label for='data-c9eca43f-aef1-427c-8b7a-cde7e22fcb27' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>CLDFRA</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 9, 250, ...</div><input id='attrs-bcaac637-eabd-4c1f-9f30-ace6b932cb57' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-bcaac637-eabd-4c1f-9f30-ace6b932cb57' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-520416ae-037f-4735-94d4-1eb47a09f134' class='xr-var-data-in' type='checkbox'><label for='data-520416ae-037f-4735-94d4-1eb47a09f134' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Q2</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-9febdaa1-b323-49e5-9847-a81f67e836a7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9febdaa1-b323-49e5-9847-a81f67e836a7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-234d5a90-3084-4494-9bd4-4d44b0fa14ac' class='xr-var-data-in' type='checkbox'><label for='data-234d5a90-3084-4494-9bd4-4d44b0fa14ac' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SH2O</span></div><div class='xr-var-dims'>(Time, soil_layers_stag, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 4, 250, ...</div><input id='attrs-8616c444-6e06-4d23-92dc-81eaab7807c1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8616c444-6e06-4d23-92dc-81eaab7807c1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-714b18c2-8efb-412f-9f9e-fadef108f6cd' class='xr-var-data-in' type='checkbox'><label for='data-714b18c2-8efb-412f-9f9e-fadef108f6cd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-0fb0c796-3b5f-42f3-9819-6277ec05e67f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0fb0c796-3b5f-42f3-9819-6277ec05e67f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2fb06ecd-ce4e-4df6-8eb4-cc382c5b8b64' class='xr-var-data-in' type='checkbox'><label for='data-2fb06ecd-ce4e-4df6-8eb4-cc382c5b8b64' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-2f50c142-f31e-47dd-9e93-588dae4b34da' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2f50c142-f31e-47dd-9e93-588dae4b34da' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-052a7363-59e8-4c65-be9d-1c9c24a822e0' class='xr-var-data-in' type='checkbox'><label for='data-052a7363-59e8-4c65-be9d-1c9c24a822e0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWDNBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-7625205f-dfa1-42fc-94e0-19c6d2d6a47a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7625205f-dfa1-42fc-94e0-19c6d2d6a47a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e0466ab4-4d67-4e70-ab65-f5fb9fa7676c' class='xr-var-data-in' type='checkbox'><label for='data-e0466ab4-4d67-4e70-ab65-f5fb9fa7676c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 9, 250, ...</div><input id='attrs-62777f73-9b84-40a0-9286-3f5fe8f7922b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-62777f73-9b84-40a0-9286-3f5fe8f7922b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f6643436-58ad-46ef-a909-64b1d2c14734' class='xr-var-data-in' type='checkbox'><label for='data-f6643436-58ad-46ef-a909-64b1d2c14734' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>ALBEDO</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-60b33459-0a6c-4294-b31e-f06d10bbbdb7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-60b33459-0a6c-4294-b31e-f06d10bbbdb7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-203ba47c-dd5a-4c23-b67d-d5cac28614f8' class='xr-var-data-in' type='checkbox'><label for='data-203ba47c-dd5a-4c23-b67d-d5cac28614f8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWDNB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-c88d7f46-c7be-40f8-9c05-b4a20081f884' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c88d7f46-c7be-40f8-9c05-b4a20081f884' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-580184ec-c4d2-4f29-bed7-deeb6f665889' class='xr-var-data-in' type='checkbox'><label for='data-580184ec-c4d2-4f29-bed7-deeb6f665889' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>XLONG</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-cf47e505-e9d7-4fc2-964a-5ae4e3d80896' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cf47e505-e9d7-4fc2-964a-5ae4e3d80896' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2af1071f-f06e-4412-9f52-e3056ff8ede1' class='xr-var-data-in' type='checkbox'><label for='data-2af1071f-f06e-4412-9f52-e3056ff8ede1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SNOWC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-5dd0d6cd-85ce-43a2-9f71-75685c5048ba' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5dd0d6cd-85ce-43a2-9f71-75685c5048ba' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bdc0d699-6df3-4c16-8c86-7f9005e847ea' class='xr-var-data-in' type='checkbox'><label for='data-bdc0d699-6df3-4c16-8c86-7f9005e847ea' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TMIN</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-28963e94-67bb-4431-81eb-73f2b59327d5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-28963e94-67bb-4431-81eb-73f2b59327d5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7ac95b51-d13b-48e3-a02b-2086faedcc2b' class='xr-var-data-in' type='checkbox'><label for='data-7ac95b51-d13b-48e3-a02b-2086faedcc2b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>V10</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-269917b2-d1b1-41c9-b0c8-8f10aa6dfc60' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-269917b2-d1b1-41c9-b0c8-8f10aa6dfc60' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-00f4af36-dc2c-4db6-a28c-37cc9ddce382' class='xr-var-data-in' type='checkbox'><label for='data-00f4af36-dc2c-4db6-a28c-37cc9ddce382' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>QVAPOR</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 9, 250, ...</div><input id='attrs-d7e27350-9546-477a-ad2c-d99b97614b59' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d7e27350-9546-477a-ad2c-d99b97614b59' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5008a0f9-4da1-47bb-b62c-2cc499744617' class='xr-var-data-in' type='checkbox'><label for='data-5008a0f9-4da1-47bb-b62c-2cc499744617' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWUPBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-9407b893-47b3-49b4-8fc2-f3d859cbd718' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9407b893-47b3-49b4-8fc2-f3d859cbd718' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9121df56-c732-4334-9c97-88bc68716e8b' class='xr-var-data-in' type='checkbox'><label for='data-9121df56-c732-4334-9c97-88bc68716e8b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TSK</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-0fb85829-6cd7-4520-aae0-4fa6cbef6867' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0fb85829-6cd7-4520-aae0-4fa6cbef6867' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b8099323-2c59-4b9d-b3c8-aebebbf09bd6' class='xr-var-data-in' type='checkbox'><label for='data-b8099323-2c59-4b9d-b3c8-aebebbf09bd6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TSLB</span></div><div class='xr-var-dims'>(Time, soil_layers_stag, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 4, 250, ...</div><input id='attrs-a41882c3-4241-4e60-b46d-2d7967f6417f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a41882c3-4241-4e60-b46d-2d7967f6417f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-aaa575d8-663f-43d9-abef-2e9514af3f67' class='xr-var-data-in' type='checkbox'><label for='data-aaa575d8-663f-43d9-abef-2e9514af3f67' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-2eca0a24-7a70-4504-9fc0-abfe0d1df239' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2eca0a24-7a70-4504-9fc0-abfe0d1df239' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9afbb93a-7519-40cd-8d15-804826680964' class='xr-var-data-in' type='checkbox'><label for='data-9afbb93a-7519-40cd-8d15-804826680964' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PCPT</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-c06d1fb0-0fef-4b21-8428-b8e8e18d6e73' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c06d1fb0-0fef-4b21-8428-b8e8e18d6e73' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5131f80a-f14a-43ac-b49c-8843da6ad92e' class='xr-var-data-in' type='checkbox'><label for='data-5131f80a-f14a-43ac-b49c-8843da6ad92e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>XLAT</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-16a196e3-4f69-4de7-a942-ec135dc27cc6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-16a196e3-4f69-4de7-a942-ec135dc27cc6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a3deccc8-667b-4f87-8400-5a16b0f94487' class='xr-var-data-in' type='checkbox'><label for='data-a3deccc8-667b-4f87-8400-5a16b0f94487' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWDNBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-723afff3-2f45-4ad1-8979-23bb2c3f8c1a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-723afff3-2f45-4ad1-8979-23bb2c3f8c1a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-aca62ec2-37c2-4544-9a8a-0607ebcdb3b2' class='xr-var-data-in' type='checkbox'><label for='data-aca62ec2-37c2-4544-9a8a-0607ebcdb3b2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SNOWH</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-9680626e-0846-4c20-8db4-89a94f387c40' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9680626e-0846-4c20-8db4-89a94f387c40' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-14c41477-a7b3-4e9a-bddb-0a98a189d497' class='xr-var-data-in' type='checkbox'><label for='data-14c41477-a7b3-4e9a-bddb-0a98a189d497' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>GHT</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 9, 250, ...</div><input id='attrs-12c5efb0-8c6f-48df-ae9d-191fce42533b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-12c5efb0-8c6f-48df-ae9d-191fce42533b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-33d14d44-9755-4524-bd25-72e5f0a6d8a1' class='xr-var-data-in' type='checkbox'><label for='data-33d14d44-9755-4524-bd25-72e5f0a6d8a1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SLP</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-07e8e52d-6974-45e1-912e-a8f8246be727' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-07e8e52d-6974-45e1-912e-a8f8246be727' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cfcb4233-8911-4955-9965-6e8ac41aaa18' class='xr-var-data-in' type='checkbox'><label for='data-cfcb4233-8911-4955-9965-6e8ac41aaa18' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1024, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SMOIS</span></div><div class='xr-var-dims'>(Time, soil_layers_stag, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 4, 250, ...</div><input id='attrs-e7c2c51f-571c-4172-a34e-80529aca566d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e7c2c51f-571c-4172-a34e-80529aca566d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0cb1b252-d9c9-43b2-bd1c-285c68cd9ca2' class='xr-var-data-in' type='checkbox'><label for='data-0cb1b252-d9c9-43b2-bd1c-285c68cd9ca2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWUPB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-408fa61a-ba6a-498f-9200-413acc950aad' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-408fa61a-ba6a-498f-9200-413acc950aad' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a6749d1d-d5b6-425c-ab0f-1a3f85fe299a' class='xr-var-data-in' type='checkbox'><label for='data-a6749d1d-d5b6-425c-ab0f-1a3f85fe299a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TMAX</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-bf92d26b-cb64-4402-b2f6-743e88d529b6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-bf92d26b-cb64-4402-b2f6-743e88d529b6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bd333e61-799a-4011-b753-e5e472956913' class='xr-var-data-in' type='checkbox'><label for='data-bd333e61-799a-4011-b753-e5e472956913' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SNOW</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-8e3fdd4c-28ab-4088-b099-53680e3e776b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8e3fdd4c-28ab-4088-b099-53680e3e776b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b83253e0-c42e-465f-87dd-a84afe257e82' class='xr-var-data-in' type='checkbox'><label for='data-b83253e0-c42e-465f-87dd-a84afe257e82' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LH</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-b089e0ff-26df-4de2-bcef-ba6ab14c08dd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b089e0ff-26df-4de2-bcef-ba6ab14c08dd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8334c8f9-42f4-4efa-aa34-5bceb6887e7e' class='xr-var-data-in' type='checkbox'><label for='data-8334c8f9-42f4-4efa-aa34-5bceb6887e7e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>U10</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 250, 320...</div><input id='attrs-7a78b133-888c-421d-9659-15644e3943f5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7a78b133-888c-421d-9659-15644e3943f5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fd415acb-4c6f-4920-98d4-7178cfa92393' class='xr-var-data-in' type='checkbox'><label for='data-fd415acb-4c6f-4920-98d4-7178cfa92393' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 250, 320), dtype=float32, chunks=(1, 250, 320)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>V</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(4, 9, 250, ...</div><input id='attrs-abdfdd64-872b-434d-a02e-2ee8fdd06fa0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-abdfdd64-872b-434d-a02e-2ee8fdd06fa0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-955fdc18-a04b-4be3-8852-6721c3786d0a' class='xr-var-data-in' type='checkbox'><label for='data-955fdc18-a04b-4be3-8852-6721c3786d0a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(4, 9, 250, 320), dtype=float32, chunks=(1, 9, 250, 320)&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0b796d5e-21c2-4c1c-a6cb-148684694323' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0b796d5e-21c2-4c1c-a6cb-148684694323' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-19892677-81dd-4bbf-b46e-0a04b522d3a7' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-19892677-81dd-4bbf-b46e-0a04b522d3a7' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+</section>
+<section id="write-combined-virtual-dataset-to-a-kerchunk-json-for-future-use">
+<h2>Write combined virtual dataset to a Kerchunk JSON for future use<a class="headerlink" href="#write-combined-virtual-dataset-to-a-kerchunk-json-for-future-use" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>If we want to keep the combined reference information in memory as well as write the file to <code class="docutils literal notranslate"><span class="pre">.json</span></code>, we can run the code snippet below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write kerchunk .json record</span>
+<span class="n">output_fname</span> <span class="o">=</span> <span class="s2">&quot;combined_kerchunk.json&quot;</span>
+<span class="n">combined_vds</span><span class="o">.</span><span class="n">virtualize</span><span class="o">.</span><span class="n">to_kerchunk</span><span class="p">(</span><span class="n">output_fname</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-output">
+<h2>Using the output<a class="headerlink" href="#using-the-output" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>Now that we have built a virtual dataset using <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>, we can read all of those original <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> files as if they were a single <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> dataset.</p>
+<p>**Since we saved the combined virtual dataset, this work doesn’t have to be repeated for anyone else to use this dataset. All they need is to pass the reference file storing the virtual dataset to <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and it is as if they had a <code class="docutils literal notranslate"><span class="pre">Zarr</span></code> dataset!</p>
+<section id="open-combined-virtual-dataset-with-kerchunk">
+<h3>Open combined virtual dataset with Kerchunk<a class="headerlink" href="#open-combined-virtual-dataset-with-kerchunk" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We once again need to provide information for fsspec to access the remote file</span>
+<span class="n">storage_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">remote_options</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="c1"># We will use the &quot;kerchunk&quot; engine in `xr.open_dataset` and pass the `storage_options` to the `kerchunk` engine through `backend_kwargs`</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+    <span class="n">output_fname</span><span class="p">,</span>
+    <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;kerchunk&quot;</span><span class="p">,</span>
+    <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;storage_options&quot;</span><span class="p">:</span> <span class="n">storage_options</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+html[data-theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: inline-block;
+  opacity: 0;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 123MB
+Dimensions:        (Time: 4, south_north: 250, west_east: 320,
+                    interp_levels: 9, soil_layers_stag: 4)
+Coordinates:
+  * Time           (Time) float64 32B nan -2.147e+09 -2.147e+09 -2.147e+09
+  * interp_levels  (interp_levels) float32 36B 100.0 200.0 300.0 ... 925.0 1e+03
+Dimensions without coordinates: south_north, west_east, soil_layers_stag
+Data variables: (12/39)
+    ACSNOW         (Time, south_north, west_east) float32 1MB ...
+    ALBEDO         (Time, south_north, west_east) float32 1MB ...
+    CLDFRA         (Time, interp_levels, south_north, west_east) float32 12MB ...
+    GHT            (Time, interp_levels, south_north, west_east) float32 12MB ...
+    HFX            (Time, south_north, west_east) float32 1MB ...
+    LH             (Time, south_north, west_east) float32 1MB ...
+    ...             ...
+    V              (Time, interp_levels, south_north, west_east) float32 12MB ...
+    V10            (Time, south_north, west_east) float32 1MB ...
+    XLAT           (Time, south_north, west_east) float32 1MB ...
+    XLONG          (Time, south_north, west_east) float32 1MB ...
+    lat            (Time, south_north, west_east) float32 1MB ...
+    lon            (Time, south_north, west_east) float32 1MB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-dc2c209b-69f8-4d60-af67-46048f79a939' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-dc2c209b-69f8-4d60-af67-46048f79a939' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>Time</span>: 4</li><li><span>south_north</span>: 250</li><li><span>west_east</span>: 320</li><li><span class='xr-has-index'>interp_levels</span>: 9</li><li><span>soil_layers_stag</span>: 4</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-417bafae-4f7f-4e5a-ab63-681dc16ebb1e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-417bafae-4f7f-4e5a-ab63-681dc16ebb1e' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>Time</span></div><div class='xr-var-dims'>(Time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan -2.147e+09 ... -2.147e+09</div><input id='attrs-4a5b14e7-6baf-473d-a29c-fae58457633f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4a5b14e7-6baf-473d-a29c-fae58457633f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-40e1ebef-46a1-42a8-a69b-26a44f9fb55c' class='xr-var-data-in' type='checkbox'><label for='data-40e1ebef-46a1-42a8-a69b-26a44f9fb55c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([          nan, -2.147484e+09, -2.147484e+09, -2.147484e+09])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>interp_levels</span></div><div class='xr-var-dims'>(interp_levels)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>100.0 200.0 300.0 ... 925.0 1e+03</div><input id='attrs-be8218c8-1f0c-4d3f-896d-9383bb0fae8e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-be8218c8-1f0c-4d3f-896d-9383bb0fae8e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-33852188-8350-4c31-a7f7-7d77b8c6cb0e' class='xr-var-data-in' type='checkbox'><label for='data-33852188-8350-4c31-a7f7-7d77b8c6cb0e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 100.,  200.,  300.,  400.,  500.,  700.,  850.,  925., 1000.],
+      dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-890296e8-0987-4aa0-8105-e90688e15c76' class='xr-section-summary-in' type='checkbox'  ><label for='section-890296e8-0987-4aa0-8105-e90688e15c76' class='xr-section-summary' >Data variables: <span>(39)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>ACSNOW</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-2cc4d12d-6503-4dde-a302-3766215405cc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2cc4d12d-6503-4dde-a302-3766215405cc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1ea892cd-74c0-4b58-84d7-7df97ecdce55' class='xr-var-data-in' type='checkbox'><label for='data-1ea892cd-74c0-4b58-84d7-7df97ecdce55' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>ALBEDO</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-cc2fd5a7-da44-4c58-97ef-3b0d69f83da1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cc2fd5a7-da44-4c58-97ef-3b0d69f83da1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-faf79a09-8c42-4b70-8747-dbe28376dc33' class='xr-var-data-in' type='checkbox'><label for='data-faf79a09-8c42-4b70-8747-dbe28376dc33' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>CLDFRA</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-af03dfc7-173c-4340-9eae-786042698e76' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-af03dfc7-173c-4340-9eae-786042698e76' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-52d223ff-99ca-4247-9877-a5d020672eca' class='xr-var-data-in' type='checkbox'><label for='data-52d223ff-99ca-4247-9877-a5d020672eca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[2880000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>GHT</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-9399ee59-97e8-4c39-b191-266849366222' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9399ee59-97e8-4c39-b191-266849366222' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-78c47fa9-0082-4d99-b634-0b3e07b990d5' class='xr-var-data-in' type='checkbox'><label for='data-78c47fa9-0082-4d99-b634-0b3e07b990d5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[2880000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>HFX</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-79360e38-6d83-4903-8e45-1d7b3c2687b2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-79360e38-6d83-4903-8e45-1d7b3c2687b2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d3f4f5e3-13c7-4a74-bef0-121cb0e162dd' class='xr-var-data-in' type='checkbox'><label for='data-d3f4f5e3-13c7-4a74-bef0-121cb0e162dd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LH</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5ce36048-ac7b-4604-bde5-933237fcd9c2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5ce36048-ac7b-4604-bde5-933237fcd9c2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2c50d0ef-4392-4fce-9ec1-56889f3a2574' class='xr-var-data-in' type='checkbox'><label for='data-2c50d0ef-4392-4fce-9ec1-56889f3a2574' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWDNB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5cff7024-605e-4de8-a726-a5223f403c30' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5cff7024-605e-4de8-a726-a5223f403c30' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bdc67fc1-3378-46d5-bdbb-40eea32c8206' class='xr-var-data-in' type='checkbox'><label for='data-bdc67fc1-3378-46d5-bdbb-40eea32c8206' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWDNBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-feb6e8c4-3221-49e7-bd60-85ce6adbff20' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-feb6e8c4-3221-49e7-bd60-85ce6adbff20' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b1792483-1c8f-4eef-8d02-25d36d04454c' class='xr-var-data-in' type='checkbox'><label for='data-b1792483-1c8f-4eef-8d02-25d36d04454c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWUPB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-b9978f97-6679-41dc-9d15-0a290291f5e2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b9978f97-6679-41dc-9d15-0a290291f5e2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-22e9339c-3bd5-4bd0-9a82-66276a3754c6' class='xr-var-data-in' type='checkbox'><label for='data-22e9339c-3bd5-4bd0-9a82-66276a3754c6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>LWUPBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-964fe81c-222d-4573-a6d1-5a56f13fa6e3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-964fe81c-222d-4573-a6d1-5a56f13fa6e3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9e808c36-dbc4-4e5a-b255-e41c4013a977' class='xr-var-data-in' type='checkbox'><label for='data-9e808c36-dbc4-4e5a-b255-e41c4013a977' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PCPT</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-feba5e15-6938-40f9-b94f-5334f7cbe0b1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-feba5e15-6938-40f9-b94f-5334f7cbe0b1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-388a6c17-d135-4ca0-9e41-9bb22bf6340f' class='xr-var-data-in' type='checkbox'><label for='data-388a6c17-d135-4ca0-9e41-9bb22bf6340f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PSFC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e806f514-63d3-47ce-8bc0-4bf0ba2dda60' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e806f514-63d3-47ce-8bc0-4bf0ba2dda60' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0a888d00-b2c7-4bf8-a02f-231a2266a7f1' class='xr-var-data-in' type='checkbox'><label for='data-0a888d00-b2c7-4bf8-a02f-231a2266a7f1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PW</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-8dc02288-c72f-4e06-ac99-da1289662c86' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8dc02288-c72f-4e06-ac99-da1289662c86' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3dbfb230-92e0-4766-a799-3f68d58e9b1a' class='xr-var-data-in' type='checkbox'><label for='data-3dbfb230-92e0-4766-a799-3f68d58e9b1a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Q2</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-eed6edec-6785-4387-a1e8-1e4816c24bcc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-eed6edec-6785-4387-a1e8-1e4816c24bcc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-55c12574-62ee-4795-b088-c25f5cc4e600' class='xr-var-data-in' type='checkbox'><label for='data-55c12574-62ee-4795-b088-c25f5cc4e600' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>QVAPOR</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a22268e1-db67-4328-8673-e839a36bec41' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a22268e1-db67-4328-8673-e839a36bec41' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dca22236-95a6-4593-897f-fb3ab78878a0' class='xr-var-data-in' type='checkbox'><label for='data-dca22236-95a6-4593-897f-fb3ab78878a0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[2880000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SH2O</span></div><div class='xr-var-dims'>(Time, soil_layers_stag, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d28170ae-5b59-4d0f-809e-5ef705f3e808' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d28170ae-5b59-4d0f-809e-5ef705f3e808' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8aba84f3-d285-43be-bffc-38347881ab99' class='xr-var-data-in' type='checkbox'><label for='data-8aba84f3-d285-43be-bffc-38347881ab99' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[1280000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SLP</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-73b4d2d7-4481-45c7-8101-996fbddb8fe4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-73b4d2d7-4481-45c7-8101-996fbddb8fe4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c81cfd3d-fa5d-47dc-9691-a5fff37b4bae' class='xr-var-data-in' type='checkbox'><label for='data-c81cfd3d-fa5d-47dc-9691-a5fff37b4bae' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SMOIS</span></div><div class='xr-var-dims'>(Time, soil_layers_stag, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-71f49e70-416e-4061-8c8a-233af4e8befa' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-71f49e70-416e-4061-8c8a-233af4e8befa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-afcd42b5-ddf8-46d7-aaf2-220571e5962d' class='xr-var-data-in' type='checkbox'><label for='data-afcd42b5-ddf8-46d7-aaf2-220571e5962d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[1280000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SNOW</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-296f3c8f-f9b7-41ca-9c15-7b6edcb594e1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-296f3c8f-f9b7-41ca-9c15-7b6edcb594e1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-11e84bba-9cd5-421c-8e4d-68faac955b7b' class='xr-var-data-in' type='checkbox'><label for='data-11e84bba-9cd5-421c-8e4d-68faac955b7b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SNOWC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-65aad01f-ebe2-422e-8f43-70e2e8594e59' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-65aad01f-ebe2-422e-8f43-70e2e8594e59' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a8ecd897-1c13-4635-879c-f983d7edeed3' class='xr-var-data-in' type='checkbox'><label for='data-a8ecd897-1c13-4635-879c-f983d7edeed3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SNOWH</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d9c93b45-3ee6-4bfd-9736-1d963c9c18b1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d9c93b45-3ee6-4bfd-9736-1d963c9c18b1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-de085b5b-83d0-4915-a76d-00dea5e1433e' class='xr-var-data-in' type='checkbox'><label for='data-de085b5b-83d0-4915-a76d-00dea5e1433e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWDNB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-4639a9c6-ed4a-4e75-b7a3-57f49586b3ad' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4639a9c6-ed4a-4e75-b7a3-57f49586b3ad' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2376353c-9b8a-4125-8dc3-8dd91fa72182' class='xr-var-data-in' type='checkbox'><label for='data-2376353c-9b8a-4125-8dc3-8dd91fa72182' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWDNBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d89674cc-779b-4faf-9598-748ad0b2e6a6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d89674cc-779b-4faf-9598-748ad0b2e6a6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-248250d1-4dbc-48f0-bcb3-a78e2631a785' class='xr-var-data-in' type='checkbox'><label for='data-248250d1-4dbc-48f0-bcb3-a78e2631a785' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWUPB</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-2f7ee851-9cd3-4726-bd6f-9a3343175b90' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2f7ee851-9cd3-4726-bd6f-9a3343175b90' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-04a9903d-fbbf-4a1e-b4f4-990763f6d167' class='xr-var-data-in' type='checkbox'><label for='data-04a9903d-fbbf-4a1e-b4f4-990763f6d167' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>SWUPBC</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5fb33cd0-da45-4c67-947f-e34fdb3f1bb2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5fb33cd0-da45-4c67-947f-e34fdb3f1bb2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-991b9541-9d60-4d08-9330-c8b5e12a3b4b' class='xr-var-data-in' type='checkbox'><label for='data-991b9541-9d60-4d08-9330-c8b5e12a3b4b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-43b81aef-1845-48b0-9362-705380c5849f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-43b81aef-1845-48b0-9362-705380c5849f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-437d3249-b938-4a85-9710-4622d6d7ad7a' class='xr-var-data-in' type='checkbox'><label for='data-437d3249-b938-4a85-9710-4622d6d7ad7a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[2880000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e96cc066-2d87-4a6c-9237-93f61926a149' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e96cc066-2d87-4a6c-9237-93f61926a149' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2947caa1-4e40-4f49-a1b5-323df57681ed' class='xr-var-data-in' type='checkbox'><label for='data-2947caa1-4e40-4f49-a1b5-323df57681ed' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TMAX</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-cd7de73b-c855-489e-8e4a-3767e38a5a70' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cd7de73b-c855-489e-8e4a-3767e38a5a70' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a821f913-a27e-40a9-b566-3bac6f6481b3' class='xr-var-data-in' type='checkbox'><label for='data-a821f913-a27e-40a9-b566-3bac6f6481b3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TMIN</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3a805b1e-8d3e-4fd1-b280-ac6e3c65e5dd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3a805b1e-8d3e-4fd1-b280-ac6e3c65e5dd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-94c8c7be-f217-4f8c-97ce-97c460ff4e99' class='xr-var-data-in' type='checkbox'><label for='data-94c8c7be-f217-4f8c-97ce-97c460ff4e99' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TSK</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-7a8f5195-f4a3-4093-b1ef-f6298eedce93' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7a8f5195-f4a3-4093-b1ef-f6298eedce93' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6549b208-7cbe-4234-9a3e-9d43adf95384' class='xr-var-data-in' type='checkbox'><label for='data-6549b208-7cbe-4234-9a3e-9d43adf95384' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>TSLB</span></div><div class='xr-var-dims'>(Time, soil_layers_stag, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d46cff87-2f06-4458-a1a5-4a1172250428' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d46cff87-2f06-4458-a1a5-4a1172250428' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6a9aef43-d9d5-46d8-99a6-78edca108b0a' class='xr-var-data-in' type='checkbox'><label for='data-6a9aef43-d9d5-46d8-99a6-78edca108b0a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[1280000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>U</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-ba83a855-2d9b-45e0-b6b9-eee381d0fbd6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ba83a855-2d9b-45e0-b6b9-eee381d0fbd6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b16e3277-1afd-4a31-ac2d-d84aa86cc868' class='xr-var-data-in' type='checkbox'><label for='data-b16e3277-1afd-4a31-ac2d-d84aa86cc868' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[2880000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>U10</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-590a1880-61f1-4e0d-b928-65161cf4f55f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-590a1880-61f1-4e0d-b928-65161cf4f55f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b8c521a9-4c6a-4e5d-ac80-5210a83f9261' class='xr-var-data-in' type='checkbox'><label for='data-b8c521a9-4c6a-4e5d-ac80-5210a83f9261' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>V</span></div><div class='xr-var-dims'>(Time, interp_levels, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a02849fc-9d25-4828-97d3-ad6dcb7f8cd2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a02849fc-9d25-4828-97d3-ad6dcb7f8cd2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7ede80b7-03d6-4ef1-b493-95ba7e4ae3a2' class='xr-var-data-in' type='checkbox'><label for='data-7ede80b7-03d6-4ef1-b493-95ba7e4ae3a2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[2880000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>V10</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-049cc07d-146b-46bc-a595-996c010433f6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-049cc07d-146b-46bc-a595-996c010433f6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1b8a8fe5-3d44-4c0c-a327-f00253fbdba7' class='xr-var-data-in' type='checkbox'><label for='data-1b8a8fe5-3d44-4c0c-a327-f00253fbdba7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>XLAT</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-179365b4-12b0-4929-b2e0-bcef67df5494' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-179365b4-12b0-4929-b2e0-bcef67df5494' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-81e2f2b0-97a3-49db-a128-39f01770db69' class='xr-var-data-in' type='checkbox'><label for='data-81e2f2b0-97a3-49db-a128-39f01770db69' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>XLONG</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-af8c8b43-c0b4-4e16-a5dd-2fe98825f107' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-af8c8b43-c0b4-4e16-a5dd-2fe98825f107' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e281dcf5-48f3-4554-b6c9-7a0e9113b361' class='xr-var-data-in' type='checkbox'><label for='data-e281dcf5-48f3-4554-b6c9-7a0e9113b361' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-6bdc34e7-d8f0-484e-9676-7089770389be' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6bdc34e7-d8f0-484e-9676-7089770389be' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-89f7d052-a3fb-465a-b9f5-898d8954da94' class='xr-var-data-in' type='checkbox'><label for='data-89f7d052-a3fb-465a-b9f5-898d8954da94' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(Time, south_north, west_east)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-fff88e02-978b-480d-9925-b96c594ce9fe' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fff88e02-978b-480d-9925-b96c594ce9fe' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a8fba02c-e6b0-4e56-a023-80d50a79dc61' class='xr-var-data-in' type='checkbox'><label for='data-a8fba02c-e6b0-4e56-a023-80d50a79dc61' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[320000 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-bdacdccd-62d7-4fd9-814a-c1b6141b5327' class='xr-section-summary-in' type='checkbox'  ><label for='section-bdacdccd-62d7-4fd9-814a-c1b6141b5327' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>Time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-31ec71ac-fdd7-4c0d-9609-169c3518cb66' class='xr-index-data-in' type='checkbox'/><label for='index-31ec71ac-fdd7-4c0d-9609-169c3518cb66' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([nan, -2147483647.0, -2147483647.0, -2147483647.0], dtype=&#x27;float64&#x27;, name=&#x27;Time&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>interp_levels</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-e15b701b-fc42-46dd-835d-169ea871b6e4' class='xr-index-data-in' type='checkbox'/><label for='index-e15b701b-fc42-46dd-835d-169ea871b6e4' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([100.0, 200.0, 300.0, 400.0, 500.0, 700.0, 850.0, 925.0, 1000.0], dtype=&#x27;float32&#x27;, name=&#x27;interp_levels&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-5f1ff3d6-e2b6-4e65-acfe-82a9cc1434c8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-5f1ff3d6-e2b6-4e65-acfe-82a9cc1434c8' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+</section>
+</section>
+<section id="plot-a-slice-of-the-dataset">
+<h2>Plot a slice of the dataset<a class="headerlink" href="#plot-a-slice-of-the-dataset" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>Here we are using <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> to select a single time slice of the dataset and plot a map of snow cover over South East Alaska.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">Time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">SNOW</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.QuadMesh at 0x7f09c86fdf30&gt;
+</pre></div>
+</div>
+<img alt="../../_images/94ce97bc56c5909803a4adc44fd0d3a42e902d56236b5c66e46c87d0deafc7ad.png" src="../../_images/94ce97bc56c5909803a4adc44fd0d3a42e902d56236b5c66e46c87d0deafc7ad.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/foundations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                  </article>
+
+                
+                
+
+                
+                
+                  <footer class="prev-next-footer">
+                    
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_kerchunk_basics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basics of virtual Zarr stores</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_kerchunk_dask.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                  </footer>
+                
+              </div>
+
+              
+              
+                
+                  <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flags">Flags</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-file-pattern-from-a-list-of-input-netcdf-files">Create a File Pattern from a list of  input NetCDF files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#as-a-quick-check-it-looks-like-we-have-a-list-365-file-paths-which-should-be-a-year-of-downscaled-climte-data">As a quick check, it looks like we have a list 365 file paths, which should be a year of downscaled climte data.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-if-you-want-to-examine-one-netcdf-files-before-creating-the-kerchunk-index-try-uncommenting-this-code-snippet-below">Optional: If you want to examine one NetCDF files before creating the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index, try uncommenting this code snippet below.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-virtual-datasets-for-every-file-in-the-file-pattern-list">Create virtual datasets for every file in the <code class="docutils literal notranslate"><span class="pre">File_Pattern</span></code> list</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-kwargs-for-fsspec">Define kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-virtual-datasets">Combine virtual datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-combined-virtual-dataset-to-a-kerchunk-json-for-future-use">Write combined virtual dataset to a Kerchunk JSON for future use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-output">Using the output</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-combined-virtual-dataset-with-kerchunk">Open combined virtual dataset with Kerchunk</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-slice-of-the-dataset">Plot a slice of the dataset</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+                
+              
+
+
+                
+                <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?urlpath=lab/tree/notebooks/foundations/02_kerchunk_multi_file.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/edit/main/notebooks/foundations/02_kerchunk_multi_file.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ProjectPythia/kerchunk-cookbook/issues/new?title=Issue%20on%20page%20%2Fnotebooks/foundations/02_kerchunk_multi_file.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/foundations/02_kerchunk_multi_file.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+            </div>
+
+            <footer class="bd-footer-content">
+              
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Norland Raphael Hagen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on 11 November 2024.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+            </footer>
+
+        </main>
+    </div>
+  </div>
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+     
+  
+  
+  
+  
+    <div class="footer-items__start">
+      <div class="container-fluid m-0 p-0">
+      
+        <div class="footer-item">
+  <div class="container-fluid footer-logos">
+    <div class="container-xl">
+      <div class="row d-flex flex-wrap align-items-center">
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="NCAR" src="../../_images/NSF-NCAR_Lockup-UCAR-Dark_102523.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="Unidata" src="../../_images/Unidata_logo_horizontal_1200x300.svg" style="width: 100%">
+        </div>
+        <div class="d-flex col-lg-3 col-md-4 col-sm-6 p-2 mx-auto">
+          <img alt="UAlbany" src="../../_images/UAlbany-A2-logo-purple-gold.svg" style="width: 100%">
+        </div>
+      </div>
+    </div>
+  </div></div>
+      
+        <div class="footer-item">  <div class="container-fluid footer-info">
+    <div class="container-xl">
+      <div class="d-flex justify-content-center">
+        <p class="py-1 m-0">
+            &copy;&nbsp;2024.
+        
+          By Norland Raphael Hagen.
+        
+          Last updated on 11 November 2024.
+        </p>
+      </div>
+    </div>
+  </div></div>
+      
+      </div>
+    </div>
+  
+
+  </footer>
+  </body>
+</html>
