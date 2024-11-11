@@ -24,21 +24,19 @@ dependencies:
   - numcodecs
   - numpy
   - pandas
-  - pangeo-forge-recipes
   - pip
   - pooch
   - pre-commit
   - pyOpenSSL
-  - python=3.10
   - rioxarray
   - s3fs
   - scipy
   - tifffile
   - ujson
-  - xarray
   - virtualizarr
+  - xarray>=2024.10.0
   - zarr
   - sphinx-pythia-theme
   - pip:
-      - git+https://github.com/fsspec/kerchunk
       - git+https://github.com/carbonplan/xrefcoord.git
+      - git+https://github.com/fsspec/kerchunk
