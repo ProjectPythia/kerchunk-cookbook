@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-pythia-theme.min.css?v=ba7ce088" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=c54c090a" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -76,10 +79,11 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="NetCDF" href="../generating_references/NetCDF.html" />
-    <link rel="prev" title="Kerchunk and Pangeo-Forge" href="Pangeo_Forge.html" />
+    <link rel="prev" title="Store Kerchunk Reference Files as Parquet" href="Parquet_Reference_Storage.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="29 August 2024"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="11 November 2024"/>
   </head>
   
   
@@ -118,7 +122,7 @@
     
     
     <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-light" alt="Kerchunk Cookbook - Home"/>
-    <script>document.write(`<img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-dark" alt="Kerchunk Cookbook - Home"/>`);</script>
+    <img src="../../_static/pythia_logo-white-rtext.svg" class="logo__image only-dark pst-js-only" alt="Kerchunk Cookbook - Home"/>
   
   
 </a></div>
@@ -345,7 +349,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -379,7 +382,6 @@
 <li class="toctree-l1"><a class="reference internal" href="Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="Pangeo_Forge.html">Kerchunk and Pangeo-Forge</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Appending to Kerchunk references</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Generating Reference Files</span></p>
@@ -531,7 +533,7 @@
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-d56d2d8c-6641-11ef-8b56-6045bd4a9cde</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-381b12fc-a04f-11ef-8a6f-000d3ad367d5</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -566,7 +568,7 @@
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">89ae41f0</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">c21b8193</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -603,11 +605,11 @@
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-65b7516c-6d90-4b6b-ae39-9ab701499f1a</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-55d7475f-e8fa-4c50-94d0-0ad092c7a24b</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:45321
+                        <strong>Comm:</strong> tcp://127.0.0.1:45779
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -649,7 +651,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44661
+                            <strong>Comm: </strong> tcp://127.0.0.1:33461
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -657,7 +659,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35955/status" target="_blank">http://127.0.0.1:35955/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42549/status" target="_blank">http://127.0.0.1:42549/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -665,13 +667,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:42319
+                            <strong>Nanny: </strong> tcp://127.0.0.1:37015
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-jq3m3fl4
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-1ptn7jxf
                         </td>
                     </tr>
 
@@ -694,7 +696,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39495
+                            <strong>Comm: </strong> tcp://127.0.0.1:45991
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -702,7 +704,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33703/status" target="_blank">http://127.0.0.1:33703/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46353/status" target="_blank">http://127.0.0.1:46353/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -710,13 +712,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:41019
+                            <strong>Nanny: </strong> tcp://127.0.0.1:44885
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-2oq9rt_d
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-wnaiz5s7
                         </td>
                     </tr>
 
@@ -739,7 +741,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40597
+                            <strong>Comm: </strong> tcp://127.0.0.1:40957
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -747,7 +749,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43787/status" target="_blank">http://127.0.0.1:43787/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:44119/status" target="_blank">http://127.0.0.1:44119/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -755,13 +757,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46731
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42159
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5elbbbot
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-o0c8aifp
                         </td>
                     </tr>
 
@@ -784,7 +786,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:36375
+                            <strong>Comm: </strong> tcp://127.0.0.1:44923
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -792,7 +794,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45755/status" target="_blank">http://127.0.0.1:45755/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36239/status" target="_blank">http://127.0.0.1:36239/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -800,13 +802,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:39817
+                            <strong>Nanny: </strong> tcp://127.0.0.1:38601
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-7rqndqmg
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ec_do_ft
                         </td>
                     </tr>
 
@@ -829,7 +831,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45405
+                            <strong>Comm: </strong> tcp://127.0.0.1:41611
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -837,7 +839,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35615/status" target="_blank">http://127.0.0.1:35615/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41913/status" target="_blank">http://127.0.0.1:41913/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -845,13 +847,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34827
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41079
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5txdm_so
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-6tc59sso
                         </td>
                     </tr>
 
@@ -874,7 +876,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42431
+                            <strong>Comm: </strong> tcp://127.0.0.1:39677
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -882,7 +884,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41241/status" target="_blank">http://127.0.0.1:41241/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34623/status" target="_blank">http://127.0.0.1:34623/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -890,13 +892,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:32969
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33231
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-hsqw8_q4
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5t_1od7i
                         </td>
                     </tr>
 
@@ -919,7 +921,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:45879
+                            <strong>Comm: </strong> tcp://127.0.0.1:32803
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -927,7 +929,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43195/status" target="_blank">http://127.0.0.1:43195/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34837/status" target="_blank">http://127.0.0.1:34837/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -935,13 +937,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:44635
+                            <strong>Nanny: </strong> tcp://127.0.0.1:44457
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-hlit9q_r
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-jwcixkuc
                         </td>
                     </tr>
 
@@ -964,7 +966,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:46461
+                            <strong>Comm: </strong> tcp://127.0.0.1:43635
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -972,7 +974,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:38293/status" target="_blank">http://127.0.0.1:38293/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39949/status" target="_blank">http://127.0.0.1:39949/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -980,13 +982,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46477
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39565
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-kyxgg38c
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-zk23siah
                         </td>
                     </tr>
 
@@ -1055,30 +1057,30 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_000.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_001.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_002.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_003.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_004.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_005.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_006.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_007.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_008.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_009.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_010.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_011.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_012.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_013.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_014.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_015.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_016.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_017.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_018.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_019.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_020.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_021.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_022.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_023.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_000.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_001.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_002.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_003.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_004.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_005.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_006.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_007.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_008.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_009.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_010.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_011.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_012.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_013.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_014.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_015.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_016.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_017.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_018.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_019.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_020.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_021.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_022.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_023.json&#39;],)
 </pre></div>
 </div>
 </div>
@@ -1134,30 +1136,30 @@ we load the original references and append the new references.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_024.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_025.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_026.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_027.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_028.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_029.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_030.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_031.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_032.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_033.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_034.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_035.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_036.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_037.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_038.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_039.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_040.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_041.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_042.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_043.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_044.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_045.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_046.json&#39;,
-  &#39;/tmp/tmpd6mvjsmd/WRFDETAR_01H_20221231_12_047.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_024.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_025.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_026.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_027.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_028.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_029.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_030.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_031.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_032.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_033.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_034.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_035.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_036.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_037.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_038.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_039.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_040.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_041.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_042.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_043.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_044.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_045.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_046.json&#39;,
+  &#39;/tmp/tmpacdhev1x/WRFDETAR_01H_20221231_12_047.json&#39;],)
 </pre></div>
 </div>
 </div>
@@ -1310,7 +1312,7 @@ body.vscode-dark {
 .xr-sections {
   padding-left: 0 !important;
   display: grid;
-  grid-template-columns: 150px auto auto 1fr 20px 20px;
+  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
 }
 
 .xr-section-item {
@@ -1318,7 +1320,8 @@ body.vscode-dark {
 }
 
 .xr-section-item input {
-  display: none;
+  display: inline-block;
+  opacity: 0;
 }
 
 .xr-section-item input + label {
@@ -1328,6 +1331,10 @@ body.vscode-dark {
 .xr-section-item input:enabled + label {
   cursor: pointer;
   color: var(--xr-font-color2);
+}
+
+.xr-section-item input:focus + label {
+  border: 2px solid var(--xr-font-color0);
 }
 
 .xr-section-item input:enabled + label:hover {
@@ -1620,7 +1627,7 @@ Attributes: (12/18)
     source:          OUTPUT FROM WRF V4.0 MODEL
     start_lat:      -54.386837005615234
     start_lon:      -94.330810546875
-    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-a229d79b-67dd-4ee3-8a0d-1ff9c82dba3a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a229d79b-67dd-4ee3-8a0d-1ff9c82dba3a' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 48</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-d84b662c-6bf0-47b1-8291-9c0f8024b7c5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d84b662c-6bf0-47b1-8291-9c0f8024b7c5' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3a8c113e-0b7f-4ef9-b975-e85c4031b743' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3a8c113e-0b7f-4ef9-b975-e85c4031b743' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7f69d407-eb66-4a97-9aeb-aa53d340a83c' class='xr-var-data-in' type='checkbox'><label for='data-7f69d407-eb66-4a97-9aeb-aa53d340a83c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d7a573a8-0206-4557-a8a8-d1d8463bdd46' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d7a573a8-0206-4557-a8a8-d1d8463bdd46' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ba28a564-0f57-4d4f-ac02-486541466cc4' class='xr-var-data-in' type='checkbox'><label for='data-ba28a564-0f57-4d4f-ac02-486541466cc4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-31T12:00:00 ... 2023-01-...</div><input id='attrs-96b1a026-468b-453e-9f13-bd389089f0aa' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-96b1a026-468b-453e-9f13-bd389089f0aa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-46bda68a-aaf2-49bf-939a-b35503eddb4f' class='xr-var-data-in' type='checkbox'><label for='data-46bda68a-aaf2-49bf-939a-b35503eddb4f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 12:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-31T12:00:00.000000000&#x27;, &#x27;2022-12-31T13:00:00.000000000&#x27;,
+    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-01fb40b5-26c3-43bd-a0ce-dc2d9c217dfb' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-01fb40b5-26c3-43bd-a0ce-dc2d9c217dfb' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 48</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-bb08cde1-9d6d-4a33-bf62-158768b191f7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-bb08cde1-9d6d-4a33-bf62-158768b191f7' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e8b3f67b-d339-445a-919a-c32fe35f190d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e8b3f67b-d339-445a-919a-c32fe35f190d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-94bfb181-f1cb-4fe2-92ad-7d7e1a168278' class='xr-var-data-in' type='checkbox'><label for='data-94bfb181-f1cb-4fe2-92ad-7d7e1a168278' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-75079c48-f786-448c-b044-5d38ed1db37e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-75079c48-f786-448c-b044-5d38ed1db37e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-68e8b5b3-1afa-4eac-bf1f-4fb366dbe044' class='xr-var-data-in' type='checkbox'><label for='data-68e8b5b3-1afa-4eac-bf1f-4fb366dbe044' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2022-12-31T12:00:00 ... 2023-01-...</div><input id='attrs-2c8a309c-daca-46ea-bcf2-85969eb2515a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-2c8a309c-daca-46ea-bcf2-85969eb2515a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-43a7f407-dfc4-45c0-92c6-e872351e15d5' class='xr-var-data-in' type='checkbox'><label for='data-43a7f407-dfc4-45c0-92c6-e872351e15d5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>T</dd><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 12:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2022-12-31T12:00:00.000000000&#x27;, &#x27;2022-12-31T13:00:00.000000000&#x27;,
        &#x27;2022-12-31T14:00:00.000000000&#x27;, &#x27;2022-12-31T15:00:00.000000000&#x27;,
        &#x27;2022-12-31T16:00:00.000000000&#x27;, &#x27;2022-12-31T17:00:00.000000000&#x27;,
        &#x27;2022-12-31T18:00:00.000000000&#x27;, &#x27;2022-12-31T19:00:00.000000000&#x27;,
@@ -1644,9 +1651,9 @@ Attributes: (12/18)
        &#x27;2023-01-02T06:00:00.000000000&#x27;, &#x27;2023-01-02T07:00:00.000000000&#x27;,
        &#x27;2023-01-02T08:00:00.000000000&#x27;, &#x27;2023-01-02T09:00:00.000000000&#x27;,
        &#x27;2023-01-02T10:00:00.000000000&#x27;, &#x27;2023-01-02T11:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-1.996e+06 -1.992e+06 ... 1.996e+06</div><input id='attrs-91f37a8d-e282-481e-92df-501238ef192e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-91f37a8d-e282-481e-92df-501238ef192e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fd967f6d-393f-4790-ae30-aa65929ef662' class='xr-var-data-in' type='checkbox'><label for='data-fd967f6d-393f-4790-ae30-aa65929ef662' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([-1996000., -1992000., -1988000., ...,  1988000.,  1992000.,  1996000.],
-      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-2.496e+06 -2.492e+06 ... 2.496e+06</div><input id='attrs-b6252911-9ca7-4bc0-a50f-cd5eedf23e62' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b6252911-9ca7-4bc0-a50f-cd5eedf23e62' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-936e00fb-2139-4e34-b8cc-98ec372bc83c' class='xr-var-data-in' type='checkbox'><label for='data-936e00fb-2139-4e34-b8cc-98ec372bc83c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([-2495999.8, -2491999.8, -2487999.8, ...,  2488000.2,  2492000.2,
-        2496000.2], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-186f6bdf-b99e-4bd8-ba66-5d3665d9e715' class='xr-section-summary-in' type='checkbox'  checked><label for='section-186f6bdf-b99e-4bd8-ba66-5d3665d9e715' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-e3f6b4ed-df02-4937-893a-915510ae139f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e3f6b4ed-df02-4937-893a-915510ae139f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9725a1cb-70be-4f3b-9d7b-226395150295' class='xr-var-data-in' type='checkbox'><label for='data-9725a1cb-70be-4f3b-9d7b-226395150295' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>percent</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-490efcf3-5af2-45b6-9fd2-5e2fc905f5e0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-490efcf3-5af2-45b6-9fd2-5e2fc905f5e0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e46ddd63-fd14-4f14-a09b-c0a51581ac50' class='xr-var-data-in' type='checkbox'><label for='data-e46ddd63-fd14-4f14-a09b-c0a51581ac50' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.9999885559082</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd><dt><span>standard_parallel :</span></dt><dd>[-35.0, -35.0]</dd></dl></div><div class='xr-var-data'><pre>[48 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-644dcfc5-5455-4372-b67c-bd83b52b78de' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-644dcfc5-5455-4372-b67c-bd83b52b78de' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d9e2912c-0941-4333-a0b9-09c8055923cc' class='xr-var-data-in' type='checkbox'><label for='data-d9e2912c-0941-4333-a0b9-09c8055923cc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>units :</span></dt><dd>millimeter</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-ed18ba7f-3b5e-47c3-aef1-56e5812550a2' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ed18ba7f-3b5e-47c3-aef1-56e5812550a2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7faebed5-7b39-4878-b50f-934b1473d407' class='xr-var-data-in' type='checkbox'><label for='data-7faebed5-7b39-4878-b50f-934b1473d407' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-7fba0929-3b51-455c-832c-91633658c9df' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7fba0929-3b51-455c-832c-91633658c9df' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1a001ba2-7311-4aaf-9f99-b82d8f1b0853' class='xr-var-data-in' type='checkbox'><label for='data-1a001ba2-7311-4aaf-9f99-b82d8f1b0853' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>units :</span></dt><dd>degree</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-74d3763c-65a6-440c-9af3-181e92f9cfa6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-74d3763c-65a6-440c-9af3-181e92f9cfa6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9154ef6f-b1cd-4e28-b8a8-8ff1500fe3f6' class='xr-var-data-in' type='checkbox'><label for='data-9154ef6f-b1cd-4e28-b8a8-8ff1500fe3f6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>meter / second</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-39ed4a9f-f50f-4c6b-99ea-2d1e6188285b' class='xr-section-summary-in' type='checkbox'  ><label for='section-39ed4a9f-f50f-4c6b-99ea-2d1e6188285b' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c81ef704-4bf7-4571-97b2-88ad28aa5ed3' class='xr-index-data-in' type='checkbox'/><label for='index-c81ef704-4bf7-4571-97b2-88ad28aa5ed3' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-31 12:00:00&#x27;, &#x27;2022-12-31 13:00:00&#x27;,
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-1.996e+06 -1.992e+06 ... 1.996e+06</div><input id='attrs-c991e540-1ea1-4042-8890-2f79ca14ab05' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c991e540-1ea1-4042-8890-2f79ca14ab05' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-24c55012-c1f4-4f92-ad46-0e5107d98473' class='xr-var-data-in' type='checkbox'><label for='data-24c55012-c1f4-4f92-ad46-0e5107d98473' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([-1996000., -1992000., -1988000., ...,  1988000.,  1992000.,  1996000.],
+      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-2.496e+06 -2.492e+06 ... 2.496e+06</div><input id='attrs-f7dbd0b4-f298-4e8f-844e-3f2c059206ec' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f7dbd0b4-f298-4e8f-844e-3f2c059206ec' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-23307c3f-8012-48f1-8149-e209c5b8f16f' class='xr-var-data-in' type='checkbox'><label for='data-23307c3f-8012-48f1-8149-e209c5b8f16f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>array([-2495999.8, -2491999.8, -2487999.8, ...,  2488000.2,  2492000.2,
+        2496000.2], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-63cdfc1e-0631-42a1-9262-f0f366ec4669' class='xr-section-summary-in' type='checkbox'  checked><label for='section-63cdfc1e-0631-42a1-9262-f0f366ec4669' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-195dd139-c5e4-48a6-9267-19bffe4e4ed6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-195dd139-c5e4-48a6-9267-19bffe4e4ed6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-79924a0a-948d-4c61-b86d-71d386c9ea91' class='xr-var-data-in' type='checkbox'><label for='data-79924a0a-948d-4c61-b86d-71d386c9ea91' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>units :</span></dt><dd>percent</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a3a3103d-5e3d-4314-bcc3-53ae0f8e67be' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a3a3103d-5e3d-4314-bcc3-53ae0f8e67be' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0f23495b-b56a-4fec-8df9-8f8d2655b8bb' class='xr-var-data-in' type='checkbox'><label for='data-0f23495b-b56a-4fec-8df9-8f8d2655b8bb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.9999885559082</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd><dt><span>standard_parallel :</span></dt><dd>[-35.0, -35.0]</dd></dl></div><div class='xr-var-data'><pre>[48 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-afd16fcd-e723-4e83-92b9-90ff1abae90c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-afd16fcd-e723-4e83-92b9-90ff1abae90c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6b31e53d-1dcd-4844-8bd7-4f759cfbe668' class='xr-var-data-in' type='checkbox'><label for='data-6b31e53d-1dcd-4844-8bd7-4f759cfbe668' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>units :</span></dt><dd>millimeter</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-06bd0dda-44b5-4eea-8e61-149515a0eb7f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-06bd0dda-44b5-4eea-8e61-149515a0eb7f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5a970bef-366a-4fea-bb7a-c062698144e3' class='xr-var-data-in' type='checkbox'><label for='data-5a970bef-366a-4fea-bb7a-c062698144e3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-6437da8c-fdb5-43ac-b67d-0f9cdca0b2f6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6437da8c-fdb5-43ac-b67d-0f9cdca0b2f6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6ab4c541-bbdf-49cc-91ba-826d04a05a93' class='xr-var-data-in' type='checkbox'><label for='data-6ab4c541-bbdf-49cc-91ba-826d04a05a93' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>units :</span></dt><dd>degree</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-1b1b61c0-1742-4a10-b67a-8188556eac5d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1b1b61c0-1742-4a10-b67a-8188556eac5d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5a68bdda-9303-41f0-8f8e-2422739a211c' class='xr-var-data-in' type='checkbox'><label for='data-5a68bdda-9303-41f0-8f8e-2422739a211c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>units :</span></dt><dd>meter / second</dd></dl></div><div class='xr-var-data'><pre>[59892048 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7565e15d-0d92-48eb-a5f7-3f5a5c69611e' class='xr-section-summary-in' type='checkbox'  ><label for='section-7565e15d-0d92-48eb-a5f7-3f5a5c69611e' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-9f5201a1-dc5e-4d1b-9cc9-8b8c267413cf' class='xr-index-data-in' type='checkbox'/><label for='index-9f5201a1-dc5e-4d1b-9cc9-8b8c267413cf' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2022-12-31 12:00:00&#x27;, &#x27;2022-12-31 13:00:00&#x27;,
                &#x27;2022-12-31 14:00:00&#x27;, &#x27;2022-12-31 15:00:00&#x27;,
                &#x27;2022-12-31 16:00:00&#x27;, &#x27;2022-12-31 17:00:00&#x27;,
                &#x27;2022-12-31 18:00:00&#x27;, &#x27;2022-12-31 19:00:00&#x27;,
@@ -1670,17 +1677,17 @@ Attributes: (12/18)
                &#x27;2023-01-02 06:00:00&#x27;, &#x27;2023-01-02 07:00:00&#x27;,
                &#x27;2023-01-02 08:00:00&#x27;, &#x27;2023-01-02 09:00:00&#x27;,
                &#x27;2023-01-02 10:00:00&#x27;, &#x27;2023-01-02 11:00:00&#x27;],
-              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-6080fe29-46eb-43ea-9345-7486cd433c42' class='xr-index-data-in' type='checkbox'/><label for='index-6080fe29-46eb-43ea-9345-7486cd433c42' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-1996000.0, -1992000.0, -1988000.0, -1984000.0, -1980000.0, -1976000.0,
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4d7feb04-f925-4c00-b348-28345abf6acf' class='xr-index-data-in' type='checkbox'/><label for='index-4d7feb04-f925-4c00-b348-28345abf6acf' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-1996000.0, -1992000.0, -1988000.0, -1984000.0, -1980000.0, -1976000.0,
        -1972000.0, -1968000.0, -1964000.0, -1960000.0,
        ...
         1960000.0,  1964000.0,  1968000.0,  1972000.0,  1976000.0,  1980000.0,
         1984000.0,  1988000.0,  1992000.0,  1996000.0],
-      dtype=&#x27;float32&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-6f16bf37-3d76-4389-acb6-2382cad17820' class='xr-index-data-in' type='checkbox'/><label for='index-6f16bf37-3d76-4389-acb6-2382cad17820' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-2495999.75, -2491999.75, -2487999.75, -2483999.75, -2479999.75,
+      dtype=&#x27;float32&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-4e68e5c7-a771-4f52-9618-c351472cd7cd' class='xr-index-data-in' type='checkbox'/><label for='index-4e68e5c7-a771-4f52-9618-c351472cd7cd' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-2495999.75, -2491999.75, -2487999.75, -2483999.75, -2479999.75,
        -2475999.75, -2471999.75, -2467999.75, -2463999.75, -2459999.75,
        ...
         2460000.25,  2464000.25,  2468000.25,  2472000.25,  2476000.25,
         2480000.25,  2484000.25,  2488000.25,  2492000.25,  2496000.25],
-      dtype=&#x27;float32&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d626fe18-21fa-49af-8078-5b1b194fc268' class='xr-section-summary-in' type='checkbox'  ><label for='section-d626fe18-21fa-49af-8078-5b1b194fc268' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CEN_LAT :</span></dt><dd>-34.9999885559082</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_12:00:00</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>end_lat :</span></dt><dd>-11.645957946777344</dd><dt><span>end_lon :</span></dt><dd>-47.96868896484375</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837005615234</dd><dt><span>start_lon :</span></dt><dd>-94.330810546875</dd><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd></dl></div></li></ul></div></div></div></div>
+      dtype=&#x27;float32&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a0b66ab2-627c-4745-8d4f-113ed0f59380' class='xr-section-summary-in' type='checkbox'  ><label for='section-a0b66ab2-627c-4745-8d4f-113ed0f59380' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>CEN_LAT :</span></dt><dd>-34.9999885559082</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_12:00:00</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>end_lat :</span></dt><dd>-11.645957946777344</dd><dt><span>end_lon :</span></dt><dd>-47.96868896484375</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837005615234</dd><dt><span>start_lon :</span></dt><dd>-94.330810546875</dd><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd></dl></div></li></ul></div></div></div></div>
 </div>
 </section>
 </section>
@@ -1716,12 +1723,12 @@ Attributes: (12/18)
                     
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Pangeo_Forge.html"
+       href="Parquet_Reference_Storage.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Kerchunk and Pangeo-Forge</p>
+        <p class="prev-next-title">Store Kerchunk Reference Files as Parquet</p>
       </div>
     </a>
     <a class="right-next"
@@ -1946,24 +1953,16 @@ Attributes: (12/18)
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -2001,7 +2000,7 @@ By Norland Raphael Hagen
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on 29 August 2024.
+  Last updated on 11 November 2024.
   <br/>
 </p>
   </div>
@@ -2018,8 +2017,8 @@ By Norland Raphael Hagen
   </div>
     
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
      
@@ -2055,7 +2054,7 @@ By Norland Raphael Hagen
         
           By Norland Raphael Hagen.
         
-          Last updated on 29 August 2024.
+          Last updated on 11 November 2024.
         </p>
       </div>
     </div>
