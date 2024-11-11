@@ -34,8 +34,7 @@ dependencies:
   - scipy
   - tifffile
   - ujson
-  - xarray
-  - xarray-datatree
+  - xarray>=2024.10.0
   - zarr
   - sphinx-pythia-theme
   - pip:
