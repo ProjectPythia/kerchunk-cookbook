@@ -379,7 +379,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">Store virtual datasets as Kerchunk Parquet references</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../advanced/appending.html">Appending to Kerchunk references</a></li>
@@ -531,424 +531,6 @@ The data is output at hourly intervals with a maximum prediction lead time of 72
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
-<defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
-<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
-<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
-<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
-</symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
-<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
-<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-</symbol>
-</defs>
-</svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
-
-:root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
-}
-
-html[theme=dark],
-html[data-theme=dark],
-body[data-theme=dark],
-body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1F1F1F;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
-}
-
-.xr-wrap {
-  display: block !important;
-  min-width: 300px;
-  max-width: 700px;
-}
-
-.xr-text-repr-fallback {
-  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
-  display: none;
-}
-
-.xr-header {
-  padding-top: 6px;
-  padding-bottom: 6px;
-  margin-bottom: 4px;
-  border-bottom: solid 1px var(--xr-border-color);
-}
-
-.xr-header > div,
-.xr-header > ul {
-  display: inline;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.xr-obj-type,
-.xr-array-name {
-  margin-left: 2px;
-  margin-right: 10px;
-}
-
-.xr-obj-type {
-  color: var(--xr-font-color2);
-}
-
-.xr-sections {
-  padding-left: 0 !important;
-  display: grid;
-  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
-}
-
-.xr-section-item {
-  display: contents;
-}
-
-.xr-section-item input {
-  display: inline-block;
-  opacity: 0;
-}
-
-.xr-section-item input + label {
-  color: var(--xr-disabled-color);
-}
-
-.xr-section-item input:enabled + label {
-  cursor: pointer;
-  color: var(--xr-font-color2);
-}
-
-.xr-section-item input:focus + label {
-  border: 2px solid var(--xr-font-color0);
-}
-
-.xr-section-item input:enabled + label:hover {
-  color: var(--xr-font-color0);
-}
-
-.xr-section-summary {
-  grid-column: 1;
-  color: var(--xr-font-color2);
-  font-weight: 500;
-}
-
-.xr-section-summary > span {
-  display: inline-block;
-  padding-left: 0.5em;
-}
-
-.xr-section-summary-in:disabled + label {
-  color: var(--xr-font-color2);
-}
-
-.xr-section-summary-in + label:before {
-  display: inline-block;
-  content: '►';
-  font-size: 11px;
-  width: 15px;
-  text-align: center;
-}
-
-.xr-section-summary-in:disabled + label:before {
-  color: var(--xr-disabled-color);
-}
-
-.xr-section-summary-in:checked + label:before {
-  content: '▼';
-}
-
-.xr-section-summary-in:checked + label > span {
-  display: none;
-}
-
-.xr-section-summary,
-.xr-section-inline-details {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.xr-section-inline-details {
-  grid-column: 2 / -1;
-}
-
-.xr-section-details {
-  display: none;
-  grid-column: 1 / -1;
-  margin-bottom: 5px;
-}
-
-.xr-section-summary-in:checked ~ .xr-section-details {
-  display: contents;
-}
-
-.xr-array-wrap {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 20px auto;
-}
-
-.xr-array-wrap > label {
-  grid-column: 1;
-  vertical-align: top;
-}
-
-.xr-preview {
-  color: var(--xr-font-color3);
-}
-
-.xr-array-preview,
-.xr-array-data {
-  padding: 0 5px !important;
-  grid-column: 2;
-}
-
-.xr-array-data,
-.xr-array-in:checked ~ .xr-array-preview {
-  display: none;
-}
-
-.xr-array-in:checked ~ .xr-array-data,
-.xr-array-preview {
-  display: inline-block;
-}
-
-.xr-dim-list {
-  display: inline-block !important;
-  list-style: none;
-  padding: 0 !important;
-  margin: 0;
-}
-
-.xr-dim-list li {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-
-.xr-dim-list:before {
-  content: '(';
-}
-
-.xr-dim-list:after {
-  content: ')';
-}
-
-.xr-dim-list li:not(:last-child):after {
-  content: ',';
-  padding-right: 5px;
-}
-
-.xr-has-index {
-  font-weight: bold;
-}
-
-.xr-var-list,
-.xr-var-item {
-  display: contents;
-}
-
-.xr-var-item > div,
-.xr-var-item label,
-.xr-var-item > .xr-var-name span {
-  background-color: var(--xr-background-color-row-even);
-  margin-bottom: 0;
-}
-
-.xr-var-item > .xr-var-name:hover span {
-  padding-right: 5px;
-}
-
-.xr-var-list > li:nth-child(odd) > div,
-.xr-var-list > li:nth-child(odd) > label,
-.xr-var-list > li:nth-child(odd) > .xr-var-name span {
-  background-color: var(--xr-background-color-row-odd);
-}
-
-.xr-var-name {
-  grid-column: 1;
-}
-
-.xr-var-dims {
-  grid-column: 2;
-}
-
-.xr-var-dtype {
-  grid-column: 3;
-  text-align: right;
-  color: var(--xr-font-color2);
-}
-
-.xr-var-preview {
-  grid-column: 4;
-}
-
-.xr-index-preview {
-  grid-column: 2 / 5;
-  color: var(--xr-font-color2);
-}
-
-.xr-var-name,
-.xr-var-dims,
-.xr-var-dtype,
-.xr-preview,
-.xr-attrs dt {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 10px;
-}
-
-.xr-var-name:hover,
-.xr-var-dims:hover,
-.xr-var-dtype:hover,
-.xr-attrs dt:hover {
-  overflow: visible;
-  width: auto;
-  z-index: 1;
-}
-
-.xr-var-attrs,
-.xr-var-data,
-.xr-index-data {
-  display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
-}
-
-.xr-var-attrs-in:checked ~ .xr-var-attrs,
-.xr-var-data-in:checked ~ .xr-var-data,
-.xr-index-data-in:checked ~ .xr-index-data {
-  display: block;
-}
-
-.xr-var-data > table {
-  float: right;
-}
-
-.xr-var-name span,
-.xr-var-data,
-.xr-index-name div,
-.xr-index-data,
-.xr-attrs {
-  padding-left: 25px !important;
-}
-
-.xr-attrs,
-.xr-var-attrs,
-.xr-var-data,
-.xr-index-data {
-  grid-column: 1 / -1;
-}
-
-dl.xr-attrs {
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 125px auto;
-}
-
-.xr-attrs dt,
-.xr-attrs dd {
-  padding: 0;
-  margin: 0;
-  float: left;
-  padding-right: 10px;
-  width: auto;
-}
-
-.xr-attrs dt {
-  font-weight: normal;
-  grid-column: 1;
-}
-
-.xr-attrs dt:hover span {
-  display: inline-block;
-  background: var(--xr-background-color);
-  padding-right: 10px;
-}
-
-.xr-attrs dd {
-  grid-column: 2;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.xr-icon-database,
-.xr-icon-file-text2,
-.xr-no-icon {
-  display: inline-block;
-  vertical-align: middle;
-  width: 1em;
-  height: 1.5em !important;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
-}
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 35MB
-Dimensions:            (time: 1, y: 1249, x: 999)
-Coordinates:
-  * time               (time) datetime64[ns] 8B 2023-01-03
-  * x                  (x) float32 4kB -1.996e+06 -1.992e+06 ... 1.996e+06
-  * y                  (y) float32 5kB -2.496e+06 -2.492e+06 ... 2.496e+06
-    lat                (y, x) float32 5MB ...
-    lon                (y, x) float32 5MB ...
-Data variables:
-    PP                 (time, y, x) float32 5MB ...
-    T2                 (time, y, x) float32 5MB ...
-    HR2                (time, y, x) float32 5MB ...
-    dirViento10        (time, y, x) float32 5MB ...
-    magViento10        (time, y, x) float32 5MB ...
-    Lambert_Conformal  float32 4B ...
-Attributes: (12/18)
-    title:          Python PostProcessing for SMN WRF-ARW Deterministic SFC
-    institution:    Servicio Meteorologico Nacional
-    source:          OUTPUT FROM WRF V4.0 MODEL
-    start_lat:      -54.386837
-    start_lon:      -94.33081
-    end_lat:        -11.645958
-    ...             ...
-    TRUELAT1:       -35.0
-    TRUELAT2:       -35.0
-    DX:             4000.0
-    DY:             4000.0
-    START_DATE:     2022-12-31_00:00:00
-    Conventions:    CF-1.8</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-3a4d6f5f-71cc-4f74-a020-c830a89b8bf5' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-3a4d6f5f-71cc-4f74-a020-c830a89b8bf5' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span class='xr-has-index'>y</span>: 1249</li><li><span class='xr-has-index'>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-c662008c-7725-46fa-bf3e-e3e29ac53c31' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c662008c-7725-46fa-bf3e-e3e29ac53c31' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2023-01-03</div><input id='attrs-29d2aa2a-b271-4409-ba93-bc26efcd1a5f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-29d2aa2a-b271-4409-ba93-bc26efcd1a5f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e32cff6f-3a0d-47a5-82f5-b14ad298c619' class='xr-var-data-in' type='checkbox'><label for='data-e32cff6f-3a0d-47a5-82f5-b14ad298c619' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>hours since 2022-12-31 00:00:00</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>axis :</span></dt><dd>T</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2023-01-03T00:00:00.000000000&#x27;], dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-1.996e+06 -1.992e+06 ... 1.996e+06</div><input id='attrs-d9aaf9b6-90cf-426a-992f-62291264abdd' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d9aaf9b6-90cf-426a-992f-62291264abdd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2e4b0336-b7cb-433a-af3c-1b9849b48a8c' class='xr-var-data-in' type='checkbox'><label for='data-2e4b0336-b7cb-433a-af3c-1b9849b48a8c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd></dl></div><div class='xr-var-data'><pre>array([-1996000., -1992000., -1988000., ...,  1988000.,  1992000.,  1996000.],
-      dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>-2.496e+06 -2.492e+06 ... 2.496e+06</div><input id='attrs-a7fe8db2-fdd3-4314-bea7-d83a15b57476' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a7fe8db2-fdd3-4314-bea7-d83a15b57476' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e1ee96f7-6d57-4c3c-9425-b37e1125eeb3' class='xr-var-data-in' type='checkbox'><label for='data-e1ee96f7-6d57-4c3c-9425-b37e1125eeb3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd></dl></div><div class='xr-var-data'><pre>array([-2495999.8, -2491999.8, -2487999.8, ...,  2488000.2,  2492000.2,
-        2496000.2], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-0c0ceba9-31a6-4857-814d-6dbd0dbfef44' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0c0ceba9-31a6-4857-814d-6dbd0dbfef44' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-830f6e57-da10-4f31-bd07-b7602bf9eb30' class='xr-var-data-in' type='checkbox'><label for='data-830f6e57-da10-4f31-bd07-b7602bf9eb30' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-eb9a296b-82f3-44ac-af44-68d5823e34b8' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eb9a296b-82f3-44ac-af44-68d5823e34b8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-24d7a4e5-f53b-4807-8537-a625fc5b2ff6' class='xr-var-data-in' type='checkbox'><label for='data-24d7a4e5-f53b-4807-8537-a625fc5b2ff6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4ddb3e85-8dc6-497f-948b-4465f23cb321' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4ddb3e85-8dc6-497f-948b-4465f23cb321' class='xr-section-summary' >Data variables: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-d69da47c-f8c1-45ee-8220-f4d23fcaef6e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-d69da47c-f8c1-45ee-8220-f4d23fcaef6e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-43976131-a832-46af-a670-1df6b1f869f2' class='xr-var-data-in' type='checkbox'><label for='data-43976131-a832-46af-a670-1df6b1f869f2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>standard_name :</span></dt><dd>precipitation_amount</dd><dt><span>long_name :</span></dt><dd>Accumulated total precipitation</dd><dt><span>units :</span></dt><dd>millimeter</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-214f5140-1d34-4c86-9800-39aff69dec82' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-214f5140-1d34-4c86-9800-39aff69dec82' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-867d8c16-b86b-4240-a3a1-7956ad9fa492' class='xr-var-data-in' type='checkbox'><label for='data-867d8c16-b86b-4240-a3a1-7956ad9fa492' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Calibrated 2-m Temperature</dd><dt><span>standard_name :</span></dt><dd>air_temperature</dd><dt><span>description :</span></dt><dd>Temperatura horaria calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>units :</span></dt><dd>degree_Celsius</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-7f1746f0-edbc-4114-a8b1-5501e386ecbf' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7f1746f0-edbc-4114-a8b1-5501e386ecbf' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3f3ab818-a7f0-426b-a627-f045d2db0fca' class='xr-var-data-in' type='checkbox'><label for='data-3f3ab818-a7f0-426b-a627-f045d2db0fca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>percent</dd><dt><span>standard_name :</span></dt><dd>relative_humidity</dd><dt><span>long_name :</span></dt><dd>Relative humidity</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-bdb75d17-10f3-4820-8523-1ed435840a71' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-bdb75d17-10f3-4820-8523-1ed435840a71' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7f9968c2-40d1-4c84-bd9d-cdfbb2c04e14' class='xr-var-data-in' type='checkbox'><label for='data-7f9968c2-40d1-4c84-bd9d-cdfbb2c04e14' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degree</dd><dt><span>standard_name :</span></dt><dd>wind_from_direction</dd><dt><span>long_name :</span></dt><dd>Wind Direction at 10m</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-c5caa300-7543-4d45-b2f6-c941fa6b26ad' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c5caa300-7543-4d45-b2f6-c941fa6b26ad' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d8ad53ce-cf4f-46fd-8d90-13fc8815fcbc' class='xr-var-data-in' type='checkbox'><label for='data-d8ad53ce-cf4f-46fd-8d90-13fc8815fcbc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Calibrated Wind Speed at 10m</dd><dt><span>standard_name :</span></dt><dd>wind_speed</dd><dt><span>description :</span></dt><dd>Intensidad del viento calibrada a partir de la interpolacion de los coeficientes de la metodologia RAFK.</dd><dt><span>units :</span></dt><dd>meter / second</dd><dt><span>grid_mapping :</span></dt><dd>Lambert_Conformal</dd></dl></div><div class='xr-var-data'><pre>[1247751 values with dtype=float32]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-a079cbe7-a58e-49b7-a374-5c34e3a78e0f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a079cbe7-a58e-49b7-a374-5c34e3a78e0f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c40f14af-ed55-48ab-bcb1-2893ba3c6c88' class='xr-var-data-in' type='checkbox'><label for='data-c40f14af-ed55-48ab-bcb1-2893ba3c6c88' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>grid_mapping_name :</span></dt><dd>lambert_conformal_conic</dd><dt><span>standard_parallel :</span></dt><dd>[-35. -35.]</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>-34.99999</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>-65.0</dd></dl></div><div class='xr-var-data'><pre>[1 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-72b75341-bf56-4a09-9eb3-0ef388aa4eea' class='xr-section-summary-in' type='checkbox'  ><label for='section-72b75341-bf56-4a09-9eb3-0ef388aa4eea' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-c6229255-2641-40d4-a32c-4d0270a9805b' class='xr-index-data-in' type='checkbox'/><label for='index-c6229255-2641-40d4-a32c-4d0270a9805b' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2023-01-03&#x27;], dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;time&#x27;, freq=None))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-b7fd95f2-c5bc-43eb-8486-86ccaa42eb25' class='xr-index-data-in' type='checkbox'/><label for='index-b7fd95f2-c5bc-43eb-8486-86ccaa42eb25' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-1996000.0, -1992000.0, -1988000.0, -1984000.0, -1980000.0, -1976000.0,
-       -1972000.0, -1968000.0, -1964000.0, -1960000.0,
-       ...
-        1960000.0,  1964000.0,  1968000.0,  1972000.0,  1976000.0,  1980000.0,
-        1984000.0,  1988000.0,  1992000.0,  1996000.0],
-      dtype=&#x27;float32&#x27;, name=&#x27;x&#x27;, length=999))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-229af37b-cfbe-4e68-9787-dd507ac81201' class='xr-index-data-in' type='checkbox'/><label for='index-229af37b-cfbe-4e68-9787-dd507ac81201' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([-2495999.75, -2491999.75, -2487999.75, -2483999.75, -2479999.75,
-       -2475999.75, -2471999.75, -2467999.75, -2463999.75, -2459999.75,
-       ...
-        2460000.25,  2464000.25,  2468000.25,  2472000.25,  2476000.25,
-        2480000.25,  2484000.25,  2488000.25,  2492000.25,  2496000.25],
-      dtype=&#x27;float32&#x27;, name=&#x27;y&#x27;, length=1249))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9aa6400b-9772-4ca3-9673-b361c52e60dd' class='xr-section-summary-in' type='checkbox'  ><label for='section-9aa6400b-9772-4ca3-9673-b361c52e60dd' class='xr-section-summary' >Attributes: <span>(18)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>title :</span></dt><dd>Python PostProcessing for SMN WRF-ARW Deterministic SFC</dd><dt><span>institution :</span></dt><dd>Servicio Meteorologico Nacional</dd><dt><span>source :</span></dt><dd> OUTPUT FROM WRF V4.0 MODEL</dd><dt><span>start_lat :</span></dt><dd>-54.386837</dd><dt><span>start_lon :</span></dt><dd>-94.33081</dd><dt><span>end_lat :</span></dt><dd>-11.645958</dd><dt><span>end_lon :</span></dt><dd>-47.96869</dd><dt><span>MAP_PROJ :</span></dt><dd>1</dd><dt><span>MAP_PROJ_CHAR :</span></dt><dd>Lambert Conformal</dd><dt><span>STAND_LON :</span></dt><dd>-65.0</dd><dt><span>CEN_LON :</span></dt><dd>-65.0</dd><dt><span>CEN_LAT :</span></dt><dd>-34.99999</dd><dt><span>TRUELAT1 :</span></dt><dd>-35.0</dd><dt><span>TRUELAT2 :</span></dt><dd>-35.0</dd><dt><span>DX :</span></dt><dd>4000.0</dd><dt><span>DY :</span></dt><dd>4000.0</dd><dt><span>START_DATE :</span></dt><dd>2022-12-31_00:00:00</dd><dt><span>Conventions :</span></dt><dd>CF-1.8</dd></dl></div></li></ul></div></div></div></div>
-</div>
 <p>Here we see the <code class="docutils literal notranslate"><span class="pre">repr</span></code> from the <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> Dataset of a single <code class="docutils literal notranslate"><span class="pre">NetCDF</span></code> file. From examining the output, we can tell that the Dataset dimensions are <code class="docutils literal notranslate"><span class="pre">['time','y','x']</span></code>, with time being only a single step.
 Later, when we use <code class="docutils literal notranslate"><span class="pre">Xarray's</span></code> <code class="docutils literal notranslate"><span class="pre">combine_nested</span></code> functionality, we will need to know on which dimensions to concatenate across.</p>
 </section>
@@ -975,15 +557,6 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This dictionary will be passed as kwargs to `fsspec`. For more details, check out the</span>
-<span class="c1"># `Basics of virtual Zarr stores` notebook in the foundations section.</span>
-<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="start-a-dask-client">
 <h2>Start a Dask Client<a class="headerlink" href="#start-a-dask-client" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
@@ -1000,7 +573,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-b93c0a65-a058-11ef-8d86-00224808284e</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-ddddb6f3-a05a-11ef-8d76-002248357acb</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -1035,7 +608,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">aa3406bd</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">af0a9b3d</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -1072,11 +645,11 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-0d5b3dda-1b44-4f3e-8df3-1627cda79624</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-982625f3-219a-4e62-a45b-d2945b62369e</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:45137
+                        <strong>Comm:</strong> tcp://127.0.0.1:33223
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -1118,7 +691,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:44307
+                            <strong>Comm: </strong> tcp://127.0.0.1:44677
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1126,7 +699,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41013/status" target="_blank">http://127.0.0.1:41013/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43563/status" target="_blank">http://127.0.0.1:43563/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1134,13 +707,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:43411
+                            <strong>Nanny: </strong> tcp://127.0.0.1:32823
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-9hjxpkto
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-0a76emez
                         </td>
                     </tr>
 
@@ -1163,7 +736,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:38647
+                            <strong>Comm: </strong> tcp://127.0.0.1:37127
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1171,7 +744,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42243/status" target="_blank">http://127.0.0.1:42243/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34849/status" target="_blank">http://127.0.0.1:34849/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1179,13 +752,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:35655
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42935
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5mkuxr4o
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-kpdezw9q
                         </td>
                     </tr>
 
@@ -1208,7 +781,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:43653
+                            <strong>Comm: </strong> tcp://127.0.0.1:35895
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1216,7 +789,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43599/status" target="_blank">http://127.0.0.1:43599/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46207/status" target="_blank">http://127.0.0.1:46207/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1224,13 +797,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40141
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42945
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-rshhuzoo
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-5f4tx5u2
                         </td>
                     </tr>
 
@@ -1253,7 +826,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41635
+                            <strong>Comm: </strong> tcp://127.0.0.1:36649
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1261,7 +834,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43063/status" target="_blank">http://127.0.0.1:43063/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35823/status" target="_blank">http://127.0.0.1:35823/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1269,13 +842,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37089
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45949
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-w38tda58
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ntnwgkob
                         </td>
                     </tr>
 
@@ -1298,7 +871,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:39481
+                            <strong>Comm: </strong> tcp://127.0.0.1:41845
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1306,7 +879,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40935/status" target="_blank">http://127.0.0.1:40935/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33151/status" target="_blank">http://127.0.0.1:33151/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1314,13 +887,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:45047
+                            <strong>Nanny: </strong> tcp://127.0.0.1:33103
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-go_awhm5
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ikz87wbs
                         </td>
                     </tr>
 
@@ -1343,7 +916,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41967
+                            <strong>Comm: </strong> tcp://127.0.0.1:35967
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1351,7 +924,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37495/status" target="_blank">http://127.0.0.1:37495/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36349/status" target="_blank">http://127.0.0.1:36349/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1359,13 +932,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:44151
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45477
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-v0m09fo0
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-czsc1te9
                         </td>
                     </tr>
 
@@ -1388,7 +961,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41467
+                            <strong>Comm: </strong> tcp://127.0.0.1:37245
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1396,7 +969,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36387/status" target="_blank">http://127.0.0.1:36387/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:39023/status" target="_blank">http://127.0.0.1:39023/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1404,13 +977,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:40821
+                            <strong>Nanny: </strong> tcp://127.0.0.1:39613
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-tdm6eyf6
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-jul6_029
                         </td>
                     </tr>
 
@@ -1433,7 +1006,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40467
+                            <strong>Comm: </strong> tcp://127.0.0.1:39843
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -1441,7 +1014,7 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43725/status" target="_blank">http://127.0.0.1:43725/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:40003/status" target="_blank">http://127.0.0.1:40003/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -1449,13 +1022,13 @@ Later, when we use <code class="docutils literal notranslate"><span class="pre">
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34219
+                            <strong>Nanny: </strong> tcp://127.0.0.1:41913
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-ub3m_4f2
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-cqrrrefg
                         </td>
                     </tr>
 
@@ -1907,7 +1480,7 @@ Data variables:
     PP                 (time, y, x) float32 40MB ManifestArray&lt;shape=(8, 1249...
     dirViento10        (time, y, x) float32 40MB ManifestArray&lt;shape=(8, 1249...
     lon                (time, y, x) float32 40MB ManifestArray&lt;shape=(8, 1249...
-    Lambert_Conformal  (time) float32 32B ManifestArray&lt;shape=(8,), dtype=flo...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ad50be37-f4f4-471b-81d0-5b03e5667538' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ad50be37-f4f4-471b-81d0-5b03e5667538' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>time</span>: 8</li><li><span>y</span>: 1249</li><li><span>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-a2b9a34c-5feb-488b-9393-a155458ff517' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a2b9a34c-5feb-488b-9393-a155458ff517' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(1249,), dty...</div><input id='attrs-7886c221-9a36-4a67-bbda-3bc90751ad6a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-7886c221-9a36-4a67-bbda-3bc90751ad6a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-28987db1-82bb-4aa2-a258-af2ce712a18e' class='xr-var-data-in' type='checkbox'><label for='data-28987db1-82bb-4aa2-a258-af2ce712a18e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(1249,), dtype=float32, chunks=(1249,)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8,), dtype=...</div><input id='attrs-fe278ead-cf73-418e-9314-50ad45e92993' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fe278ead-cf73-418e-9314-50ad45e92993' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fe00250a-0202-4b28-b7a9-94483ee58683' class='xr-var-data-in' type='checkbox'><label for='data-fe00250a-0202-4b28-b7a9-94483ee58683' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8,), dtype=int32, chunks=(1,)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(999,), dtyp...</div><input id='attrs-ec8f929d-a84a-4299-a45e-f60ce29b0174' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ec8f929d-a84a-4299-a45e-f60ce29b0174' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a648f2a6-9116-4b42-a062-82dcb7301f05' class='xr-var-data-in' type='checkbox'><label for='data-a648f2a6-9116-4b42-a062-82dcb7301f05' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(999,), dtype=float32, chunks=(999,)&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7334c0c7-f8cc-4c13-8652-120a59f14e07' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7334c0c7-f8cc-4c13-8652-120a59f14e07' class='xr-section-summary' >Data variables: <span>(8)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-3d5cd564-5bea-431d-bb72-cef872ced446' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3d5cd564-5bea-431d-bb72-cef872ced446' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b3bbf32d-66c7-4df3-add1-86508e4b1a5e' class='xr-var-data-in' type='checkbox'><label for='data-b3bbf32d-66c7-4df3-add1-86508e4b1a5e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-a613aee7-4635-4a55-9382-7667e7e26ee2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a613aee7-4635-4a55-9382-7667e7e26ee2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eb301a02-3db7-4afc-a144-a45c86608539' class='xr-var-data-in' type='checkbox'><label for='data-eb301a02-3db7-4afc-a144-a45c86608539' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-d7cec682-565f-4684-a126-47fee9027e98' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d7cec682-565f-4684-a126-47fee9027e98' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ea96f37b-b8f5-4d25-b052-0b3d69cefa8b' class='xr-var-data-in' type='checkbox'><label for='data-ea96f37b-b8f5-4d25-b052-0b3d69cefa8b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-da9c67a4-1c4d-481c-8754-d9db57f87bb0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-da9c67a4-1c4d-481c-8754-d9db57f87bb0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-045f8696-540f-47e6-ac3c-4c9f4a0ff7c6' class='xr-var-data-in' type='checkbox'><label for='data-045f8696-540f-47e6-ac3c-4c9f4a0ff7c6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-33764057-f4c0-4a2c-a49c-c07b7d6e5e89' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-33764057-f4c0-4a2c-a49c-c07b7d6e5e89' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-69b5c222-af9c-4c73-ba2d-76800817ff03' class='xr-var-data-in' type='checkbox'><label for='data-69b5c222-af9c-4c73-ba2d-76800817ff03' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-f2c0825d-5e9d-4977-9a32-37f273496b76' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f2c0825d-5e9d-4977-9a32-37f273496b76' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6d5fe5ae-efeb-45e2-a2b4-fa2b79090fc2' class='xr-var-data-in' type='checkbox'><label for='data-6d5fe5ae-efeb-45e2-a2b4-fa2b79090fc2' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-0ecf1f49-ef37-4386-8017-616184e13b29' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0ecf1f49-ef37-4386-8017-616184e13b29' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-aa2931b4-d8a4-4dec-82ae-1069a937cc5d' class='xr-var-data-in' type='checkbox'><label for='data-aa2931b4-d8a4-4dec-82ae-1069a937cc5d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8,), dtype=...</div><input id='attrs-c2f688cc-a7ef-480d-9c09-ffc21fab7119' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c2f688cc-a7ef-480d-9c09-ffc21fab7119' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3d56e03b-b437-4195-bd8f-95536e811e9b' class='xr-var-data-in' type='checkbox'><label for='data-3d56e03b-b437-4195-bd8f-95536e811e9b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8,), dtype=float32, chunks=(1,)&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a3e0c77c-8b92-4988-9b9b-39c1fb23a299' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a3e0c77c-8b92-4988-9b9b-39c1fb23a299' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-b89ddfe4-872a-4db9-b5b0-0dff8128102a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b89ddfe4-872a-4db9-b5b0-0dff8128102a' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    Lambert_Conformal  (time) float32 32B ManifestArray&lt;shape=(8,), dtype=flo...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-9259fddd-33a4-42b2-8d89-6eb97cdc98af' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9259fddd-33a4-42b2-8d89-6eb97cdc98af' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>time</span>: 8</li><li><span>y</span>: 1249</li><li><span>x</span>: 999</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-6f00e991-0b7f-4ee2-bcd9-21b2c4b55462' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6f00e991-0b7f-4ee2-bcd9-21b2c4b55462' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(1249,), dty...</div><input id='attrs-aee4cbc7-5e47-4e9e-9651-60ed0d79234f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-aee4cbc7-5e47-4e9e-9651-60ed0d79234f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f9594fb3-6b82-43a5-b06e-4d4495a7d74d' class='xr-var-data-in' type='checkbox'><label for='data-f9594fb3-6b82-43a5-b06e-4d4495a7d74d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>Y</dd><dt><span>long_name :</span></dt><dd>y-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(1249,), dtype=float32, chunks=(1249,)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>int32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8,), dtype=...</div><input id='attrs-bfe32dc6-3743-4702-a25a-11f7b3b7566e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-bfe32dc6-3743-4702-a25a-11f7b3b7566e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9a069616-e9c4-4430-be8f-62372a738f49' class='xr-var-data-in' type='checkbox'><label for='data-9a069616-e9c4-4430-be8f-62372a738f49' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8,), dtype=int32, chunks=(1,)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(999,), dtyp...</div><input id='attrs-6d3c2abe-ec43-4585-8c65-55505a926f1c' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6d3c2abe-ec43-4585-8c65-55505a926f1c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b0210499-28c7-416f-8556-cf4e60fbbe3c' class='xr-var-data-in' type='checkbox'><label for='data-b0210499-28c7-416f-8556-cf4e60fbbe3c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>axis :</span></dt><dd>X</dd><dt><span>long_name :</span></dt><dd>x-coordinate in projected coordinate system</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>m</dd></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(999,), dtype=float32, chunks=(999,)&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-449f7ac5-dc8b-4075-8ab8-38f75fe9a423' class='xr-section-summary-in' type='checkbox'  checked><label for='section-449f7ac5-dc8b-4075-8ab8-38f75fe9a423' class='xr-section-summary' >Data variables: <span>(8)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>magViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-16eb3328-d3d6-40d2-9967-c9131d7cd370' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-16eb3328-d3d6-40d2-9967-c9131d7cd370' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-71fac677-81f2-4af7-8d24-15e9d6b6e404' class='xr-var-data-in' type='checkbox'><label for='data-71fac677-81f2-4af7-8d24-15e9d6b6e404' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-5eef124f-9dc1-4c7f-aebc-796b9fa86b87' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5eef124f-9dc1-4c7f-aebc-796b9fa86b87' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bf99eac7-a346-4bc2-9105-f1a1d8f874cc' class='xr-var-data-in' type='checkbox'><label for='data-bf99eac7-a346-4bc2-9105-f1a1d8f874cc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>T2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-a1c60d1c-ad61-4d4c-9d7a-b110ac4248fe' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a1c60d1c-ad61-4d4c-9d7a-b110ac4248fe' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2f951d95-bcaa-4865-9bb0-dad7813de04d' class='xr-var-data-in' type='checkbox'><label for='data-2f951d95-bcaa-4865-9bb0-dad7813de04d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>HR2</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-faac845a-e8a9-44ec-8981-65d5f23f7c7d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-faac845a-e8a9-44ec-8981-65d5f23f7c7d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3751c833-edfb-4cb9-b082-fecb41f973ff' class='xr-var-data-in' type='checkbox'><label for='data-3751c833-edfb-4cb9-b082-fecb41f973ff' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>PP</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-d1a38b60-b8ba-424a-b936-6fca085a78fd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d1a38b60-b8ba-424a-b936-6fca085a78fd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9b93c82c-6ade-4e67-9513-215030515502' class='xr-var-data-in' type='checkbox'><label for='data-9b93c82c-6ade-4e67-9513-215030515502' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>dirViento10</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-0201d32c-ed44-4d36-ae69-0c51ff5cac54' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0201d32c-ed44-4d36-ae69-0c51ff5cac54' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3f589fe8-5f95-417d-a41f-45d72acd45dc' class='xr-var-data-in' type='checkbox'><label for='data-3f589fe8-5f95-417d-a41f-45d72acd45dc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon</span></div><div class='xr-var-dims'>(time, y, x)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8, 1249, 99...</div><input id='attrs-00bf6187-5e03-4f88-bedb-7a22b8e81eeb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-00bf6187-5e03-4f88-bedb-7a22b8e81eeb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5ad3ad70-ada2-4d83-b588-bcba2bec90c5' class='xr-var-data-in' type='checkbox'><label for='data-5ad3ad70-ada2-4d83-b588-bcba2bec90c5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8, 1249, 999), dtype=float32, chunks=(1, 1249, 999)&gt;</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>Lambert_Conformal</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>ManifestArray&lt;shape=(8,), dtype=...</div><input id='attrs-83c35fb1-b479-4b3b-ac0f-daeedda5b6c4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-83c35fb1-b479-4b3b-ac0f-daeedda5b6c4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0d35b39e-0a44-48f9-8976-15d5912d6aca' class='xr-var-data-in' type='checkbox'><label for='data-0d35b39e-0a44-48f9-8976-15d5912d6aca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>ManifestArray&lt;shape=(8,), dtype=float32, chunks=(1,)&gt;</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-effa5bd2-d08a-4f0f-ac77-d0f136689ee7' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-effa5bd2-d08a-4f0f-ac77-d0f136689ee7' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-c5534838-b26f-4458-87c8-805b5cb6c568' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c5534838-b26f-4458-87c8-805b5cb6c568' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
