@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Kerchunk and Dask &#8212; Kerchunk Cookbook</title>
+    <title>Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask &#8212; Kerchunk Cookbook</title>
   
   
   
@@ -78,12 +78,12 @@
     <link rel="icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Store Kerchunk Reference Files as Parquet" href="../advanced/Parquet_Reference_Storage.html" />
-    <link rel="prev" title="Multi-File Datasets with Kerchunk" href="02_kerchunk_multi_file.html" />
+    <link rel="next" title="Store virtual datasets as Kerchunk Parquet references" href="../advanced/Parquet_Reference_Storage.html" />
+    <link rel="prev" title="Multi-file virtual datasets with VirtualiZarr" href="02_kerchunk_multi_file.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="11 November 2024"/>
+    <meta name="docbuild:last-update" content="2 December 2024"/>
   </head>
   
   
@@ -363,7 +363,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../../README.html">
-                    Kerchunk Cookbook
+                    Virtual Zarr Cookbook (Kerchunk and VirtualiZarr)
                 </a>
             </li>
         </ul>
@@ -373,13 +373,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_kerchunk_basics.html">Kerchunk Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_kerchunk_multi_file.html">Multi-File Datasets with Kerchunk</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Kerchunk and Dask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_kerchunk_basics.html">Basics of virtual Zarr stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_kerchunk_multi_file.html">Multi-file virtual datasets with VirtualiZarr</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/Parquet_Reference_Storage.html">Store virtual datasets as Kerchunk Parquet references</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../advanced/appending.html">Appending to Kerchunk references</a></li>
@@ -431,16 +431,15 @@
                   <article class="bd-article">
                     
   <p><a class="reference internal" href="../../_images/dask.png"><img alt="Dask Logo" src="../../_images/dask.png" style="width: 200px;" /></a></img></p>
-<section class="tex2jax_ignore mathjax_ignore" id="kerchunk-and-dask">
-<h1>Kerchunk and Dask<a class="headerlink" href="#kerchunk-and-dask" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="parallel-virtual-dataset-creation-with-virtualizarr-kerchunk-and-dask">
+<h1>Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask<a class="headerlink" href="#parallel-virtual-dataset-creation-with-virtualizarr-kerchunk-and-dask" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>In this notebook we will cover:</p>
 <ol class="arabic simple">
-<li><p>How to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files using the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> library.</p></li>
-<li><p>How to scale up the creation of large <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> datasets using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p></li>
+<li><p>How to parallelize the creation of virtual datasets using the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> library.</p></li>
 </ol>
-<p>This notebook builds upon the <a class="reference internal" href="#./kerchunk_basics.ipynb"><span class="xref myst">Kerchunk Basics</span></a> and the <a class="reference internal" href="#../foundations/kerchunk_multi_file.ipynb"><span class="xref myst">Multi-File Datasets with Kerchunk</span></a> notebooks. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the the generation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files.</p>
+<p>This notebook builds upon the <a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores</span></a> and the <a class="reference internal" href="02_kerchunk_multi_file.html"><span class="std std-doc">Multi-file virtual datasets with VirtualiZarr</span></a> notebooks. A basic understanding of <code class="docutils literal notranslate"><span class="pre">Dask</span></code> will be helpful, but is not required. This notebook is not intended as a tutorial for using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but will show how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to greatly speedup the the generation of virtual datasets.</p>
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
@@ -452,11 +451,11 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#../foundations/kerchunk_basics"><span class="xref myst">Kerchunk Basics</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="01_kerchunk_basics.html"><span class="std std-doc">Basics of virtual Zarr stores</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#../foundations/kerchunk_multi_file"><span class="xref myst">Multiple Files and Kerchunk</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="02_kerchunk_multi_file.html"><span class="std std-doc">Multi-file virtual datasets with VirtualiZarr</span></a></p></td>
 <td><p>Required</p></td>
 <td><p>Core</p></td>
 </tr>
@@ -478,10 +477,10 @@
 <hr class="docutils" />
 <section id="dask-and-parallel-processing">
 <h2>Dask and Parallel Processing<a class="headerlink" href="#dask-and-parallel-processing" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-<p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is not intended to be a guide for how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallelize some <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
-<p>In the previous notebook <a class="reference internal" href="#../foundations/kerchunk_multi_file"><span class="xref myst">Multiple Files and Kerchunk</span></a>, we were looking at daily downscaled climate data over South-Eastern Alaska. In our function named <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code>, we were looping over, one at a time, the input NetCDF4 files and using <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> method to create a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> index for each file.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we can call <code class="docutils literal notranslate"><span class="pre">SingleHdf5ToZarr</span></code> in parallel, which allows us to create multiple <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files at the same time.</p>
-<p>Further on in this notebook, we will show how using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can greatly speed-up the process of creating a virtual dataset using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code></p>
+<p>Dask is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> library for parallel computing. It plays well with <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, but can be used in many ways across the <code class="docutils literal notranslate"><span class="pre">Python</span></code> ecosystem. This notebook is not intended to be a guide for how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, but just an example of how to use <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to parallelize some <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> functionality.</p>
+<p>In the previous notebook <a class="reference internal" href="02_kerchunk_multi_file.html"><span class="std std-doc">Multi-file virtual datasets with VirtualiZarr</span></a>, we were looking at daily downscaled climate data over South-Eastern Alaska. We created a virtual dataset for each input file using list comprehension in Python.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we can call <code class="docutils literal notranslate"><span class="pre">open_virtual_dataset</span></code> in parallel, which allows us to create multiple virtual datasets at the same time.</p>
+<p>Further on in this notebook, we will show how using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can greatly speed-up the process of creating a virtual datasets.</p>
 </section>
 <section id="setting-up-the-dask-client">
 <h2>Setting up the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> Client<a class="headerlink" href="#setting-up-the-dask-client" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
@@ -503,7 +502,7 @@
     <div style="width: 24px; height: 24px; background-color: #e1e1e1; border: 3px solid #9D9D9D; border-radius: 5px; position: absolute;"> </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px;">Client</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-4b3c9781-a04f-11ef-8b4a-000d3ad367d5</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">Client-b6245e13-b0ee-11ef-8bc9-7c1e5222ecf8</p>
         <table style="width: 100%; text-align: left;">
 
         <tr>
@@ -538,7 +537,7 @@
     </div>
     <div style="margin-left: 48px;">
         <h3 style="margin-bottom: 0px; margin-top: 0px;">LocalCluster</h3>
-        <p style="color: #9D9D9D; margin-bottom: 0px;">2353b988</p>
+        <p style="color: #9D9D9D; margin-bottom: 0px;">1fafacf1</p>
         <table style="width: 100%; text-align: left;">
             <tr>
                 <td style="text-align: left;">
@@ -575,11 +574,11 @@
         <div style="width: 24px; height: 24px; background-color: #FFF7E5; border: 3px solid #FF6132; border-radius: 5px; position: absolute;"> </div>
         <div style="margin-left: 48px;">
             <h3 style="margin-bottom: 0px;">Scheduler</h3>
-            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-19f8c184-7763-4ac6-b6fa-24fbde6f2b8c</p>
+            <p style="color: #9D9D9D; margin-bottom: 0px;">Scheduler-9999dabd-6593-4f97-bec7-33783c88fe30</p>
             <table style="width: 100%; text-align: left;">
                 <tr>
                     <td style="text-align: left;">
-                        <strong>Comm:</strong> tcp://127.0.0.1:33423
+                        <strong>Comm:</strong> tcp://127.0.0.1:37151
                     </td>
                     <td style="text-align: left;">
                         <strong>Workers:</strong> 8
@@ -621,7 +620,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:34469
+                            <strong>Comm: </strong> tcp://127.0.0.1:44895
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -629,7 +628,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35007/status" target="_blank">http://127.0.0.1:35007/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:37175/status" target="_blank">http://127.0.0.1:37175/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -637,13 +636,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37021
+                            <strong>Nanny: </strong> tcp://127.0.0.1:35807
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-38w6r_ic
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-y2engjaw
                         </td>
                     </tr>
 
@@ -666,7 +665,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40365
+                            <strong>Comm: </strong> tcp://127.0.0.1:34987
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -674,7 +673,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:45351/status" target="_blank">http://127.0.0.1:45351/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41819/status" target="_blank">http://127.0.0.1:41819/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -682,13 +681,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38475
+                            <strong>Nanny: </strong> tcp://127.0.0.1:36129
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-oljsz2p_
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-z8xhjy5s
                         </td>
                     </tr>
 
@@ -711,7 +710,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:34737
+                            <strong>Comm: </strong> tcp://127.0.0.1:37359
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -719,7 +718,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34645/status" target="_blank">http://127.0.0.1:34645/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:33177/status" target="_blank">http://127.0.0.1:33177/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -727,13 +726,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:43035
+                            <strong>Nanny: </strong> tcp://127.0.0.1:42127
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-sp70e4sk
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-e_6vb06i
                         </td>
                     </tr>
 
@@ -756,7 +755,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:37013
+                            <strong>Comm: </strong> tcp://127.0.0.1:33469
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -764,7 +763,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:41471/status" target="_blank">http://127.0.0.1:41471/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:43901/status" target="_blank">http://127.0.0.1:43901/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -772,13 +771,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:37281
+                            <strong>Nanny: </strong> tcp://127.0.0.1:45303
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-28_roqcr
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-4s6owrrl
                         </td>
                     </tr>
 
@@ -801,7 +800,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:40283
+                            <strong>Comm: </strong> tcp://127.0.0.1:37147
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -809,7 +808,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46743/status" target="_blank">http://127.0.0.1:46743/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:42289/status" target="_blank">http://127.0.0.1:42289/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -817,13 +816,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:34269
+                            <strong>Nanny: </strong> tcp://127.0.0.1:43575
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-gy124s4v
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-rmw1npo0
                         </td>
                     </tr>
 
@@ -846,7 +845,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:42271
+                            <strong>Comm: </strong> tcp://127.0.0.1:39539
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -854,7 +853,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36461/status" target="_blank">http://127.0.0.1:36461/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:35945/status" target="_blank">http://127.0.0.1:35945/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -862,13 +861,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:33089
+                            <strong>Nanny: </strong> tcp://127.0.0.1:37543
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-wi12madf
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-bslyh04d
                         </td>
                     </tr>
 
@@ -891,7 +890,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:41953
+                            <strong>Comm: </strong> tcp://127.0.0.1:43835
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -899,7 +898,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:34755/status" target="_blank">http://127.0.0.1:34755/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:32955/status" target="_blank">http://127.0.0.1:32955/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -907,13 +906,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:46547
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34871
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-qkeyvmt_
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-8a_3omfk
                         </td>
                     </tr>
 
@@ -936,7 +935,7 @@
                 <table style="width: 100%; text-align: left;">
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Comm: </strong> tcp://127.0.0.1:34389
+                            <strong>Comm: </strong> tcp://127.0.0.1:45365
                         </td>
                         <td style="text-align: left;">
                             <strong>Total threads: </strong> 1
@@ -944,7 +943,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:36913/status" target="_blank">http://127.0.0.1:36913/status</a>
+                            <strong>Dashboard: </strong> <a href="http://127.0.0.1:46187/status" target="_blank">http://127.0.0.1:46187/status</a>
                         </td>
                         <td style="text-align: left;">
                             <strong>Memory: </strong> 1.95 GiB
@@ -952,13 +951,13 @@
                     </tr>
                     <tr>
                         <td style="text-align: left;">
-                            <strong>Nanny: </strong> tcp://127.0.0.1:38045
+                            <strong>Nanny: </strong> tcp://127.0.0.1:34047
                         </td>
                         <td style="text-align: left;"></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: left;">
-                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-wbfhip7z
+                            <strong>Local directory: </strong> /tmp/dask-scratch-space/worker-xogrfcbj
                         </td>
                     </tr>
 
@@ -996,16 +995,13 @@
 </section>
 <section id="building-off-of-our-previous-work">
 <h2>Building off of our Previous Work<a class="headerlink" href="#building-off-of-our-previous-work" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-<p>In the next section, we will re-use some of the code from <a class="reference internal" href="#../foundations/kerchunk_multi_file"><span class="xref myst">Multiple Files and Kerchunk</span></a> notebook. However, we will modify it slightly to make it compatible with <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
+<p>In the next section, we will re-use some of the code from the <a class="reference internal" href="02_kerchunk_multi_file.html"><span class="std std-doc">multi-file virtual datasets with VirtualiZarr</span></a> notebook. However, we will modify it slightly to make it compatible with <code class="docutils literal notranslate"><span class="pre">Dask</span></code>.</p>
 <p>The following two cells should look the same as before.  As a reminder we are importing the required libraries, using <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to create a list of our input files and setting up some kwargs for <code class="docutils literal notranslate"><span class="pre">fsspec</span></code> to use.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
-
-<span class="kn">import</span> <span class="nn">dask</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dask</span>
 <span class="kn">import</span> <span class="nn">fsspec</span>
-<span class="kn">import</span> <span class="nn">ujson</span>
-<span class="kn">from</span> <span class="nn">kerchunk.hdf</span> <span class="kn">import</span> <span class="n">SingleHdf5ToZarr</span>
+<span class="kn">from</span> <span class="nn">virtualizarr</span> <span class="kn">import</span> <span class="n">open_virtual_dataset</span>
 </pre></div>
 </div>
 </div>
@@ -1019,22 +1015,7 @@
 <span class="n">files_paths</span> <span class="o">=</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/*&quot;</span><span class="p">)</span>
 
 <span class="c1"># Here we prepend the prefix &#39;s3://&#39;, which points to AWS.</span>
-<span class="n">file_pattern</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
-
-<span class="c1"># Define kwargs for `fsspec`</span>
-<span class="n">so</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
-
-
-<span class="c1"># We are creating a temporary directory to store the .json reference files</span>
-<span class="c1"># Alternately, you could write these to cloud storage.</span>
-<span class="n">td</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
-<span class="n">temp_dir</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">name</span>
-<span class="n">temp_dir</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/tmp/tmp7enzo4ak&#39;
+<span class="n">files_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="s2">&quot;s3://&quot;</span> <span class="o">+</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_paths</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1044,7 +1025,11 @@
 <p>To speed up our example, lets take a subset of the year of data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_pattern</span> <span class="o">=</span> <span class="n">file_pattern</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If the subset_flag == True (default), the list of input files will</span>
+<span class="c1"># be subset to speed up the processing</span>
+<span class="n">subset_flag</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">subset_flag</span><span class="p">:</span>
+    <span class="n">files_paths</span> <span class="o">=</span> <span class="n">files_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1053,26 +1038,26 @@
 </section>
 <section id="dask-specific-changes">
 <h2>Dask Specific Changes<a class="headerlink" href="#dask-specific-changes" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-<p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">generate_json_reference</span></code> to create the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files, we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
-<p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list of delayed objects to create  <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files in parallel.</p>
+<p>Here is the section of code that will change. Instead of iterating through each input file and using <code class="docutils literal notranslate"><span class="pre">open_virtual_dataset</span></code> to create the virtual datasets, we are iterating through our input file list and creating <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>. It is not super important to understand this, but a <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Object</span></code> is lazy, meaning it is not computed eagerly. Once we have iterated through all our input files, we end up with a list of <code class="docutils literal notranslate"><span class="pre">Dask</span> <span class="pre">Delayed</span> <span class="pre">Objects</span></code>.</p>
+<p>When we are ready, we can call <code class="docutils literal notranslate"><span class="pre">dask.compute</span></code> on this list of delayed objects to create virtual datasets in parallel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Kerchunk&#39;s `SingleHdf5ToZarr` method to create a `Kerchunk` index</span>
-<span class="c1"># from a NetCDF file.</span>
-
-
-<span class="k">def</span> <span class="nf">generate_json_reference</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">fs_read</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="o">**</span><span class="n">so</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
-        <span class="n">h5chunks</span> <span class="o">=</span> <span class="n">SingleHdf5ToZarr</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">fil</span><span class="p">,</span> <span class="n">inline_threshold</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-        <span class="n">fname</span> <span class="o">=</span> <span class="n">fil</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.nc&quot;</span><span class="p">)</span>
-        <span class="n">outf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">temp_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">.json&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outf</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">h5chunks</span><span class="o">.</span><span class="n">translate</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">outf</span>
-
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_virtual_dataset</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">storage_options</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">open_virtual_dataset</span><span class="p">(</span>
+        <span class="n">file</span><span class="p">,</span> <span class="n">indexes</span><span class="o">=</span><span class="p">{},</span> <span class="n">reader_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;storage_options&quot;</span><span class="p">:</span> <span class="n">storage_options</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">storage_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_fill_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default_cache_type</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
 <span class="c1"># Generate Dask Delayed objects</span>
-<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_json_reference</span><span class="p">)(</span><span class="n">fil</span><span class="p">,</span> <span class="n">temp_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">fil</span> <span class="ow">in</span> <span class="n">file_pattern</span><span class="p">]</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">dask</span><span class="o">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_virtual_dataset</span><span class="p">)(</span><span class="n">file</span><span class="p">,</span> <span class="n">storage_options</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files_paths</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1106,52 +1091,119 @@ The <code class="docutils literal notranslate"><span class="pre">Binder</span></
 <h2>Start the Dask Processing<a class="headerlink" href="#start-the-dask-processing" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start parallel computation of `SingleHDF5ToZarr`</span>
-<span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-01.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-02.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-03.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-04.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-05.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-06.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-07.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-08.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-09.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-10.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-11.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-12.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-13.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-14.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-15.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-16.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-17.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-18.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-19.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-20.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-21.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-22.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-23.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-24.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-25.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-26.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-27.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-28.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-29.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-30.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-01-31.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-01.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-02.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-03.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-04.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-05.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-06.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-07.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-08.json&#39;,
-  &#39;/tmp/tmp7enzo4ak/WRFDS_2060-02-09.json&#39;],)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;xarray.Dataset&gt; Size: 31MB
+ Dimensions:        (Time: 1, interp_levels: 9, south_north: 250,
+                     west_east: 320, soil_layers_stag: 4)
+ Coordinates:
+     interp_levels  (interp_levels) float32 36B ManifestArray&lt;shape=(9,), dtyp...
+     Time           (Time) int32 4B ManifestArray&lt;shape=(1,), dtype=int32, chu...
+ Dimensions without coordinates: south_north, west_east, soil_layers_stag
+ Data variables: (12/39)
+     V              (Time, interp_levels, south_north, west_east) float32 3MB ...
+     lat            (south_north, west_east) float32 320kB ManifestArray&lt;shape...
+     T2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     TSLB           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     LH             (Time, south_north, west_east) float32 320kB ManifestArray...
+     U10            (Time, south_north, west_east) float32 320kB ManifestArray...
+     ...             ...
+     Q2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     SWUPB          (Time, south_north, west_east) float32 320kB ManifestArray...
+     SLP            (Time, south_north, west_east) float32 320kB ManifestArray...
+     SH2O           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     QVAPOR         (Time, interp_levels, south_north, west_east) float32 3MB ...
+     PCPT           (Time, south_north, west_east) float32 320kB ManifestArray...
+ Attributes:
+     contact:  rtladerjr@alaska.edu
+     data:     Downscaled CCSM4
+     date:     Mon Oct 21 11:37:23 AKDT 2019
+     format:   version 2
+     info:     Alaska CASC,
+ &lt;xarray.Dataset&gt; Size: 31MB
+ Dimensions:        (Time: 1, interp_levels: 9, south_north: 250,
+                     west_east: 320, soil_layers_stag: 4)
+ Coordinates:
+     interp_levels  (interp_levels) float32 36B ManifestArray&lt;shape=(9,), dtyp...
+     Time           (Time) int32 4B ManifestArray&lt;shape=(1,), dtype=int32, chu...
+ Dimensions without coordinates: south_north, west_east, soil_layers_stag
+ Data variables: (12/39)
+     V              (Time, interp_levels, south_north, west_east) float32 3MB ...
+     lat            (south_north, west_east) float32 320kB ManifestArray&lt;shape...
+     T2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     TSLB           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     LH             (Time, south_north, west_east) float32 320kB ManifestArray...
+     U10            (Time, south_north, west_east) float32 320kB ManifestArray...
+     ...             ...
+     Q2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     SWUPB          (Time, south_north, west_east) float32 320kB ManifestArray...
+     SLP            (Time, south_north, west_east) float32 320kB ManifestArray...
+     SH2O           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     QVAPOR         (Time, interp_levels, south_north, west_east) float32 3MB ...
+     PCPT           (Time, south_north, west_east) float32 320kB ManifestArray...
+ Attributes:
+     contact:  rtladerjr@alaska.edu
+     data:     Downscaled CCSM4
+     date:     Mon Oct 21 11:40:02 AKDT 2019
+     format:   version 2
+     info:     Alaska CASC,
+ &lt;xarray.Dataset&gt; Size: 31MB
+ Dimensions:        (Time: 1, interp_levels: 9, south_north: 250,
+                     west_east: 320, soil_layers_stag: 4)
+ Coordinates:
+     interp_levels  (interp_levels) float32 36B ManifestArray&lt;shape=(9,), dtyp...
+     Time           (Time) int32 4B ManifestArray&lt;shape=(1,), dtype=int32, chu...
+ Dimensions without coordinates: south_north, west_east, soil_layers_stag
+ Data variables: (12/39)
+     V              (Time, interp_levels, south_north, west_east) float32 3MB ...
+     lat            (south_north, west_east) float32 320kB ManifestArray&lt;shape...
+     T2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     TSLB           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     LH             (Time, south_north, west_east) float32 320kB ManifestArray...
+     U10            (Time, south_north, west_east) float32 320kB ManifestArray...
+     ...             ...
+     Q2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     SWUPB          (Time, south_north, west_east) float32 320kB ManifestArray...
+     SLP            (Time, south_north, west_east) float32 320kB ManifestArray...
+     SH2O           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     QVAPOR         (Time, interp_levels, south_north, west_east) float32 3MB ...
+     PCPT           (Time, south_north, west_east) float32 320kB ManifestArray...
+ Attributes:
+     contact:  rtladerjr@alaska.edu
+     data:     Downscaled CCSM4
+     date:     Mon Oct 21 11:42:40 AKDT 2019
+     format:   version 2
+     info:     Alaska CASC,
+ &lt;xarray.Dataset&gt; Size: 31MB
+ Dimensions:        (Time: 1, interp_levels: 9, south_north: 250,
+                     west_east: 320, soil_layers_stag: 4)
+ Coordinates:
+     interp_levels  (interp_levels) float32 36B ManifestArray&lt;shape=(9,), dtyp...
+     Time           (Time) int32 4B ManifestArray&lt;shape=(1,), dtype=int32, chu...
+ Dimensions without coordinates: south_north, west_east, soil_layers_stag
+ Data variables: (12/39)
+     V              (Time, interp_levels, south_north, west_east) float32 3MB ...
+     lat            (south_north, west_east) float32 320kB ManifestArray&lt;shape...
+     T2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     TSLB           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     LH             (Time, south_north, west_east) float32 320kB ManifestArray...
+     U10            (Time, south_north, west_east) float32 320kB ManifestArray...
+     ...             ...
+     Q2             (Time, south_north, west_east) float32 320kB ManifestArray...
+     SWUPB          (Time, south_north, west_east) float32 320kB ManifestArray...
+     SLP            (Time, south_north, west_east) float32 320kB ManifestArray...
+     SH2O           (Time, soil_layers_stag, south_north, west_east) float32 1MB ManifestArray&lt;shape=(1, 4, 250, 320), dtype=float32, chunks=(1, 4, 250, 32...
+     QVAPOR         (Time, interp_levels, south_north, west_east) float32 3MB ...
+     PCPT           (Time, south_north, west_east) float32 320kB ManifestArray...
+ Attributes:
+     contact:  rtladerjr@alaska.edu
+     data:     Downscaled CCSM4
+     date:     Mon Oct 21 11:45:30 AKDT 2019
+     format:   version 2
+     info:     Alaska CASC)
 </pre></div>
 </div>
 </div>
@@ -1169,36 +1221,35 @@ The <code class="docutils literal notranslate"><span class="pre">Binder</span></
 </section>
 <section id="timing">
 <h2>Timing<a class="headerlink" href="#timing" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-<p>To demonstrate how Dask can speed-up your <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference generation, the next section will show the timing of generating reference files with and without Dask.
-For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fine folks at <a class="reference external" href="https://2i2c.org/">2i2c</a>) with ~32 CPU and ~256G RAM. It is also important to note that the data is also hosted on AWS.</p>
+<p>To demonstrate how Dask can speed-up your virtual dataset generation, the next section will show the timing of generating reference files with and without Dask.
+For reference, the timing was run on a large AWS Jupyter-Hub (managed by the fine folks at <a class="reference external" href="https://2i2c.org/">2i2c</a>) with ~16 CPU and ~64 GB RAM. It is also important to note that the data is also hosted on AWS.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Serial Kerchunk</p></th>
-<th class="head"><p>Parallel Kerchunk (Dask)</p></th>
+<tr class="row-odd"><th class="head"><p>Serial Virtualization</p></th>
+<th class="head"><p>Parallel Virtualization (Dask)</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>3min 41s</p></td>
-<td><p>39.2 s</p></td>
+<tr class="row-even"><td><p>7 min 22 s</p></td>
+<td><p>36 s</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Running our <code class="docutils literal notranslate"><span class="pre">Dask</span></code> version on a subset of 40 files took only ~39 seconds. In comparison, computing the <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> indices one-by-one in  took about 3 minutes and 41 seconds.</p>
-<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run almost <strong>6x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds its task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
+<p>Running our <code class="docutils literal notranslate"><span class="pre">Dask</span></code> version on the year of data took only ~36 seconds. In comparison, creating the <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> virtual datasets one-by-one took about 7 minutes and 22 seconds.</p>
+<p>Just by changing a few lines of code and using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, we got our code to run <strong>11x faster</strong>. One other detail to note is that there is usually a bit of a delay as <code class="docutils literal notranslate"><span class="pre">Dask</span></code> builds its task graph before any of the tasks are started. All that to say, you may see even better performance when using <code class="docutils literal notranslate"><span class="pre">Dask</span></code>, <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code>, and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> on larger datasets.</p>
 <p>Note: These timings may vary for you. There are many factors that may affect performance, such as:</p>
 <ul class="simple">
 <li><p>Geographical location of your compute and the source data</p></li>
 <li><p>Internet speed</p></li>
 <li><p>Compute resources, IO limits and # of workers given to <code class="docutils literal notranslate"><span class="pre">Dask</span></code></p></li>
 <li><p>Location of where to write reference files to (cloud vs local)</p></li>
-<li><p>Type of reference files (<code class="docutils literal notranslate"><span class="pre">Parquet</span></code> vs <code class="docutils literal notranslate"><span class="pre">.JSON</span></code>)</p></li>
 </ul>
 <p>This is meant to be an example of how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to speed-up <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> not a detailed benchmark in <code class="docutils literal notranslate"><span class="pre">Kerchunk/Dask</span></code> performance.</p>
 </section>
 <section id="next-steps">
 <h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-<p>In this notebook we demonstrated how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to parallelize the creation of <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reference files. In the following <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section, we will walk though examples of using <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> with <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to create virtual cloud-optimized datasets.</p>
+<p>In this notebook we demonstrated how <code class="docutils literal notranslate"><span class="pre">Dask</span></code> can be used to parallelize the creation of virtual datasets. In the following <code class="docutils literal notranslate"><span class="pre">Case</span> <span class="pre">Studies</span></code> section, we will walk though examples of using <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> and <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> with <code class="docutils literal notranslate"><span class="pre">Dask</span></code> to create virtual cloud-optimized datasets.</p>
 <p>Additionally, if you wish to explore more of <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <code class="docutils literal notranslate"><span class="pre">Dask</span></code> integration, you can try checking out <code class="docutils literal notranslate"><span class="pre">Kerchunk's</span></code> <a class="reference external" href="https://fsspec.github.io/kerchunk/reference.html?highlight=auto%20dask#kerchunk.combine.auto_dask">auto_dask</a> method, which combines many of the <code class="docutils literal notranslate"><span class="pre">Dask</span></code> setup steps into a single convenient function.</p>
 </section>
 </section>
@@ -1239,7 +1290,7 @@ For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fin
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Multi-File Datasets with Kerchunk</p>
+        <p class="prev-next-title">Multi-file virtual datasets with VirtualiZarr</p>
       </div>
     </a>
     <a class="right-next"
@@ -1247,7 +1298,7 @@ For reference, the timing was run on a Large AWS Jupyter-Hub (managed by the fin
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Store Kerchunk Reference Files as Parquet</p>
+        <p class="prev-next-title">Store virtual datasets as Kerchunk Parquet references</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1521,7 +1572,7 @@ By Norland Raphael Hagen
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on 11 November 2024.
+  Last updated on 2 December 2024.
   <br/>
 </p>
   </div>
@@ -1575,7 +1626,7 @@ By Norland Raphael Hagen
         
           By Norland Raphael Hagen.
         
-          Last updated on 11 November 2024.
+          Last updated on 2 December 2024.
         </p>
       </div>
     </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Kerchunk Cookbook &#8212; Kerchunk Cookbook</title>
+    <title>Virtual Zarr Cookbook (Kerchunk and VirtualiZarr) &#8212; Kerchunk Cookbook</title>
   
   
   
@@ -82,7 +82,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="11 November 2024"/>
+    <meta name="docbuild:last-update" content="2 December 2024"/>
   </head>
   
   
@@ -364,7 +364,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Kerchunk Cookbook
+                    Virtual Zarr Cookbook (Kerchunk and VirtualiZarr)
                 </a>
             </li>
         </ul>
@@ -374,13 +374,13 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/foundations/01_kerchunk_basics.html">Kerchunk Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/foundations/02_kerchunk_multi_file.html">Multi-File Datasets with Kerchunk</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/foundations/03_kerchunk_dask.html">Kerchunk and Dask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/foundations/01_kerchunk_basics.html">Basics of virtual Zarr stores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/foundations/02_kerchunk_multi_file.html">Multi-file virtual datasets with VirtualiZarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/foundations/03_kerchunk_dask.html">Parallel virtual dataset creation with VirtualiZarr, Kerchunk, and Dask</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced/Parquet_Reference_Storage.html">Store Kerchunk Reference Files as Parquet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced/Parquet_Reference_Storage.html">Store virtual datasets as Kerchunk Parquet references</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="notebooks/advanced/appending.html">Appending to Kerchunk references</a></li>
@@ -432,31 +432,29 @@
                   <article class="bd-article">
                     
   <a class="reference internal image-reference" href="_images/thumbnail.png"><img alt="thumbnail" src="_images/thumbnail.png" style="width: 300px;" /></a>
-<section class="tex2jax_ignore mathjax_ignore" id="kerchunk-cookbook">
-<h1>Kerchunk Cookbook<a class="headerlink" href="#kerchunk-cookbook" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="virtual-zarr-cookbook-kerchunk-and-virtualizarr">
+<h1>Virtual Zarr Cookbook (Kerchunk and VirtualiZarr)<a class="headerlink" href="#virtual-zarr-cookbook-kerchunk-and-virtualizarr" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <p><a class="reference external" href="https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml"><img alt="nightly-build" src="https://github.com/ProjectPythia/kerchunk-cookbook/actions/workflows/nightly-build.yaml/badge.svg" /></a>
 <a class="reference external" href="https://binder.projectpythia.org/v2/gh/ProjectPythia/kerchunk-cookbook/main?labpath=notebooks"><img alt="Binder" src="https://binder.projectpythia.org/badge_logo.svg" /></a>
 <a class="reference external" href="https://zenodo.org/badge/latestdoi/588661659"><img alt="DOI" src="https://zenodo.org/badge/588661659.svg" /></a></p>
-<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk</a>
-library to access archival data formats as if they were
-ARCO (Analysis-Ready-Cloud-Optimized) data.</p>
+<p>This Project Pythia Cookbook covers using the <a class="reference external" href="https://fsspec.github.io/kerchunk/">Kerchunk</a>, <a class="reference external" href="https://virtualizarr.readthedocs.io/en/latest/index.html">VirtualiZarr</a>, and <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr-Python</a> libraries to access archival data formats as if they were ARCO (Analysis-Ready-Cloud-Optimized) data.</p>
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library allows you to access chunked and compressed
+<p>The <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> library pioneered the access of chunked and compressed
 data formats (such as NetCDF3. HDF5, GRIB2, TIFF &amp; FITS), many of
 which are the primary data formats for many data archives, as if
 they were in ARCO formats such as Zarr which allows for parallel,
 chunk-specific access. Instead of creating a new copy of the dataset
 in the Zarr spec/format, <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> reads through the data archive
 and extracts the byte range and compression information of each
-chunk, then writes that information to a .json file (or alternate
-backends in future releases). For more details on how this process
-works please see this page on the
-<a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).
-These summary files can then be combined to generated a <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code>
-reference for that dataset, which can be read via
-<a class="reference external" href="https://zarr.readthedocs.io">Zarr</a> and
+chunk, then writes that information to a “virtual Zarr store” using a
+JSON or Parquet “reference file”. The <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code>
+library provides a simple way to create these “virtual stores” using familiary
+<code class="docutils literal notranslate"><span class="pre">xarray</span></code> syntax. Lastly, the <code class="docutils literal notranslate"><span class="pre">icechunk</span></code> provides a new way to store and re-use these references.</p>
+<p>These virtual Zarr stores can be re-used and read via <a class="reference external" href="https://zarr.readthedocs.io">Zarr</a> and
 <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a>.</p>
+<p>For more details on how this process works please see this page on the
+<a class="reference external" href="https://fsspec.github.io/kerchunk/detail.html">Kerchunk docs</a>).</p>
 </section>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
@@ -477,23 +475,23 @@ the creator of <code class="docutils literal notranslate"><span class="pre">Kerc
 <p>This cookbook is broken up into two sections,
 Foundations and Example Notebooks.</p>
 <section id="section-1-foundations">
-<h3>Section 1 Foundations<a class="headerlink" href="#section-1-foundations" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<h3>Section 1 - Foundations<a class="headerlink" href="#section-1-foundations" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
 <p>In the <code class="docutils literal notranslate"><span class="pre">Foundations</span></code> section we will demonstrate
-how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create reference sets
+how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> to create reference files
 from single file sources, as well as to create
-multi-file virtual datasets from collections of files.</p>
+multi-file virtual Zarr stores from collections of files.</p>
 </section>
-<section id="section-2-generating-reference-files">
-<h3>Section 2 Generating Reference Files<a class="headerlink" href="#section-2-generating-reference-files" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
-<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Generating</span> <span class="pre">Reference</span> <span class="pre">Files</span></code> section
-demonstrate how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> to create
+<section id="section-2-generating-virtual-zarr-stores">
+<h3>Section 2 - Generating Virtual Zarr Stores<a class="headerlink" href="#section-2-generating-virtual-zarr-stores" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<p>The notebooks in the <code class="docutils literal notranslate"><span class="pre">Generating</span> <span class="pre">Virtual</span> <span class="pre">Zarr</span> <span class="pre">Stores</span></code> section
+demonstrates how to use <code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> and <code class="docutils literal notranslate"><span class="pre">VirtualiZarr</span></code> to create
 datasets for all the supported file formats.
-<code class="docutils literal notranslate"><span class="pre">Kerchunk</span></code> currently supports NetCDF3,
-NetCDF4/HDF5, GRIB2, TIFF (including CoG).</p>
+These libraries currently support virtualizing NetCDF3,
+NetCDF4/HDF5, GRIB2, TIFF (including COG).</p>
 </section>
-<section id="section-3-using-pre-generated-references">
-<h3>Section 3 Using Pre-Generated References<a class="headerlink" href="#section-3-using-pre-generated-references" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">Pre-Generated</span> <span class="pre">References</span></code> section contains notebooks demonstrating how to load existing references into <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> and <code class="docutils literal notranslate"><span class="pre">Xarray-Datatree</span></code>, generated coordinates for GeoTiffs using <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code> and plotting using <code class="docutils literal notranslate"><span class="pre">Hvplot</span> <span class="pre">Datashader</span></code>.</p>
+<section id="section-3-using-virtual-zarr-stores">
+<h3>Section 3 - Using Virtual Zarr Stores<a class="headerlink" href="#section-3-using-virtual-zarr-stores" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Using</span> <span class="pre">Virtual</span> <span class="pre">Zarr</span> <span class="pre">Stores</span></code> section contains notebooks demonstrating how to load existing references into <code class="docutils literal notranslate"><span class="pre">Xarray</span></code>, generating coordinates for GeoTiffs using <code class="docutils literal notranslate"><span class="pre">xrefcoord</span></code>, and plotting using <code class="docutils literal notranslate"><span class="pre">Hvplot</span> <span class="pre">Datashader</span></code>.</p>
 </section>
 </section>
 <section id="running-the-notebooks">
@@ -623,9 +621,9 @@ jupyter<span class="w"> </span>lab
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-1-foundations">Section 1 Foundations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-2-generating-reference-files">Section 2 Generating Reference Files</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-3-using-pre-generated-references">Section 3 Using Pre-Generated References</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-1-foundations">Section 1 - Foundations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-2-generating-virtual-zarr-stores">Section 2 - Generating Virtual Zarr Stores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-3-using-virtual-zarr-stores">Section 3 - Using Virtual Zarr Stores</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-notebooks">Running the Notebooks</a><ul class="nav section-nav flex-column">
@@ -836,7 +834,7 @@ By Norland Raphael Hagen
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on 11 November 2024.
+  Last updated on 2 December 2024.
   <br/>
 </p>
   </div>
@@ -890,7 +888,7 @@ By Norland Raphael Hagen
         
           By Norland Raphael Hagen.
         
-          Last updated on 11 November 2024.
+          Last updated on 2 December 2024.
         </p>
       </div>
     </div>
