@@ -1,0 +1,132 @@
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Start parallel processing
+import warnings
+
+warnings.filterwarnings("ignore")
+virtual_datasets = dask.compute(*tasks)
+------------------
+
+----- stderr -----
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+----- stderr -----
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+----- stderr -----
+2025-06-17 19:15:59,221 - distributed.worker - ERROR - Compute Failed
+Key:       generate_virtual_dataset-ec8c96a7-56e0-48a3-93fb-2dbe2f24eb11
+State:     executing
+Task:  <Task 'generate_virtual_dataset-ec8c96a7-56e0-48a3-93fb-2dbe2f24eb11' generate_virtual_dataset(...)>
+Exception: 'NotImplementedError("Doesn\'t support slicing with (None, slice(None, None, None))")'
+Traceback: '  File "/tmp/ipykernel_4869/4131322973.py", line 17, in generate_virtual_dataset\n  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/core/dataset.py", line 4568, in expand_dims\n    variables[k] = v.set_dims(dict(all_dims))\n                   ~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/util/deprecation_helpers.py", line 143, in wrapper\n    return func(*args, **kwargs)\n  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/core/variable.py", line 1395, in set_dims\n    expanded_data = self.data[indexer]\n                    ~~~~~~~~~^^^^^^^^^\n  File "/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/manifests/array.py", line 226, in __getitem__\n    raise NotImplementedError(f"Doesn\'t support slicing with {indexer}")\n'
+
+/home/runner/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/tiff.py:47: UserWarning: storage_options have been dropped from reader_options as they are not supported by kerchunk.tiff.tiff_to_zarr
+  warnings.warn(
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mNotImplementedError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[9][39m[32m, line 5[39m
+[32m      2[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mwarnings[39;00m
+[32m      4[39m warnings.filterwarnings([33m"[39m[33mignore[39m[33m"[39m)
+[32m----> [39m[32m5[39m virtual_datasets = [43mdask[49m[43m.[49m[43mcompute[49m[43m([49m[43m*[49m[43mtasks[49m[43m)[49m
+
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/dask/base.py:681[39m, in [36mcompute[39m[34m(traverse, optimize_graph, scheduler, get, *args, **kwargs)[39m
+[32m    678[39m     expr = expr.optimize()
+[32m    679[39m     keys = [38;5;28mlist[39m(flatten(expr.__dask_keys__()))
+[32m--> [39m[32m681[39m     results = [43mschedule[49m[43m([49m[43mexpr[49m[43m,[49m[43m [49m[43mkeys[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+[32m    683[39m [38;5;28;01mreturn[39;00m repack(results)
+
+[36mCell[39m[36m [39m[32mIn[7][39m[32m, line 17[39m, in [36mgenerate_virtual_dataset[39m[34m()[39m
+[32m     15[39m subst = file.split([33m"[39m[33m/[39m[33m"[39m)[-[32m1[39m].split([33m"[39m[33m.json[39m[33m"[39m)[[32m0[39m].split([33m"[39m[33m_[39m[33m"[39m)[[32m0[39m]
+[32m     16[39m time_val = datetime.strptime(subst, [33m"[39m[33m%[39m[33mY[39m[33m%[39m[33mm[39m[38;5;132;01m%d[39;00m[33m%[39m[33mH[39m[33m%[39m[33mM[39m[33m"[39m)
+[32m---> [39m[32m17[39m vds = vds.expand_dims(dim={[33m"[39m[33mtime[39m[33m"[39m: [time_val]})
+[32m     18[39m [38;5;66;03m# Only include the raw data, not the overviews[39;00m
+[32m     19[39m vds = vds[[[33m"[39m[33m0[39m[33m"[39m]]
+
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/core/dataset.py:4568[39m, in [36mexpand_dims[39m[34m()[39m
+[32m   4566[39m         [38;5;28;01mfor[39;00m d, c [38;5;129;01min[39;00m zip_axis_dim:
+[32m   4567[39m             all_dims.insert(d, c)
+[32m-> [39m[32m4568[39m         variables[k] = v.set_dims([38;5;28mdict[39m(all_dims))
+[32m   4569[39m [38;5;28;01melif[39;00m k [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m variables:
+[32m   4570[39m     [38;5;28;01mif[39;00m k [38;5;129;01min[39;00m coord_names [38;5;129;01mand[39;00m create_index_for_new_dim:
+[32m   4571[39m         [38;5;66;03m# If dims includes a label of a non-dimension coordinate,[39;00m
+[32m   4572[39m         [38;5;66;03m# it will be promoted to a 1D coordinate with a single value.[39;00m
+
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/util/deprecation_helpers.py:143[39m, in [36mwrapper[39m[34m()[39m
+[32m    135[39m     emit_user_level_warning(
+[32m    136[39m         [33mf[39m[33m"[39m[33mThe `[39m[38;5;132;01m{[39;00mold_name[38;5;132;01m}[39;00m[33m` argument has been renamed to `dim`, and will be removed [39m[33m"[39m
+[32m    137[39m         [33m"[39m[33min the future. This renaming is taking place throughout xarray over the [39m[33m"[39m
+[32m   (...)[39m[32m    140[39m         [38;5;167;01mPendingDeprecationWarning[39;00m,
+[32m    141[39m     )
+[32m    142[39m     kwargs[[33m"[39m[33mdim[39m[33m"[39m] = kwargs.pop(old_name)
+[32m--> [39m[32m143[39m [38;5;28;01mreturn[39;00m func(*args, **kwargs)
+
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/core/variable.py:1395[39m, in [36mset_dims[39m[34m()[39m
+[32m   1388[39m [38;5;28;01melif[39;00m shape [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mor[39;00m [38;5;28mall[39m(
+[32m   1389[39m     s == [32m1[39m [38;5;28;01mfor[39;00m s, e [38;5;129;01min[39;00m [38;5;28mzip[39m(shape, dim, strict=[38;5;28;01mTrue[39;00m) [38;5;28;01mif[39;00m e [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m self_dims
+[32m   1390[39m ):
+[32m   1391[39m     [38;5;66;03m# "Trivial" broadcasting, i.e. simply inserting a new dimension[39;00m
+[32m   1392[39m     [38;5;66;03m# This is typically easier for duck arrays to implement[39;00m
+[32m   1393[39m     [38;5;66;03m# than the full "broadcast_to" semantics[39;00m
+[32m   1394[39m     indexer = ([38;5;28;01mNone[39;00m,) * ([38;5;28mlen[39m(expanded_dims) - [38;5;28mself[39m.ndim) + (...,)
+[32m-> [39m[32m1395[39m     expanded_data = [38;5;28mself[39m.data[indexer]
+[32m   1396[39m [38;5;28;01melse[39;00m:  [38;5;66;03m# elif shape is not None:[39;00m
+[32m   1397[39m     dims_map = [38;5;28mdict[39m([38;5;28mzip[39m(dim, shape, strict=[38;5;28;01mTrue[39;00m))
+
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/manifests/array.py:226[39m, in [36m__getitem__[39m[34m()[39m
+[32m    224[39m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m
+[32m    225[39m [38;5;28;01melse[39;00m:
+[32m--> [39m[32m226[39m     [38;5;28;01mraise[39;00m [38;5;167;01mNotImplementedError[39;00m([33mf[39m[33m"[39m[33mDoesn[39m[33m'[39m[33mt support slicing with [39m[38;5;132;01m{[39;00mindexer[38;5;132;01m}[39;00m[33m"[39m)
+
+[31mNotImplementedError[39m: Doesn't support slicing with (None, slice(None, None, None))
+
