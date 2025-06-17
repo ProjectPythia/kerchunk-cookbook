@@ -1,12 +1,12 @@
 version: 1
 extends:
-  - https://raw.githubusercontent.com/projectpythia-mystmd/pythia-config/main/pythia.yml
+  - https://raw.githubusercontent.com/projectpythia/pythia-config/main/pythia.yml
 project:
 project:
   title: Kerchunk Cookbook
   authors:
     - name: Norland Raphael Hagen
-  github: https://github.com/projectpythia-mystmd/kerchunk-cookbook
+  github: https://github.com/projectpythia/kerchunk-cookbook
   copyright: '2024'
   toc:
     - file: README.md
@@ -35,7 +35,7 @@ project:
         - file: notebooks/using_references/Hvplot_Datashader.ipynb
   jupyter:
       binder:
-        repo: projectpythia-mystmd/kerchunk-cookbook
+        repo: projectpythia/kerchunk-cookbook
 site:
   options:
     logo: notebooks/images/logos/pythia_logo-white-rtext.svg
