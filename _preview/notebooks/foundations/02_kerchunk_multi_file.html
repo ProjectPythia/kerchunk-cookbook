@@ -601,47 +601,37 @@ This function:</p>
 <span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="n">path</span><span class="o">=</span><span class="n">filepath</span><span class="p">,</span> <span class="n">reader_options</span><span class="o">=</span><span class="n">reader_options</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span>
 <span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="p">)</span>
 
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:419,</span> in <span class="ni">HDFVirtualBackend._virtual_vars_from_hdf</span><span class="nt">(path, group, drop_variables, reader_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drop_variables</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">419</span>         <span class="n">variable</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_dataset_to_variable</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">420</span>             <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">421</span>             <span class="n">dataset</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="n">key</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">422</span>             <span class="n">group</span><span class="o">=</span><span class="n">group_name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">423</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">424</span>         <span class="k">if</span> <span class="n">variable</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span>             <span class="n">variables</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">variable</span>
+<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:412,</span> in <span class="ni">HDFVirtualBackend._virtual_vars_from_hdf</span><span class="nt">(path, group, drop_variables, reader_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>     <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span> <span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="ne">--&gt; </span><span class="mi">412</span> <span class="n">non_coordinate_dimesion_vars</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_find_non_coord_dimension_vars</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">413</span>     <span class="n">group</span><span class="o">=</span><span class="n">g</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">415</span> <span class="n">drop_variables</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">drop_variables</span> <span class="o">+</span> <span class="n">non_coordinate_dimesion_vars</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
 
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:329,</span> in <span class="ni">HDFVirtualBackend._dataset_to_variable</span><span class="nt">(path, dataset, group)</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="n">chunks</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">chunks</span> <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">chunks</span> <span class="k">else</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span>
-<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="n">codecs</span> <span class="o">=</span> <span class="n">codecs_from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">329</span> <span class="n">cfcodec</span> <span class="o">=</span> <span class="n">cfcodec_from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_extract_attrs</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="n">cf_fill_value</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_extract_cf_fill_value</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/filters.py:144,</span> in <span class="ni">cfcodec_from_dataset</span><span class="nt">(dataset)</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">def</span><span class="w"> </span><span class="nf">cfcodec_from_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Codec</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="sd">     Converts select h5py dataset CF convention attrs to CFCodec</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span><span class="sd"> </span>
-<span class="sd">   (...)    142         A CFCodec.</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">144</span>     <span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span><span class="n">attr</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">attrs</span><span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span>     <span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="k">if</span> <span class="s2">&quot;scale_factor&quot;</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/h5py/_hl/attrs.py:264,</span> in <span class="ni">AttributeManager.__iter__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span>         <span class="n">idx_type</span> <span class="o">=</span> <span class="n">h5</span><span class="o">.</span><span class="n">INDEX_NAME</span>
-<span class="ne">--&gt; </span><span class="mi">264</span>     <span class="n">h5a</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="n">iter_cb</span><span class="p">,</span> <span class="n">index_type</span><span class="o">=</span><span class="n">idx_type</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">266</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">attrlist</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span>     <span class="k">yield</span> <span class="n">name</span>
+<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:454,</span> in <span class="ni">HDFVirtualBackend._find_non_coord_dimension_vars</span><span class="nt">(group)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> <span class="n">non_coordinate_dimension_variables</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>     <span class="k">if</span> <span class="s2">&quot;_Netcdf4Dimid&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">dimension_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
 <span class="nn">File h5py/_objects.pyx:56,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
 
 <span class="nn">File h5py/_objects.pyx:57,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
 
-<span class="nn">File h5py/h5a.pyx:296,</span> in <span class="ni">h5py.h5a.iterate</span><span class="nt">()</span>
+<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/h5py/_hl/attrs.py:272,</span> in <span class="ni">AttributeManager.__contains__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">269</span> <span class="nd">@with_phil</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span> <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">271</span><span class="w">     </span><span class="sd">&quot;&quot;&quot; Determine if an attribute exists, by name. &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">272</span>     <span class="k">return</span> <span class="n">h5a</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_e</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="nn">File h5py/_objects.pyx:56,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
+
+<span class="nn">File h5py/_objects.pyx:57,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
+
+<span class="nn">File h5py/h5a.pyx:103,</span> in <span class="ni">h5py.h5a.exists</span><span class="nt">()</span>
 
 <span class="nn">File h5py/h5fd.pyx:162,</span> in <span class="ni">h5py.h5fd.H5FD_fileobj_read</span><span class="nt">()</span>
 

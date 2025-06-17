@@ -467,153 +467,6 @@ In this tutorial we will:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;s3://wrf-se-ak-ar5/ccsm/rcp85/daily/2060/WRFDS_2060-01-01.nc&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Create a virtual dataset using VirtualiZarr.</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># We specify `indexes={}` to avoid creating in-memory pandas indexes for each 1D coordinate, since concatenating with pandas indexes is not yet supported in VirtualiZarr</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">virtual_ds</span> <span class="o">=</span> <span class="n">open_virtual_dataset</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">url</span><span class="p">,</span> <span class="n">indexes</span><span class="o">=</span><span class="p">{},</span> <span class="n">reader_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;storage_options&quot;</span><span class="p">:</span> <span class="n">storage_options</span><span class="p">}</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Write the virtual dataset to disk as a Kerchunk JSON. We could alternative write to a Kerchunk JSON or Icechunk Store.</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">virtual_ds</span><span class="o">.</span><span class="n">virtualize</span><span class="o">.</span><span class="n">to_kerchunk</span><span class="p">(</span><span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/backend.py:199,</span> in <span class="ni">open_virtual_dataset</span><span class="nt">(filepath, filetype, group, drop_variables, loadable_variables, decode_times, cftime_variables, indexes, virtual_array_class, virtual_backend_kwargs, reader_options, backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span> <span class="k">if</span> <span class="n">backend_cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span>     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported file type: </span><span class="si">{</span><span class="n">filetype</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">199</span> <span class="n">vds</span> <span class="o">=</span> <span class="n">backend_cls</span><span class="o">.</span><span class="n">open_virtual_dataset</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span>     <span class="n">filepath</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">203</span>     <span class="n">loadable_variables</span><span class="o">=</span><span class="n">loadable_variables</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="n">decode_times</span><span class="o">=</span><span class="n">decode_times</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">205</span>     <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span>     <span class="n">virtual_backend_kwargs</span><span class="o">=</span><span class="n">virtual_backend_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span>     <span class="n">reader_options</span><span class="o">=</span><span class="n">reader_options</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">return</span> <span class="n">vds</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:86,</span> in <span class="ni">HDFVirtualBackend.open_virtual_dataset</span><span class="nt">(filepath, group, drop_variables, loadable_variables, decode_times, indexes, virtual_backend_kwargs, reader_options)</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="n">drop_variables</span><span class="p">,</span> <span class="n">loadable_variables</span> <span class="o">=</span> <span class="n">check_for_collisions</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="n">drop_variables</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span>     <span class="n">loadable_variables</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">80</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span> <span class="n">filepath</span> <span class="o">=</span> <span class="n">validate_and_normalize_path_to_uri</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span>     <span class="n">filepath</span><span class="p">,</span> <span class="n">fs_root</span><span class="o">=</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">as_uri</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">84</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">86</span> <span class="n">virtual_vars</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_virtual_vars_from_hdf</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span>     <span class="n">path</span><span class="o">=</span><span class="n">filepath</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span>     <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span> <span class="o">+</span> <span class="n">loadable_variables</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span>     <span class="n">reader_options</span><span class="o">=</span><span class="n">reader_options</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span> <span class="n">loadable_vars</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="n">maybe_open_loadable_vars_and_indexes</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">filepath</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="n">loadable_variables</span><span class="o">=</span><span class="n">loadable_variables</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">100</span>     <span class="n">decode_times</span><span class="o">=</span><span class="n">decode_times</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">101</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_get_group_attrs</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="n">path</span><span class="o">=</span><span class="n">filepath</span><span class="p">,</span> <span class="n">reader_options</span><span class="o">=</span><span class="n">reader_options</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:412,</span> in <span class="ni">HDFVirtualBackend._virtual_vars_from_hdf</span><span class="nt">(path, group, drop_variables, reader_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">409</span>     <span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">411</span> <span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="ne">--&gt; </span><span class="mi">412</span> <span class="n">non_coordinate_dimesion_vars</span> <span class="o">=</span> <span class="n">HDFVirtualBackend</span><span class="o">.</span><span class="n">_find_non_coord_dimension_vars</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">413</span>     <span class="n">group</span><span class="o">=</span><span class="n">g</span>
-<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span> <span class="n">drop_variables</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">drop_variables</span> <span class="o">+</span> <span class="n">non_coordinate_dimesion_vars</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/virtualizarr/readers/hdf/hdf.py:458,</span> in <span class="ni">HDFVirtualBackend._find_non_coord_dimension_vars</span><span class="nt">(group)</span>
-<span class="g g-Whitespace">    </span><span class="mi">456</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">457</span>     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">is</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">458</span>         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">get_storage_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dimension_names</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">459</span>             <span class="n">non_coordinate_dimension_variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">461</span> <span class="k">return</span> <span class="n">non_coordinate_dimension_variables</span>
-
-<span class="nn">File h5py/_objects.pyx:56,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
-
-<span class="nn">File h5py/_objects.pyx:57,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
-
-<span class="nn">File h5py/h5d.pyx:453,</span> in <span class="ni">h5py.h5d.DatasetID.get_storage_size</span><span class="nt">()</span>
-
-<span class="nn">File h5py/h5fd.pyx:162,</span> in <span class="ni">h5py.h5fd.H5FD_fileobj_read</span><span class="nt">()</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/spec.py:2129,</span> in <span class="ni">AbstractBufferedFile.readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2124</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;mirrors builtin file&#39;s readinto method</span>
-<span class="g g-Whitespace">   </span><span class="mi">2125</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">2126</span><span class="sd"> https://docs.python.org/3/library/io.html#io.RawIOBase.readinto</span>
-<span class="g g-Whitespace">   </span><span class="mi">2127</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2128</span> <span class="n">out</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2129</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">nbytes</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2130</span> <span class="n">out</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-<span class="g g-Whitespace">   </span><span class="mi">2131</span> <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/spec.py:2111,</span> in <span class="ni">AbstractBufferedFile.read</span><span class="nt">(self, length)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2108</span> <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2109</span>     <span class="c1"># don&#39;t even bother calling fetch</span>
-<span class="g g-Whitespace">   </span><span class="mi">2110</span>     <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">2111</span> <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">_fetch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2113</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2114</span>     <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> read: </span><span class="si">%i</span><span class="s2"> - </span><span class="si">%i</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2115</span>     <span class="bp">self</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">2118</span>     <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">_log_stats</span><span class="p">(),</span>
-<span class="g g-Whitespace">   </span><span class="mi">2119</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2120</span> <span class="bp">self</span><span class="o">.</span><span class="n">loc</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/caching.py:78,</span> in <span class="ni">BaseCache._fetch</span><span class="nt">(self, start, stop)</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="ow">or</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">stop</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">78</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetcher</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/s3fs/core.py:2378,</span> in <span class="ni">S3File._fetch_range</span><span class="nt">(self, start, end)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2376</span> <span class="k">def</span><span class="w"> </span><span class="nf">_fetch_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2377</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2378</span>         <span class="k">return</span> <span class="n">_fetch_range</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2379</span>             <span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2380</span>             <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2381</span>             <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2382</span>             <span class="bp">self</span><span class="o">.</span><span class="n">version_id</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2383</span>             <span class="n">start</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2384</span>             <span class="n">end</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2385</span>             <span class="n">req_kw</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">req_kw</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2386</span>         <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2388</span>     <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2389</span>         <span class="k">if</span> <span class="n">ex</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">EINVAL</span> <span class="ow">and</span> <span class="s2">&quot;pre-conditions&quot;</span> <span class="ow">in</span> <span class="n">ex</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/s3fs/core.py:2550,</span> in <span class="ni">_fetch_range</span><span class="nt">(fs, bucket, key, version_id, start, end, req_kw)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2548</span>     <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2549</span> <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Fetch: </span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2550</span> <span class="k">return</span> <span class="n">sync</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">loop</span><span class="p">,</span> <span class="n">_inner_fetch</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">version_id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">req_kw</span><span class="p">)</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/asyn.py:91,</span> in <span class="ni">sync</span><span class="nt">(loop, func, timeout, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run_coroutine_threadsafe</span><span class="p">(</span><span class="n">_runner</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">coro</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">timeout</span><span class="p">),</span> <span class="n">loop</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span>     <span class="c1"># this loops allows thread to get interrupted</span>
-<span class="ne">---&gt; </span><span class="mi">91</span>     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span>         <span class="k">break</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span>     <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/threading.py:659,</span> in <span class="ni">Event.wait</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span> <span class="n">signaled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flag</span>
-<span class="g g-Whitespace">    </span><span class="mi">658</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">signaled</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">659</span>     <span class="n">signaled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cond</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span> <span class="k">return</span> <span class="n">signaled</span>
-
-<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/threading.py:363,</span> in <span class="ni">Condition.wait</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">361</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">362</span>     <span class="k">if</span> <span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">363</span>         <span class="n">gotit</span> <span class="o">=</span> <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">364</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">365</span>         <span class="n">gotit</span> <span class="o">=</span> <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="opening-virtual-datasets">
@@ -632,6 +485,65 @@ In this tutorial we will:</p>
     <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;storage_options&quot;</span><span class="p">:</span> <span class="n">storage_options</span><span class="p">},</span>
 <span class="p">)</span>
 <span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">storage_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">remote_options</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">skip_instance_cache</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># We will use the &quot;kerchunk&quot; engine in `xr.open_dataset` and pass the `storage_options` to the `kerchunk` engine through `backend_kwargs`</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="s2">&quot;single_file_kerchunk.json&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;kerchunk&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;storage_options&quot;</span><span class="p">:</span> <span class="n">storage_options</span><span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">ds</span>
+
+<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/xarray/backends/api.py:687,</span> in <span class="ni">open_dataset</span><span class="nt">(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, chunked_array_type, from_array_kwargs, backend_kwargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">675</span> <span class="n">decoders</span> <span class="o">=</span> <span class="n">_resolve_decoders_kwargs</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="n">decode_cf</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">677</span>     <span class="n">open_backend_dataset_parameters</span><span class="o">=</span><span class="n">backend</span><span class="o">.</span><span class="n">open_dataset_parameters</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">683</span>     <span class="n">decode_coords</span><span class="o">=</span><span class="n">decode_coords</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">684</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">686</span> <span class="n">overwrite_encoded_chunks</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;overwrite_encoded_chunks&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">687</span> <span class="n">backend_ds</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">688</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">689</span>     <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span>     <span class="o">**</span><span class="n">decoders</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">693</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">_dataset_from_backend_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span>     <span class="n">backend_ds</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span>     <span class="n">filename_or_obj</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">705</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span> <span class="k">return</span> <span class="n">ds</span>
+
+<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/kerchunk/xarray_backend.py:13,</span> in <span class="ni">KerchunkBackend.open_dataset</span><span class="nt">(self, filename_or_obj, storage_options, open_dataset_options, **kw)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">def</span><span class="w"> </span><span class="nf">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">filename_or_obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">open_dataset_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">open_dataset_options</span> <span class="o">=</span> <span class="p">(</span><span class="n">open_dataset_options</span> <span class="ow">or</span> <span class="p">{})</span> <span class="o">|</span> <span class="n">kw</span>
+<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="n">ref_ds</span> <span class="o">=</span> <span class="n">open_reference_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>         <span class="n">filename_or_obj</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="n">open_dataset_options</span><span class="o">=</span><span class="n">open_dataset_options</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="k">return</span> <span class="n">ref_ds</span>
+
+<span class="nn">File ~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/kerchunk/xarray_backend.py:45,</span> in <span class="ni">open_reference_dataset</span><span class="nt">(filename_or_obj, storage_options, open_dataset_options)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="k">if</span> <span class="n">open_dataset_options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="n">open_dataset_options</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="ne">---&gt; </span><span class="mi">45</span> <span class="n">store</span> <span class="o">=</span> <span class="n">refs_as_store</span><span class="p">(</span><span class="n">filename_or_obj</span><span class="p">,</span> <span class="o">**</span><span class="n">storage_options</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="k">return</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>     <span class="n">store</span><span class="p">,</span> <span class="n">zarr_format</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">open_dataset_options</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="p">)</span>
+
+<span class="ne">TypeError</span>: refs_as_store() got an unexpected keyword argument &#39;skip_instance_cache&#39;
 </pre></div>
 </div>
 </div>
