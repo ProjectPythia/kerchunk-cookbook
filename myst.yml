@@ -2,7 +2,6 @@ version: 1
 extends:
   - https://raw.githubusercontent.com/projectpythia/pythia-config/main/pythia.yml
 project:
-project:
   title: Kerchunk Cookbook
   authors:
     - name: Norland Raphael Hagen
