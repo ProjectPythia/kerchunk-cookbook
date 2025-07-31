@@ -1,102 +1,5 @@
 [31m---------------------------------------------------------------------------[39m
-[31mCancelledError[39m                            Traceback (most recent call last)
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/connector.py:1268[39m, in [36mTCPConnector._wrap_create_connection[39m[34m(self, addr_infos, req, timeout, client_error, *args, **kwargs)[39m
-[32m   1265[39m [38;5;28;01masync[39;00m [38;5;28;01mwith[39;00m ceil_timeout(
-[32m   1266[39m     timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
-[32m   1267[39m ):
-[32m-> [39m[32m1268[39m     sock = [38;5;28;01mawait[39;00m aiohappyeyeballs.start_connection(
-[32m   1269[39m         addr_infos=addr_infos,
-[32m   1270[39m         local_addr_infos=[38;5;28mself[39m._local_addr_infos,
-[32m   1271[39m         happy_eyeballs_delay=[38;5;28mself[39m._happy_eyeballs_delay,
-[32m   1272[39m         interleave=[38;5;28mself[39m._interleave,
-[32m   1273[39m         loop=[38;5;28mself[39m._loop,
-[32m   1274[39m         socket_factory=[38;5;28mself[39m._socket_factory,
-[32m   1275[39m     )
-[32m   1276[39m     [38;5;66;03m# Add ssl_shutdown_timeout for Python 3.11+ when SSL is used[39;00m
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohappyeyeballs/impl.py:73[39m, in [36mstart_connection[39m[34m(addr_infos, local_addr_infos, happy_eyeballs_delay, interleave, loop, socket_factory)[39m
-[32m     72[39m [38;5;28;01mtry[39;00m:
-[32m---> [39m[32m73[39m     sock = [38;5;28;01mawait[39;00m _connect_sock(
-[32m     74[39m         current_loop,
-[32m     75[39m         exceptions,
-[32m     76[39m         addrinfo,
-[32m     77[39m         local_addr_infos,
-[32m     78[39m         [38;5;28;01mNone[39;00m,
-[32m     79[39m         socket_factory,
-[32m     80[39m     )
-[32m     81[39m     [38;5;28;01mbreak[39;00m
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohappyeyeballs/impl.py:208[39m, in [36m_connect_sock[39m[34m(loop, exceptions, addr_info, local_addr_infos, open_sockets, socket_factory)[39m
-[32m    207[39m             [38;5;28;01mraise[39;00m [38;5;167;01mOSError[39;00m([33mf[39m[33m"[39m[33mno matching local address with [39m[38;5;132;01m{[39;00mfamily[38;5;132;01m=}[39;00m[33m found[39m[33m"[39m)
-[32m--> [39m[32m208[39m [38;5;28;01mawait[39;00m loop.sock_connect(sock, address)
-[32m    209[39m [38;5;28;01mreturn[39;00m sock
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/asyncio/selector_events.py:641[39m, in [36mBaseSelectorEventLoop.sock_connect[39m[34m(self, sock, address)[39m
-[32m    640[39m [38;5;28;01mtry[39;00m:
-[32m--> [39m[32m641[39m     [38;5;28;01mreturn[39;00m [38;5;28;01mawait[39;00m fut
-[32m    642[39m [38;5;28;01mfinally[39;00m:
-[32m    643[39m     [38;5;66;03m# Needed to break cycles when an exception occurs.[39;00m
-
-[31mCancelledError[39m: 
-
-The above exception was the direct cause of the following exception:
-
-[31mTimeoutError[39m                              Traceback (most recent call last)
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/client.py:725[39m, in [36mClientSession._request.<locals>._connect_and_send_request[39m[34m(req)[39m
-[32m    724[39m [38;5;28;01mtry[39;00m:
-[32m--> [39m[32m725[39m     conn = [38;5;28;01mawait[39;00m [38;5;28mself[39m._connector.connect(
-[32m    726[39m         req, traces=traces, timeout=real_timeout
-[32m    727[39m     )
-[32m    728[39m [38;5;28;01mexcept[39;00m asyncio.TimeoutError [38;5;28;01mas[39;00m exc:
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/connector.py:642[39m, in [36mBaseConnector.connect[39m[34m(self, req, traces, timeout)[39m
-[32m    641[39m         [38;5;28;01mawait[39;00m trace.send_connection_create_start()
-[32m--> [39m[32m642[39m proto = [38;5;28;01mawait[39;00m [38;5;28mself[39m._create_connection(req, traces, timeout)
-[32m    643[39m [38;5;28;01mif[39;00m traces:
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/connector.py:1209[39m, in [36mTCPConnector._create_connection[39m[34m(self, req, traces, timeout)[39m
-[32m   1208[39m [38;5;28;01melse[39;00m:
-[32m-> [39m[32m1209[39m     _, proto = [38;5;28;01mawait[39;00m [38;5;28mself[39m._create_direct_connection(req, traces, timeout)
-[32m   1211[39m [38;5;28;01mreturn[39;00m proto
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/connector.py:1581[39m, in [36mTCPConnector._create_direct_connection[39m[34m(self, req, traces, timeout, client_error)[39m
-[32m   1580[39m [38;5;28;01massert[39;00m last_exc [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
-[32m-> [39m[32m1581[39m [38;5;28;01mraise[39;00m last_exc
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/connector.py:1550[39m, in [36mTCPConnector._create_direct_connection[39m[34m(self, req, traces, timeout, client_error)[39m
-[32m   1549[39m [38;5;28;01mtry[39;00m:
-[32m-> [39m[32m1550[39m     transp, proto = [38;5;28;01mawait[39;00m [38;5;28mself[39m._wrap_create_connection(
-[32m   1551[39m         [38;5;28mself[39m._factory,
-[32m   1552[39m         timeout=timeout,
-[32m   1553[39m         ssl=sslcontext,
-[32m   1554[39m         addr_infos=addr_infos,
-[32m   1555[39m         server_hostname=server_hostname,
-[32m   1556[39m         req=req,
-[32m   1557[39m         client_error=client_error,
-[32m   1558[39m     )
-[32m   1559[39m [38;5;28;01mexcept[39;00m (ClientConnectorError, asyncio.TimeoutError) [38;5;28;01mas[39;00m exc:
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/connector.py:1265[39m, in [36mTCPConnector._wrap_create_connection[39m[34m(self, addr_infos, req, timeout, client_error, *args, **kwargs)[39m
-[32m   1264[39m [38;5;28;01mtry[39;00m:
-[32m-> [39m[32m1265[39m     [38;5;28;01masync[39;00m [38;5;28;01mwith[39;00m ceil_timeout(
-[32m   1266[39m         timeout.sock_connect, ceil_threshold=timeout.ceil_threshold
-[32m   1267[39m     ):
-[32m   1268[39m         sock = [38;5;28;01mawait[39;00m aiohappyeyeballs.start_connection(
-[32m   1269[39m             addr_infos=addr_infos,
-[32m   1270[39m             local_addr_infos=[38;5;28mself[39m._local_addr_infos,
-[32m   (...)[39m[32m   1274[39m             socket_factory=[38;5;28mself[39m._socket_factory,
-[32m   1275[39m         )
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/asyncio/timeouts.py:116[39m, in [36mTimeout.__aexit__[39m[34m(self, exc_type, exc_val, exc_tb)[39m
-[32m    115[39m [38;5;28;01mif[39;00m [38;5;28missubclass[39m(exc_type, exceptions.CancelledError):
-[32m--> [39m[32m116[39m     [38;5;28;01mraise[39;00m [38;5;167;01mTimeoutError[39;00m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mexc_val[39;00m
-[32m    117[39m [38;5;28;01melif[39;00m exc_val [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
-
-[31mTimeoutError[39m: 
-
-The above exception was the direct cause of the following exception:
-
-[31mConnectionTimeoutError[39m                    Traceback (most recent call last)
+[31mFileNotFoundError[39m                         Traceback (most recent call last)
 [36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/implementations/reference.py:825[39m, in [36mReferenceFileSystem._cat_file[39m[34m(self, path, start, end, **kwargs)[39m
 [32m    824[39m [38;5;28;01mtry[39;00m:
 [32m--> [39m[32m825[39m     [38;5;28;01mreturn[39;00m [38;5;28;01mawait[39;00m [38;5;28mself[39m.fss[protocol]._cat_file(
@@ -104,29 +7,17 @@ The above exception was the direct cause of the following exception:
 [32m    827[39m     )
 [32m    828[39m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m e:
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/implementations/http.py:244[39m, in [36mHTTPFileSystem._cat_file[39m[34m(self, url, start, end, **kwargs)[39m
-[32m    243[39m session = [38;5;28;01mawait[39;00m [38;5;28mself[39m.set_session()
-[32m--> [39m[32m244[39m [38;5;28;01masync[39;00m [38;5;28;01mwith[39;00m session.get([38;5;28mself[39m.encode_url(url), **kw) [38;5;28;01mas[39;00m r:
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/implementations/http.py:246[39m, in [36mHTTPFileSystem._cat_file[39m[34m(self, url, start, end, **kwargs)[39m
 [32m    245[39m     out = [38;5;28;01mawait[39;00m r.read()
+[32m--> [39m[32m246[39m     [38;5;28;43mself[39;49m[43m.[49m[43m_raise_not_found_for_status[49m[43m([49m[43mr[49m[43m,[49m[43m [49m[43murl[49m[43m)[49m
+[32m    247[39m [38;5;28;01mreturn[39;00m out
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/client.py:1488[39m, in [36m_BaseRequestContextManager.__aenter__[39m[34m(self)[39m
-[32m   1487[39m [38;5;28;01masync[39;00m [38;5;28;01mdef[39;00m[38;5;250m [39m[34m__aenter__[39m([38;5;28mself[39m) -> _RetType:
-[32m-> [39m[32m1488[39m     [38;5;28mself[39m._resp: _RetType = [38;5;28;01mawait[39;00m [38;5;28mself[39m._coro
-[32m   1489[39m     [38;5;28;01mreturn[39;00m [38;5;28;01mawait[39;00m [38;5;28mself[39m._resp.[34m__aenter__[39m()
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/fsspec/implementations/http.py:228[39m, in [36mHTTPFileSystem._raise_not_found_for_status[39m[34m(self, response, url)[39m
+[32m    227[39m [38;5;28;01mif[39;00m response.status == [32m404[39m:
+[32m--> [39m[32m228[39m     [38;5;28;01mraise[39;00m [38;5;167;01mFileNotFoundError[39;00m(url)
+[32m    229[39m response.raise_for_status()
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/client.py:770[39m, in [36mClientSession._request[39m[34m(self, method, str_or_url, params, data, json, cookies, headers, skip_auto_headers, auth, allow_redirects, max_redirects, compress, chunked, expect100, raise_for_status, read_until_eof, proxy, proxy_auth, timeout, verify_ssl, fingerprint, ssl_context, ssl, server_hostname, proxy_headers, trace_request_ctx, read_bufsize, auto_decompress, max_line_size, max_field_size, middlewares)[39m
-[32m    769[39m [38;5;28;01mtry[39;00m:
-[32m--> [39m[32m770[39m     resp = [38;5;28;01mawait[39;00m handler(req)
-[32m    771[39m [38;5;66;03m# Client connector errors should not be retried[39;00m
-
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.13/site-packages/aiohttp/client.py:729[39m, in [36mClientSession._request.<locals>._connect_and_send_request[39m[34m(req)[39m
-[32m    728[39m [38;5;28;01mexcept[39;00m asyncio.TimeoutError [38;5;28;01mas[39;00m exc:
-[32m--> [39m[32m729[39m     [38;5;28;01mraise[39;00m ConnectionTimeoutError(
-[32m    730[39m         [33mf[39m[33m"[39m[33mConnection timeout to host [39m[38;5;132;01m{[39;00mreq.url[38;5;132;01m}[39;00m[33m"[39m
-[32m    731[39m     ) [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mexc[39;00m
-[32m    733[39m [38;5;28;01massert[39;00m conn.protocol [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
-
-[31mConnectionTimeoutError[39m: Connection timeout to host http://www.northwestknowledge.net/metdata/data/bi_1979.nc
+[31mFileNotFoundError[39m: http://www.northwestknowledge.net/metdata/data/bi_1979.nc
 
 The above exception was the direct cause of the following exception:
 
