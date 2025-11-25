@@ -1,0 +1,1 @@
+import{a}from"/kerchunk-cookbook/build/_shared/chunk-IRH6KG7U.js";import"/kerchunk-cookbook/build/_shared/chunk-J3PKFMLQ.js";import"/kerchunk-cookbook/build/_shared/chunk-OZE3FFNP.js";export default a();
