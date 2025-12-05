@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3000/sitemap_style.xsl" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:3000</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/how-to-cite</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/foundations/kerchunk-basics</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/foundations/kerchunk-multi-file</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/foundations/kerchunk-dask</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/advanced/parquet-reference-storage</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/advanced/appending</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/generating-references/netcdf</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/generating-references/grib2</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/generating-references/geotiff</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/using-references/xarray</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/using-references/xrefcoord</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/using-references/datatree</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notebooks/using-references/hvplot-datashader</loc>
+  </url>
+</urlset>
