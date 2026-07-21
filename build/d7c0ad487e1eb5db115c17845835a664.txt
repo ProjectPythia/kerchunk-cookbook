@@ -7,45 +7,45 @@
 [32m     12[39m m = fs.get_mapper([33m""[39m)
 [32m---> [39m[32m13[39m ds = xr.open_dataset(m, engine=[33m"zarr"[39m, backend_kwargs={[33m"consolidated"[39m: [38;5;28;01mFalse[39;00m})
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/api.py:607[39m, in [36mopen_dataset[39m[34m(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, create_default_indexes, inline_array, chunked_array_type, from_array_kwargs, backend_kwargs, **kwargs)[39m
-[32m    595[39m decoders = _resolve_decoders_kwargs(
-[32m    596[39m     decode_cf,
-[32m    597[39m     open_backend_dataset_parameters=backend.open_dataset_parameters,
-[32m   (...)[39m[32m    603[39m     decode_coords=decode_coords,
-[32m    604[39m )
-[32m    606[39m overwrite_encoded_chunks = kwargs.pop([33m"[39m[33moverwrite_encoded_chunks[39m[33m"[39m, [38;5;28;01mNone[39;00m)
-[32m--> [39m[32m607[39m backend_ds = [30;43mbackend[39;49m[30;43m.[39;49m[30;43mopen_dataset[39;49m[30;43m([39;49m
-[32m    608[39m [30;43m    [39;49m[30;43mfilename_or_obj[39;49m[30;43m,[39;49m
-[32m    609[39m [30;43m    [39;49m[30;43mdrop_variables[39;49m[30;43m=[39;49m[30;43mdrop_variables[39;49m[30;43m,[39;49m
-[32m    610[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mdecoders[39;49m[30;43m,[39;49m
-[32m    611[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwargs[39;49m[30;43m,[39;49m
-[32m    612[39m [30;43m[39;49m[30;43m)[39;49m
-[32m    613[39m ds = _dataset_from_backend_dataset(
-[32m    614[39m     backend_ds,
-[32m    615[39m     filename_or_obj,
-[32m   (...)[39m[32m    626[39m     **kwargs,
-[32m    627[39m )
-[32m    628[39m [38;5;28;01mreturn[39;00m ds
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/api.py:613[39m, in [36mopen_dataset[39m[34m(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, create_default_indexes, inline_array, chunked_array_type, from_array_kwargs, backend_kwargs, **kwargs)[39m
+[32m    601[39m decoders = _resolve_decoders_kwargs(
+[32m    602[39m     decode_cf,
+[32m    603[39m     open_backend_dataset_parameters=backend.open_dataset_parameters,
+[32m   (...)[39m[32m    609[39m     decode_coords=decode_coords,
+[32m    610[39m )
+[32m    612[39m overwrite_encoded_chunks = kwargs.pop([33m"[39m[33moverwrite_encoded_chunks[39m[33m"[39m, [38;5;28;01mNone[39;00m)
+[32m--> [39m[32m613[39m backend_ds = [30;43mbackend[39;49m[30;43m.[39;49m[30;43mopen_dataset[39;49m[30;43m([39;49m
+[32m    614[39m [30;43m    [39;49m[30;43mfilename_or_obj[39;49m[30;43m,[39;49m
+[32m    615[39m [30;43m    [39;49m[30;43mdrop_variables[39;49m[30;43m=[39;49m[30;43mdrop_variables[39;49m[30;43m,[39;49m
+[32m    616[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mdecoders[39;49m[30;43m,[39;49m
+[32m    617[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwargs[39;49m[30;43m,[39;49m
+[32m    618[39m [30;43m[39;49m[30;43m)[39;49m
+[32m    619[39m ds = _dataset_from_backend_dataset(
+[32m    620[39m     backend_ds,
+[32m    621[39m     filename_or_obj,
+[32m   (...)[39m[32m    632[39m     **kwargs,
+[32m    633[39m )
+[32m    634[39m [38;5;28;01mreturn[39;00m ds
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/zarr.py:1732[39m, in [36mZarrBackendEntrypoint.open_dataset[39m[34m(self, filename_or_obj, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, use_cftime, decode_timedelta, group, mode, synchronizer, consolidated, chunk_store, storage_options, zarr_version, zarr_format, store, engine, use_zarr_fill_value_as_mask, cache_members)[39m
-[32m   1730[39m filename_or_obj = _normalize_path(filename_or_obj)
-[32m   1731[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m store:
-[32m-> [39m[32m1732[39m     store = [30;43mZarrStore[39;49m[30;43m.[39;49m[30;43mopen_group[39;49m[30;43m([39;49m
-[32m   1733[39m [30;43m        [39;49m[30;43mfilename_or_obj[39;49m[30;43m,[39;49m
-[32m   1734[39m [30;43m        [39;49m[30;43mgroup[39;49m[30;43m=[39;49m[30;43mgroup[39;49m[30;43m,[39;49m
-[32m   1735[39m [30;43m        [39;49m[30;43mmode[39;49m[30;43m=[39;49m[30;43mmode[39;49m[30;43m,[39;49m
-[32m   1736[39m [30;43m        [39;49m[30;43msynchronizer[39;49m[30;43m=[39;49m[30;43msynchronizer[39;49m[30;43m,[39;49m
-[32m   1737[39m [30;43m        [39;49m[30;43mconsolidated[39;49m[30;43m=[39;49m[30;43mconsolidated[39;49m[30;43m,[39;49m
-[32m   1738[39m [30;43m        [39;49m[30;43mconsolidate_on_close[39;49m[30;43m=[39;49m[30;43;01mFalse[39;49;00m[30;43m,[39;49m
-[32m   1739[39m [30;43m        [39;49m[30;43mchunk_store[39;49m[30;43m=[39;49m[30;43mchunk_store[39;49m[30;43m,[39;49m
-[32m   1740[39m [30;43m        [39;49m[30;43mstorage_options[39;49m[30;43m=[39;49m[30;43mstorage_options[39;49m[30;43m,[39;49m
-[32m   1741[39m [30;43m        [39;49m[30;43mzarr_version[39;49m[30;43m=[39;49m[30;43mzarr_version[39;49m[30;43m,[39;49m
-[32m   1742[39m [30;43m        [39;49m[30;43muse_zarr_fill_value_as_mask[39;49m[30;43m=[39;49m[30;43;01mNone[39;49;00m[30;43m,[39;49m
-[32m   1743[39m [30;43m        [39;49m[30;43mzarr_format[39;49m[30;43m=[39;49m[30;43mzarr_format[39;49m[30;43m,[39;49m
-[32m   1744[39m [30;43m        [39;49m[30;43mcache_members[39;49m[30;43m=[39;49m[30;43mcache_members[39;49m[30;43m,[39;49m
-[32m   1745[39m [30;43m    [39;49m[30;43m)[39;49m
-[32m   1747[39m store_entrypoint = StoreBackendEntrypoint()
-[32m   1748[39m [38;5;28;01mwith[39;00m close_on_error(store):
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/zarr.py:1741[39m, in [36mZarrBackendEntrypoint.open_dataset[39m[34m(self, filename_or_obj, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, use_cftime, decode_timedelta, group, mode, synchronizer, consolidated, chunk_store, storage_options, zarr_version, zarr_format, store, engine, use_zarr_fill_value_as_mask, cache_members)[39m
+[32m   1739[39m filename_or_obj = _normalize_path(filename_or_obj)
+[32m   1740[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m store:
+[32m-> [39m[32m1741[39m     store = [30;43mZarrStore[39;49m[30;43m.[39;49m[30;43mopen_group[39;49m[30;43m([39;49m
+[32m   1742[39m [30;43m        [39;49m[30;43mfilename_or_obj[39;49m[30;43m,[39;49m
+[32m   1743[39m [30;43m        [39;49m[30;43mgroup[39;49m[30;43m=[39;49m[30;43mgroup[39;49m[30;43m,[39;49m
+[32m   1744[39m [30;43m        [39;49m[30;43mmode[39;49m[30;43m=[39;49m[30;43mmode[39;49m[30;43m,[39;49m
+[32m   1745[39m [30;43m        [39;49m[30;43msynchronizer[39;49m[30;43m=[39;49m[30;43msynchronizer[39;49m[30;43m,[39;49m
+[32m   1746[39m [30;43m        [39;49m[30;43mconsolidated[39;49m[30;43m=[39;49m[30;43mconsolidated[39;49m[30;43m,[39;49m
+[32m   1747[39m [30;43m        [39;49m[30;43mconsolidate_on_close[39;49m[30;43m=[39;49m[30;43;01mFalse[39;49;00m[30;43m,[39;49m
+[32m   1748[39m [30;43m        [39;49m[30;43mchunk_store[39;49m[30;43m=[39;49m[30;43mchunk_store[39;49m[30;43m,[39;49m
+[32m   1749[39m [30;43m        [39;49m[30;43mstorage_options[39;49m[30;43m=[39;49m[30;43mstorage_options[39;49m[30;43m,[39;49m
+[32m   1750[39m [30;43m        [39;49m[30;43mzarr_version[39;49m[30;43m=[39;49m[30;43mzarr_version[39;49m[30;43m,[39;49m
+[32m   1751[39m [30;43m        [39;49m[30;43muse_zarr_fill_value_as_mask[39;49m[30;43m=[39;49m[30;43;01mNone[39;49;00m[30;43m,[39;49m
+[32m   1752[39m [30;43m        [39;49m[30;43mzarr_format[39;49m[30;43m=[39;49m[30;43mzarr_format[39;49m[30;43m,[39;49m
+[32m   1753[39m [30;43m        [39;49m[30;43mcache_members[39;49m[30;43m=[39;49m[30;43mcache_members[39;49m[30;43m,[39;49m
+[32m   1754[39m [30;43m    [39;49m[30;43m)[39;49m
+[32m   1756[39m store_entrypoint = StoreBackendEntrypoint()
+[32m   1757[39m [38;5;28;01mwith[39;00m close_on_error(store):
 
 [36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/zarr.py:771[39m, in [36mZarrStore.open_group[39m[34m(cls, store, mode, synchronizer, group, consolidated, consolidate_on_close, chunk_store, storage_options, append_dim, write_region, safe_chunks, align_chunks, zarr_version, zarr_format, use_zarr_fill_value_as_mask, write_empty, cache_members)[39m
 [32m    745[39m [38;5;129m@classmethod[39m
@@ -77,14 +77,14 @@
 [32m   (...)[39m[32m    796[39m         cache_members=cache_members,
 [32m    797[39m     )
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/zarr.py:1974[39m, in [36m_get_open_params[39m[34m(store, mode, synchronizer, group, consolidated, consolidate_on_close, chunk_store, storage_options, zarr_version, use_zarr_fill_value_as_mask, zarr_format)[39m
-[32m   1970[39m     [38;5;28;01mif[39;00m _zarr_v3():
-[32m   1971[39m         [38;5;66;03m# we have determined that we don't want to use consolidated metadata[39;00m
-[32m   1972[39m         [38;5;66;03m# so we set that to False to avoid trying to read it[39;00m
-[32m   1973[39m         open_kwargs[[33m"[39m[33muse_consolidated[39m[33m"[39m] = [38;5;28;01mFalse[39;00m
-[32m-> [39m[32m1974[39m     zarr_group = [30;43mzarr[39;49m[30;43m.[39;49m[30;43mopen_group[39;49m[30;43m([39;49m[30;43mstore[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mopen_kwargs[39;49m[30;43m)[39;49m
-[32m   1976[39m close_store_on_close = zarr_group.store [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m store
-[32m   1978[39m [38;5;66;03m# we use this to determine how to handle fill_value[39;00m
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/xarray/backends/zarr.py:1983[39m, in [36m_get_open_params[39m[34m(store, mode, synchronizer, group, consolidated, consolidate_on_close, chunk_store, storage_options, zarr_version, use_zarr_fill_value_as_mask, zarr_format)[39m
+[32m   1979[39m     [38;5;28;01mif[39;00m _zarr_v3():
+[32m   1980[39m         [38;5;66;03m# we have determined that we don't want to use consolidated metadata[39;00m
+[32m   1981[39m         [38;5;66;03m# so we set that to False to avoid trying to read it[39;00m
+[32m   1982[39m         open_kwargs[[33m"[39m[33muse_consolidated[39m[33m"[39m] = [38;5;28;01mFalse[39;00m
+[32m-> [39m[32m1983[39m     zarr_group = [30;43mzarr[39;49m[30;43m.[39;49m[30;43mopen_group[39;49m[30;43m([39;49m[30;43mstore[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mopen_kwargs[39;49m[30;43m)[39;49m
+[32m   1985[39m close_store_on_close = zarr_group.store [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m store
+[32m   1987[39m [38;5;66;03m# we use this to determine how to handle fill_value[39;00m
 
 [36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/zarr/api/synchronous.py:533[39m, in [36mopen_group[39m[34m(store, mode, cache_attrs, synchronizer, path, chunk_store, storage_options, zarr_format, meta_array, attributes, use_consolidated)[39m
 [32m    463[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mopen_group[39m(
@@ -186,14 +186,14 @@
 [32m     63[39m         [33m"[39m[33m2024.12.0 or later to enable this functionality.[39m[33m"[39m
 [32m     64[39m     )
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1494[39m, in [36mAbstractFileSystem.from_json[39m[34m(blob)[39m
-[32m   1473[39m [38;5;250m[39m[33;03m"""[39;00m
-[32m   1474[39m [33;03mRecreate a filesystem instance from JSON representation.[39;00m
-[32m   1475[39m 
-[32m   (...)[39m[32m   1490[39m [33;03mat import time.[39;00m
-[32m   1491[39m [33;03m"""[39;00m
-[32m   1492[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[34;01mjson[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m FilesystemJSONDecoder
-[32m-> [39m[32m1494[39m [38;5;28;01mreturn[39;00m [30;43mjson[39;49m[30;43m.[39;49m[30;43mloads[39;49m[30;43m([39;49m[30;43mblob[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mcls[39;49m[30;43m=[39;49m[30;43mFilesystemJSONDecoder[39;49m[30;43m)[39;49m
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1500[39m, in [36mAbstractFileSystem.from_json[39m[34m(blob)[39m
+[32m   1479[39m [38;5;250m[39m[33;03m"""[39;00m
+[32m   1480[39m [33;03mRecreate a filesystem instance from JSON representation.[39;00m
+[32m   1481[39m 
+[32m   (...)[39m[32m   1496[39m [33;03mat import time.[39;00m
+[32m   1497[39m [33;03m"""[39;00m
+[32m   1498[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[34;01mjson[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m FilesystemJSONDecoder
+[32m-> [39m[32m1500[39m [38;5;28;01mreturn[39;00m [30;43mjson[39;49m[30;43m.[39;49m[30;43mloads[39;49m[30;43m([39;49m[30;43mblob[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mcls[39;49m[30;43m=[39;49m[30;43mFilesystemJSONDecoder[39;49m[30;43m)[39;49m
 
 [36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/json/__init__.py:365[39m, in [36mloads[39m[34m(s, cls, object_hook, parse_float, parse_int, parse_constant, object_pairs_hook, **kw)[39m
 [32m    363[39m [38;5;28;01mif[39;00m parse_constant [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
@@ -228,27 +228,27 @@
 [32m     93[39m     [38;5;28;01mif[39;00m (obj_cls := [38;5;28mself[39m.try_resolve_path_cls(dct)) [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
 [32m     94[39m         [38;5;28;01mreturn[39;00m obj_cls(dct[[33m"[39m[33mstr[39m[33m"[39m])
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1570[39m, in [36mAbstractFileSystem.from_dict[39m[34m(dct)[39m
-[32m   1567[39m dct.pop([33m"[39m[33mcls[39m[33m"[39m, [38;5;28;01mNone[39;00m)
-[32m   1568[39m dct.pop([33m"[39m[33mprotocol[39m[33m"[39m, [38;5;28;01mNone[39;00m)
-[32m-> [39m[32m1570[39m [38;5;28;01mreturn[39;00m [30;43mcls[39;49m[30;43m([39;49m
-[32m   1571[39m [30;43m    [39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m.[39;49m[30;43mpop[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43margs[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m,[39;49m
-[32m   1572[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m)[39;49m[30;43m,[39;49m
-[32m   1573[39m [30;43m[39;49m[30;43m)[39;49m
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1576[39m, in [36mAbstractFileSystem.from_dict[39m[34m(dct)[39m
+[32m   1573[39m dct.pop([33m"[39m[33mcls[39m[33m"[39m, [38;5;28;01mNone[39;00m)
+[32m   1574[39m dct.pop([33m"[39m[33mprotocol[39m[33m"[39m, [38;5;28;01mNone[39;00m)
+[32m-> [39m[32m1576[39m [38;5;28;01mreturn[39;00m [30;43mcls[39;49m[30;43m([39;49m
+[32m   1577[39m [30;43m    [39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m.[39;49m[30;43mpop[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43margs[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1578[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1579[39m [30;43m[39;49m[30;43m)[39;49m
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:84[39m, in [36m_Cached.__call__[39m[34m(cls, *args, **kwargs)[39m
-[32m     82[39m     [38;5;28;01mreturn[39;00m [38;5;28mcls[39m._cache[token]
-[32m     83[39m [38;5;28;01melse[39;00m:
-[32m---> [39m[32m84[39m     obj = [30;43msuper[39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m.[39;49m[30;43m__call__[39;49m[30;43m([39;49m[30;43m*[39;49m[30;43margs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwargs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mstrip_tokenize_options[39;49m[30;43m)[39;49m
-[32m     85[39m     [38;5;66;03m# Setting _fs_token here causes some static linters to complain.[39;00m
-[32m     86[39m     obj._fs_token_ = token
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:87[39m, in [36m_Cached.__call__[39m[34m(cls, *args, **kwargs)[39m
+[32m     85[39m     [38;5;28;01mreturn[39;00m [38;5;28mcls[39m._cache[token]
+[32m     86[39m [38;5;28;01melse[39;00m:
+[32m---> [39m[32m87[39m     obj = [30;43msuper[39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m.[39;49m[30;43m__call__[39;49m[30;43m([39;49m[30;43m*[39;49m[30;43margs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwargs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mstrip_tokenize_options[39;49m[30;43m)[39;49m
+[32m     88[39m     [38;5;66;03m# Setting _fs_token here causes some static linters to complain.[39;00m
+[32m     89[39m     obj._fs_token_ = token
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/implementations/reference.py:781[39m, in [36mReferenceFileSystem.__init__[39m[34m(self, fo, target, ref_storage_args, target_protocol, target_options, remote_protocol, remote_options, fs, template_overrides, simple_templates, max_gap, max_block, cache_size, **kwargs)[39m
-[32m    779[39m     [38;5;28mself[39m.fss[k] = AsyncFileSystemWrapper(f, asynchronous=[38;5;28mself[39m.asynchronous)
-[32m    780[39m [38;5;28;01melif[39;00m [38;5;28mself[39m.asynchronous ^ f.asynchronous:
-[32m--> [39m[32m781[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
-[32m    782[39m         [33m"[39m[33mReference-FS[39m[33m'[39m[33ms target filesystem must have same value [39m[33m"[39m
-[32m    783[39m         [33m"[39m[33mof asynchronous[39m[33m"[39m
-[32m    784[39m     )
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/implementations/reference.py:784[39m, in [36mReferenceFileSystem.__init__[39m[34m(self, fo, target, ref_storage_args, target_protocol, target_options, remote_protocol, remote_options, fs, template_overrides, simple_templates, max_gap, max_block, cache_size, **kwargs)[39m
+[32m    782[39m     [38;5;28mself[39m.fss[k] = AsyncFileSystemWrapper(f, asynchronous=[38;5;28mself[39m.asynchronous)
+[32m    783[39m [38;5;28;01melif[39;00m [38;5;28mself[39m.asynchronous ^ f.asynchronous:
+[32m--> [39m[32m784[39m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[32m    785[39m         [33m"[39m[33mReference-FS[39m[33m'[39m[33ms target filesystem must have same value [39m[33m"[39m
+[32m    786[39m         [33m"[39m[33mof asynchronous[39m[33m"[39m
+[32m    787[39m     )
 
 [31mValueError[39m: Reference-FS's target filesystem must have same value of asynchronous
