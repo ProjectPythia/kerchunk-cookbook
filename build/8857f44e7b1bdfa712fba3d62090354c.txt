@@ -194,14 +194,14 @@
 [32m     63[39m         [33m"[39m[33m2024.12.0 or later to enable this functionality.[39m[33m"[39m
 [32m     64[39m     )
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1500[39m, in [36mAbstractFileSystem.from_json[39m[34m(blob)[39m
-[32m   1479[39m [38;5;250m[39m[33;03m"""[39;00m
-[32m   1480[39m [33;03mRecreate a filesystem instance from JSON representation.[39;00m
-[32m   1481[39m 
-[32m   (...)[39m[32m   1496[39m [33;03mat import time.[39;00m
-[32m   1497[39m [33;03m"""[39;00m
-[32m   1498[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[34;01mjson[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m FilesystemJSONDecoder
-[32m-> [39m[32m1500[39m [38;5;28;01mreturn[39;00m [30;43mjson[39;49m[30;43m.[39;49m[30;43mloads[39;49m[30;43m([39;49m[30;43mblob[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mcls[39;49m[30;43m=[39;49m[30;43mFilesystemJSONDecoder[39;49m[30;43m)[39;49m
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1547[39m, in [36mAbstractFileSystem.from_json[39m[34m(blob)[39m
+[32m   1526[39m [38;5;250m[39m[33;03m"""[39;00m
+[32m   1527[39m [33;03mRecreate a filesystem instance from JSON representation.[39;00m
+[32m   1528[39m 
+[32m   (...)[39m[32m   1543[39m [33;03mat import time.[39;00m
+[32m   1544[39m [33;03m"""[39;00m
+[32m   1545[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[34;01mjson[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m FilesystemJSONDecoder
+[32m-> [39m[32m1547[39m [38;5;28;01mreturn[39;00m [30;43mjson[39;49m[30;43m.[39;49m[30;43mloads[39;49m[30;43m([39;49m[30;43mblob[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mcls[39;49m[30;43m=[39;49m[30;43mFilesystemJSONDecoder[39;49m[30;43m)[39;49m
 
 [36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/json/__init__.py:365[39m, in [36mloads[39m[34m(s, cls, object_hook, parse_float, parse_int, parse_constant, object_pairs_hook, **kw)[39m
 [32m    363[39m [38;5;28;01mif[39;00m parse_constant [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
@@ -236,20 +236,20 @@
 [32m     93[39m     [38;5;28;01mif[39;00m (obj_cls := [38;5;28mself[39m.try_resolve_path_cls(dct)) [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
 [32m     94[39m         [38;5;28;01mreturn[39;00m obj_cls(dct[[33m"[39m[33mstr[39m[33m"[39m])
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1576[39m, in [36mAbstractFileSystem.from_dict[39m[34m(dct)[39m
-[32m   1573[39m dct.pop([33m"[39m[33mcls[39m[33m"[39m, [38;5;28;01mNone[39;00m)
-[32m   1574[39m dct.pop([33m"[39m[33mprotocol[39m[33m"[39m, [38;5;28;01mNone[39;00m)
-[32m-> [39m[32m1576[39m [38;5;28;01mreturn[39;00m [30;43mcls[39;49m[30;43m([39;49m
-[32m   1577[39m [30;43m    [39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m.[39;49m[30;43mpop[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43margs[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m,[39;49m
-[32m   1578[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m)[39;49m[30;43m,[39;49m
-[32m   1579[39m [30;43m[39;49m[30;43m)[39;49m
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:1623[39m, in [36mAbstractFileSystem.from_dict[39m[34m(dct)[39m
+[32m   1620[39m dct.pop([33m"[39m[33mcls[39m[33m"[39m, [38;5;28;01mNone[39;00m)
+[32m   1621[39m dct.pop([33m"[39m[33mprotocol[39m[33m"[39m, [38;5;28;01mNone[39;00m)
+[32m-> [39m[32m1623[39m [38;5;28;01mreturn[39;00m [30;43mcls[39;49m[30;43m([39;49m
+[32m   1624[39m [30;43m    [39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m.[39;49m[30;43mpop[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43margs[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1625[39m [30;43m    [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mjson_decoder[39;49m[30;43m.[39;49m[30;43munmake_serializable[39;49m[30;43m([39;49m[30;43mdct[39;49m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1626[39m [30;43m[39;49m[30;43m)[39;49m
 
-[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:87[39m, in [36m_Cached.__call__[39m[34m(cls, *args, **kwargs)[39m
-[32m     85[39m     [38;5;28;01mreturn[39;00m [38;5;28mcls[39m._cache[token]
-[32m     86[39m [38;5;28;01melse[39;00m:
-[32m---> [39m[32m87[39m     obj = [30;43msuper[39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m.[39;49m[30;43m__call__[39;49m[30;43m([39;49m[30;43m*[39;49m[30;43margs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwargs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mstrip_tokenize_options[39;49m[30;43m)[39;49m
-[32m     88[39m     [38;5;66;03m# Setting _fs_token here causes some static linters to complain.[39;00m
-[32m     89[39m     obj._fs_token_ = token
+[36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/spec.py:127[39m, in [36m_Cached.__call__[39m[34m(cls, *args, **kwargs)[39m
+[32m    124[39m         [38;5;28;01mif[39;00m inst [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[32m    125[39m             [38;5;28;01mreturn[39;00m inst
+[32m--> [39m[32m127[39m obj = [30;43msuper[39;49m[30;43m([39;49m[30;43m)[39;49m[30;43m.[39;49m[30;43m__call__[39;49m[30;43m([39;49m[30;43m*[39;49m[30;43margs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwargs[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mstrip_tokenize_options[39;49m[30;43m)[39;49m
+[32m    128[39m [38;5;66;03m# Setting _fs_token here causes some static linters to complain.[39;00m
+[32m    129[39m obj._fs_token_ = token
 
 [36mFile [39m[32m~/micromamba/envs/kerchunk-cookbook/lib/python3.14/site-packages/fsspec/implementations/reference.py:784[39m, in [36mReferenceFileSystem.__init__[39m[34m(self, fo, target, ref_storage_args, target_protocol, target_options, remote_protocol, remote_options, fs, template_overrides, simple_templates, max_gap, max_block, cache_size, **kwargs)[39m
 [32m    782[39m     [38;5;28mself[39m.fss[k] = AsyncFileSystemWrapper(f, asynchronous=[38;5;28mself[39m.asynchronous)
